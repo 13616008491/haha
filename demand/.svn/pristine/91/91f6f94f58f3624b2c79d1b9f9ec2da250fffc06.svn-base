@@ -1,0 +1,174 @@
+<?php
+/*
+ * @开发工具: JetBrains PhpStorm.
+ * @文件名：LoginController.class.php
+ * @类功能: 首页
+ * @开发者: zc
+ * @开发时间： 15-10-22
+ * @版本：version 1.0
+ */
+namespace app\admin\controller;
+
+use app\common\controller\AdminBaseController;
+use app\common\enum\AdminSuper;
+use app\common\enum\IsDelete;
+use app\common\ext\IDb;
+use app\common\ext\IRequest;
+use think\captcha\Captcha;
+use think\Session;
+
+class Login extends AdminBaseController {
+    /**
+     * @功能：后台管理员用户登录
+     * @开发者：cxl
+     */
+    public function login(){
+        //设置layout
+        $this->layout(false);
+
+        $this->assign("mini_code","http://demand.zhizhuguanjia.com/upload/demand/mini_code/demand_jqyp_demand.png");
+        //获取画面
+        return view();
+    }
+    
+    /**
+     * @功能：调用验证码方法
+     * @开发者：cxl
+     */
+    public function verify(){
+        //设置输出内容
+        ob_end_clean();
+
+        //配置参数
+        $config =    array(
+            'seKey'       =>    'Admin.XQ.ThinkPHP.CN',     //session key
+            'fontSize'    =>    30,     //验证码字体大小
+            'length'      =>    4,      //验证码位数
+            'useZh'       =>    true,   //使用中文验证码
+            'zhSet'       =>    '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM',
+            'useNoise'    =>    false, //关闭验证码杂点
+        );
+
+        //生产验证码
+        $captcha = new Captcha($config);
+        return $captcha->entry(1);
+    }
+
+    /**
+     * @功能：后台管理员用户登录
+     * @开发者：cxl
+     */
+    public function login_submit(){
+        //获取参数
+        $phone = IRequest::get("phone");
+        $pwd = IRequest::get("pwd");
+        $verify = IRequest::get('verify');
+        $screen = IRequest::get('screen');
+
+        //检测用户名是否存在
+        $admin_id = null;
+        if(empty($phone) || empty($pwd)){
+            self::send("error","亲，请输入用户名密码！");
+        }else{
+            $pwd = md5(md5($pwd));
+        }
+
+        //检测验证码是否存在
+        if(empty($verify)){
+            self::send("error","亲，请输入验证码！");
+        }
+
+        //判断验证码是否正确
+        $captcha = new Captcha(array('seKey'=>'Admin.XQ.ThinkPHP.CN'));
+        if(!($captcha->check($verify,1))){
+            self::send("error","您输入的验证码不正确！");
+        }
+
+        //取得用户信息
+        $admin_where['phone'] = $phone;
+        $admin_info = IDb::getInstance("admin")->setDbWhere($admin_where)->row();
+        if(empty($admin_info)){
+            //设置错误登录次数
+            self::send("error","您输入的用户名不存在，请重新输入！");
+        }else{
+            //取得管理员ID
+            $admin_id = $admin_info['admin_id'];
+
+            //判断用户是否禁用
+            if($admin_info['is_delete'] == IsDelete::Yes){
+                self::send("error","您的用户已经被禁用了，请联系管理员！");
+            }
+        }
+
+        //判断密码是否错误
+        if($pwd == $admin_info['pwd']){
+            //判断是否为超级管理员
+            if($admin_info['admin_super'] == AdminSuper::Ordinary) {
+                //判断用户是否分配角色
+                if (empty($admin_info['admin_role_id'])) {
+                    self::send("error", "您的用户还没有分配角色，请联系管理员！");
+                }
+            }
+
+            //修改用户信息
+            $admin_data = null;
+            $admin_where = null;
+            $admin_data['login_time'] = get_date_time();
+            $admin_data['login_ip'] = get_client_ip();
+            $admin_where['admin_id'] = $admin_id;
+            $admin_flg = IDb::getInstance("admin")->setDbWhere($admin_where)->setDbData($admin_data)->upd();
+            if($admin_flg === false){
+                self::send("error","修改管理员登录信息异常，请联系管理员！");
+            }
+
+            //设置屏幕比例
+            if(intval($screen) > 0 && $screen < 1920){
+                $screen = ((((1920 - intval($screen)) / 1920) + 1.1) * 100);
+                $screen = "{$screen}%";
+            }else{
+                $screen = "100%";
+            }
+
+            //写session信息
+            Session::set("screen",$screen);
+            Session::set("admin_id",$admin_info['admin_id']);
+            Session::set("phone",$admin_info['phone']);
+            Session::set("user_id",$admin_info['user_id']);
+            Session::set("admin_role_id",$admin_info['admin_role_id']);
+            Session::set("admin_super",$admin_info['admin_super']);
+            Session::set("ip",$admin_data['login_ip']);
+            self::send("success","用户登录成功！");
+        }else{
+            //写错误登录日志
+            self::send("error","您输入的密码错误，请重新输入！");
+        }
+    }
+
+    /**
+     * @功能：新登录日志及返回json数据
+     * @param string $status 登录状态
+     * @param string $note 描述
+     * @开发者： zc
+     */
+    private static function send($status,$note){
+        //整理数据
+        $result['status']  =  $status;
+        $result['info'] =  $note;
+
+        //返回json格式数据
+        header("Content-Type:text/html; charset=utf-8");
+        exit(json_encode($result));
+    }
+
+    /**
+     * @功能：后台管理员退出
+     * @开发者：zc
+     */
+    public function logout(){
+        //清除session信息
+        Session::clear();
+
+        //画面跳转
+        $this->redirect("login");
+    }
+}   

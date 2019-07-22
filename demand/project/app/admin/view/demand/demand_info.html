@@ -1,0 +1,132 @@
+<!-- 编辑区域 -->
+<div class="lists">
+    <!--添加用户表单-->
+    <div class="tab_edit">
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">需求编号：</td>
+                <td class="t_l">{$demand_info['demand_id']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">提出人编号：</td>
+                <td class="t_l">{$demand_info['user_id']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">提出人姓名：</td>
+                <td class="t_l">{empty name="demand_info['real_name']"}{$demand_info['nickname']}{else/}{$demand_info['real_name']}{/empty}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">提出人电话：</td>
+                <td class="t_l">{$demand_info['phone']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目编号：</td>
+                <td class="t_l">{$demand_info['project_id']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目名称：</td>
+                <td class="t_l">{$demand_info['project_name']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求描述：</td>
+                <td class="t_l">{$demand_info['demand_describe']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求描述（语音）：</td>
+                <td class="t_l">{:widget('common/File/show',array($demand_info['voice_url']))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求图片：</td>
+                <td class="t_l">
+                    {empty name="demand_info['demand_photo_list']"}
+                    <font style="font-weight: bold;color: red;">未上传</font>
+                    {else/}
+                    {foreach name="$demand_info['demand_photo_list']" item="url"}
+                    {:widget('common/Images/img',array($url,25,25))}
+                    {/foreach}
+                    {/empty}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">优先级：</td>
+                <td class="t_l">{:widget('common/Color/color',array('priority_level',$demand_info["priority_level"]))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">加急说明：</td>
+                <td class="t_l"><font style="font-weight: bold;color: red;">{$demand_info['priority_describe']|default='未填写'}</font></td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求状态：</td>
+                <td class="t_l">{:widget('common/Color/color',array('demand_status',$demand_info["demand_status"]))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">审核说明：</td>
+                <td class="t_l"><font style="font-weight: bold;color: red;">{$demand_info['demand_feedback']|default='未填写'}</font></td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">设计人员：</td>
+                <td class="t_l">
+                    {empty name="demand_info['design_list']"}
+                    <font style="font-weight: bold;color: red;">未填写</font>
+                    {else/}
+                    {foreach name="$demand_info['design_list']" item="user_id"}
+                    {:widget('common/Name/user',array($user_id))} 、
+                    {/foreach}
+                    {/empty}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">开发人员：</td>
+                <td class="t_l">
+                    {empty name="demand_info['development_list']"}
+                    <font style="font-weight: bold;color: red;">未填写</font>
+                    {else/}
+                    {foreach name="$demand_info['development_list']" item="user_id"}
+                    {:widget('common/Name/user',array($user_id))} 、
+                    {/foreach}
+                    {/empty}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">测试人员：</td>
+                <td class="t_l">
+                    {empty name="demand_info['test_list']"}
+                    <font style="font-weight: bold;color: red;">未填写</font>
+                    {else/}
+                    {foreach name="$demand_info['test_list']" item="user_id"}
+                    {:widget('common/Name/user',array($user_id))} 、
+                    {/foreach}
+                    {/empty}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">提出时间：</td>
+                <td class="t_l">{$demand_info['propose_time']|default='--'}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">审核时间：</td>
+                <td class="t_l">{$demand_info['auditing_time']|default='--'}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">预计完成时间：</td>
+                <td class="t_l">{$demand_info['expect_finish_time']|default='--'}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">开发完成时间：</td>
+                <td class="t_l">{$demand_info['development_time']|default='--'}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">测试完成时间：</td>
+                <td class="t_l">{$demand_info['test_time']|default='--'}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求完成时间：</td>
+                <td class="t_l">{$demand_info['finish_time']|default='--'}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">备注：</td>
+                <td class="t_l">{$demand_info['remark']|default='--'}</td>
+            </tr>
+        </table>
+    </div>
+</div>

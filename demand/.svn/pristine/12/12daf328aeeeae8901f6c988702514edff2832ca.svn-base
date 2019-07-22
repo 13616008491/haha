@@ -1,0 +1,737 @@
+<?php
+/*
+ * @开发工具: JetBrains PhpStorm.
+ * @文件名：SystemController.class.php
+ * @类功能: 系统设置
+ * @开发者: cxl
+ * @开发时间： 15-10-22
+ * @版本：version 1.0
+ */
+namespace app\admin\controller;
+
+use app\common\controller\AdminBaseController;
+use app\common\enum\AdminSuper;
+use app\common\enum\HtmlEnumValue;
+use app\common\enum\IsDelete;
+use app\common\enum\IsRead;
+use app\common\enum\TaskType;
+use app\common\ext\IDb;
+use app\common\ext\IRedis;
+use app\common\ext\IRequest;
+use app\common\widget\ListTree;
+
+class System extends AdminBaseController {
+    /**
+     * @功能：清除缓存
+     * @开发者：cxl
+     */
+    public function clear_cache_all(){
+        //清除redis缓存
+        //IRedis::flushDB();
+
+        //清除文件缓存
+        rm_directory(RUNTIME_PATH);
+
+        //创建目录
+        @mkdir(RUNTIME_PATH."temp",0755,true);
+        @mkdir(RUNTIME_PATH."cache",0755,true);
+        @mkdir(RUNTIME_PATH."data",0755,true);
+        @mkdir(RUNTIME_PATH."log",0755,true);
+
+        //画面跳转
+        $this->success("操作成功！");
+    }
+
+    /**
+     * @功能：管理员列表
+     * @开发者：cxl
+     */
+    public function admin_list(){
+        //接收参数
+        $role_id = IRequest::get('role_id');
+        $admin_super = IRequest::get('admin_super');
+        $admin_type = IRequest::get('admin_type');
+        $real_name = IRequest::get('real_name');
+        $phone = IRequest::get('phone');
+
+        //取得管理员数据
+        $where = array();
+        if(!empty($role_id)) $where["an.admin_role_id"] = array("eq",$role_id);
+        if(!empty($admin_super)) $where["an.admin_super"] = array("eq",$admin_super);
+        if(!empty($admin_type)) $where["an.admin_type"] = array("eq",$admin_type);
+        if(!empty($real_name)) $where["an.real_name"] = array("like","%{$real_name}%");
+        if(!empty($phone)) $where["an.phone"] = array("like","%{$phone}%");
+
+        //取得数据
+        $admin_list = IDb::getInstance("admin as an")
+            ->setDbFiled("an.*,ar.role_name,an.admin_super")
+            ->setDbJoin("admin_role as ar","an.admin_role_id=ar.admin_role_id","left")
+            ->setDbWhere($where)
+            ->pag();
+
+        //取得管理员数据
+        $role_list = IDb::getInstance("admin_role")->sel();
+
+        //模板渲染
+        $this->assign('role_id',$role_id);
+        $this->assign('admin_super',$admin_super);
+        $this->assign('admin_type',$admin_type);
+        $this->assign('real_name',$real_name);
+        $this->assign('phone',$phone);
+        $this->assign('admin_list',$admin_list);
+        $this->assign('role_list',$role_list);
+
+        //渲染模板输出 
+        return view();
+    }
+
+    /**
+     * @功能：编辑管理员
+     * @开发者：cxl
+     */
+    public function admin_add(){
+        //取得管理员数据
+        $role_list = IDb::getInstance("admin_role")->sel();
+
+        //取得默认密码
+        $admin_password = "88888888";
+
+        //取得数据
+        $task_type_list = array(
+            array("status_id"=>TaskType::Development,"status_name"=>HtmlEnumValue::$enum_value['task_type'][TaskType::Development]),
+            array("status_id"=>TaskType::Design,"status_name"=>HtmlEnumValue::$enum_value['task_type'][TaskType::Design]),
+            array("status_id"=>TaskType::Test,"status_name"=>HtmlEnumValue::$enum_value['task_type'][TaskType::Test])
+        );
+
+        //模板渲染
+        $this->assign('admin_password',$admin_password);
+        $this->assign('role_list',$role_list);
+        $this->assign('task_type_list',$task_type_list);
+
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：编辑管理员
+     * @开发者：cxl
+     */
+    public function admin_edit(){
+        //接收参数
+        $admin_id = IRequest::get('admin_id',IRequest::NOT_EMPTY,"管理员编号不能为空！");
+
+        //取得角色数据
+        $admin_where['admin_id'] = $admin_id;
+        $admin_info = IDb::getInstance("admin")->setDbWhere($admin_where)->row();
+        if(empty($admin_info['admin_id'])){
+            error("管理员不存在！");
+        }
+
+        //取得数据
+        $task_type_list = array(
+            array("status_id"=>TaskType::Development,"status_name"=>HtmlEnumValue::$enum_value['task_type'][TaskType::Development]),
+            array("status_id"=>TaskType::Design,"status_name"=>HtmlEnumValue::$enum_value['task_type'][TaskType::Design]),
+            array("status_id"=>TaskType::Test,"status_name"=>HtmlEnumValue::$enum_value['task_type'][TaskType::Test])
+        );
+
+        //取得管理员数据
+        $role_list = IDb::getInstance("admin_role")->sel();
+
+        //模板渲染
+        $this->assign('admin_id',$admin_id);
+        $this->assign('role_list',$role_list);
+        $this->assign('admin_info',$admin_info);
+        $this->assign('task_type_list',$task_type_list);
+
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：管理员保存
+     * 开发者：cxl
+     */
+    public function admin_submit(){
+        //接收参数
+        $admin_id = IRequest::get("admin_id");
+        $real_name = IRequest::get("real_name",IRequest::NOT_EMPTY,"真实姓名不能为空！");
+        $phone = IRequest::get("phone",IRequest::NOT_EMPTY,"手机不能为空！");
+        $admin_role_id= IRequest::get("admin_role_id",IRequest::NOT_EMPTY,"请选择角色！");
+        $admin_type= IRequest::get("admin_type",IRequest::NOT_EMPTY,"请职能！");
+        $remark = IRequest::get("remark");
+
+        //取得角色类型
+        $phone = trim($phone);
+        $role_where['admin_role_id'] = $admin_role_id;
+        $role_info = IDb::getInstance("admin_role")->setDbWhere($role_where)->row();
+        if(empty($role_info)){
+            error("取得角色信息失败！");
+        }
+
+        //实例化对象
+        IDb::dbStartTrans();
+
+        //查询用户名账号信息
+        $admin_where['phone'] = $phone;
+        $admin_info = IDb::getInstance("admin")->setDbWhere($admin_where)->row();
+
+        //判断用户是否已经被注册了
+        if(empty($admin_id)){
+            //判断用户名称是否被使用了
+            if(!empty($admin_info)){
+                error("账户名已经被使用了！");
+            }
+
+            //获取后台用户默认密码
+            $admin_password = "88888888";
+            if(empty($admin_password)){
+                error('未配置后台用户密码,请联系管理员！');
+            }
+
+            //新增保存
+            $admin_data['real_name']=$real_name;
+            $admin_data['phone']=$phone;
+            $admin_data['admin_role_id']=$admin_role_id;
+            $admin_data['admin_super']=$role_info['admin_super'];
+            $admin_data['admin_type']=$admin_type;
+            $admin_data['remark']=$remark;
+            $admin_data['pwd'] = md5(md5($admin_password));
+            $admin_data['create_admin']=get_login_admin_id();
+            $admin_data['create_time']=get_date_time();
+            $admin_id = IDb::getInstance("admin")->setDbData($admin_data)->add();
+            if($admin_id === false){
+                IDb::dbRollback();
+                error("创建管理员失败！");
+            }
+        }else {
+            //判断用户名称是否被使用了
+            if(!empty($admin_info) && $admin_id != $admin_info['admin_id']){
+                error("账户名已经被使用了！");
+            }
+
+            //修改保存
+            $admin_where = null;
+            $admin_where['admin_id'] = $admin_id;
+            $admin_data['real_name']=$real_name;
+            $admin_data['phone']=$phone;
+            $admin_data['admin_role_id']=$admin_role_id;
+            $admin_data['admin_super']=$role_info['admin_super'];
+            $admin_data['admin_type']=$admin_type;
+            $admin_data['remark']=$remark;
+            $admin_data['update_admin'] = get_login_admin_id();
+            $admin_data['update_time'] = get_date_time();
+            $admin_upd = IDb::getInstance("admin")->setDbWhere($admin_where)->setDbData($admin_data)->upd();
+            if ($admin_upd === false) {
+                IDb::dbRollback();
+                error("编辑管理员信息失败！");
+            }
+        }
+
+        //提交事物处理
+        IDb::dbCommit();
+
+        //画面跳转
+        $this->redirect("admin_list");
+    }
+
+    /**
+     * @功能：编辑管理员
+     * @开发者：cxl
+     */
+    public function admin_info(){
+        //接收参数
+        $admin_id = IRequest::get('admin_id',IRequest::NOT_EMPTY,"管理员编号不能为空！");
+
+        //取得管理员数据
+        $role_list = IDb::getInstance("admin_role")->sel();
+
+        //取得角色数据
+        $admin_where['admin_id'] = $admin_id;
+        $admin_info = IDb::getInstance("admin")->setDbWhere($admin_where)->row();
+
+        //模板渲染
+        $this->assign('admin_id',$admin_id);
+        $this->assign('role_list',$role_list);
+        $this->assign('admin_info',$admin_info);
+
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：禁用管理员
+     * @开发者：cxl
+     */
+    public function admin_del(){
+        //接收参数
+        $admin_id = IRequest::get("admin_id",IRequest::NOT_EMPTY,"管理员编号不能为空！");
+
+        //取得角色使用信息
+        $admin_where["admin_id"] = $admin_id;
+        $admin_data['is_delete'] = IsDelete::Yes;
+        $admin_data['update_admin']=get_login_admin_id();
+        $admin_data['update_time']=get_date_time();
+        $admin_upd = IDb::getInstance("admin")->setDbWhere($admin_where)->setDbData($admin_data)->upd();
+        if($admin_upd === false){
+            error("修改管理员信息失败！");
+        }
+
+        //画面跳转
+        $this->redirect("admin_list");
+    }
+
+    /**
+     * @功能：启用管理员
+     * @开发者：cxl
+     */
+    public function admin_reset(){
+        //接收参数
+        $admin_id = IRequest::get("admin_id",IRequest::NOT_EMPTY,"管理员编号不能为空！");
+
+        //取得角色使用信息
+        $admin_where["admin_id"] = $admin_id;
+        $admin_data['is_delete'] = IsDelete::No;
+        $admin_data['update_admin']=get_login_admin_id();
+        $admin_data['update_time']=get_date_time();
+        $admin_upd = IDb::getInstance("admin")->setDbWhere($admin_where)->setDbData($admin_data)->upd();
+        if($admin_upd === false){
+            error("修改管理员信息失败！");
+        }
+
+        //画面跳转
+        $this->redirect("admin_list");
+    }
+
+    /**
+     * @功能：重置密码
+     * @开发者：cxl
+     */
+    public function admin_reset_pwd(){
+        //接收参数
+        $admin_id = IRequest::get("admin_id",IRequest::NOT_EMPTY,"管理员编号不能为空！");
+
+        //获取后台用户默认密码
+        $admin_password = "88888888";
+        if(empty($admin_password)){
+            error('未配置后台用户密码,请联系管理员！');
+        }
+
+        //取得角色使用信息
+        $admin_where["admin_id"] = $admin_id;
+        $admin_data['pwd'] = md5(md5($admin_password));
+        $admin_data['update_admin']=get_login_admin_id();
+        $admin_data['update_time']=get_date_time();
+        $admin_upd = IDb::getInstance("admin")->setDbWhere($admin_where)->setDbData($admin_data)->upd();
+        if($admin_upd === false){
+            error("重置密码失败！");
+        }
+
+        //充值密码
+        $this->success('重置密码成功，重置后的密码为8个8');
+    }
+
+    /**
+     * @功能：角色列表
+     * @开发者：cxl
+     */
+    public function role_list(){
+        //接收参数
+        $role_name = IRequest::get('role_name');
+        $admin_super = IRequest::get('admin_super');
+
+        //查询条件
+        $admin_role_where = array();
+        if(!empty($role_name)) $admin_role_where["role_name"] = array("like","%{$role_name}%");
+        if(!empty($admin_super)) $admin_role_where["admin_super"] = array("eq",$admin_super);
+
+        //取得角色列表
+        $admin_role_list = IDb::getInstance("admin_role")->setDbWhere($admin_role_where)->pag();
+
+        //模板渲染
+        $this->assign('role_name',$role_name);
+        $this->assign('admin_super',$admin_super);
+        $this->assign('role_list',$admin_role_list);
+
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：编辑角色
+     * @开发者：cxl
+     */
+    public function role_add(){
+        //取得管理员类型
+        $admin_super = get_login_admin_super();
+        if($admin_super != AdminSuper::Super){
+            error("只有超级管理员才有权限！");
+        }
+
+        //模板渲染
+        $this->assign('admin_super',$admin_super);
+
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：编辑角色
+     * @开发者：cxl
+     */
+    public function role_edit(){
+        //接收参数
+        $role_id = IRequest::get('role_id',IRequest::NOT_EMPTY,"角色编号不能为空！");
+
+        //取得管理员类型
+        $admin_super = get_login_admin_super();
+        if($admin_super != AdminSuper::Super){
+            error("只有超级管理员才有权限！");
+        }
+
+        //取得角色数据
+        $admin_role_where['admin_role_id'] = $role_id;
+        $admin_role_info = IDb::getInstance("admin_role")->setDbWhere($admin_role_where)->row();
+        if(empty($admin_role_info['admin_role_id'])){
+            error("角色不存在！");
+        }
+
+        //模板渲染
+        $this->assign('admin_super',$admin_super);
+        $this->assign('role_id',$role_id);
+        $this->assign('role_info',$admin_role_info);
+
+        //渲染模板输出
+        return view('role_edit');
+    }
+
+    /**
+     * @功能：角色保存
+     * 开发者：cxl
+     */
+    public function role_submit(){
+        //接收参数
+        $role_id = IRequest::get("role_id");
+        $role_name = IRequest::get("role_name",IRequest::NOT_EMPTY,"请输入角色名称！");
+        $admin_super = IRequest::get("admin_super");
+        $remark = IRequest::get("remark");
+
+        //取得管理员类型
+        $login_admin_super = get_login_admin_super();
+        if($login_admin_super == AdminSuper::Ordinary){
+            error("只有超级管理员才有权限！");
+        }
+
+        //判断角色是否存在
+        $find_where['role_name'] = $role_name;
+        if(!empty($role_id)) $find_where['admin_role_id'] = ['neq',$role_id];
+        $admin_role_info=IDb::getInstance("admin_role")->setDbWhere($find_where)->row();
+        if(!empty($admin_role_info)){
+            error('角色名已经存在');
+        }
+
+        //保存信息
+        if(empty($role_id)){
+            //新增保存
+            $admin_role_data['role_name'] = $role_name;
+            $admin_role_data['admin_super'] = $admin_super;
+            $admin_role_data['remark'] = $remark;
+            $admin_role_data['create_admin'] = get_login_admin_id();
+            $admin_role_data['create_time'] = get_date_time();
+            $admin_role_add = IDb::getInstance("admin_role")->setDbData($admin_role_data)->add();
+            if($admin_role_add === false){
+                error("创建角色失败！");
+            }
+        }else{
+            //修改保存
+            $admin_role_where['admin_role_id'] = $role_id;
+            $admin_role_data['role_name'] = $role_name;
+            $admin_role_data['admin_super'] = $admin_super;
+            $admin_role_data['remark'] = $remark;
+            $admin_role_data['update_admin']=get_login_admin_id();
+            $admin_role_data['update_time']=get_date_time();
+            $admin_role_upd = IDb::getInstance("admin_role")->setDbWhere($admin_role_where)->setDbData($admin_role_data)->upd();
+            if($admin_role_upd === false){
+                error("修改角色信息失败！");
+            }
+        }
+
+        //画面跳转
+        $this->redirect("role_list");
+    }
+
+    /**
+     * @功能：禁用角色
+     * @开发者：cxl
+     */
+    public function role_del(){
+        //接收参数
+        $role_id = IRequest::get("role_id",IRequest::NOT_EMPTY,"角色编号不能为空！");
+
+        //禁用角色
+        $admin_role_where['admin_role_id'] = $role_id;
+        $admin_role_data['is_delete'] = IsDelete::Yes;
+        $admin_role_data['update_admin']=get_login_admin_id();
+        $admin_role_data['update_time']=get_date_time();
+        $admin_role_upd = IDb::getInstance("admin_role")->setDbData($admin_role_data)->setDbWhere($admin_role_where)->upd();
+        if($admin_role_upd === false){
+            error("禁用角色失败，请联系管理员！");
+        }
+
+        //画面跳转
+        $this->redirect("role_list");
+    }
+
+    /**
+     * @功能：启用角色
+     * @开发者：cxl
+     */
+    public function role_reset(){
+        //接收参数
+        $role_id = IRequest::get("role_id",IRequest::NOT_EMPTY,"角色编号不能为空！");
+
+        //启用角色
+        $admin_role_where['admin_role_id'] = $role_id;
+        $admin_role_data['is_delete'] = IsDelete::No;
+        $admin_role_data['update_admin']=get_login_admin_id();
+        $admin_role_data['update_time']=get_date_time();
+        $admin_role_upd = IDb::getInstance("admin_role")->setDbData($admin_role_data)->setDbWhere($admin_role_where)->upd();
+        if($admin_role_upd === false){
+            error("启用角色失败，请联系管理员！");
+        }
+
+        //画面跳转
+        $this->redirect("role_list");
+    }
+
+    /**
+     * @功能：编辑角色
+     * @开发者：cxl
+     */
+    public function role_info(){
+        //接收参数
+        $role_id = IRequest::get('role_id',IRequest::NOT_EMPTY,"角色编号不能为空！");
+
+        //取得角色数据
+        $admin_role_where['admin_role_id'] = $role_id;
+        $admin_role_info = IDb::getInstance("admin_role")->setDbWhere($admin_role_where)->row();
+
+        //模板渲染
+        $this->assign('role_info',$admin_role_info);
+
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：角色权限设置
+     * @开发者：cxl
+     */
+    public function role_access_edit(){
+        //接收参数
+        $role_id= IRequest::get('role_id',IRequest::NOT_EMPTY,"角色编号不能为空！");
+
+        //取得角色数据
+        $admin_role_where['admin_role_id'] = $role_id;
+        $admin_role_info = IDb::getInstance("admin_role")->setDbWhere($admin_role_where)->row();
+        if(empty($admin_role_info)){
+            error("角色不存在！");
+        }
+
+        //取得菜单列表
+        $menu_where['is_delete'] = array("eq",1);
+        $menu_list = IDb::getInstance("admin_menu")
+            ->setDbFiled("menu_id,name,parent_id,if(default_node is null,'N',concat('N',default_node)) as default_node")
+            ->setDbWhere($menu_where)
+            ->setDbOrder("order_by")
+            ->sel();
+
+        //取得菜单节点
+        $menu_node_where['an.is_delete'] = IsDelete::No;
+        $menu_node = IDb::getInstance("admin_menu_node as amn")
+            ->setDbFiled("concat('N',amn.node_id) as menu_id,concat(an.title,'【',an.model_name,'：',an.action_name,'】') as name,amn.menu_id as parent_id,an.model_name,an.action_name,'N' as default_node")
+            ->setDbJoin("admin_node as an","an.node_id=amn.node_id")
+            ->setDbWhere($menu_node_where)
+            ->sel();
+
+        //整理数据
+        $menu_list = array_merge($menu_list,$menu_node);
+
+        //取得选中菜单
+        $menu_node_map["admin_role_id"] = $role_id;
+        $menu_node_info = IDb::getInstance("admin_role_menu")->setDbWhere($menu_node_map)->row();
+
+        //整理数据
+        $menu = explode(",",$menu_node_info['menu']);
+        $node = explode(",",$menu_node_info['node']);
+        $node = array_map(function($item){return "N{$item}";},$node);
+
+        //合并数据
+        $node_list = array_merge($menu,$node);
+
+        //模板渲染
+        $this->assign('role_id',$role_id);
+        $this->assign('menu_list',$menu_list);
+        $this->assign('node_list',$node_list);
+
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：角色权限提交
+     * @开发者：cxl
+     */
+    public function role_access_submit(){
+        //接收参数
+        $role_id= IRequest::get('role_id',IRequest::NOT_EMPTY,"角色编号不能为空！");
+        $data= IRequest::get('data/a');
+
+        //判断是否为超级管理员
+        $admin_super = get_login_admin_super();
+        if($admin_super != AdminSuper::Super){
+            error("只有超级管理员才有权限！");
+        }
+
+        //取得角色数据
+        $admin_role_where['admin_role_id'] = $role_id;
+        $admin_role_info = IDb::getInstance("admin_role")->setDbWhere($admin_role_where)->row();
+        if(empty($admin_role_info)){
+            error("角色不存在！");
+        }
+
+        //判断权限数据是否正确
+        if(!is_array($data)){
+            error("权限数据错误！");
+        }
+
+        //整理数据
+        $menu = array();
+        $node = array();
+        foreach($data as $item){
+            //判断是否为节点
+            if(stripos($item,"N") === false){
+                $menu[] = $item;
+            }else{
+                $node[] = str_ireplace("N","",$item);
+            }
+        }
+
+        //添加首页，编辑我的信息，修改密码权限
+        $menu = array_merge($menu,[1,37]);
+        $node = array_merge($node,[1,62,63,64,65]);
+
+        //判断角色权限是否存在
+        //$role_menu_info = IAdminRoleCache::getInfo($role_id);
+        $role_menu_info = IDb::getInstance("admin_role_menu")->setDbWhere(['admin_role_id'=>$role_id])->row();
+        if(empty($role_menu_info)){
+            //添加角色权限
+            $admin_role_data['admin_role_id'] = $role_id;
+            $admin_role_data['menu'] = implode(",",$menu);
+            $admin_role_data['node'] = implode(",",$node);
+            $admin_role_add = IDb::getInstance("admin_role_menu")->setDbData($admin_role_data)->add();
+            if($admin_role_add === false){
+                error("修改角色权限失败1！");
+            }
+        }else{
+            //修改角色权限
+            $admin_role_data['menu'] = implode(",",$menu);
+            $admin_role_data['node'] = implode(",",$node);
+            $admin_role_upd = IDb::getInstance("admin_role_menu")->setDbWhere("admin_role_id='{$role_id}'")->setDbData($admin_role_data)->upd();
+            if($admin_role_upd === false){
+                error("修改角色权限失败2！");
+            }
+        }
+
+        //画面跳转
+        $this->redirect("role_list");
+    }
+
+    /**
+     * @功能：发送给我的信息
+     * @开发者：szg
+     */
+    public function demand_notice_list(){
+        //接收参数
+        $user_id = IRequest::get('user_id');
+        $demand_id = IRequest::get('demand_id');
+        $demand_describe = IRequest::get('demand_describe');
+        $notice_describe = IRequest::get('notice_describe');
+        $notice_read = IRequest::get('notice_read');
+        $notice_state = IRequest::get('notice_state');
+
+        //设置查询条件
+        $notice_where = array();
+        if (!empty($user_id)) $notice_where['ne.user_id'] = $user_id;
+        if (!empty($demand_id)) $notice_where['ne.demand_id'] = $demand_id;
+        if (!empty($demand_describe))$notice_where['dd.demand_describe'] = array('like', "%{$demand_describe}%");
+        if (!empty($notice_describe))$notice_where['ne.notice_describe'] = array('like', "%{$notice_describe}%");
+        if (!empty($notice_read)) $notice_where['ne.notice_read'] = $notice_read;
+        if (!empty($notice_state)) $notice_where['ne.notice_state'] = $notice_state;
+
+        //取得数据
+        $notice_list = IDb::getInstance('notice as ne')
+            ->setDbFiled("ne.*,dd.demand_describe,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name,ur.phone")
+            ->setDbJoin("demand as dd", "dd.demand_id=ne.demand_id","left")
+            ->setDbJoin("user as ur", "ne.user_id=ur.user_id","left")
+            ->setDbWhere($notice_where)
+            ->setDbOrder('ne.notice_id desc')
+            ->pag();
+
+        //判断数据是否正常
+        if ($notice_list === false) {
+            error('获取消息列表有误！');
+        }
+
+        //页面赋值
+        $this->assign('notice_list', $notice_list);
+        $this->assign('user_id', $user_id);
+        $this->assign('demand_id', $demand_id);
+        $this->assign('demand_describe', $demand_describe);
+        $this->assign('notice_describe', $notice_describe);
+        $this->assign('notice_read', $notice_read);
+        $this->assign('notice_state', $notice_state);
+
+        //页面显示
+        return view();
+    }
+
+    /**
+     * @功能：发送给我的信息需求
+     * @开发者：szg
+     */
+    public function demand_notice_info(){
+        //接收参数
+        $notice_id = IRequest::get('notice_id',IRequest::NOT_EMPTY,"项目编号不能为空！");
+
+        //设置查询条件
+        $notice_where['ne.notice_id'] = $notice_id;
+
+        //取得数据
+        $notice_info = IDb::getInstance('notice as ne')
+            ->setDbFiled("ne.*,dd.demand_describe,pt.project_id,pt.project_name,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name,ur.phone")
+            ->setDbJoin("demand as dd", "dd.demand_id=ne.demand_id","left")
+            ->setDbJoin("project as pt", "pt.project_id=dd.project_id","left")
+            ->setDbJoin("user as ur", "ne.user_id=ur.user_id","left")
+            ->setDbWhere($notice_where)
+            ->setDbOrder('ne.notice_id desc')
+            ->row();
+
+        //判断数据是否正常
+        if ($notice_info === false) {
+            error('获取消息详情有误！');
+        }
+
+        //修改数据状态
+        $notice_data['notice_read'] = IsRead::Yes;
+        $notice_upd = IDb::getInstance("notice as ne")->setDbWhere($notice_where)->setDbData($notice_data)->upd();
+        if($notice_upd === false){
+            error("修改消息状态失败！");
+        }
+
+        //页面赋值
+        $this->assign('notice_info', $notice_info);
+
+        //页面显示
+        return view();
+    }
+}

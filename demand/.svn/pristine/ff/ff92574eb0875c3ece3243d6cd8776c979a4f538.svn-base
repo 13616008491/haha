@@ -1,0 +1,38 @@
+<!--添加用户表单-->
+<div class="tab_edit">
+    <form action="{:Url('org_submit')}" method="post" id="org_submit">
+        <input type="hidden" name="org_id" value="{$org_id}"/>
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">组织架构编号：</td>
+                <td class="t_l">
+                    {$org_info['org_id']}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">组织父级编号：</td>
+                <td class="t_l">
+                    {$org_info['parent_id']}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">菜单名称：</td>
+                <td class="t_l">
+                    {:widget('common/Input/input',array('name',$org_info['name'],true))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">排序：</td>
+                <td class="t_l">
+                    {:widget('common/Input/input',array('order_by',$org_info['order_by'],true))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"></td>
+                <td class="t_l">
+                    <div class="btn"><input type="submit" class="but_blue" value="保存信息"></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

@@ -1,0 +1,65 @@
+<!-- 搜索框及工具条 -->
+<div class="c-head-box">
+    <form method="get" action="{:Url('demand_task')}">
+        <ul>
+            <li class="c-head-search">
+                <!-- 搜索条件 -->
+                <ul>
+                    <li><span>操作人编号：</span><input type="text" name="user_id" value="{$user_id}"/></li>
+                    <li><span>操作人名称：</span><input type="text" name="user_name" value="{$user_name}"/></li>
+                </ul>
+            </li>
+            <li class="c-head-button">
+                <!-- 操作按钮 -->
+                <div class="fr">
+                    <input type="submit" class="but_blue" value="搜索">
+                </div>
+            </li>
+        </ul>
+    </form>
+</div>
+
+<!--用户列表-->
+<div class="lists-tab-cont">
+    <div class="lists-table">
+        <table class="pointer" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th style="width: 4%" class="tabSort-header"><a class="tabSort-header-inner"><p>编号</p></a></th>
+                <th style="width: 10%" class="tabSort-header"><a class="tabSort-header-inner"><p>项目名称</p></a></th>
+                <th style="width: 25%" class="tabSort-header"><a class="tabSort-header-inner"><p>需求概要</p></a></th>
+                <th style="width: 8%" class="tabSort-header"><a class="tabSort-header-inner"><p>操作人</p></a></th>
+                <th style="width: 8%" class="tabSort-header"><a class="tabSort-header-inner"><p>操作人电话</p></a></th>
+                <th style="width: 5%" class="tabSort-header"><a class="tabSort-header-inner"><p>类型</p></a></th>
+                <th style="width: 25%" class="tabSort-header"><a class="tabSort-header-inner"><p>进度概要</p></a></th>
+                <th style="width: 5%" class="tabSort-header"><a class="tabSort-header-inner"><p>进度比例</p></a></th>
+                <th style="width: 10%" class="tabSort-header"><a class="tabSort-header-inner"><p>开始时间</p></a></th>
+                <th style="width: 10%" class="tabSort-header"><a class="tabSort-header-inner"><p>结束时间</p></a></th>
+                <th style="width: 10%" class="tabSort-header"><a class="tabSort-header-inner"><p>报告时间</p></a></th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach name="demand_task_list" item="info"}
+            <tr>
+                <td>{$info.task_id}</td>
+                <td>{$info.project_name}</td>
+                <td title="{$info.demand_describe}">{$info.demand_describe}</td>
+                <td>{$info.real_name}</td>
+                <td>{$info.phone}</td>
+                <td>{:widget('common/Color/color',array('task_type',$info["task_type"]))}</td>
+                <td title="{$info.rate_describe}">{$info.rate_describe}</td>
+                <td>{$info.rate_percent}%</td>
+                <td>{$info.start_time}</td>
+                <td>{$info.end_time}</td>
+                <td>{$info.create_time}</td>
+            </tr>
+            {/foreach}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 翻页模板 -->
+    <div class="page">
+        {$Think.config.page_html}
+    </div>
+</div>

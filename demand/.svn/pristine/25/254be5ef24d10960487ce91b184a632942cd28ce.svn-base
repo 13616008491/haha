@@ -1,0 +1,358 @@
+<?php
+/*
+ * @开发工具: JetBrains PhpStorm.
+ * @文件名：SystemController.class.php
+ * @类功能: 项目管理
+ * @开发者: cxl
+ * @开发时间： 15-10-22
+ * @版本：version 1.0
+ */
+namespace app\admin\controller;
+
+use app\common\controller\AdminBaseController;
+use app\common\enum\AdminSuper;
+use app\common\enum\IsDelete;
+use app\common\ext\IDb;
+use app\common\ext\IRedis;
+use app\common\ext\IRequest;
+use think\Cache;
+use think\Url;
+use app\common\ext\ExportCom;
+
+class Project extends AdminBaseController {
+
+
+    /**
+     * @功能：项目列表
+     * @开发者：szg
+     */
+    public function project_list(){
+        //接收参数
+        $project_id = IRequest::get('project_id');
+        $charge_name = IRequest::get('charge_name');
+        $charge_phone = IRequest::get('charge_phone');
+        $project_name = IRequest::get('project_name');
+
+        //查询条件
+        $where = null;
+        if(!empty($project_id))$where['project_id'] = $project_id;
+        if(!empty($charge_name))$where['charge_name'] = array('like', "%{$charge_name}%");
+        if(!empty($charge_phone))$where['charge_phone'] = array('like', "%{$charge_phone}%");
+        if(!empty($project_name))$where['project_name'] = array('like', "%{$project_name}%");
+
+        $project_list = IDb::getInstance('project')->setDbWhere($where)->setDbOrder('sort_level desc,project_name asc')->pag();
+        if($project_list === false){
+            error('获取项目表有误！');
+        }
+
+        if(!empty($project_list) && is_array($project_list)) {
+            foreach ($project_list as &$data) {
+                for($i = 1; $i <=4; $i++){
+                    $demand_where = null;
+                    $demand_where['project_id'] = $data['project_id'];
+                    $demand_where['demand_status'] = $i;
+                    $demand_where['is_delete'] = IsDelete::No;
+                    $demand_count = IDb::getInstance('demand')->setDbWhere($demand_where)->con();
+                    switch ($i){
+                        case 1:
+                            $data["pending"]=$demand_count;
+                            break;
+                        case 2:
+                            $data["confirm"]=$demand_count;
+                            break;
+                        case 3:
+                            $data["finish"]=$demand_count;
+                            break;
+                        case 4:
+                            $data["refuse"]=$demand_count;
+                            break;
+                    }
+                }
+
+            }
+        }
+        //页面赋值
+        $this->assign('project_list', $project_list);
+        $this->assign('project_id', $project_id);
+        $this->assign('charge_name', $charge_name);
+        $this->assign('charge_phone', $charge_phone);
+        $this->assign('project_name', $project_name);
+
+        //页面显示
+        return view();
+    }
+ 
+    /**
+     * @功能：添加项目
+     * @开发者：szg
+     */
+    public function project_add(){
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：项目保存
+     * 开发者：szg
+     */
+    public function project_submit(){
+        //接收参数
+        $project_name = IRequest::get("project_name",IRequest::NOT_EMPTY,"项目名称不能为空！");
+        $project_id = IRequest::get("project_id");
+        $project_photo_url = IRequest::get("project_photo_url",IRequest::NOT_EMPTY,"项目图片地址不能为空！");
+        $project_describe= IRequest::get("project_describe",IRequest::NOT_EMPTY,"项目描述不能为空");
+        $affiliated_company= IRequest::get("affiliated_company",IRequest::NOT_EMPTY,"所属公司不能为空");
+        $charge_name= IRequest::get("charge_name",IRequest::NOT_EMPTY,"项目负责人不能为空");
+        $charge_phone= IRequest::get("charge_phone");
+        $propose_status= IRequest::get("propose_status",IRequest::NOT_EMPTY,"请选择需求提交状态");
+        $start_time= IRequest::get("start_time",IRequest::NOT_EMPTY,"请选择项目开始时间");
+        $sort_level= IRequest::get("sort_level");
+        $remark = IRequest::get("remark");
+
+        if(empty($sort_level)){
+            $sort_level = 0;
+        }
+        if(mb_strlen($project_name)>15){
+            error("项目名称不能超过15个字！");
+        }
+
+
+        if(empty($project_id)){
+            //查询项目名是否重复
+            $project_where['project_name'] = $project_name;
+            $porject_info = IDb::getInstance('project')->setDbWhere($project_where)->row();
+            if(!empty($porject_info)){
+                error("项目名已经被使用了！");
+            }
+
+            //开始事物
+            IDb::dbStartTrans();
+
+            //新增保存
+            $project_data['project_id']=$project_id;
+            $project_data['project_name']=$project_name;
+            $project_data['project_photo_url']=$project_photo_url;
+            $project_data['project_describe']=$project_describe;
+            $project_data['affiliated_company']=$affiliated_company;
+            $project_data['charge_name'] = $charge_name;
+            $project_data['charge_phone'] = $charge_phone;
+            $project_data['propose_status'] = $propose_status;
+            $project_data['start_time'] = $start_time;
+            $project_data['remark'] = $remark;
+            $project_data['create_admin']=get_login_admin_id();
+            $project_data['create_time']=get_date_time();
+            $project_data['sort_level']=$sort_level;
+            $project_id = IDb::getInstance("project")->setDbData($project_data)->add();
+            if($project_id === false){
+                IDb::dbRollback();
+                error("添加项目失败！");
+            }
+        }else{
+            //开始事物
+            IDb::dbStartTrans();
+
+            $porject_where['project_id'] = $project_id;
+            //新增保存
+            $project_data['project_name']=$project_name;
+            $project_data['project_photo_url']=$project_photo_url;
+            $project_data['project_describe']=$project_describe;
+            $project_data['affiliated_company']=$affiliated_company;
+            $project_data['charge_name'] = $charge_name;
+            $project_data['charge_phone'] = $charge_phone;
+            $project_data['propose_status'] = $propose_status;
+            $project_data['start_time'] = $start_time;
+            $project_data['remark'] = $remark;
+            $project_data['update_admin']=get_login_admin_id();
+            $project_data['update_time']=get_date_time();
+            $project_data['sort_level']=$sort_level;
+            $project_id = IDb::getInstance("project")->setDbWhere($porject_where)->setDbData($project_data)->upd();
+            if($project_id === false){
+                IDb::dbRollback();
+                error("编辑项目失败！");
+            }
+        }
+
+
+        //提交事物处理
+        IDb::dbCommit();
+
+        //画面跳转
+        $this->success("操作成功",Url("project_list"));
+    }
+
+     /**
+     * @功能：项目编辑
+     * @开发者：szg
+     */
+    public function project_edit(){
+        //接收参数
+        $project_id = IRequest::get('project_id',IRequest::NOT_EMPTY,"项目编号不能为空！");
+
+        //取得项目数据
+        $project_where['project_id'] = $project_id;
+        $project_info = IDb::getInstance("project")->setDbWhere($project_where)->row();
+        if(empty($project_info['project_id'])){
+            error("项目不存在！");
+        }
+
+        //模板渲染
+        $this->assign('project_id',$project_id);
+        $this->assign('project_info',$project_info);
+
+        //渲染模板输出
+        return view('project_edit');
+    }
+
+    /**
+     * @功能：项目详情
+     * @开发者：szg
+     */
+    public function project_info(){
+        //接收参数
+        $project_id = IRequest::get('project_id',IRequest::NOT_EMPTY,"项目编号不能为空！");
+
+        //取得项目数据
+        $project_where['project_id'] = $project_id;
+        $project_info = IDb::getInstance("project")->setDbWhere($project_where)->row();
+        if(empty($project_info['project_id'])){
+            error("项目不存在！");
+        }
+
+        //模板渲染
+        $this->assign('project_id',$project_id);
+        $this->assign('project_info',$project_info);
+
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：禁用项目
+     * @开发者：szg
+     */
+    public function project_del(){
+        //接收参数
+        $project_id = IRequest::get("project_id",IRequest::NOT_EMPTY,"项目编号不能为空！");
+
+        //取得项目信息
+        $project_where["project_id"] = $project_id;
+        $project_data['is_delete'] = IsDelete::Yes;
+        $project_data['update_admin']=get_login_admin_id();
+        $project_data['update_time']=get_date_time();
+        $project_upd = IDb::getInstance("project")->setDbWhere($project_where)->setDbData($project_data)->upd();
+        if($project_upd === false){
+            error("修改项目信息失败！");
+        }
+
+        //画面跳转
+        $this->success("操作成功",Url("project_list"));
+    }
+
+    /**
+     * @功能：启用项目
+     * @开发者：szg
+     */
+    public function project_reset(){
+        //接收参数
+        $project_id = IRequest::get("project_id",IRequest::NOT_EMPTY,"项目编号不能为空！");
+
+        //取得项目信息
+        $project_where["project_id"] = $project_id;
+        $project_data['is_delete'] = IsDelete::No;
+        $project_data['update_admin']=get_login_admin_id();
+        $project_data['update_time']=get_date_time();
+        $project_upd = IDb::getInstance("project")->setDbWhere($project_where)->setDbData($project_data)->upd();
+        if($project_upd === false){
+            error("修改项目信息失败！");
+        }
+
+        //画面跳转
+        $this->success("操作成功",Url("project_list"));
+    }
+
+    /**
+     * @功能：需求概览导出
+     * @开发者： wdd
+     */
+    public function project_demand_export(){
+        //接收参数
+        $project_id = IRequest::get('project_id');
+        $charge_name = IRequest::get('charge_name');
+        $charge_phone = IRequest::get('charge_phone');
+        $project_name = IRequest::get('project_name');
+
+        //查询条件
+        $where = null;
+        if(!empty($project_id))$where['project_id'] = $project_id;
+        if(!empty($charge_name))$where['charge_name'] = array('like', "%{$charge_name}%");
+        if(!empty($charge_phone))$where['charge_phone'] = array('like', "%{$charge_phone}%");
+        if(!empty($project_name))$where['project_name'] = array('like', "%{$project_name}%");
+
+        $project_list = IDb::getInstance('project')->setDbWhere($where)->setDbOrder('sort_level desc,project_name asc')->pag();
+        if($project_list === false){
+            error('获取项目表有误！');
+        }
+
+        if(!empty($project_list) && is_array($project_list)) {
+            foreach ($project_list as &$data) {
+                for($i = 1; $i <=4; $i++){
+                    $demand_where = null;
+                    $demand_where['project_id'] = $data['project_id'];
+                    $demand_where['demand_status'] = $i;
+                    $demand_where['is_delete'] = IsDelete::No;
+                    $demand_count = IDb::getInstance('demand')->setDbWhere($demand_where)->con();
+                    switch ($i){
+                        case 1:
+                            $data["pending"]=$demand_count;
+                            break;
+                        case 2:
+                            $data["confirm"]=$demand_count;
+                            break;
+                        case 3:
+                            $data["finish"]=$demand_count;
+                            break;
+                        case 4:
+                            $data["refuse"]=$demand_count;
+                            break;
+                    }
+                }
+
+            }
+        }
+        //设置数据格式
+        $line = array();
+        $col_str = "项目编号,项目名称,负责人,负责人手机号,需求总数,已完成,进行中,待确认,已拒绝";
+        $col = explode(',',$col_str);
+
+        foreach ($project_list as $k => $value) {
+            //计算总需求量
+            $demand_count = array_sum([$value['pending'],$value['confirm'],$value['finish'],$value['refuse']]);
+            $finish = "0%";
+            $pending = "0%";
+            $confirm = "0%";
+            $refuse = "0%";
+            if($demand_count>0){
+                //被除数不能为0
+                $finish = round(($value['finish']/$demand_count)*100,2)."％";
+                $pending = round(($value['pending']/$demand_count)*100,2)."％";
+                $confirm = round(($value['confirm']/$demand_count)*100,2)."％";
+                $refuse = round(($value['refuse']/$demand_count)*100,2)."％";
+            }
+            $temp = [
+                $value['project_id'],
+                $value['project_name'],
+                $value['charge_name'],
+                $value['charge_phone'],
+                $demand_count,
+                $finish,
+                $pending,
+                $confirm,
+                $refuse,
+            ];
+            $line[] = $temp;
+        }
+
+        //导出数据
+        ExportCom::export("项目需求概览列表导出".date('YmdHis').".xls",$col,$line);
+    }
+}

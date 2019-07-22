@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <meta http-equiv="Cache-Control" content="max-age=2592000" />
+    <title>需求小助手 · 总后台</title>
+    <link href="__STATIC__/favicon.ico" rel="shortcut icon">
+    <link href="__STATIC__/admin/css/base.css" rel="stylesheet">
+    <link href="__STATIC__/admin/css/index.css" rel="stylesheet" />
+    <link href="__STATIC__/admin/css/system.css" rel="stylesheet" />
+    <script type="text/javascript" src="__STATIC__/common/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/common/jquery.validate.js"></script>
+    <script type="text/javascript" src="__STATIC__/common/jquery.metadata.js"></script>
+    <script type='text/javascript' src="__STATIC__/common/jquery.resizableColumns.js"></script>
+    <script type="text/javascript" src="__STATIC__/common/plugins/layer/layer.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/admin/js/common.js"></script>
+    <script type="text/javascript" src="__STATIC__/common/json2.js"></script>
+    <script type="text/javascript">
+        var json = JSON.parse('{$Think.config.json}');
+    </script>
+</head>
+
+<body>
+    <div class="warp tree">
+        <div class="head-content">
+            <!-- 页面head -->
+            <div class="head">
+                <div class="user-logo" style="color: #fff;font-size: 30px;width:500px;font-family:Arial,Helvetica,sans-serif;">需求小助手 · 总后台</div>
+                <div class="user-info">
+                    <p>
+                        欢迎[
+                        <font color="red">{:get_login_admin_role_name()}</font>]<a href="{:Url('admin/admin_info')}">{:get_login_admin_phone()}</a>的到来 |
+                        <a href="{:Url('system/clear_cache_all')}">清除缓存</a> |
+                        <a href="{:Url('allot/demand_notice_list')}">未读消息（<font color="red"><b>{$_notice_count_}</b></font>）</a> |
+                        <a href="{:Url('login/logout')}">退出</a>
+                    </p>
+                    <p><span>版本：1.0.0</span><span>最后登录IP：{:get_client_ip()}</span></p>
+                </div>
+            </div>
+
+            <!-- 一级菜单 -->
+            <div class="nav-box">
+                <ul class="nav" id="_menu_one">
+                    {foreach name="$Think.config.menu.menu[1]" item="menu_one"} {if condition="($menu_one['menu_id'] == $Think.config.menu.current[1])"}
+                    <li class="cur"><a href="{:Url($menu_one['action'])}"><span>{$menu_one.name}</span></a></li>
+                    {else /}
+                    <li><a href="{:Url($menu_one['action'])}"><span>{$menu_one.name}</span></a></li>
+                    {/if} {/foreach}
+                </ul>
+            </div>
+
+            <!-- 内容页面 -->
+            <div class="container">
+                {__CONTENT__}
+            </div>
+        </div>
+    </div>
+    <div class="footer_gp">
+        <p>厦门酷融信息科技有限公司版权所有 © Copyright 2014-2017 闽ICP备18006609号-1</p>
+    </div>
+</body>
+<!-- JS处理 -->
+<script language="javascript">
+    $(function() {
+        //修改列表宽度
+        $("div.lists-table table").resizableColumns(function() {});
+
+        //重写alert
+        window.alert = layer.alert;
+    });
+</script>
+
+</html>

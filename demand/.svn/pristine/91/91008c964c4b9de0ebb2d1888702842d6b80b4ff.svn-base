@@ -1,0 +1,213 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: zengwenjie
+ * Date: 2018/12/6
+ * Time: 18:00
+ */
+
+namespace app\api\controller;
+
+
+use app\common\controller\DemandBaseController;
+use app\common\enum\IsUserEnable;
+use app\common\enum\AdminSuper;
+use app\common\ext\IDb;
+use app\common\ext\IWeChat;
+use app\common\cache\user\IUserCache;
+use app\api\cache\ITokenCache;
+use app\common\ext\util\StringUtil;
+use think\Config;
+use app\common\enum\IsDelete;
+
+class Login extends DemandBaseController
+{
+    /**
+     * @功能：登录
+     * @开发者：曾文杰
+     */
+    public function login(){
+        $user_secret = Config::get("user_secret");
+        $secret = self::get_data('secret');
+        $code = self::get_data('code',self::NOT_EMPTY,'missing code');
+        if ($user_secret==$secret){
+            $is_enable=true;
+        }else{
+            $is_enable=false;
+        }
+
+        $data = IWeChat::miniCodeToSession($code);
+        if(!$data){
+            self::set_code(self::WARNING_0001);
+            self::set_msg('授权失败');
+            self::send();
+        }
+
+        $data['login_time'] = get_date_time();
+
+        //一定条件下，才会下发union id 详情查看：https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/union-id.html
+        $where['open_id'] = $data['open_id'];
+        $user_info = IDb::getInstance('user')->setDbWhere($where)->row();
+        if(!empty($user_info)){
+
+            $uid = $user_info['user_id'];
+            if ($user_info['is_enable']==IsUserEnable::No&&$is_enable){
+                $user_data['is_enable']=IsUserEnable::Yes;
+            }
+            $user_data['session_key']=$data['session_key'];
+            $user_data['login_time'] = get_date_time();
+            $result = IDb::getInstance('user')
+                ->setDbWhere(['user_id'=>$user_info['user_id']])
+                ->setDbData($user_data)
+                ->upd();
+            if($result === false){
+                self::set_code(self::WARNING_0002);
+                self::set_msg('登录失败');
+                self::send();
+            }
+
+            IUserCache::deleteInfo(self::$uid);
+        }else{
+            if ($is_enable){
+                $data['is_enable']=IsUserEnable::Yes;
+            }else{
+                $data['is_enable']=IsUserEnable::No;
+            }
+            $data['login_time'] = get_date_time();
+//            $data['avatar'] = 'https://juqi.oss-cn-shanghai.aliyuncs.com/card/static/default_avatar.png';
+            $uid = IDb::getInstance('user')->setDbData($data)->add();
+            if(!$uid){
+                self::set_code(self::WARNING_0003);
+                self::set_msg('登录失败');
+                self::send();
+            }
+        }
+//        $relation_where['user_id'] =$uid;
+//        $relation_info = IDb::getInstance('organize_relation')->setDbWhere($relation_where)->row();
+//        if(!empty($relation_info)){
+//            $relation_exist=1;
+//        }else{
+//            $relation_exist=2;
+//        }
+        //保存登录状态
+        session('uid',$uid);
+        $token = md5(StringUtil::randString(32).$uid);
+        $result = ITokenCache::setUseId($token,$uid);
+        if(!$result){
+            self::set_code(self::WARNING_0004);
+            self::set_msg('登录失败');
+            self::send();
+        }
+        if(self::$token){
+            ITokenCache::delUserId(self::$token);
+        }
+        self::set_code(self::SUCCESS);
+        self::set_value('is_enable',$is_enable);
+        self::set_value('token',$token);
+        self::set_msg('登录成功');
+        self::send();
+    }
+
+    /**
+     * @功能：登录
+     * @开发者：曾文杰
+     */
+    public function login_test(){
+        if(empty(self::$uid)){
+            self::set_code(self::WARNING_0001);
+            self::set_msg('未登录');
+            self::send();
+        }
+
+        $data['cookie'] = $_COOKIE;
+        $data['session'] = $_SESSION;
+        self::set_values($data);
+
+        self::set_code(self::SUCCESS);
+        self::set_msg('已登录');
+        self::send();
+    }
+
+    /**
+     * @功能：后台账号注册
+     * @开发者：张俊
+     */
+    public function admin_reg(){
+
+        $phone = self::get_data('phone',self::PHONE,'请输入正确的手机号');
+
+        //账号是否存在
+        $admin_where['phone'] = $phone;
+        $admin_where['is_delete'] = IsDelete::No;
+        $admin_sel = IDb::getInstance('admin')->setDbWhere($admin_where)->row();
+        if(!empty($admin_sel)){
+            self::set_code(self::WARNING_0001);
+            self::set_msg('账号已存在');
+            self::send();
+        }
+
+        //获取用户的信息
+        $user_info = self::get_info(self::$uid);
+
+        //添加后台账号
+        $admin_data['phone'] = $phone;
+        $admin_data['pwd'] = md5(md5(123456));
+        $admin_data['real_name'] = $user_info['nickname'];
+        $admin_data['user_id'] = self::$uid;
+        $admin_data['admin_super'] = AdminSuper::Super;
+        $admin_data['reg_time'] = get_date_time();
+        $admin_data['create_admin'] = 1;
+        $admin_data['admin_role_id'] = 1;
+        $admin_data['create_time'] = get_date_time();
+        $admin_data['is_delete'] = IsDelete::No;
+        $admin_add = IDb::getInstance('admin')->setDbData($admin_data)->add();
+        if($admin_add===false){
+            self::set_code(self::ERR_0005);
+            self::set_msg('创建失败');
+            self::send();
+        }
+
+        self::set_code(self::SUCCESS);
+        self::set_msg('账号创建成功');
+        self::send();
+
+    }
+
+    /**
+     * @功能：是否可以注册后台账号
+     * @开发者：张俊
+     */
+    public function reg_right(){
+
+        //查询职位表中是否存在
+        $admin_where['user_id'] = self::$uid;
+        $admin_sel = IDb::getInstance('organize_relation')->setDbWhere($admin_where)->sel();
+        if(empty($admin_sel)){
+            self::set_code(self::SUCCESS);
+            self::set_value('is_right','2');
+            self::set_value('phone','');
+            self::set_msg('没有注册权限');
+            self::send(); 
+        }
+
+        //获取用户的信息
+        $user_info = self::get_info(self::$uid);
+
+        //判断账号是否存在
+        $admin_sel = IDb::getInstance('admin')->setDbWhere($admin_where)->sel();
+        if(!empty($admin_sel)){
+            self::set_code(self::SUCCESS);
+            self::set_value('is_right','3');
+            self::set_value('phone',$user_info['phone']);
+            self::set_msg('账号已存在');
+            self::send(); 
+        }
+
+        self::set_code(self::SUCCESS);
+        self::set_value('is_right','1');
+        self::set_value('phone',$user_info['phone']);
+        self::set_msg('成功');
+        self::send();
+
+    }
+}

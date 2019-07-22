@@ -1,0 +1,57 @@
+.z-add-selection{
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: #fff;
+	width: 510px;
+	min-height: 300px;
+	max-height: 600px;
+	border: 1px solid #ccc;
+	z-index: 999999999999;
+}
+.z-add-selection b{
+	display: inline-block;
+	position: absolute;
+	right: 10px;
+	top: 0;
+	font-size: 24px;
+	font-weight: 400;
+	cursor: pointer;
+}
+.z-add-selection .z-add-heard{
+	border-bottom:1px solid #eee ;
+}
+.z-add-selection .z-add-heard a{
+	display: inline-block;
+	width: 100px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	margin-right: 10px;
+	cursor: pointer;
+	overflow: hidden;
+}
+.z-add-selection .z-add-heard a.aft{
+	color: #479EF8;
+}
+.z-add-selection .z-add-box{
+	padding: 20px;
+	max-height: 200px;
+	overflow: auto;
+}
+.z-add-selection .z-add-box span{
+	display: inline-block;
+	width: 80px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	margin-right: 10px;
+	background-color: #fafafa;
+	cursor: pointer;
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+.z-add-selection .z-add-box span:hover{
+	background-color: #479ef8;
+	color: #fff;
+}

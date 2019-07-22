@@ -1,0 +1,72 @@
+<?php
+
+
+/**
+ * Created by PhpStorm.
+ * User: zengwenjie
+ * Date: 2018/12/5
+ * Time: 15:48
+ */
+namespace app\api\controller;
+use app\common\cache\project\IProjectCache;
+use app\common\controller\DemandBaseController;
+use app\common\enum\IsDelete;
+use app\common\ext\IDb;
+class Project extends  DemandBaseController
+{
+    /**
+     * @功能：取得项目列表接口
+     * @开发者：曾文杰
+     */
+    public function get_project()
+    {
+        //接收参数
+        $user_id = self::$uid;
+        $bottom_id = self::get_data('bottom_id');
+        $search_content = self::get_data('search_content');
+        $project_where = null;
+        if (!empty($search_content)){
+            if (is_numeric($search_content)) {
+                $project_where['pt.project_id'] = $search_content + 0;
+            } else {
+               $project_where['concat(pt.project_name,pt.project_describe)'] = array("like", "%{$search_content}%");
+            }
+        }
+        //取得数据
+        $project_list = IDb::getInstance('project as pt')
+            ->setDbFiled("dd.*,pt.*,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name,ur.phone")
+            ->setDbJoin("user as ur","pt.charge_user_id=ur.user_id","left")
+            ->setDbJoin("(select project_id,sum(if(demand_status=1,1,0)) as pending,sum(if(demand_status=2,1,0)) as confirm,
+                              sum(if(demand_status=3,1,0)) as development,sum(if(demand_status=4,1,0)) as refuse,
+                              sum(if(demand_status=5,1,0)) as test,sum(if(demand_status=5,1,0)) as finish
+                       from   dm_demand as dd
+                       group  by project_id
+                       ) as dd","dd.project_id=pt.project_id","left")
+            ->setDbWhere($project_where)
+            ->setDbOrder('pt.sort_level desc,pt.project_name desc')
+            ->sel();
+        //判断取得数据是否正常
+        if(empty($project_list)){
+            $project_list = array();
+        }
+
+        foreach ($project_list as $key=>$project){
+            $project_number = str_pad($project['project_id'],6,"0",STR_PAD_LEFT);
+
+            $project_list[$key]['project_number'] = $project_number;
+            if(empty($project['confirm']))$project_list[$key]['confirm'] = "0";
+            if(empty($project['development']))$project_list[$key]['development'] = "0";
+            if(empty($project['refuse']))$project_list[$key]['refuse'] = "0";
+            if(empty($project['pending']))$project_list[$key]['pending'] = "0";
+            if(empty($project['test']))$project_list[$key]['test'] = "0";
+            if(empty($project['finish']))$project_list[$key]['finish'] = "0";
+        }
+
+        //返回值
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::set_value("userid",$user_id);
+        self::set_value("project_list",$project_list);
+        self::send();
+    }
+}

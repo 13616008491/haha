@@ -1,0 +1,434 @@
+<?php
+/*
+ * @开发工具: JetBrains PhpStorm.
+ * @文件名：LoginController.class.php
+ * @类功能: 首页
+ * @开发者: zc
+ * @开发时间： 15-10-22
+ * @版本：version 1.0
+ */
+namespace app\api\controller;
+
+use app\common\cache\user\IUserCache;
+use app\common\controller\DemandBaseController;
+use app\common\enum\WeChatInformStatus;
+use app\common\enum\OperationType;
+use app\common\enum\IsYes;
+use app\common\ext\IDb;
+use app\common\ext\IWeChat;
+use app\common\ext\Statistics;
+use app\common\ext\util\Oss;
+use app\common\ext\util\StringUtil;
+use think\Config;
+use app\common\enum\WeChatInformType;
+
+class User extends DemandBaseController {
+
+     private static $init = true; //开启统计初始化
+
+    /**
+     * @功能：设置微信用户信息
+     * @开发者：gys
+     */
+    public function wx_info(){
+        $encrypted_data = self::get_data('encrypted_data',self::NOT_EMPTY,'missing encrypted data');
+        $iv = self::get_data('iv',self::NOT_EMPTY,'missing iv');
+
+        //设置条件
+        $where['user_id'] = self::$uid;
+
+        //实例化对象
+        $user_info = IDb::getInstance('user')->setDbWhere($where)->row();
+        if(!$user_info){
+            self::set_code(self::WARNING_0001);
+            self::set_msg('用户不存在');
+            self::send();
+        }
+        $data = [];
+        $result = IWeChat::decryptData($user_info['session_key'],$encrypted_data, $iv, $data );
+        if(!$result){
+            self::set_code(self::WARNING_0002);
+            self::set_msg('数据校验失败');
+            self::send();
+        }
+
+        $update_data['nickname'] = $data['nickName'];
+        $update_data['avatar'] = $data['avatarUrl'];
+        $update_data['sex'] = intval($data['gender'])+1;
+//        $update_data['country'] = $data['country'];
+//        $update_data['province'] = $data['province'];
+//        $update_data['city'] = $data['city'];
+        $return_data = $update_data;
+
+        if(isset($data['unionId'])){
+            $update_data['union_id'] = $data['unionId'];
+        }
+
+        $result = IDb::getInstance('user')
+            ->setDbWhere(['user_id'=>self::$uid])
+            ->setDbData($update_data)
+            ->upd();
+        if($result === false){
+            self::set_code(self::WARNING_0003);
+            self::set_msg('修改用户信息失败');
+            self::send();
+        }
+
+        IUserCache::deleteInfo(self::$uid);
+
+        $return_data['user_id'] = self::$uid;
+
+        self::set_code(self::SUCCESS);
+        self::set_msg('成功！');
+        self::set_values($return_data);
+        return self::send();
+    }
+
+    /**
+     * @功能：设置用户信息
+     * @开发者：gys
+     */
+    private function set_info(){
+        $nickname = self::get_data('nickname');
+        $avatar = self::get_data('avatar');
+        $data[''] = self::get_data('sex');
+        $country = self::get_data('country');
+        $province = self::get_data('province');
+        $city = self::get_data('city');
+
+
+        $iv = self::get_data('iv',self::NOT_EMPTY,'missing iv');
+
+        $data = [];
+        $result = IWeChat::decryptData($session_key,$encrypted_data, $iv, $data );
+        if(!$result){
+            self::set_code(self::WARNING_0001);
+            self::set_msg('数据校验失败');
+            self::send();
+        }
+
+
+        self::set_code(self::SUCCESS);
+        self::set_msg('登录成功');
+        return self::send();
+    }
+
+    /**
+     * @功能：客户列表
+     * @开发者：yy
+     */
+    public function user_list(){
+        //参数的获取
+        $user_id = self::$uid;
+        $bottom_id = self::get_data('bottom_id');
+
+        //获取用户的信息
+        $user_info = self::get_info($user_id);
+
+        //判断是否存在名片
+        $card_list = null;
+        if(!empty($user_info['card_id'])){
+            //获取名片信息和标签信息
+            $card_where['cc.card_id'] = $user_info['card_id'];
+            if(!empty($bottom_id)) $card_where['date_format(cc.view_time,"%Y%m%d%H%i%s")'] = ['lt',$bottom_id];
+            $card_list = IDb::getInstance('user as u')
+                ->setDbFiled('u.nickname,u.card_id,cc.view_time,u.avatar,cc.user_tag,u.user_id,date_format(cc.view_time,"%Y%m%d%H%i%s") as code')
+                ->setDbJoin('card_customer as cc', 'u.user_id = cc.user_id')
+                ->setDbWhere($card_where)
+                ->setDbOrder('code desc')
+                ->setDbLimit(10)
+                ->sel();
+            if($card_list === false){
+                self::set_code(self::WARNING_0001);
+                self::set_msg('获取客户列表失败');
+                self::send();
+            }
+
+            //获取客户标签
+            $tag_list = null;
+            if(!empty($card_list) || !is_array($card_list)){
+               foreach ($card_list as &$val){
+                   if(!empty($val['user_tag'])){
+                       $val['user_tag'] = str_replace(',', '、', $val['user_tag']);
+                   }
+                   //获取浏览数量
+                   $val['view_con'] = ICardOperation::get_con($user_info['card_id'],OperationType::browse,$val['user_id']);
+
+                   //获取交谈次数
+                   $val['chat_con'] = ICardOperation::get_chat_num($user_id,$val['user_id']);
+
+
+                   //获取拨号次数
+                   $val['dial_con'] = ICardOperation::get_con($user_info['card_id'],OperationType::dial,$val['user_id']);
+
+               }
+            }
+
+        }
+
+        //返回数据
+        self::set_code(self::SUCCESS);
+        self::set_value('card_list', $card_list);
+        return self::send();
+    }
+
+    /**
+     * @功能：获取客户详情
+     * @开发者：yy
+     */
+    public function user_info(){
+        //参数的获取
+        $customer_id = self::get_data('user_id', self::NOT_EMPTY, '客户ID不能为空');
+        $bottom_id = self::get_data('bottom_id');
+
+        //获取当前用户详情
+        $info = self::get_info();
+
+        //判断客户是不是属于自己
+        $card_customer_where['user_id'] = $customer_id;
+        $card_customer_where['card_id'] = $info['card_id'];
+        $card_customer_info = IDb::getInstance('card_customer')->setDbWhere($card_customer_where)->setDbFiled('user_id,view_time,user_tag,card_id')->row();
+        if(empty($card_customer_info)){
+            self::set_code(self::WARNING_0001);
+            self::set_msg('获取客户详情失败');
+            self::send();
+        }
+
+        //数据的整理
+        if(!empty($card_customer_info['user_tag'])){
+            $card_customer_info['user_tag'] = str_replace(',', '、', $card_customer_info['user_tag']);
+        }
+
+
+        //获取客户详情
+        $user_info = self::get_info($customer_id);
+        if($user_info === false){
+            self::set_code(self::WARNING_0001);
+            self::set_msg('获取客户详情失败');
+            self::send();
+        }
+
+        //获取有用信息
+        $data['nickname'] = $user_info['nickname'];
+        $data['avatar'] = $user_info['avatar'];
+
+        //统计
+        if(!empty($info['card_id'])){
+            //获取浏览数量
+            $data['view_con'] = ICardOperation::get_con($info['card_id'],OperationType::browse,$customer_id);
+
+            //获取交谈次数
+            $data['chat_con'] = ICardOperation::get_chat_num($info['user_id'],$customer_id);
+
+            //获取拨号次数
+            $data['dial_con'] = ICardOperation::get_con($info['card_id'],OperationType::dial,$customer_id);
+        }
+
+        $data = array_merge($card_customer_info, $data);
+
+        //获取操作记录
+        $card_operation_list = ICardOperation::get_operation($info['card_id'],$customer_id,$bottom_id);
+        if (empty($card_operation_list)){
+            $card_operation_list = [];
+        }
+
+        //返回数据
+        self::set_code(self::SUCCESS);
+        self::set_value('user_info', $data);
+        self::set_value('card_operation_list', $card_operation_list);
+        return self::send();
+    }
+
+    /**
+     * @功能：客户标签的设置
+     * @开发者：yy
+     */
+    public function set_tag(){
+        //参数的获取
+        $customer_id = self::get_data('user_id', self::NOT_EMPTY, '客户ID不能为空');
+        $user_tag = self::get_data('user_tag',self::NOT_EMPTY, '用户标签不能为空');
+
+        //获取当前用户详情
+        $info = self::get_info();
+
+        //参数的处理
+        $user_tag = json_decode($user_tag, true);
+
+        //获取详情
+        $where['user_id'] = $customer_id;
+        $where['card_id'] = $info['card_id'];
+        $data['user_tag'] = implode(',', $user_tag);
+        $card_customer_upd = IDb::getInstance('card_customer')->setDbWhere($where)->setDbData($data)->upd();
+        if($card_customer_upd === false){
+            self::set_code(self::WARNING_0001);
+            self::set_msg('添加客户标签失败');
+            self::send();
+        }
+
+        //缓存删除
+        ICardCustomerCache::deleteInfo($customer_id,$info['card_id']);
+
+        //返回数据
+        self::set_code(self::SUCCESS);
+        self::set_msg('操作成功！');
+        return self::send();
+    }
+
+    /**
+     * @功能：设置名片模板
+     * @开发者：gys
+     */
+    public function set_style(){
+        //参数的获取
+        $card_id = self::get_data('card_id', self::NOT_EMPTY, '名片ID不能为空');
+        $style = self::get_data('style', self::NOT_EMPTY, '模板风格不能为空');
+        $color = self::get_data('color', self::NOT_EMPTY, '模板颜色不能为空');
+
+
+        $card_info = ICardCache::getInfo($card_id);
+        if($card_info['user_id'] != self::$uid || !empty($card_info['unbind_time'])){
+            self::set_code(self::WARNING_0001);
+            self::set_msg('名片不存在！');
+            self::send();
+        }
+
+        $style .= '-'.$color;
+
+        $card_data['style'] = $style;
+        $card_where['card_id'] = $card_id;
+        $card_where['user_id'] = self::$uid;
+        $card_upd = IDb::getInstance('card')->setDbData($card_data)->setDbWhere($card_where)->upd();
+        if($card_upd === false){
+            //事物回滚
+            IDb::dbRollback();
+            self::set_code(self::WARNING_0001);
+            self::set_msg('修改名片信息失败！');
+            self::send();
+        }
+
+        //缓存删除
+        ICardCache::deleteInfo($card_id);
+
+        //返回数据
+        self::set_code(self::SUCCESS);
+        self::set_msg('操作成功！');
+        return self::send();
+    }
+
+
+
+    /**
+     * @功能：消息推送测试
+     * @开发者：张俊
+     */
+    public function wx_push_msg(){
+        
+        IWeChat::sendInform(self::$uid,WeChatInformType::State,['1','2',3,2],161);
+        
+        IWeChat::sendInform(self::$uid,WeChatInformType::Received,['1','2',3,2],161);
+
+        //操作成功
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::send();
+
+    }
+
+
+
+    /**
+     * @功能：取得oss上传签名
+     * @开发者：yy
+     */
+    public function get_oss_sign(){
+
+        //获取配置信息
+        $access_id = Config::get("oss.access_key_id");
+        $access_key = Config::get("oss.access_key_secret");
+        $endpoint = Config::get("oss.endpoint");
+        $bucket = Config::get("oss.bucket");
+
+
+        $oss = new Oss($access_id,$access_key,$endpoint,$bucket);
+
+        $data['upload_url'] = Config::get("oss.url");
+        $data['access_id'] = $access_id;
+        $data['policy'] = $oss->getUploadPolicy();
+        $data['signature'] = $oss->getUploadSignature($data['policy']);
+        $data['key'] = md5(StringUtil::randString(32).self::$uid);
+        $data['path'] = config('oss.path');
+
+        //操作成功
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::set_values($data);
+        self::send();
+    }
+
+    /**
+     * @功能：获取小程序的form_id
+     * @开发者：yy
+     */
+    public function get_form_id(){
+        //获取参数
+        $user_id = self::$uid;
+        $form_id = self::get_data('form_id');
+        $source = self::get_data('source');
+
+        //判断小程序form_id是否为空
+        if(empty($form_id)){
+            $data['module'] = 'card';
+            $data['controller'] = self::$call_controller;
+            $data['action'] = self::$call_action;
+            $data['error'] = 'form_id不能为空';
+            IDb::getInstance('database')->setDbData($data)->add();
+            self::set_code(self::SUCCESS);
+            self::set_msg("成功！");
+            self::send();
+        }
+
+        //数据的整理
+        $form_id_list = json_decode($form_id,true);
+
+//      $form_id_list = explode(',','123,2,1,3');
+
+        //判断是否是合法的数组
+        $data = null;
+        $where['user_id'] = $user_id;
+        $where['status'] = WeChatInformStatus::Entering;
+        $where['create_time'] = ['gt',date('Y-m-d H:i:s',strtotime('-6 days'))];
+        $count = IDb::getInstance('wechat_inform')->setDbWhere($where)->con();
+
+        if(!is_array($form_id_list)){
+            $data['module'] = 'card';
+            $data['controller'] = self::$call_controller;
+            $data['action'] = self::$call_action;
+            $data['error'] = 'json格式有误';
+            IDb::getInstance('database')->setDbData($data)->add();
+        }
+
+        $save_count = 50;
+        if(!empty($form_id_list) && $count < $save_count){
+            foreach ($form_id_list as $val){
+                if($count >= $save_count){
+                    break;
+                }
+                //添加数据
+                $data['user_id'] = $user_id;
+                $data['form_id'] = $val;
+                $data['status'] = WeChatInformStatus::Entering;
+                $data['source'] = $source;
+                $data['create_time'] = get_date_time();
+                IDb::getInstance('wechat_inform')->setDbData($data)->add();
+                $count++;
+            }
+        }
+
+        //操作成功
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::send();
+
+    }
+
+}

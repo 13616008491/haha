@@ -1,0 +1,38 @@
+<!-- 搜索框及工具条 -->
+<div class="c-head-box">
+    <form method="get" action="{:Url('org_list')}">
+        <ul>
+            <li class="c-head-search">
+                <!-- 搜索条件 -->
+                <ul>
+                    <li><span>选择组织架构：</span>{:widget('common/Select/select_tree',array('org_id',array($select_org_list,"org_id","name","parent_id"),0,$org_id))}</li>
+                </ul>
+            </li>
+            <li class="c-head-button">
+                <!-- 操作按钮 -->
+                <div class="fr"><input type="submit" class="but_blue" value="搜索"></div>
+            </li>
+        </ul>
+    </form>
+</div>
+
+<!--用户列表-->
+<div class="lists-tab-cont">
+    <div class="lists-table">
+        {:widget('common/ListTree/show',array($org_list,$org_id))}
+    </div>
+</div>
+
+<!-- JS处理 -->
+<script language="javascript">
+    $(function(){
+        //提示是否删除
+        $("a.info").click(function(){
+            if(confirm("您确定要删除该记录吗？")){
+                return true;
+            }else{
+                return false;
+            }
+        });
+    });
+</script>

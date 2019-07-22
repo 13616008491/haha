@@ -1,0 +1,69 @@
+<!-- 搜索框及工具条 -->
+<div class="c-head-box">
+    <form method="get" action="{:Url('notice_list')}">
+    <ul>
+        <li class="c-head-search">
+            <!-- 搜索条件 -->
+            <ul>
+                <li><span>选择项目：</span>{:widget('common/Select/select',array('project_id',array($project_list,"project_id","project_name"),$project_id))}</li>
+                <li><span>需求编号：</span><input type="text" name="demand_id" value="{$demand_id}"/></li>
+                <li><span>用户编号：</span><input type="text" name="user_id" value="{$user_id}"/></li>
+                <li><span>消息内容：</span><input type="text" name="notice_describe" value="{$notice_describe}"/></li>
+                <li><span>微信通知状态：</span>{:widget('common/Select/select',array('notice_state','notice_state',$notice_state))}</li>
+                <li><span>微信通知状态：</span>{:widget('common/Select/select',array('notice_read','notice_read',$notice_read))}</li>
+            </ul>
+        </li>
+        <li class="c-head-button">
+            <!-- 操作按钮 -->
+            <div class="fr"><input type="submit" class="but_blue" value="搜索"></div>
+        </li>
+    </ul>
+    </form>
+</div>
+
+<!--用户列表-->
+<div class="lists-tab-cont">
+    <div class="lists-table">
+        <table class="pointer" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th style="width: 3%" class="tabSort-header"><a class="tabSort-header-inner"><p>消息编号</p></a></th>
+                <th style="width: 3%" class="tabSort-header"><a class="tabSort-header-inner"><p>项目编号</p></a></th>
+                <th style="width: 8%" class="tabSort-header"><a class="tabSort-header-inner"><p>项目名称</p></a></th>
+                <th style="width: 3%" class="tabSort-header"><a class="tabSort-header-inner"><p>需求编号</p></a></th>
+                <th style="width: 12%" class="tabSort-header"><a class="tabSort-header-inner"><p>需求概要</p></a></th>
+                <th style="width: 3%" class="tabSort-header"><a class="tabSort-header-inner"><p>用户编号</p></a></th>
+                <th style="width: 5%" class="tabSort-header"><a class="tabSort-header-inner"><p>用户名称</p></a></th>
+                <th style="width: 6%" class="tabSort-header"><a class="tabSort-header-inner"><p>用户电话</p></a></th>
+                <th style="width: 15%" class="tabSort-header"><a class="tabSort-header-inner"><p>消息内容</p></a></th>
+                <th style="width: 4%" class="tabSort-header"><a class="tabSort-header-inner"><p>是否读取</p></a></th>
+                <th style="width: 4%" class="tabSort-header"><a class="tabSort-header-inner"><p>微信通知</p></a></th>
+                <th style="width: 6%" class="tabSort-header"><a class="tabSort-header-inner"><p>发送时间</p></a></th>
+            </tr>
+            </thead>
+            <tbody>
+                {foreach name="notice_list" item="info"}
+                    <tr>
+                        <td>{$info.notice_id|default='--'}</td>
+                        <td>{$info.project_id|default='--'}</td>
+                        <td>{$info.project_name|default='--'}</td>
+                        <td>{$info.demand_id|default='--'}</td>
+                        <td>{$info.demand_describe|default='--'}</td>
+                        <td>{$info.user_id|default='--'}</td>
+                        <td>{$info.real_name|default='--'}</td>
+                        <td>{$info.phone|default='--'}</td>
+                        <td title="{$info.notice_describe|default='--'}">{$info.notice_describe|default='--'}</td>
+                        <td>{:widget('common/Color/color',array('notice_read',$info["notice_read"]))}</td>
+                        <td>{:widget('common/Color/color',array('notice_state',$info["notice_state"]))}</td>
+                        <td>{$info.create_time}</td>
+                    </tr>
+                {/foreach}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 翻页模板 -->
+    <div class="page">
+        {$Think.config.page_html}
+    </div>
+</div>

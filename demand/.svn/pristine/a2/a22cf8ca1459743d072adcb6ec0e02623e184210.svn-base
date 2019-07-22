@@ -1,0 +1,114 @@
+<?php
+/*
+ * @开发工具: JetBrains PhpStorm.
+ * @文件名：IApiConfig.class.php
+ * @类功能: api配置文件
+ * @开发者: zc
+ * @开发时间： 14-10-28
+ * @版本：version 1.0
+ */
+namespace app\api\ext;
+
+class IApiConfig{
+    //API配置文件
+    public static $api = array(
+        "login/login" => array(
+            "api_group" => "公共接口",
+            "api_name" => "微信登录",
+            "api_param" => array(
+
+                array("name"=>"临时登录凭证code","code"=>"code"),
+                array("name"=>"权限校验码","code"=>"secret")
+
+            ),
+        ),
+        "login/login_test" => array(
+            "api_group" => "公共接口",
+            "api_name" => "登录状态测试（pc无效）",
+            "api_param" => array(
+            ),
+        ),
+        "user/wx_info" => array(
+            "api_group" => "公共接口",
+            "api_name" => "设置用户微信信息",
+            "api_param" => array(
+                array("name"=>"签名","code"=>"signature"),
+                array("name"=>"加解数据","code"=>"encrypted_data"),
+                array("name"=>"加密算法的初始向量","code"=>"iv")
+            ),
+        ),
+        "user/get_oss_sign" => array(
+            "api_group" => "公共接口",
+            "api_name" => "获取阿里云oss签名",
+            "api_param" => array(
+            ),
+        ),
+        "user/get_form_id" => array(
+            "api_group" => "公共接口",
+            "api_name" => "收集小程序form_id",
+            "api_param" => array(
+                array("name"=>"收集小程序form_id【传入json格式】","code"=>"form_id"),
+                array("name"=>"收集小程序form_id来源","code"=>"source"),
+            ),
+        ),
+        "project/get_project" => array(
+            "api_group" => "项目接口",
+            "api_name" => "获取项目列表",
+            "api_param" => array(
+                array("name"=>"最下面数据编号（首次请求为空,project_id）","code"=>"bottom_id"),
+
+            ),
+        ),"demand/add_demand" => array(
+            "api_group" => "需求接口",
+            "api_name" => "添加项目需求",
+            "api_param" => array(
+                array("name"=>"项目编号","code"=>"project_id"),
+                array("name"=>"用户名字","code"=>"proposer_name"),
+                array("name"=>"手机号","code"=>"proposer_phone"),
+                array("name"=>"描述","code"=>"demand_describe"),
+                array("name"=>"图片（非必填,多张用“,”分隔）","code"=>"demand_photo_url"),
+                array("name"=>"语音（非必填）","code"=>"voice_url"),
+                array("name"=>"语音时长","code"=>"voice_duration"),
+                array("name"=>"优先级【1：普通，2：紧急，3：特急】","code"=>"priority_level"),
+                array("name"=>"优先级说明（只有特急时才有且必须有）","code"=>"priority_describe"),
+            ),
+        ),"demand/get_demand_list" => array(
+            "api_group" => "需求接口",
+            "api_name" => "取得项目需求列表",
+            "api_param" => array(
+                array("name"=>"项目编号","code"=>"project_id"),
+                array("name"=>"状态分类（【1：待确定，2：进行中，3：已完成，4：已拒绝】,不填为所有）","code"=>"demand_status"),
+                array("name"=>"最下面数据编号（首次请求为空,demand_id）","code"=>"bottom_id"),
+            ),
+        ),"demand/get_demand_detail" => array(
+            "api_group" => "需求接口",
+            "api_name" => "取得项目需求详情",
+            "api_param" => array(
+                array("name"=>"项目需求编号","code"=>"demand_id"),
+            ),
+        ),"demand/get_my_demand" => array(
+            "api_group" => "需求接口",
+            "api_name" => "取得我提出的项目需求列表",
+            "api_param" => array(
+                array("name"=>"状态分类（【1：待确定，2：进行中，3：已完成，4：已拒绝】,不填为所有）","code"=>"demand_status"),
+                array("name"=>"最下面数据编号（首次请求为空,demand_id）","code"=>"bottom_id"),
+            ),
+        ),"demand/search_demand" => array(
+            "api_group" => "需求接口",
+            "api_name" => "需求搜索",
+            "api_param" => array(
+                array("name"=>"搜索内容（必填）","code"=>"search_content"),
+                array("name"=>"项目编号(不填为所有项目)","code"=>"project_id"),
+                array("name"=>"状态分类（【1：待确定，2：进行中，3：已完成，4：已拒绝】,不填为所有）","code"=>"demand_status"),
+                array("name"=>"最下面数据编号（首次请求为空,demand_id）","code"=>"bottom_id"),
+            ),
+        ),"demand/qr_code" => array(
+            "api_group" => "需求接口",
+            "api_name" => "生成二维码",
+            "api_param" => array(
+                array("name"=>"参数","code"=>"scene"),
+            ),
+        ),
+
+    );
+}

@@ -1,0 +1,254 @@
+<?php
+/*
+ * @开发工具: JetBrains PhpStorm.
+ * @文件名：SystemController.class.php
+ * @类功能: 需求管理
+ * @开发者: cxl
+ * @开发时间： 15-10-22
+ * @版本：version 1.0
+ */
+namespace app\admin\controller;
+
+use app\common\controller\AdminBaseController;
+use app\common\enum\DemandStatus;
+use app\common\enum\IsDelete;
+use app\common\enum\IsUserEnable;
+use app\common\enum\PriorityLevel;
+use app\common\enum\ProposeStatus;
+use app\common\ext\IDb;
+use app\common\ext\IRequest;
+use app\common\ext\IWeChat;
+use app\common\enum\HtmlEnumValue;
+use app\common\enum\WeChatInformType;
+
+class User extends AdminBaseController {
+    /**
+     * @功能：用户列表
+     * @开发者：szg
+     */
+    public function user_list(){
+        //接收参数
+        $user_id = IRequest::get('user_id');
+        $nickname = IRequest::get('nickname');
+        $real_name = IRequest::get('real_name');
+        $phone = IRequest::get('phone');
+        $is_enable = IRequest::get('is_enable');
+        $admin_id = IRequest::get('admin_id');
+        $admin_real_name = IRequest::get('admin_real_name');
+        $admin_phone = IRequest::get('admin_phone');
+
+        //设置查询条件
+        $user_where = array();
+        if (!empty($user_id)) $user_where['ur.user_id'] = $user_id;
+        if (!empty($nickname))$user_where['ur.nickname'] = array('like', "%{$nickname}%");
+        if (!empty($real_name))$user_where['ur.real_name'] = array('like', "%{$real_name}%");
+        if (!empty($phone))$user_where['ur.phone'] = array('like', "%{$phone}%");
+        if (!empty($is_enable)) $user_where['ur.is_enable'] = $is_enable;
+        if (!empty($admin_id)) $user_where['an.admin_id'] = $admin_id;
+        if (!empty($admin_real_name))$user_where['an.real_name'] = array('like', "%{$admin_real_name}%");
+        if (!empty($admin_phone))$user_where['an.phone'] = array('like', "%{$admin_phone}%");
+
+        //取得数据
+        $user_list = IDb::getInstance('user as ur')
+            ->setDbFiled("ur.*,an.admin_id,an.real_name as admin_real_name,an.phone as admin_phone")
+            ->setDbJoin("admin as an", "ur.user_id=an.user_id","left")
+            ->setDbWhere($user_where)
+            ->setDbOrder('ur.user_id desc')
+            ->pag();
+
+        //判断数据是否正常
+        if ($user_list === false) {
+            error('获取用户列表有误！');
+        }
+
+        //页面赋值
+        $this->assign('user_list', $user_list);
+        $this->assign('user_id', $user_id);
+        $this->assign('nickname', $nickname);
+        $this->assign('real_name', $real_name);
+        $this->assign('phone', $phone);
+        $this->assign('is_enable', $is_enable);
+        $this->assign('admin_id', $admin_id);
+        $this->assign('admin_real_name', $admin_real_name);
+        $this->assign('admin_phone', $admin_phone);
+
+        //页面显示
+        return view();
+    }
+
+    /**
+     * @功能：用户列表
+     * @开发者：szg
+     */
+    public function user_enable_list(){
+        //接收参数
+        $user_id = IRequest::get('user_id');
+        $nickname = IRequest::get('nickname');
+        $real_name = IRequest::get('real_name');
+        $phone = IRequest::get('phone');
+        $admin_id = IRequest::get('admin_id');
+        $admin_real_name = IRequest::get('admin_real_name');
+        $admin_phone = IRequest::get('admin_phone');
+
+        //设置查询条件
+        $user_where['ur.is_enable'] = IsUserEnable::No;
+        if (!empty($user_id)) $user_where['ur.user_id'] = $user_id;
+        if (!empty($nickname))$user_where['ur.nickname'] = array('like', "%{$nickname}%");
+        if (!empty($real_name))$user_where['ur.real_name'] = array('like', "%{$real_name}%");
+        if (!empty($phone))$user_where['ur.phone'] = array('like', "%{$phone}%");
+        if (!empty($admin_id)) $user_where['an.admin_id'] = $admin_id;
+        if (!empty($admin_real_name))$user_where['an.real_name'] = array('like', "%{$admin_real_name}%");
+        if (!empty($admin_phone))$user_where['an.phone'] = array('like', "%{$admin_phone}%");
+
+        //取得数据
+        $user_list = IDb::getInstance('user as ur')
+            ->setDbFiled("ur.*,an.admin_id,an.real_name as admin_real_name,an.phone as admin_phone")
+            ->setDbJoin("admin as an", "ur.user_id=an.user_id","left")
+            ->setDbWhere($user_where)
+            ->setDbOrder('ur.user_id desc')
+            ->pag();
+
+        //判断数据是否正常
+        if ($user_list === false) {
+            error('获取用户列表有误！');
+        }
+
+        //页面赋值
+        $this->assign('user_list', $user_list);
+        $this->assign('user_id', $user_id);
+        $this->assign('nickname', $nickname);
+        $this->assign('real_name', $real_name);
+        $this->assign('phone', $phone);
+        $this->assign('admin_id', $admin_id);
+        $this->assign('admin_real_name', $admin_real_name);
+        $this->assign('admin_phone', $admin_phone);
+
+        //页面显示
+        return view();
+    }
+
+    /**
+     * @功能：用户详情
+     * @开发者：szg
+     */
+    public function user_info(){
+        //接收参数
+        $user_id = IRequest::get('user_id',IRequest::NOT_EMPTY,"用户编号不能为空！");
+
+        //查询条件
+        $user_where['ur.user_id'] = $user_id;
+        $user_info = IDb::getInstance('user as ur')
+            ->setDbFiled("ur.*,an.admin_id,an.real_name as admin_real_name,an.phone as admin_phone,an.admin_type")
+            ->setDbJoin("admin as an", "ur.user_id=an.user_id","left")
+            ->setDbWhere($user_where)
+            ->row();
+
+        //设置layout
+        $this->layout("layout_empty");
+
+        //模板渲染
+        $this->assign('user_info',$user_info);
+
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：用户禁用
+     * 开发者：szg
+     */
+    public function user_del(){
+        //接收参数
+        $user_id = IRequest::get('user_id',IRequest::NOT_EMPTY,"用户编号不能为空！");
+
+        //修改用户状态
+        $user_where['user_id'] = $user_id;
+        $user_data['is_enable'] = IsUserEnable::No;
+        $user_upd = IDb::getInstance("user")->setDbData($user_data)->setDbWhere($user_where)->upd();
+        if($user_upd === false){
+            error("禁用用户失败！");
+        }
+
+        //画面跳转
+        $this->success("操作成功",Url("user_list"));
+    }
+
+    /**
+     * @功能：用户还原
+     * 开发者：szg
+     */
+    public function user_reset(){
+        //接收参数
+        $user_id = IRequest::get('user_id',IRequest::NOT_EMPTY,"用户编号不能为空！");
+
+        //修改用户状态
+        $user_where['user_id'] = $user_id;
+        $user_data['is_enable'] = IsUserEnable::Yes;
+        $user_upd = IDb::getInstance("user")->setDbData($user_data)->setDbWhere($user_where)->upd();
+        if($user_upd === false){
+            error("禁用用户失败！");
+        }
+
+        //画面跳转
+        $this->success("操作成功",Url("user_list"));
+    }
+
+    /**
+     * @功能：用户消息列表
+     * @开发者：szg
+     */
+    public function notice_list(){
+        //接收参数
+        $project_id = IRequest::get('project_id');
+        $demand_id = IRequest::get('demand_id');
+        $user_id = IRequest::get('user_id');
+        $notice_describe = IRequest::get('notice_describe');
+        $notice_state = IRequest::get('notice_state');
+        $notice_read = IRequest::get('notice_read');
+
+        //设置查询条件
+        $notice_where = array();
+        if(!empty($project_id))$notice_where['pt.project_id'] = $project_id;
+        if(!empty($user_id))$notice_where['ne.user_id'] = $user_id;
+        if(!empty($demand_id))$notice_where['ne.demand_id'] =$demand_id;
+        if (!empty($notice_describe))$notice_where['ne.notice_describe'] = array('like', "%{$notice_describe}%");
+        if(!empty($notice_state))$notice_where['ne.notice_state'] = $notice_state;
+        if(!empty($notice_read))$notice_where['ne.notice_read'] = $notice_read;
+
+        //取得数据
+        $notice_list = IDb::getInstance('notice as ne')
+            ->setDbFiled("ne.*,pt.project_id,pt.project_name,dd.demand_describe,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name,ur.phone")
+            ->setDbJoin("demand as dd","dd.demand_id=ne.demand_id","left")
+            ->setDbJoin("project as pt","dd.project_id=pt.project_id","left")
+            ->setDbJoin("user as ur","ne.user_id=ur.user_id")
+            ->setDbWhere($notice_where)
+            ->setDbOrder('ne.notice_id desc')
+            ->pag();
+//        dump(IDb::getLastSql());exit;
+
+        //判断数据是否正常
+        if($notice_list === false){
+            error('取得消息列表失败！');
+        }
+
+        //查询条件
+        $project_where['propose_status'] = ProposeStatus::OPEN;
+        $project_list = IDb::getInstance('project')->setDbWhere($project_where)->setDbOrder('project_id desc')->sel();
+        if($project_list === false){
+            error("获取项目列表错误！");
+        }
+
+        //页面赋值
+        $this->assign('project_list', $project_list);
+        $this->assign('notice_list', $notice_list);
+        $this->assign('project_id', $project_id);
+        $this->assign('demand_id', $demand_id);
+        $this->assign('user_id', $user_id);
+        $this->assign('notice_describe', $notice_describe);
+        $this->assign('notice_state', $notice_state);
+        $this->assign('notice_read', $notice_read);
+
+        //页面显示
+        return view();
+    }
+}

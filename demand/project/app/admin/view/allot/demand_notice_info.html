@@ -1,0 +1,44 @@
+<!-- 编辑区域 -->
+<div class="lists">
+    <!--添加用户表单-->
+    <div class="tab_edit">
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">消息编号：</td>
+                <td class="t_l">{$notice_info['notice_id']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目编号：</td>
+                <td class="t_l">{$notice_info['project_id']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目名称：</td>
+                <td class="t_l">{$notice_info['project_name']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求编号：</td>
+                <td class="t_l">{$notice_info['demand_id']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求概要：</td>
+                <td class="t_l">{:widget('common/TextArea/text_area',array('demand_describe',$notice_info['demand_describe'],false,true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">消息内容：</td>
+                <td class="t_l">{:widget('common/TextArea/text_area',array('notice_describe',$notice_info['notice_describe'],false,true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">是否阅读消息：</td>
+                <td class="t_l">{:widget('common/Color/color',array('notice_read',$notice_info["notice_read"]))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">微信通知状态：</td>
+                <td class="t_l">{:widget('common/Color/color',array('notice_state',$notice_info["notice_state"]))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">创建时间：</td>
+                <td class="t_l">{$notice_info['create_time']}</td>
+            </tr>
+        </table>
+    </div>
+</div>

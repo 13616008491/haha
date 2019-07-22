@@ -1,0 +1,843 @@
+@charset "UTF-8";
+/*--车贷详细--*/
+.carLoanDet {
+	padding: 0 20px;
+	background-color:#fff ;
+	border: 1px solid #eee;
+}
+.carLoanDet-head {
+	position: relative;
+	height: 90px;
+	padding-top: 20px;
+}
+.carLoanDet-head:after {
+	content: '';
+	clear: both;
+}
+.carLoanDet-head div {
+	float: left;
+	height: 50px;
+	line-height: 50px;
+}
+.carLoanDet-head .carLoanDet-bank {
+	border: #eee solid 1px;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+.carLoanDet-head .carLoanDet-bank img {
+	height: 48px;
+}
+.carLoanDet-head .carLoanDet-title {
+	font-size: 26px;
+	font-weight: bold;
+	margin-left: 20px;
+}
+.carLoanDet-head .carLoanDet-sign {
+	position: absolute;
+	right: 0px
+}
+.carLoanDet-head .carLoanDet-sign span {
+	margin-right: 5px;
+}
+.carLoanDet-head .carLoanDet-sign .sign_mortgages {
+	color: #f46200;
+}
+.carLoanDet-head .carLoanDet-sign i {
+	color: #999999;
+	margin-right: 2px;
+}
+.carLoanDet-head .carLoanDet-sign .sign_identity i {
+	font-size: 19px;
+	position: relative;
+	top: 2px;
+}
+.carLoanDet-info {
+	background: #f1f8fe;
+	padding: 20px 30px;
+}
+.carLoanDet-info-a li {
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	margin-right: 50px;
+}
+.carLoanDet-info-a:after {
+	content: '';
+	clear: both;
+	display: block;
+}
+.carLoanDet-info-a li div {
+	display: inline-block;
+}
+.carLoanDet-info-a li div input {
+	width: 160px;
+}
+.carLoanDet-info-b {
+	padding: 15px 0px;
+}
+.carLoanDet-info-b div {
+	height: 30px;
+	line-height: 30px;
+}
+.carLoanDet-info-b div i {
+	color: #ff0000;
+	font-size: 20px;
+}
+.carLoanDet-info-b div span {
+	display: inline-block;
+	width: 200px;
+}
+.carLoanDet-info-b .fontCor_gray:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+.carLoanDet-info-c .chhBtn {
+	width: 120px;
+	background: #fd654d;
+	height: 35px;
+	line-height: 35px;
+	color: #FFFFFF;
+	margin-right: 10px;
+	border-radius: 3px;
+}
+.carLoanDet-info-c i {
+	color: #ff0000;
+}
+.carLoanDet-info-line {
+	border-bottom: 1px solid #eee;
+	margin: 20px 0px;
+}
+.carLoanDet-info-d h1 {
+	color: #323232;
+	font-size: 20px;
+	font-weight: 400;
+}
+.carLoanDet-info-d-flow {
+	margin: 10px 0px;
+	position: relative;
+}
+.carLoanDet-info-d-flow .carLoanDet-info-R {
+	width: 32px;
+	height: 43px;
+	background: url(../../images/carLoan_icon5.png);
+	position: absolute;
+	top: 50%;
+	margin-top: -21px;
+	left: 227px;
+}
+.carLoanDet-info-d-flow .carLoanDet-info-R-b {
+	left: 499px;
+}
+.carLoanDet-info-d-flow .zhhCol-4 {
+	padding-left: 30px;
+}
+.carLoanDet-info-d-flow .zhhCol-4:first-child {
+	padding-left: 0px;
+}
+.carLoanDet-info-d-flow .paddL50 {
+	padding-left: 50px;
+}
+.carLoanDet-info-d-flow .zhhCol-4 .zhhCol-4 {
+	text-align: center;
+}
+.carLoanDet-info-d-flow .zhhCol-4 .zhhCol-4 img {
+	margin-top: 4px;
+}
+.carLoanDet-info-d-flow .zhhCol-4 .zhhRow {
+	height: 80px;
+}
+.carLoanDet-info-d-flow .zhhCol-4 .zhhRow .zhhCol-8 p {
+	height: 40px;
+	line-height: 40px;
+	padding-left: 15px;
+}
+.carLoanDet-info-d-flow .zhhCol-4 .zhhRow .zhhCol-8 .info-d-flow-title {
+	color: #323232;
+	font-size: 18px;
+	line-height: 60px;
+}
+.saveText {
+	position: absolute;
+	right: 40px;
+	top: 30px;
+	cursor: pointer;
+	color: #666666;
+}
+.saveText:hover {
+	color: #6fbb68;
+}
+.saveText i {
+	color: #6fbb68;
+	position: relative;
+	top: 1px;
+	margin-right: 5px;
+}
+.carLoanDet_TabBox_list {
+	padding-bottom: 30px;
+}
+.carLoanDet_TabBox_list h1 {
+	font-size: 16px;
+	font-weight: 400;
+	height: 52px;
+	width: 175px;
+	text-align: center;
+	line-height: 35px;
+	background: url(../../images/carLoan_icon4.png);
+	color: #FFF;
+	margin-bottom: 10px;
+}
+.carLoanDet_TabBox_list h1 i {
+	margin-right: 5px;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text {
+	padding: 0px 40px;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text p {
+	padding: 10px 0px;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text h3 {
+	font-size: 16px;
+	color: #323232;
+	font-weight: 400;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text h3 i {
+	display: inline-block;
+	width: 3px;
+	height: 16px;
+	background: #2692e9;
+	position: relative;
+	top: 2px;
+	margin: 30px 10px 0px 0px;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text div.zhhRow:last-child {
+	border-bottom: 1px solid #eee;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text div.zhhRow>div {
+	color: #ff0f0f;
+	font-size: 16px;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text div.zhhRow>div:first-child {
+	border-right: 0px;
+	color: #666;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text div.zhhRow.formTitle {
+	height: 40px;
+	line-height: 40px;
+	margin-top: 30px;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text div.zhhRow.formTitle>div {
+	color: #666;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text div.zhhRow.formTitle>div {
+	height: 40px;
+	line-height: 40px;
+	background: #ececec;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text div.zhhCol-6 {
+	height: 35px;
+	line-height: 35px;
+	padding-left: 40px;
+	border: 1px solid #eee;
+	border-bottom: 0px;
+}
+
+/*
+	edit by zhz
+	2018.3.12
+ */
+.title-d {
+    width: 100%;
+    text-align: center;
+    line-height: 120px;
+    font-size: 38px;
+    color: #323232;
+}
+.new-car ul li {
+	width: 590px;
+	height: 335px;
+	float: left;
+	background: #fff;
+	border-top: #2692E9 solid 3px;
+	margin-top: 20px;
+}
+.new-car-kg {
+	margin-left: 20px;
+}
+.new-car-u {
+	width: 100%;
+	line-height: 45px;
+	font-size: 24px;
+	font-weight: 600;
+	color: #333;
+	padding: 30px 0 0 30px;
+	overflow: hidden;
+	float: left;
+}
+.new-car-u img {
+	width: 45px;
+	height: 45px;
+	float: left;
+	margin-right: 10px;
+}
+.new-car-r {
+	float: right;
+	width: 220px;
+	margin-right: 10px;
+}
+.new-car-r dl {
+	width: 100%;
+	overflow: hidden;
+	margin-bottom: 13px;
+}
+
+.new-car-r dl dt {
+	width: 36px;
+	height: 36px;
+	border: #2692E9 solid 1px;
+	text-align: center;
+	line-height: 36px;
+	color: #2692E9;
+	font-size: 24px;
+	float: left;
+	margin: 2px 15px 0 0;
+}
+
+.new-car-r dl dd p {
+	margin-bottom: 2px;
+	color: #999;
+}
+.new-car-rbtn:link, .new-car-rbtn:visited {
+	width: 100px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	color: #fff;
+	display: inline-block;
+	background: #2692E9;
+	margin-top: 15px;
+	border-radius: 2px;
+}
+
+.new-car-rbtn:hover {
+	opacity: 0.8;
+}
+.wrapbtn-a:link, .wrapbtn-a:visited {
+	width: 190px;
+	height: 55px;
+	text-align: center;
+	line-height: 55px;
+	color: #fff;
+	display: block;
+	background: #2692E9;
+	margin: 60px auto;
+	font-size: 20px;
+	clear: both;
+}
+
+.wrapbtn-a:hover {
+	opacity: 0.8;
+}
+
+.zero-payment ul {
+	margin-right: -8px;
+}
+
+.zero-payment ul li {
+	width: 294px;
+	height: 405px;
+	border: #fff solid 2px;
+	overflow: hidden;
+	padding: 0 12px;
+	float: left;
+	box-shadow: 0 0 10px rgba(38, 146, 233, 0.2);
+	margin: 8px 8px 0 0;
+}
+
+.zero-payment ul li:hover {
+	border: #2692E9 solid 2px;
+}
+
+.zero-payment-logo {
+	width: 100%;
+	height: 100px;
+	overflow: hidden;
+	text-align: center;
+	line-height: 100px;
+	font-size: 0;
+}
+
+.zero-payment-logo img {
+	max-width: 260px;
+	max-height: 90px;
+	vertical-align: middle;
+}
+
+.zero-payment-type {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	text-align: center;
+	line-height: 80px;
+	background: #F7F7F7;
+	font-size: 18px;
+	color: #333;
+}
+
+.zero-payment ul li:hover .zero-payment-type {
+	color: #2692E9;
+}
+
+.zero-payment-details {
+	width: 100%;
+	height: 80px;
+	overflow: hidden;
+	background: #F7F7F7;
+	padding-bottom: 30px;
+	text-align: center;
+}
+
+.zero-payment-details dl {
+	float: left;
+	width: 33.3%;
+}
+
+.zero-payment-cborder {
+	border-left: #eee solid 1px;
+}
+
+.zero-payment-details dl dd {
+	color: #000;
+	margin-top: 10px;
+}
+
+.zero-payment-d {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	line-height: 60px;
+}
+
+.zero-payment-d p {
+	float: left;
+	width: 33.3%;
+	text-align: center;
+	color: #999;
+}
+
+.zero-payment-d p .iconfont {
+	color: #B5B5B5;
+	padding-right: 5px;
+}
+
+.zero-payment-e2:link, .zero-payment-e2:visited {
+	width: 135px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	color: #fff;
+	display: block;
+	background: #2692E9;
+	margin: 20px auto 0 auto;
+	clear: both;
+	border-radius: 2px;
+}
+
+.zero-payment-e2:hover {
+	opacity: 0.8;
+}
+
+.wrapbtn-b:link, .wrapbtn-b:visited {
+	width: 190px;
+	height: 55px;
+	text-align: center;
+	line-height: 55px;
+	color: #2692E9;
+	display: block;
+	margin: 60px auto;
+	font-size: 20px;
+	clear: both;
+	border: #2692E9 solid 1px;
+}
+
+.wrapbtn-b:hover {
+	opacity: 0.8;
+	background: #2692E9;
+	color: #fff;
+}
+
+.piclist-b {
+	max-width: 1200px;
+	height: auto;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+.piclist-b ul {
+	margin-right: -12px;
+}
+
+.piclist-b ul li {
+	width: 291px;
+	height: auto;
+	overflow: hidden;
+	float: left;
+	margin: 17px 12px 0 0;
+}
+
+.credit-card-box {
+	display: block;
+	-webkit-border-radius:11px;
+	-moz-border-radius: 11px;
+	-ms-border-radius: 11px;
+	border-radius: 11px;
+	overflow: hidden;
+	font-size: 0;
+}
+
+.piclist-b ul li img {
+	width: 291px;
+	height: 177px;
+	transition: all 0.5s ease 0s;
+	transform: scale(1);
+}
+
+.piclist-b ul li img:hover {
+	transform: scale(1.1);
+}
+
+.piclistb-txt {
+	width: 100%;
+	height: 50px;
+	clear: both;
+	overflow: hidden;
+	font-size: 18px;
+	float: left;
+	line-height: 50px;
+}
+
+.piclistb-txt-link:link, .piclistb-txt-link:visited {
+	text-decoration: none;
+	color: #333;
+}
+
+.piclistb-txt-link:hover {
+	text-decoration: none;
+	color: #0099FF;
+}
+/*房贷详情*/
+.hosLoanDet-info{
+	background-color: #f1f8fe;
+	padding: 20px;
+}
+.hosLoanDet-info>p{
+	margin-top: 10px;
+	color: #999;
+	font-size: 12px;
+}
+.hosLoanDet-info>p span{
+	cursor: pointer;
+}
+.hosLoanDet-info>p span:hover{
+	text-decoration: underline;
+	color:#0099FF;
+}
+.hosLoanDet-info-heard{
+	position: relative;
+}
+.hosLoanDet-info-heard p{
+	margin-bottom: 20px;
+}
+.hosLoanDet-info-heard p label{
+	display: inline-block;
+	min-width: 80px;
+}
+.hosLoanDet-info-heard p span{
+	color: #323232;
+	margin-right: 40px;
+}
+.hosLoanDet-info-heard p a{
+	font-weight: bold;
+	cursor: pointer;
+	margin-left: -30px;
+	color: #2692e9;
+}
+.hosLoanDet-info-heard p a:hover{
+	text-decoration: underline;
+}
+
+.hosLoanDet-info-heard .chhBtn{
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	width: 120px;
+	color: #fff;
+	background-color: #fd654d;
+	 border-radius: 3px;
+}
+.hosLoanType-tab{
+	margin-top: 20px;
+	border-bottom: 1px solid #eee;
+}
+.hosLoanType-tab a{
+	cursor: pointer;
+	position: relative;top: 1px;
+	display: inline-block;
+	padding: 10px 20px;
+	color: #323232;
+	font-size: 20px;
+}
+.hosLoanType-tab a.aft{
+	color: #2692e9;
+	border-bottom: 3px solid #2692e9;
+}
+.hosLoanType-box {
+	background-color: #f9f9f9;
+	margin-top: 20px;
+	padding: 20px 0;
+}
+.hosLoanType-box li{
+	margin-bottom: 20px;
+}
+.hosLoanType-box li label{
+	display: inline-block;
+	width: 80px;
+	text-align: right;
+	margin-right: 10px;
+}
+.hosLoanType-box li .inputTextBD{
+	margin-right: 40px;
+}
+.hosLoanType-box li .inputTextBD input{
+	width: 120px;
+}
+.hosLoanType-box .chhBtn{
+	width: 150px;
+	color: #fff;
+	background-color: #fd654d;
+	border-radius: 3px;
+	margin-left: 94px;
+}
+.car-banner{
+	background: url(../../images/car_loan_banner.jpg) center center no-repeat;
+	background-size:auto 100%;
+	width: 100%;
+	height: 496px;
+}
+.card-sign{
+	background-color: #fff;
+	padding: 80px 0;
+}
+.card-sign li{
+	float: left;
+	width: 33.33%;
+	text-align: center;
+}
+.card-sign li>div{
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+	border:1px solid #ccc;
+	text-align: center;
+	position: relative;
+	vertical-align: middle;
+	margin-right: 6px;
+}
+.card-sign li>div span{
+	position: absolute;
+	top: 50%;
+	margin-top: -40px;
+	left: 50%;
+	margin-left: -40px;
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+	border-radius: 40px;
+	background-color: #ccc;
+	line-height: 80px;
+}
+.card-sign li>div{
+	border:1px solid #ffa569;
+}
+.card-sign li>div span{
+	background-color: #ffa569;
+}
+.card-sign li>dl{
+	color: #ffa569;
+}
+.card-sign li+li>div{
+	border:1px solid #49adf4;
+}
+.card-sign li+li>div span{
+	background-color: #49adf4;
+}
+.card-sign li+li>dl{
+	color: #49adf4;
+}
+.card-sign li+li+li>div{
+	border:1px solid #53f0b7;
+}
+.card-sign li+li+li>div span{
+	background-color: #53f0b7;
+}
+.card-sign li+li+li>dl{
+	color: #53f0b7;
+}
+.card-sign li>div span i{
+	color: #fff;
+	font-size: 40px;
+}
+.card-sign li>dl{
+	display: inline-block;
+	vertical-align: middle;
+	text-align: left;
+}
+
+.card-sign li>dl dt{
+	font-size: 22px;
+	margin-bottom: 4px;
+}
+.card-sign li>dl dd{
+	font-size: 16px;
+	margin-top: 2px;
+}
+.car-loan-list{
+	margin-bottom: 20px;
+}
+.car-loan-list .car-list{
+	margin-top: 20px;
+}
+.car-loan-list .car-list .car-min-banner{
+	width: 312px;
+	height: 505px;
+	float: left;
+}
+.car-loan-list .car-list .car-list-conter{
+	padding: 20px;
+	width: 868px;
+	float: right;
+	background-color: #fff;
+	height: 505px;
+}
+.car-loan-list .car-list .car-list-conter h2{
+	font-size: 20px;
+	margin-bottom: 20px;
+	color: #323232;
+	font-weight: 500;
+	position: relative;
+}
+.car-loan-list .car-list .car-list-conter h2 a{
+	position: absolute;
+    right: 0;
+    top: 4px;
+    font-size: 14px;
+}
+.car-loan-list .car-list .car-list-conter li{
+	position: relative;
+	border: 1px solid #eee;
+	padding: 31px 0;
+	padding-left: 100px;
+	margin-bottom: 20px;
+}
+.car-loan-list .car-list .car-list-conter li:last-child{
+	margin: 0;
+}
+.car-loan-list .car-list .car-list-conter li .imgCenterBox{
+	position: absolute;
+	left: 20px;
+	top: 50%;
+	margin-top: -30px;
+	height: 60px;
+	width: 60px;
+	border-radius: 30px;
+	overflow: hidden;
+}
+.car-loan-list .car-list .car-list-conter li .chhBtn{
+	position: absolute;
+	right: 20px;
+	top: 50%;
+	margin-top: -20px;
+	height: 40px;
+	line-height: 40px;
+	width: 100px;
+	border-radius: 4px;
+	background-color: #2692e9;
+	color: #fff;
+}
+.car-loan-list .car-list .car-list-conter li h3{
+	color: #323232;
+	font-size: 22px;
+	font-weight: 400;
+	margin-bottom: 10px;
+}
+.car-loan-list .car-list .car-list-conter li h3 span{
+	color: #999;
+	font-size: 18px;
+	margin-left: 10px;
+}
+.car-loan-list .car-list .car-list-conter li p{
+	margin-top: 10px;
+}
+.car-loan-list .car-list .car-list-conter li p b{
+	margin-right: 50px;
+	color: #323232;
+}
+.car-loan-list .car-list .car-list-conter li p label{
+	font-size: 16px;
+	color: #666;
+	margin-right: 10px;
+}
+.car-loan-list .car-list-a .car-min-banner{
+	background: url(../../images/car_min_banner2.jpg);
+}
+.car-loan-list .car-list-b .car-min-banner{
+	background: url(../../images/car_min_banner.jpg);
+}
+.car-main-credit{
+	background-color: #fff;
+}
+.car-main-credit h1{
+	color: #323232;
+	font-weight: 400;
+	font-size: 22px;
+	padding: 20px;
+}
+.car-main-credit li {
+	width:23.5%;
+	height: 172px;
+	margin-right: 2%;
+	float: left;
+	margin-bottom: 2%;
+	cursor: pointer;
+	position: relative;
+}
+.car-main-credit li:nth-child(4n) {
+	margin-right: 0;
+}
+.car-main-credit li img{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.car-main-credit li:hover div{
+	display: block;
+}
+.car-main-credit li div{
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 0;
+	 background-image: url("../images/img_title.png");
+	color: #fff;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	padding: 50px 0;
+	border-radius: 8px;
+}
+.car-main-credit li div p{
+	margin-bottom: 10px;
+	font-size: 20px;
+	font-weight: 500;
+}
+

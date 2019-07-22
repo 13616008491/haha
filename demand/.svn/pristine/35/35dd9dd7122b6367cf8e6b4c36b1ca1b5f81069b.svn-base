@@ -1,0 +1,166 @@
+<?php
+/*
+ * @开发工具: JetBrains PhpStorm.
+ * @文件名：SystemController.class.php
+ * @类功能: 需求管理
+ * @开发者: cxl
+ * @开发时间： 15-10-22
+ * @版本：version 1.0
+ */
+namespace app\admin\controller;
+
+use app\common\controller\AdminBaseController;
+use app\common\ext\IDb;
+use app\common\ext\IRequest;
+
+class Total extends AdminBaseController {
+    /**
+     * @功能：项目统计
+     * @开发者：szg
+     */
+    public function project_list(){
+        //接收参数
+        $project_id = IRequest::get('project_id');
+        $project_name = IRequest::get('project_name');
+        $user_name = IRequest::get('user_name');
+        $propose_time_start = IRequest::get('propose_time_start');
+        $propose_time_end = IRequest::get('propose_time_end');
+
+        //设置查询条件
+        $demand_where = null;
+        $project_where = array();
+        if(!empty($project_id)) $project_where['pt.project_id'] =$project_id;
+        if(!empty($project_name)) $project_where['pt.project_name'] = array('like', "%{$project_name}%");
+        if(!empty($user_name)) $project_where['concat(ur.nickname,ur.real_name)'] = array('like', "%{$user_name}%");
+        if(!empty($propose_time_start) && empty($propose_time_end)) $demand_where = " where date_format(propose_time,'%Y-%m-%d')>='{$propose_time_start}'";
+        if(empty($propose_time_start) && !empty($propose_time_end)) $demand_where = " where date_format(propose_time,'%Y-%m-%d')<='{$propose_time_end}'";
+        if(!empty($propose_time_start) && !empty($propose_time_end)) $demand_where = " where date_format(propose_time,'%Y-%m-%d')>='{$propose_time_start}' and date_format(propose_time,'%Y-%m-%d')<='{$propose_time_end}'";
+
+        //取得数据
+        $project_list = IDb::getInstance('project as pt')
+            ->setDbFiled("dd.*,pt.*,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name,ur.phone")
+            ->setDbJoin("user as ur","pt.charge_user_id=ur.user_id","left")
+            ->setDbJoin("(select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) as total,sum(if(demand_status=1,1,0)) as pending,sum(if(demand_status=2,1,0)) as confirm,
+                              sum(if(demand_status=3,1,0)) as development,sum(if(demand_status=4,1,0)) as refuse,
+                              sum(if(demand_status=5,1,0)) as test,sum(if(demand_status=6,1,0)) as finish
+                       from ".get_table("demand").$demand_where."
+                       group  by project_id
+                       ) as dd","dd.project_id=pt.project_id","left")
+            ->setDbWhere($project_where)
+            ->setDbOrder('pt.sort_level desc,pt.project_name desc')
+            ->pag();
+
+        //判断取得数据是否正常
+        if(empty($project_list)){
+            $project_list = array();
+        }
+
+        //页面赋值
+        $this->assign('project_list', $project_list);
+        $this->assign('project_id', $project_id);
+        $this->assign('project_name', $project_name);
+        $this->assign('user_name', $user_name);
+        $this->assign('propose_time_start', $propose_time_start);
+        $this->assign('propose_time_end', $propose_time_end);
+
+        //页面显示
+        return view();
+    }
+
+    /**
+     * @功能：项目详情
+     * @开发者：szg
+     */
+    public function project_info(){
+        //接收参数
+        $project_id = IRequest::get('project_id',IRequest::NOT_EMPTY,"项目编号不能为空！");
+
+        //取得数据
+        $project_where['project_id'] = $project_id;
+        $project_info = IDb::getInstance('project as pt')
+            ->setDbFiled("pt.*,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name,ur.phone")
+            ->setDbJoin("user as ur","pt.charge_user_id=ur.user_id")
+            ->setDbWhere($project_where)
+            ->row();
+
+        //设置layout
+        $this->layout("layout_empty");
+
+        //模板渲染
+        $this->assign('project_id',$project_id);
+        $this->assign('project_info',$project_info);
+
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：用户统计
+     * @开发者：szg
+     */
+    public function user_list(){
+        //接收参数
+        $user_id = IRequest::get('user_id');
+        $user_name = IRequest::get('user_name');
+        $phone = IRequest::get('phone');
+        $propose_time_start = IRequest::get('propose_time_start');
+        $propose_time_end = IRequest::get('propose_time_end');
+
+        //设置查询条件
+        $notice_where = null;
+        $demand_log_where = null;
+        $demand_where = null;
+        $project_where = array();
+        if(!empty($project_id)) $project_where['ur.user_id'] =$user_id;
+        if(!empty($phone)) $project_where['ur.phone'] = array('like', "%{$phone}%");
+        if(!empty($user_name)) $project_where['concat(ur.nickname,ur.real_name)'] = array('like', "%{$user_name}%");
+
+        //设置日期查询条件（开始时间）
+        if(!empty($propose_time_start) && empty($propose_time_end)) {
+            $notice_where = " where date_format(create_time,'%Y-%m-%d')>='{$propose_time_start}'";
+            $demand_log_where = " where date_format(operate_time,'%Y-%m-%d')>='{$propose_time_start}'";
+            $demand_where = " where date_format(propose_time,'%Y-%m-%d')>='{$propose_time_start}'";
+        }
+
+        //设置日期查询条件（结束时间）
+        if(empty($propose_time_start) && !empty($propose_time_end)) {
+            $notice_where = " where date_format(create_time,'%Y-%m-%d')<='{$propose_time_end}'";
+            $demand_log_where = " where date_format(operate_time,'%Y-%m-%d')<='{$propose_time_end}'";
+            $demand_where = " where date_format(propose_time,'%Y-%m-%d')<='{$propose_time_end}'";
+        }
+
+        //设置日期查询条件（开始时间、结束时间）
+        if(!empty($propose_time_start) && !empty($propose_time_end)) {
+            $notice_where = " where date_format(create_time,'%Y-%m-%d')>='{$propose_time_start}' and date_format(create_time,'%Y-%m-%d')<='{$propose_time_end}'";
+            $demand_log_where = " where date_format(operate_time,'%Y-%m-%d')>='{$propose_time_start}' and date_format(operate_time,'%Y-%m-%d')<='{$propose_time_end}'";
+            $demand_where = " where date_format(propose_time,'%Y-%m-%d')>='{$propose_time_start}' and date_format(propose_time,'%Y-%m-%d')<='{$propose_time_end}'";
+        }
+
+        //取得数据
+        $user_list = IDb::getInstance('user as ur')
+            ->setDbFiled("ne.*,dl.*,tk.*,dd.*,ur.*")
+            ->setDbJoin("(select user_id,count(user_id) as notice from ".get_table("notice").$notice_where." group by user_id) as ne","ne.user_id=ur.user_id","left")
+            ->setDbJoin("(select user_id,count(user_id) as log from ".get_table("demand_log").$demand_log_where." group by user_id) as dl","dl.user_id=ur.user_id","left")
+            ->setDbJoin("(select user_id,count(user_id) as task from ".get_table("task").$notice_where." group by user_id) as tk","tk.user_id=ur.user_id","left")
+            ->setDbJoin("(select user_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) as total,sum(if(demand_status=1,1,0)) as pending,sum(if(demand_status=2,1,0)) as confirm,sum(if(demand_status=3,1,0)) as development,sum(if(demand_status=4,1,0)) as refuse,sum(if(demand_status=5,1,0)) as test,sum(if(demand_status=6,1,0)) as finish from ".get_table("demand").$demand_where." group  by user_id) as dd","dd.user_id=ur.user_id","left")
+            ->setDbWhere($project_where)
+            ->setDbOrder('ur.user_id desc')
+            ->pag();
+
+        //判断取得数据是否正常
+        if(empty($user_list)){
+            $user_list = array();
+        }
+
+        //页面赋值
+        $this->assign('user_list', $user_list);
+        $this->assign('user_id', $user_id);
+        $this->assign('user_name', $user_name);
+        $this->assign('phone', $phone);
+        $this->assign('propose_time_start', $propose_time_start);
+        $this->assign('propose_time_end', $propose_time_end);
+
+        //页面显示
+        return view();
+    }
+}

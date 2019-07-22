@@ -1,0 +1,53 @@
+<!--添加用户表单-->
+<div class="tab_edit">
+    <form action="{:Url('demand_submit')}" method="post" id="demand_submit">
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">选择项目：</td>
+                <td class="t_l">{:widget('common/Select/select',array('project_id',array($project_list,"project_id","project_name"),1,true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">我的姓名：</td>
+                <td class="t_l">{:widget('common/Input/input',array('proposer_name',null,true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">我的公司：</td>
+                <td class="t_l">{:widget('common/Input/input',array('proposer_company',null,false))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">我的部门：</td>
+                <td class="t_l">{:widget('common/Input/input',array('proposer_dept',null,false))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">我的电话：</td>
+                <td class="t_l">{:widget('common/Input/input',array('proposer_phone',null,true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求描述：</td>
+                <td class="t_l">
+                    {:widget('common/TextArea/text_area',array('demand_describe',null,true))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求图片</td>
+                <td class="t_l">{:widget('common/Images/wos',array('demand_photo_url','demand',null,true,false))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">优先级：</td>
+                <td class="t_l">{:widget('common/Radio/radio',array('priority_level','priority_level',null,true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">备注：</td>
+                <td class="t_l">
+                    {:widget('common/TextArea/text_area',array('remark',null,false))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"></td>
+                <td class="t_l">
+                    <div class="btn"><input type="submit" class="but_blue" value="保存信息"></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

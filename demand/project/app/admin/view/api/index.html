@@ -1,0 +1,200 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>后台管理系统</title>
+    <!--<link href="/Public/company/img/favicon.ico" rel="shortcut icon">-->
+    <link href="/static/admin/css/base.css" rel="stylesheet">
+    <link href="/static/admin/css/index.css" rel="stylesheet" />
+    <link href="/static/admin/css/system.css" rel="stylesheet" />
+    <script type="text/javascript" src="/static/admin/js/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<!-- 编辑区域 -->
+<div class="lists">
+    <!--用户列表-->
+    <div class="lists-tab-cont">
+        <div style="border-bottom:1px solid #ddd;">
+            <table style="width: 100%;" cellpadding="0" cellspacing="0" border="0">
+                {foreach name="api_list" item="info" key="group" }
+                <tr><td style="font-weight: bold;">{$group}</td></tr>
+                <tr>
+                    <td style="width: 100%;" id="api">
+                        <ul style="width: 100%;">
+                            {foreach name="info" item="item" key="action" }
+                            <li style="width: 15%;margin-right: 10px;float: left;"><a style="cursor: pointer;padding: 5px;" href="javascript:void(0);" data-url="{$item['api_url']}" data-controller="{$item['api_controller']}" data-action="{$item['api_action']}">{$item['api_name']}</a></li>
+                            {/foreach}
+                        </ul>
+                    </td>
+                </tr>
+                {/foreach}
+            </table>
+        </div>
+
+        <div style="border-top:1px solid #ddd;border-bottom:1px solid #ddd;margin-top: 20px;">
+            <table class="edit-table" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td style="width: 30%;border-right:2px solid #ddd;background-color: #E2E2E2;font-size: 12px;font-weight: bold;">参数设置</td>
+                    <td style="width: 70%;background-color: #E2E2E2;font-size: 12px;font-weight: bold;">返回相关结果</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 12px;width: 30%;border-right:1px solid #ddd;padding: 0px;vertical-align: top;">
+                        <form method="post" id="form_call" action="{:Url('api_call')}">
+                            <input type="hidden" name="api_url" value=""/>
+                            <input type="hidden" name="api_controller" value=""/>
+                            <input type="hidden" name="api_action" value=""/>
+                            <table class="info-table" cellpadding="0" cellspacing="0" border="0">
+                                <thead>
+                                <tr>
+                                    <td colspan="2" style="width: 40%;border-left:1px solid #ddd;border-bottom:1px solid #ddd;text-align: center;">名称</td>
+                                    <td style="width: 60%;border-left:1px solid #ddd;border-bottom:1px solid #ddd;text-align: center;">值</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="token">
+                                    <td colspan="2" style="width: 30%;border:1px solid #ddd;">用户ID：</td>
+                                    <td colspan="2" style="width: 60%;border:1px solid #ddd;padding: 0px;">
+                                        <input name="_u" value="" style="border:0px;width: 100%;height: 100%;" type="text" placeholder="必填项！" />
+                                    </td>
+                                </tr>
+                                <tr id="submit_tr">
+                                    <td colspan="4" style="text-align: center;">
+                                        <input type="submit" class="but_blue" style="width: 90%;" value="提交">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </td>
+                    <td style="font-size: 12px;width: 70%;vertical-align: top;">
+                        <table class="info-table" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                            <tr>
+                                <td style="width: 20%;border-left:1px solid #ddd;border-bottom:1px solid #ddd;text-align: center;">名称</td>
+                                <td style="width: 80%;border-left:1px solid #ddd;border-bottom:1px solid #ddd;text-align: center;">值</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="width: 20%;border:1px solid #ddd;vertical-align: top;">接口请求地址：</td>
+                                <td style="width: 80%;border:1px solid #ddd;padding: 0px;color:red;font-weight: bold;" id="url"></td>
+                            </tr>
+                            <tr style="height: 400px;">
+                                <td style="width: 20%;border-left:1px solid #ddd;border-right:1px solid #ddd;vertical-align: top;">请求返回结果：</td>
+                                <td style="width: 80%;border-right:1px solid #ddd;padding: 0px;vertical-align: top;">
+                                    <pre style="line-height: 18px;padding: 0px;"  id="result"></pre>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="border:0px;height: 40px;"></div>
+    </div>
+</div>
+
+<!-- JS处理 -->
+<script language="javascript">
+    $(function(){
+        //初期化
+        var api_param = {$api_param};
+
+        //参数模板
+        var param_tpl = {
+            getTemplate : function(info){
+                return '<tr class="param_tr">\
+                            <td colspan="2" style="width: 40%;border:1px solid #ddd;white-space: normal;">' + info.name + '[' + info.code + ']</td>\
+                            <td style="width: 60%;border:1px solid #ddd;padding: 0px;">\
+                                <input name="' + info.code + '" style="border:0px;width: 100%;height: 100%;" type="text" value="" placeholder="请输入参数！" />\
+                            </td>\
+                        </tr>';
+            }
+        }
+
+        //选中API
+        $("#api a").click(function(){
+            //初期化
+            var controller = $(this).attr("data-controller");
+            var action = $(this).attr("data-action");
+
+            //判断是否为取得token
+            if((controller == "login" && action == "login") || (controller == "user" && action == "login")){
+                $("tr.token").hide();
+            }else{
+                $("tr.token").show();
+            }
+
+            //设置接口ID
+            $("input[name='api_url']").val($(this).attr("data-url"));
+            $("input[name='api_controller']").val($(this).attr("data-controller"));
+            $("input[name='api_action']").val($(this).attr("data-action"));
+
+            //设置接口ID
+            $("#request").val("");
+            $("#parameter").text("");
+            $("#token").text("");
+            $("#response").val("");
+            $("#result").text("");
+            $("#url").text($(this).attr("data-url"));
+
+            //设置选中接口
+            $("#api a").css("color","#0086C8");
+            $(this).css("color","red");
+
+            //移除参数
+            $("tr.param_tr").remove();
+
+            //创建动态参数数
+            var item = $(this).attr("data-controller") + "/" + $(this).attr("data-action");
+            for(var x in api_param[item]){
+                $("#submit_tr").before(param_tpl.getTemplate({
+                    name : api_param[item][x].name,
+                    code : api_param[item][x].code
+                }));
+            }
+        });
+
+        //请求API
+        $("#form_call").submit(function(){
+            //初期化
+            var api_url = $("input[name='api_url']").val();
+            var api_controller = $("input[name='api_controller']").val();
+            var api_action = $("input[name='api_action']").val();
+
+            //判断参数是否存在
+            if($.trim(api_url) == "" || $.trim(api_controller) == "" || $.trim(api_action) == ""){
+                alert("请选中接口名称！");
+                return false;
+            }
+
+            //ajax信息
+            $.post($(this).attr('action'),$(this).serializeArray(),function(data){
+                $("#result").text(data);
+//                if(data.status == "OK"){
+//                    $("#request").val(data.request);
+//                    $("#parameter").text(data.parameter);
+//                    $("#token").text(data.token);
+//                    $("#response").val(data.response);
+//                    $("#result").text(data.result);
+//                }else{
+//                    $("#request").val(data.request);
+//                    $("#parameter").text(data.parameter);
+//                    $("#token").text(data.token);
+//                    $("#response").val(data.response);
+//                    $("#result").text(data.result);
+//                    alert(data.info);
+//                }
+            },"text");
+
+            //放回值
+            return false;
+        });
+    });
+</script>
+
+</body>
+</html>

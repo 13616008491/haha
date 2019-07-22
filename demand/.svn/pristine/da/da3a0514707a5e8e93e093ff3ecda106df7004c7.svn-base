@@ -1,0 +1,62 @@
+<?php
+namespace app\common\cache\common;
+
+use app\common\cache\BaseCache;
+use app\common\ext\IRedis;
+use app\common\ext\IWeChat;
+
+class IWeChatCache extends BaseCache{
+    /**
+     * @功能：获取微信接口凭证
+     * @开发者：gys
+     * @return array|string
+     */
+    public static function getAccessToken(){
+        $key = BaseCache::CD_WE_CHAT_ACCESS_TOKEN;
+
+        $key = self::getKey($key);
+
+        $redis = IRedis::getInstance();
+
+        //判断取得字段是否为空
+        $data = $redis->get($key);
+        if(empty($data)){
+            $data =self::setAccessToken();
+        }
+
+        //返回值
+        return $data;
+    }
+
+    /**
+     * @功能：取得缓存数据
+     * @开发者：gys
+     * @return array|string
+     */
+    public static function setAccessToken(){
+        $token = IWeChat::requestAccessToken();
+        if(!$token){
+            return false;
+        }
+        $redis = IRedis::getInstance();
+
+        $key = BaseCache::CD_WE_CHAT_ACCESS_TOKEN;
+
+        $key = self::getKey($key);
+
+        //判断取得字段是否为空
+        $redis->setex($key,$token['expires_in']-30,$token['access_token']);
+
+        return $token['access_token'];
+    }
+
+    /**
+     * @功能：删除缓存数据
+     * @开发者：gys
+     * @return string
+     */
+    public static function deleteInfo(){
+        return IRedis::delItem(self::getKey(self::CD_WE_CHAT_ACCESS_TOKEN), 0);
+    }
+
+}

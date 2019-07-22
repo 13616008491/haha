@@ -1,0 +1,807 @@
+---------------------------------------------------------------
+[ 2019-03-19T09:47:52+08:00 ] 172.19.22.204 101.132.97.6 GET /demand/public/index.php/admin/user/user_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/user/user_list.html [运行时间：0.018970s][吞吐率：52.71req/s] [内存消耗：2,453.92kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'user',
+    2 => 'user_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000179s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-19T09:47:52+08:00 ] 172.19.22.204 101.132.97.6 GET /demand/public/index.php/admin/login/login.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/login/login.html [运行时间：0.038213s][吞吐率：26.17req/s] [内存消耗：3,746.95kb] [文件加载：64]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000146s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Login->login[ /phpstudy/www/demand/project/app/admin/controller/Login.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/login/login.html [ array (
+  0 => '_notice_count_',
+  1 => 'mini_code',
+) ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000892s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001072s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = null  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000586s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000932s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001204s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001048s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000993s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000693s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000655s ]
+---------------------------------------------------------------
+[ 2019-03-19T09:53:07+08:00 ] 172.19.22.204 39.107.86.51 GET /demand/public/index.php/admin/login/login.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/login/login.html [运行时间：0.038367s][吞吐率：26.06req/s] [内存消耗：3,746.95kb] [文件加载：64]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000169s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Login->login[ /phpstudy/www/demand/project/app/admin/controller/Login.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/login/login.html [ array (
+  0 => '_notice_count_',
+  1 => 'mini_code',
+) ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000855s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001064s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = null  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000640s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000945s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001203s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001021s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000923s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000651s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000645s ]
+---------------------------------------------------------------
+[ 2019-03-19T10:04:40+08:00 ] 172.19.22.204 47.97.215.92 GET /demand/public/index.php/admin/admin/admin_info.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/admin/admin_info.html [运行时间：0.018766s][吞吐率：53.29req/s] [内存消耗：2,420.45kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'admin',
+    2 => 'admin_info',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000177s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-19T10:04:40+08:00 ] 172.19.22.204 47.97.215.92 GET /demand/public/index.php/admin/login/login.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/login/login.html [运行时间：0.038248s][吞吐率：26.15req/s] [内存消耗：3,746.95kb] [文件加载：64]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000188s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Login->login[ /phpstudy/www/demand/project/app/admin/controller/Login.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/login/login.html [ array (
+  0 => '_notice_count_',
+  1 => 'mini_code',
+) ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000816s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001055s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = null  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000584s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.001141s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001077s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001015s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000870s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000654s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000634s ]
+---------------------------------------------------------------
+[ 2019-03-19T11:27:59+08:00 ] 172.19.22.204 47.92.31.65 GET /demand/public/index.php/admin/project/project_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/project/project_list.html [运行时间：0.018672s][吞吐率：53.56req/s] [内存消耗：2,435.77kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'project',
+    2 => 'project_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000158s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-19T11:27:59+08:00 ] 172.19.22.204 47.92.31.65 GET /demand/public/index.php/admin/login/login.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/login/login.html [运行时间：0.037805s][吞吐率：26.45req/s] [内存消耗：3,746.95kb] [文件加载：64]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000154s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Login->login[ /phpstudy/www/demand/project/app/admin/controller/Login.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/login/login.html [ array (
+  0 => '_notice_count_',
+  1 => 'mini_code',
+) ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000893s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001051s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = null  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000631s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000863s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001132s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.000999s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000867s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000668s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000727s ]
+---------------------------------------------------------------
+[ 2019-03-19T11:30:01+08:00 ] 172.19.22.204 47.92.98.215 GET /demand/public/index.php/admin/allot/demand_propose_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/allot/demand_propose_list.html [运行时间：0.019917s][吞吐率：50.21req/s] [内存消耗：2,620.16kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'allot',
+    2 => 'demand_propose_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000207s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-19T11:30:01+08:00 ] 172.19.22.204 47.92.98.215 GET /demand/public/index.php/admin/login/login.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/login/login.html [运行时间：0.038552s][吞吐率：25.94req/s] [内存消耗：3,746.95kb] [文件加载：64]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000149s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Login->login[ /phpstudy/www/demand/project/app/admin/controller/Login.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/login/login.html [ array (
+  0 => '_notice_count_',
+  1 => 'mini_code',
+) ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000961s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001136s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = null  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000617s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000991s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001166s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001054s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000882s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000672s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000651s ]
+---------------------------------------------------------------
+[ 2019-03-19T11:46:59+08:00 ] 172.19.22.204 47.92.148.120 GET /demand/public/index.php/admin/total/project_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/total/project_list.html [运行时间：0.019012s][吞吐率：52.60req/s] [内存消耗：2,502.52kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'total',
+    2 => 'project_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000143s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-19T11:46:59+08:00 ] 172.19.22.204 47.92.148.120 GET /demand/public/index.php/admin/login/login.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/login/login.html [运行时间：0.038866s][吞吐率：25.73req/s] [内存消耗：3,746.95kb] [文件加载：64]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000144s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Login->login[ /phpstudy/www/demand/project/app/admin/controller/Login.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/login/login.html [ array (
+  0 => '_notice_count_',
+  1 => 'mini_code',
+) ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001029s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001127s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = null  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000777s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000861s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001156s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001048s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.001077s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000825s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000716s ]
+---------------------------------------------------------------
+[ 2019-03-19T12:00:41+08:00 ] 172.19.22.204 47.92.71.118 GET /demand/public/index.php/admin/system/admin_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/system/admin_list.html [运行时间：0.020476s][吞吐率：48.84req/s] [内存消耗：2,547.30kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'system',
+    2 => 'admin_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000145s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-19T12:00:41+08:00 ] 172.19.22.204 47.92.71.118 GET /demand/public/index.php/admin/login/login.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/login/login.html [运行时间：0.039499s][吞吐率：25.32req/s] [内存消耗：3,746.95kb] [文件加载：64]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000145s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Login->login[ /phpstudy/www/demand/project/app/admin/controller/Login.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/login/login.html [ array (
+  0 => '_notice_count_',
+  1 => 'mini_code',
+) ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000874s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001050s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = null  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000597s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000867s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001143s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001052s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000874s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000684s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000644s ]
+---------------------------------------------------------------
+[ 2019-03-19T12:03:33+08:00 ] 172.19.22.204 101.132.126.80 GET /demand/public/index.php/admin/allot/demand_notice_info/notice_id/202.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/allot/demand_notice_info/notice_id/202.html [运行时间：0.020552s][吞吐率：48.66req/s] [内存消耗：2,621.70kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'allot',
+    2 => 'demand_notice_info',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'notice_id' => '202',
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000149s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-19T12:03:33+08:00 ] 172.19.22.204 101.132.126.80 GET /demand/public/index.php/admin/login/login.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/login/login.html [运行时间：0.038217s][吞吐率：26.17req/s] [内存消耗：3,746.95kb] [文件加载：64]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000144s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Login->login[ /phpstudy/www/demand/project/app/admin/controller/Login.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/login/login.html [ array (
+  0 => '_notice_count_',
+  1 => 'mini_code',
+) ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000852s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001045s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = null  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000606s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000951s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001203s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001125s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000913s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000712s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000665s ]
+---------------------------------------------------------------
+[ 2019-03-19T12:05:58+08:00 ] 172.19.22.204 47.100.38.9 GET /demand/public/index.php/admin/allot/demand_task_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/allot/demand_task_list.html [运行时间：0.020234s][吞吐率：49.42req/s] [内存消耗：2,620.27kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'allot',
+    2 => 'demand_task_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000147s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-19T12:05:58+08:00 ] 172.19.22.204 47.100.38.9 GET /demand/public/index.php/admin/login/login.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/login/login.html [运行时间：0.038735s][吞吐率：25.82req/s] [内存消耗：3,746.95kb] [文件加载：64]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000160s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Login->login[ /phpstudy/www/demand/project/app/admin/controller/Login.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/login/login.html [ array (
+  0 => '_notice_count_',
+  1 => 'mini_code',
+) ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000853s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001049s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = null  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000597s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000944s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001180s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001051s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000860s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000694s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000648s ]
+---------------------------------------------------------------
+[ 2019-03-19T12:18:09+08:00 ] 172.19.22.204 47.92.132.229 GET /demand/public/index.php/admin/allot/demand_notice_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/allot/demand_notice_list.html [运行时间：0.019676s][吞吐率：50.82req/s] [内存消耗：2,620.13kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'allot',
+    2 => 'demand_notice_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000143s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-19T12:18:09+08:00 ] 172.19.22.204 47.92.132.229 GET /demand/public/index.php/admin/login/login.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/login/login.html [运行时间：0.037926s][吞吐率：26.37req/s] [内存消耗：3,746.95kb] [文件加载：64]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000143s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Login->login[ /phpstudy/www/demand/project/app/admin/controller/Login.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/login/login.html [ array (
+  0 => '_notice_count_',
+  1 => 'mini_code',
+) ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000885s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001058s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = null  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000574s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000914s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001117s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001115s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000873s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000661s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000735s ]

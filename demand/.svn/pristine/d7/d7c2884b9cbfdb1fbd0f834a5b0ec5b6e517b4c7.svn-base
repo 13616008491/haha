@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="description" content="">
+    <!-- <link rel="stylesheet" href="__STATIC__/h5/app.css?v=12"> -->
+</head>
+<style>
+    body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 50px;
+    }
+</style>
+
+<body>
+    <img src="__STATIC__/index/images/un_dataa.png" width="40%" alt="">
+    <p>敬请期待</p>
+</body>
+
+</html>

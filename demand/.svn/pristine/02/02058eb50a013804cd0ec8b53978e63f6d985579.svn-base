@@ -1,0 +1,45 @@
+<!--添加用户表单-->
+<div class="tab_edit">
+    <form action="{:Url('org_submit')}" method="post" id="org_submit">
+        <input type="hidden" name="parent_id" value="{$parent_id}"/>
+        <input type="hidden" name="level" value="{$level}"/>
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">父级组织架构编号：</td>
+                <td class="t_l">
+                    {$parent_id}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">父级组织架构名称：</td>
+                <td class="t_l">
+                    {$parent_name}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">组织架构等级：</td>
+                <td class="t_l">
+                    {$level}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">下级组织架构名称：</td>
+                <td class="t_l">
+                    {:widget('common/Input/input',array('name',null,true))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">排序：</td>
+                <td class="t_l">
+                    {:widget('common/Input/input',array('order_by',0,true))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"></td>
+                <td class="t_l">
+                    <div class="btn"><input type="submit" class="but_blue" value="保存信息"></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

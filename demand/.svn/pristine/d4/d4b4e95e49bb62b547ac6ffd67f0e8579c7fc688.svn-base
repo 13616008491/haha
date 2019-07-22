@@ -1,0 +1,403 @@
+<?php
+/*
+ * @开发工具: JetBrains PhpStorm.
+ * @文件名：SystemController.class.php
+ * @类功能: 需求管理
+ * @开发者: cxl
+ * @开发时间： 15-10-22
+ * @版本：version 1.0
+ */
+namespace app\admin\controller;
+
+use app\common\controller\AdminBaseController;
+use app\common\enum\IsDelete;
+use app\common\ext\IDb;
+use app\common\ext\IRequest;
+use app\common\ext\ExportCom;
+use app\common\ext\IWeChat;
+use app\common\enum\HtmlEnumValue;
+use app\common\enum\WeChatInformType;
+
+class Demand extends AdminBaseController {
+
+    /**
+     * @功能：需求列表
+     * @开发者：szg
+     */
+    public function demand_list(){
+        //接收参数
+        $demand_id = IRequest::get('demand_id');
+        $project_id = IRequest::get('project_id');
+        $proposer_name = IRequest::get('proposer_name');
+        $demand_status = IRequest::get('demand_status');
+        $priority_level = IRequest::get('priority_level');
+
+        //查询条件
+        $where = null;
+        if(!empty($demand_id))$where['dd.demand_id'] = $demand_id;
+        if(!empty($project_id))$where['dd.project_id'] =$project_id;
+        if(!empty($proposer_name))$where['dd.proposer_name'] = array('like', "%{$proposer_name}%");
+        if(!empty($demand_status))$where['dd.demand_status'] = $demand_status;
+        if(!empty($priority_level))$where['dd.priority_level'] = $priority_level;
+
+        $demand_list = IDb::getInstance('demand as dd')
+                            ->setDbFiled("dd.*,dd.charge_id as demand_charge_id,pt.project_name,pt.charge_id as project_charge_id")
+                            ->setDbJoin("project as pt","dd.project_id = pt.project_id")
+                            ->setDbWhere($where)
+                            ->setDbOrder('dd.demand_id desc')->pag();
+        if($demand_list === false){
+            error('获取需求列表有误！');
+        }
+
+        //将图片转成数组
+        foreach ($demand_list as $key=>$demand){
+            $demand_list[$key]['image_list'] = explode(",",$demand['demand_photo_url']);
+        }
+        //页面赋值
+        $this->assign('demand_list', $demand_list);
+        $this->assign('demand_id', $demand_id);
+        $this->assign('project_id', $project_id);
+        $this->assign('proposer_name', $proposer_name);
+        $this->assign('demand_status', $demand_status);
+        $this->assign('priority_level', $priority_level);
+        //页面显示
+        return view();
+    }
+ 
+    /**
+     * @功能：添加需求
+     * @开发者：szg
+     */
+    public function demand_add(){
+        //查询条件
+        $where = null;
+        $where['is_delete'] = "1";
+
+        $project_list = IDb::getInstance('project')->setDbWhere($where)->setDbOrder('project_id desc')->sel();
+        if($project_list==false){
+            error("获取需求表错误！");
+        }
+
+        $this->assign('project_list',$project_list);
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：需求保存
+     * 开发者：szg
+     */
+    public function demand_submit(){
+        //接收参数
+        $project_id = IRequest::get("project_id",IRequest::NOT_EMPTY,"请选择项目！");
+        $proposer_name= IRequest::get("proposer_name",IRequest::NOT_EMPTY,"姓名不能为空！");
+        $proposer_phone= IRequest::get("proposer_phone",IRequest::MOBILE,"手机号错误！");
+        $proposer_dept= IRequest::get("proposer_dept");
+        $proposer_company= IRequest::get("proposer_company");
+        $demand_describe= IRequest::get("demand_describe",IRequest::NOT_EMPTY,"需求描述不能为空！");
+        $demand_photo_url= IRequest::get("demand_photo_url");
+        $priority_level= IRequest::get("priority_level",IRequest::NOT_EMPTY,"请选择优先级！");
+        $remark = IRequest::get("remark");
+
+        //开始事物
+        IDb::dbStartTrans();
+
+        //新增保存
+        $demand_data['project_id']=$project_id;
+        $demand_data['proposer_name']=$proposer_name;
+        $demand_data['proposer_phone']=$proposer_phone;
+        $demand_data['proposer_dept']=$proposer_dept;
+        $demand_data['proposer_company'] = $proposer_company;
+        $demand_data['demand_describe'] = $demand_describe;
+        $demand_data['demand_photo_url'] = implode(",",$demand_photo_url);
+        $demand_data['priority_level'] = $priority_level;
+        $demand_data['remark'] = $remark;
+        $demand_data['user_id']=get_login_admin_id();
+        $demand_data['create_time']=get_date_time();
+        $demand_data['propose_time']=get_date_time();
+        $demand_id = IDb::getInstance("demand")->setDbData($demand_data)->add();
+        if($demand_id === false){
+            IDb::dbRollback();
+            error("添加需求失败！");
+        }
+
+        //提交事物处理
+        IDb::dbCommit();
+
+        //画面跳转
+        $this->success("操作成功",Url("demand_list"));
+    }
+
+    /**
+     * @功能：需求详情
+     * @开发者：szg
+     */
+    public function demand_info(){
+        //接收参数
+        $demand_id = IRequest::get('demand_id',IRequest::NOT_EMPTY,"需求编号不能为空！");
+
+        //取得需求数据
+        $demand_where['demand_id'] = $demand_id;
+        $demand_info = IDb::getInstance("demand as dd")
+            ->setDbFiled("dd.*,project_name")
+            ->setDbJoin("project as pt","dd.project_id = pt.project_id")
+            ->setDbWhere($demand_where)->row();
+
+        //将图片转成数组
+        $demand_info['image_list'] = explode(",",$demand_info['demand_photo_url']);
+
+        //模板渲染
+        $this->assign('demand_id',$demand_id);
+        $this->assign('demand_info',$demand_info);
+
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：删除需求
+     * @开发者：szg
+     */
+    public function demand_del(){
+        //接收参数
+        $demand_id = IRequest::get("demand_id",IRequest::NOT_EMPTY,"需求编号不能为空！");
+
+        //取得需求信息
+        $demand_where["demand_id"] = $demand_id;
+        $demand_upd = IDb::getInstance("demand")->setDbWhere($demand_where)->del();
+        if($demand_upd === false){
+            error("删除需求失败！");
+        }
+
+        //画面跳转
+        $this->success("操作成功",Url("demand_list"));
+    }
+
+    /**
+     * @功能：启用需求
+     * @开发者：szg
+     */
+    public function demand_reset(){
+        //接收参数
+        $demand_id = IRequest::get("demand_id",IRequest::NOT_EMPTY,"需求编号不能为空！");
+
+        //取得需求信息
+        $demand_where["demand_id"] = $demand_id;
+        $demand_data['is_delete'] = IsDelete::No;
+        $demand_data['update_time']=get_date_time();
+        $demand_upd = IDb::getInstance("demand")->setDbWhere($demand_where)->setDbData($demand_data)->upd();
+        if($demand_upd === false){
+            error("修改项目信息失败！");
+        }
+        //画面跳转
+        $this->success("操作成功",Url("demand_list"));
+    }
+
+    /**
+     * @功能：开始需求
+     * @开发者：szg
+     */
+    public function demand_start(){
+
+        //接收参数
+        $demand_id = IRequest::get('demand_id',IRequest::NOT_EMPTY,"需求编号不能为空！");
+
+        $select_org_list = IDb::getInstance("organize")->sel();
+        $this->assign('demand_id',$demand_id);
+        $this->assign('select_org_list',$select_org_list);
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：完成需求
+     * @开发者：szg
+     */
+    public function demand_finish(){
+        //接收参数
+        $demand_id = IRequest::get("demand_id",IRequest::NOT_EMPTY,"需求编号不能为空！");
+
+        //取得需求信息
+        $demand_where["demand_id"] = $demand_id;
+        $demand_data['finish_time'] = get_date_time();
+        $demand_data['demand_status'] = "3";
+        $demand_data['update_time']=get_date_time();
+        $demand_upd = IDb::getInstance("demand")->setDbWhere($demand_where)->setDbData($demand_data)->upd();
+
+
+        //操作成功开始发送对应通知
+        //取得需求信息
+        $demand_where["demand_id"] = $demand_id;
+        $demand_info = IDb::getInstance("demand")->setDbWhere($demand_where)->row();
+        
+        $sendStart = '需求任务已完成';
+        //设置通知数据
+        $sendData=[
+            $demand_info['demand_describe'],
+            '完成时间:'.$demand_data['update_time'],
+            $sendStart
+        ];
+
+        //发送通知
+        IWeChat::sendInform($demand_info['user_id'],WeChatInformType::Complete,$sendData,$demand_info['demand_id']);
+
+        if($demand_upd === false){
+            error("修改项目信息失败！");
+        }
+
+        //画面跳转
+        $this->success("操作成功",Url("demand_list"));
+    }
+
+    /**
+     * @功能：需求开始提交
+     * @开发者：szg
+     */
+    public function demand_start_submit(){
+        //接收参数
+        $get_user = IRequest::get("get_user");
+        if (!empty($get_user)){
+            //接收参数
+            $org_id = IRequest::get('org_id');
+            $where['org.org_id']=$org_id;
+            $user_list = IDb::getInstance('organize_relation as org')
+                ->setDbJoin("user as us","us.user_id = org.user_id")
+                ->setDbWhere($where)
+                ->sel();
+//            echo($user_list);
+            if (empty($user_list)){
+                $user_list = null;
+            }
+//
+            echo json_encode(array('user_list'=>$user_list));
+            exit;
+        }
+        $demand_id = IRequest::get("demand_id",IRequest::NOT_EMPTY,"需求编号不能为空！");
+        $demand_status = IRequest::get("demand_audit",IRequest::NOT_EMPTY,"请审核需求！");
+        $demand_feedback = IRequest::get("demand_feedback");
+        $charge_id = IRequest::get("charge_id",IRequest::NOT_EMPTY,"请选择负责人！");
+        $add_list = IRequest::get("add_list",IRequest::NOT_EMPTY,"请选择参与人！");
+//        dump($add_list);dump($charge_id);exit;
+
+        //处理参与人
+        $join_id =  substr($add_list,0,strlen($add_list)-1);
+
+        //取得需求信息
+        $demand_where["demand_id"] = $demand_id;
+        $demand_info = IDb::getInstance("demand")->setDbWhere($demand_where)->row();
+
+        if($demand_status == "2"){
+            if($demand_info!=true){
+                error("查找项目信息失败！");
+            }
+            $start_time = $demand_info['create_time'];
+            //同意 改为进行中
+            $expect_finish_time = IRequest::get("expect_finish_time",IRequest::NOT_EMPTY,"预计需求完成时间不能为空！");
+            if(strtotime($expect_finish_time)<=strtotime($start_time)){
+                error("预计时间不能小于项目开始时间！");
+            }
+            $demand_data['demand_status'] = "2";
+            $demand_data['expect_finish_time'] = $expect_finish_time;
+        }else{
+            //拒绝
+            $demand_data['demand_status'] = "4";
+        }
+        $demand_data['auditing_time'] = get_date_time();
+        $demand_data['demand_feedback'] = $demand_feedback;
+        $demand_data['update_time']=get_date_time();
+        $demand_data['charge_id']=$charge_id;
+        $demand_data['join_id']=$join_id;
+        $demand_upd = IDb::getInstance("demand")->setDbWhere($demand_where)->setDbData($demand_data)->upd();
+        if($demand_upd === false){
+            error("修改项目信息失败！");
+        }
+
+        //操作成功开始发送对应通知
+        $sendStart = '审核失败';
+        $sendText = '审核失败请重新提交需求或联系执行人';
+        $demand_data['demand_status']==2?$sendStart = '审核成功':'';
+        $demand_data['demand_status']==2?$sendText = '进行中-预计完成时间:'.$demand_data['expect_finish_time']:'';
+
+        //设置通知数据
+        $sendData=[
+            $demand_info['demand_describe'],
+            $sendStart,
+            $sendText
+        ];
+
+        //发送通知
+        IWeChat::sendInform($demand_info['user_id'],WeChatInformType::State,$sendData,$demand_info['demand_id']);
+
+        //画面跳转
+        $this->success("操作成功",Url("demand_list"));
+    }
+
+    /**
+     * @功能：需求导出
+     * @开发者： wdd
+     */
+    public function demand_export(){
+        //接收参数
+        //接收参数
+        $demand_id = IRequest::get('demand_id');
+        $project_id = IRequest::get('project_id');
+        $proposer_name = IRequest::get('proposer_name');
+        $demand_status = IRequest::get('demand_status');
+        $priority_level = IRequest::get('priority_level');
+
+        //查询条件
+        $where = null;
+        if(!empty($demand_id))$where['dd.demand_id'] = $demand_id;
+        if(!empty($project_id))$where['dd.project_id'] =$project_id;
+        if(!empty($proposer_name))$where['dd.proposer_name'] = array('like', "%{$proposer_name}%");
+        if(!empty($demand_status))$where['dd.demand_status'] = $demand_status;
+        if(!empty($priority_level))$where['dd.priority_level'] = $priority_level;
+
+        $demand_list = IDb::getInstance('demand as dd')
+            ->setDbFiled("dd.*,project_name")
+            ->setDbJoin("project as pt","dd.project_id = pt.project_id")
+            ->setDbWhere($where)
+            ->setDbOrder('dd.demand_id desc')->sel();
+        if($demand_list === false){
+            error('获取需求列表有误！');
+        }
+
+        //将图片转成数组
+        foreach ($demand_list as $key=>$demand){
+            $demand_list[$key]['image_list'] = explode(",",$demand['demand_photo_url']);
+        }
+
+
+
+        //设置数据格式
+        $line = array();
+        $col_str = "需求编号,项目编号,项目名称,提出人，提出人手机号，需求描述,需求图片,提出时间,需求状态,优先级";
+        $col = explode(',',$col_str);
+
+        foreach ($demand_list as $k => $value) {
+            $temp = [
+                $value['demand_id'],
+                $value['project_id'],
+                $value['project_name'],
+                $value['proposer_name'],
+                $value['proposer_phone'],
+                $value['demand_describe'],
+                $value['demand_photo_url'],
+                $value['propose_time'],
+                HtmlEnumValue::$enum_value['demand_status'][$value['demand_status']],
+                HtmlEnumValue::$enum_value['priority_level'][$value['priority_level']],
+            ];
+//            array_push($temp,$agent_account_event);
+//            array_push($temp, $value['note']);
+//            array_push($temp, isset($value['item_name']) ? $value['item_name'] : '--');
+//            array_push($temp, $value['create_time']);
+
+            $line[] = $temp;
+        }
+
+        //导出数据
+//        IExcel::export("资金日志导出".date('YmdHis').".csv",$col,$line);
+        ExportCom::export("需求列表导出".date('YmdHis').".xls",$col,$line);
+    }
+
+}

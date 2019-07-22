@@ -1,0 +1,62 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: zengwenjie
+ * Date: 2018/12/6
+ * Time: 11:10
+ */
+
+namespace app\api\controller;
+
+
+use app\common\cache\demand\IDemandCache;
+use app\common\cache\demand\IMyDemandCache;
+use app\common\controller\DemandBaseController;
+use app\common\ext\IDb;
+use app\common\enum\IsDelete;
+use app\common\enum\PriorityLevel;
+use app\common\ext\IWeChat;
+
+class Organization extends DemandBaseController{
+    /**
+     * @功能：获取组织架构
+     * @开发者：WDD
+     */
+    public function get_organization(){
+        $org_id  = self::get_data('org_id');
+        if (empty($org_id)){
+            $org_id = 0;
+        }
+
+        $organize_where['parent_id'] = $org_id;
+        $organize_list = IDb::getInstance('organize')->setDbWhere($organize_where)->sel();
+        if ($organize_list === false){
+            //返回错误
+            self::set_code(self::ERR_0003);
+            self::set_msg("获取组织失败！");
+            self::send();
+        }
+        foreach ($organize_list as $key=>$value){
+            //判断是否还有下级
+            $where['parent_id'] = $value['org_id'];
+            $organize_info = IDb::getInstance('organize')->setDbWhere($where)->row();
+            if (empty($organize_info)){
+                $organize_list[$key]['below'] = 0;
+            }else{
+                $organize_list[$key]['below'] = 1;
+            }
+
+            //查找职位
+            $job_list = IDb::getInstance('job')->setDbWhere(array('org_id'=>$value['org_id']))->sel();
+            if (empty($job_list)){
+                $job_list = array();
+            }
+            $organize_list[$key]['job_list'] = $job_list;
+        }
+
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::set_value("organize_list",$organize_list);
+        self::send();
+    }
+}

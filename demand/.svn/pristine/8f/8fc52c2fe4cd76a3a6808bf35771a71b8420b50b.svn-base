@@ -1,0 +1,456 @@
+<?php
+/*
+ * @开发工具: JetBrains PhpStorm.
+ * @文件名：IUrl.class.php
+ * @类功能: 任务管理
+ * @开发者: zc
+ * @开发时间： 15-10-22
+ * @版本：version 1.0
+ */
+namespace app\common\ext;
+
+use app\common\cache\common\IWeChatCache;
+use app\common\cache\user\IUserCache;
+use think\Db;
+use app\common\enum\MiniCode;
+use app\common\enum\WeChatInformStatus;
+use app\common\enum\WeChatInformType;
+use phpDocumentor\Reflection\Types\Boolean;
+use think\response\Json;
+use app\common\enum\IsYes;
+
+class IWeChat extends ICommon {
+
+//    private static $app_id = 'wxaaf3cd376f0ee5f2';
+//    private static $app_secret = '24166aedee729d15fbf76cbffdff55f5';
+
+    private static $app_id = 'wxe2a00d6defb725e6';
+    private static $app_secret = '429f1007091bb2cacdab725f8f9a643c';
+
+    private static $return_data = '';
+
+    /**
+     * @功能：取得地址
+     * @param $code string 地址
+     * @开发者：gys
+     * @return array|bool
+     */
+    public static function miniCodeToSession($code){
+
+        $request_url ='https://api.weixin.qq.com/sns/jscode2session?appid='.self::$app_id.'&secret='.self::$app_secret.'&js_code='.$code.'&grant_type=authorization_code';
+
+        $return = self::request($request_url);
+        if(!$return){
+            return false;
+        }
+
+        $data['open_id'] = $return['openid'];
+        $data['session_key'] = $return['session_key'];
+        if(isset($return['unionid'])){
+            //一定条件下，才会下发union id 详情查看：https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/union-id.html
+            $data['union_id'] = $return['unionid'];
+        }
+
+        return $data;
+    }
+
+    /**
+     * 获取access token
+     * @return bool|mixed|string
+     */
+    public static function getAccessToken(){
+        //获取配置中的token
+//        $access_token = config('wx_access_token');
+//        if($access_token !== true){
+//            return $access_token;
+//        }
+
+        return IWeChatCache::getAccessToken();
+    }
+
+    /**
+     * 请求access token
+     * @return bool|mixed|string
+     */
+    public static function requestAccessToken(){
+        $request_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.self::$app_id.'&secret='.self::$app_secret;
+
+        $return = self::request($request_url);
+        if(!$return){
+            return false;
+        }
+
+        return $return;
+    }
+
+    /**
+     * 获取小程序二维码
+     * @return bool|mixed|string
+     */
+        public static function getWXACodeUnlimit($page = '',$scene = ''){
+            $request_url = 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token='.self::getAccessToken();
+            $param['scene'] = $scene;
+            $param['page'] = $page;
+//        $param['width'] = 280; //默认为 430px，最小 280px，最大 1280px
+
+            $param = json_encode($param);
+            return self::post($request_url,$param);
+    }
+
+    /**
+     * 获取小程序二维码url（进入授权）
+     * @param string $code
+     * @param string $scene
+     * @return bool|string
+     */
+    public static function getMiniCode($scene = '0'){
+        $page = 'pages/DemandList/DemandList';
+        $path = 'demand_';
+
+        $file_path = 'upload/demand/mini_code/';
+        if (!is_dir($file_path)) {
+            mkdir($file_path,0777,true);
+        }
+
+        $filename = $path.$scene . '.png';
+
+        $full_name = $file_path.$filename;
+        if (!file_exists($full_name)) {
+            self::$error = "page:{$page};scene:{$scene};";
+            $content = self::getWXACodeUnlimit($page,$scene);
+            $return = json_decode($content,true);
+            if(isset($return['errcode']) && $return['errcode'] != 0){
+                self::$error = $return['errmsg'];
+                return false;
+            }
+            $result = file_put_contents($full_name, $content);
+            if(!$result){
+                self::$error .= '保存二维码失败';
+                return false;
+            }
+        }
+
+        return IUrl::get($full_name);
+    }
+
+    /**
+     * 获取小程序二维码url（后台账号注册）
+     * @param string $code
+     * @param string $scene
+     * @return bool|string
+     */
+    public static function getMiniCodeReg($scene = '0'){
+        $page = 'pages/Admin_reg/Admin_reg';
+        $path = 'demand_';
+
+        $file_path = 'upload/demand/mini_code/';
+        if (!is_dir($file_path)) {
+            mkdir($file_path,0777,true);
+        }
+
+        $filename = $path.$scene . '.png';
+
+        $full_name = $file_path.$filename;
+        if (!file_exists($full_name)) {
+            self::$error = "page:{$page};scene:{$scene};";
+            $content = self::getWXACodeUnlimit($page,$scene);
+            $return = json_decode($content,true);
+            if(isset($return['errcode']) && $return['errcode'] != 0){
+                self::$error = $return['errmsg'];
+                return false;
+            }
+            $result = file_put_contents($full_name, $content);
+            if(!$result){
+                self::$error .= '保存二维码失败';
+                return false;
+            }
+        }
+
+        return IUrl::get($full_name);
+    }
+
+    /**
+     * @功能：发送服务消息
+     * @param $openid string 小程序微信openid
+     * @param $data array 服务消息数据 [1,2,3] ['回复者'， ‘回复内容’ ， ‘回复时间’]
+     * @param $template_id int 消息模板ID
+     * @param $page string 小程序路径
+     * @param $form_id string
+     * @param $k int $data数据里面的可以值
+     * @return Json|bool {"errcode": 0,"errmsg": "ok"}
+     */
+    private static function sendUniformMessage($openid,$form_id,$template_id,$page,$data,$k = 0){
+        //获取发送到地址
+        $request_url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token='.self::getAccessToken();
+
+        //数据的判断
+        if(!is_array($data)){
+            return false;
+        }
+
+        $param = array();
+        $param['touser'] = $openid; //用户openid
+        $param['weapp_template_msg']['template_id'] = $template_id; //消息模板id
+        $param['weapp_template_msg']['page'] = $page; //小程序路径
+        $param['weapp_template_msg']['form_id'] = $form_id;
+
+        //拼装消息数据
+        foreach ($data as $key=>$val){
+            $param['weapp_template_msg']['data']["keyword".($key+1)]['value'] = $val; //模版消息
+        }
+        $param['emphasis_keyword'] = 'keyword'.($k+1).'.DATA'; //大写字段信息
+
+        //模板的获取
+        $template = json_encode($param, true);
+
+        //请求数据
+        $result = self::requestCurl($request_url, $template);
+
+        //返回数据
+        return $result;
+    }
+
+    /**
+     * 发送通知
+     * @param $user_id int 接收消息用户ID
+     * @param $type int 消息类型
+     * @param $data array type=1 ['回复者'， '回复内容' ， '回复时间']
+     * @param $target_id int 跳转参数
+     * @return bool|null
+     */
+    public static function sendInform($user_id,$type,$data,$id,$notice_describe='-'){
+        $emphasis_key = 0;
+        switch ($type){
+            case WeChatInformType::State:
+                $template_id = 'lHx_C7nfSI-a4HeV7GpD90Qq22bDEAxWuD6s-nh0ZMw';
+                
+                $page = 'pages/Details/Details?target_id='.$id;
+                $notice_type = 'State';
+                break;
+
+            case WeChatInformType::Complete:
+                $template_id = '_gRrqSdPANRajgIT7B7qypJF5JzudtFlpyym-FlIHMI';
+                
+                $page = 'pages/Details/Details?target_id='.$id;
+                $notice_type = 'Complete';
+                break;
+
+            case WeChatInformType::Received:
+                $template_id = '5G39tzT3XrZ3ge444IP4PViIpp7xr8ToCGAOfGVzh0E';
+                
+                $page = 'pages/Details/Details?target_id='.$id;
+                $notice_type = 'Received';
+                break;
+            case WeChatInformType::Submission:
+                $template_id = 'F7hJjWD82jtarIB9lyRAF4wdFXhumkmm1aOVEFZaQXU';
+
+                $page = 'pages/Details/Details?target_id='.$id;
+                $notice_type = 'Submission';
+                break;
+            default:
+                self::$error = 'error type';
+                return false;
+        }
+
+        //查找可用from_id
+        $where['user_id'] = $user_id;
+        $where['create_time'] = ['gt',date('Y-m-d H:i:s',strtotime('-6 days'))];
+        $inform_info = IDb::getInstance('wechat_inform')->setDbWhere($where)->row();
+        if(empty($inform_info)){
+            //记录通知(失败)
+            $noticeDbData['user_id'] = $user_id;
+            $noticeDbData['demand_id'] = $id;
+            $noticeDbData['notice_describe'] = $notice_describe;
+            $noticeDbData['return_data'] = "{'errcode':433333',errmsg':'该用户没有可用from_id,发送通知失败。'}";
+            $noticeDbData['notice_state'] = IsYes::No;
+            $noticeDbData['create_time'] = get_date_time();
+            IDb::getInstance('notice')
+                ->setDbData($noticeDbData)
+                ->add();
+            return null;
+        }
+
+        $open_id = IUserCache::getInfo($user_id,'open_id');
+        if(empty($open_id)){
+            self::$error = 'error open_id';
+            return false;
+        }
+
+        $result = self::sendUniformMessage($open_id,$inform_info['form_id'],$template_id,$page,$data,$emphasis_key);
+        if($result){
+            $inform_data['status'] = WeChatInformStatus::Success;
+
+            $notice_state = IsYes::Yes;
+        }else{
+            //如果发送失败，在重新获取10次from_id
+            $index = 0;
+            $state = true;
+            while ($state || $index<11){
+                $index++;
+                $where['user_id'] = $user_id;
+                $where['create_time'] = ['gt',date('Y-m-d H:i:s',strtotime('-6 days'))];
+                $inform_info = IDb::getInstance('wechat_inform')->setDbWhere($where)->setDbOrder('inform_id desc,create_time desc')->row();
+                if(empty($inform_info)){
+                    //记录通知(失败)
+                    $noticeDbData['user_id'] = $user_id;
+                    $noticeDbData['demand_id'] = $id;
+                    $noticeDbData['notice_describe'] = $notice_describe;
+                    $noticeDbData['return_data'] = "{'errcode':433333',errmsg':'该用户没有可用from_id,发送通知失败。'}";
+                    $noticeDbData['notice_state'] = IsYes::No;
+                    $noticeDbData['create_time'] = get_date_time();
+                    IDb::getInstance('notice')
+                        ->setDbData($noticeDbData)
+                        ->add();
+                    $state = false;
+                }else{
+                    $result = self::sendUniformMessage($open_id,$inform_info['form_id'],$template_id,$page,$data,$emphasis_key);
+                    if (!$result){
+                        $inform_data['status'] = WeChatInformStatus::Error;
+
+                        $notice_state = IsYes::No;
+
+                        //删除失效的id和使用过的id
+                        Db::name('wechat_inform')
+                            ->where('inform_id',$inform_info['inform_id'])
+                            ->whereOr('create_time','<',date('Y-m-d H:i:s',strtotime('-6 days')))
+                            ->delete();
+                    }else{
+                        $state = false;
+                    }
+                }
+
+            }
+        }
+
+        //删除失效的id和使用过的id
+        Db::name('wechat_inform')
+            ->where('inform_id',$inform_info['inform_id'])
+            ->whereOr('create_time','<',date('Y-m-d H:i:s',strtotime('-6 days')))
+            ->delete();
+        
+        //记录通知
+        $noticeDbData['user_id'] = $user_id;
+        $noticeDbData['demand_id'] = $id;
+        $noticeDbData['notice_describe'] = $notice_describe;
+        $noticeDbData['return_data'] = self::getReturnData();
+        $noticeDbData['notice_state'] = $notice_state;
+        $noticeDbData['create_time'] = get_date_time();
+        IDb::getInstance('notice')
+            ->setDbData($noticeDbData)
+            ->add();
+
+        return $inform_data['status'] == WeChatInformStatus::Success;
+    }
+
+    /**
+     * 获取请求返回数据
+     * @return string
+     */
+    private static function getReturnData(){
+        return self::$return_data;
+    }
+
+    /**
+     * 发起请求
+     * @param $url
+     * @return bool|mixed|string
+     */
+    private static function request($url){
+        $return = file_get_contents($url);
+        self::$return_data = $return;
+        $return = json_decode($return,true);
+        if(isset($return['errcode']) && $return['errcode'] != 0){
+            self::$error = $return['errmsg'];
+            return false;
+        }
+        return $return;
+    }
+
+    /**
+     * curl 请求 带错误信息处理
+     * @param $url
+     * @param $param
+     * @return bool|mixed
+     */
+    private static function requestCurl($url,$param){
+        self::$return_data = self::post($url,$param);
+        $return = json_decode(self::$return_data,true);
+        if(isset($return['errcode']) && $return['errcode'] != 0){
+            self::$error = $return['errmsg'];
+            return false;
+        }
+
+        return $return;
+    }
+
+    /**
+     * curl 请求
+     * @param $url
+     * @param $param
+     * @return mixed
+     */
+    private static function post($url,$param){
+        //参数设置
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER,array("Content-Type"=>"application/json"));
+
+        //发送请求
+        $content = curl_exec ($ch);
+
+        //关闭
+        curl_close($ch);
+
+        //返回值
+        return $content;
+    }
+
+    /**
+     * 检验数据的真实性，并且获取解密后的明文.
+     * @param $session_key string 调用微信登录返回
+     * @param $encryptedData string 加密的用户数据
+     * @param $iv string 与用户数据一同返回的初始向量
+     * @param $data string 解密后的原文
+     *
+     * @return bool|array
+     */
+    public static function decryptData($session_key,$encryptedData, $iv, &$data ){
+        if (strlen($session_key) != 24) {
+            self::$error = 'session key error';
+            return false;
+        }
+        $aesKey=base64_decode($session_key);
+
+        if (strlen($iv) != 24) {
+            self::$error = 'iv error';
+            return false;
+        }
+
+        $aesIV=base64_decode($iv);
+
+        $aesCipher=base64_decode($encryptedData);
+
+        $result=openssl_decrypt( $aesCipher, "AES-128-CBC", $aesKey, 1, $aesIV);
+
+        $dataObj=json_decode( $result ,true);
+        if( $dataObj  == NULL )
+        {
+            self::$error = 'null returned';
+            return false;
+        }
+        if( $dataObj['watermark']['appid'] != self::$app_id )
+        {
+            self::$error = 'app id error';
+            return false;
+        }
+        $data = $dataObj;
+
+        return true;
+    }
+}

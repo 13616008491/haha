@@ -1,0 +1,431 @@
+body, p, form, input, textarea, ul, li, h1, h2, h3, h4, dl, dt, dd, table, td, th {
+	margin: 0;
+	padding: 0;
+}
+body {
+	height: 100%;
+}
+img {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+table, td, th {
+	border-collapse: collapse;
+}
+ul, li {
+	list-style: none outside none;
+}
+h1, h2, h3, h4 {
+	font-size: 100%;
+}
+img {
+	border: 0 none;
+	vertical-align: middle;
+}
+a {
+	color: #383838;
+	outline: medium none;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+body {
+	color: #383838;
+	font: 12px/1.5 "微软雅黑", Verdana, Geneva, sans-serif;
+	height: 100%;
+}
+.clearfix:after, container:after {
+	clear: both;
+	content: " ";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+.clearfix, container {
+}
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+.mt10 {
+	margin-top: 10px;
+}
+.ml1 {
+	margin-left: 1%;
+}
+.blue {
+	color: #3979C7 !important;
+}
+.orange {
+	color: #FF6C00;
+}
+.green {
+	color: #1B6309;
+}
+.gray {
+	color: #999999;
+}
+.none {
+	display: none;
+}
+.block {
+	display: block;
+}
+.tra {
+	background-color: #F3F6FA;
+}
+select, input, button, area {
+	font: 12px "微软雅黑";
+}
+.l_warp {
+	opacity: 1;
+	margin-top: 0;
+	transition: 0.5s;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-o-transition: 0.5s;
+	z-index: 1;
+}
+.w-load2 {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	z-index: 1;
+	margin-top: -8px;
+	width: 100%;
+	margin: 20px auto;
+	text-align: center;
+}
+.m-stwrap1 {
+}
+.m-stwrap1, .g-ft1 {
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.5s 0.3s;
+	-webkit-transition: opacity 0.5s 0.3s;
+	-moz-transition: opacity 0.5s 0.3s;
+	-o-transition: opacity 0.5s 0.3s;
+}
+.m-stwrap1 {
+	position: absolute;
+	z-index: 10;
+	left: 0;
+	top: 40%;
+	margin: -131px auto 0;
+	width: 100%;
+}
+.m-stwrap1, .g-ft1 {
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 1s 0.5s;
+	-webkit-transition: opacity 1s 0.5s;
+	-moz-transition: opacity 1s 0.5s;
+	-o-transition: opacity 1s 0.5s;
+}
+.loginlogo {
+	width: 427px;
+	margin: 0 auto 55px;
+}
+.loginlogo .f1 {
+	width: 100%;
+	height: 133px;
+	text-indent: -9999px;
+	background: url(../img/login-1.png) no-repeat -3px 0;
+	display: block;
+}
+.m-userlnks {
+	margin: 0 auto;
+	width: 488px;
+}
+.m-userlnks .login, .m-userlnks .reg {
+	color: white;
+	text-shadow: 0 1px 1px black;
+	background: -moz-linear-gradient(top, #2C2C2C 0%, #222 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2C2C2C), color-stop(100%, #222));
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(255, 255, 255, 0.1) inset;
+}
+.m-userlnks a {
+	width: 184px;
+	padding-left: 8px;
+	*background-position:1px -704px;	
+}
+.m-userlnks a:hover {	
+	*background-position:-213px -704px;	
+}
+
+.m-userlnks a, .w-account-2 .btn {
+	display: block;
+	float: left;
+	margin: 0 15px;
+	width: 192px;
+	height: 52px;
+	font-size: 21px;
+	letter-spacing: 8px;
+	text-align: center;
+	line-height: 52px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+}
+.m-reg, .m-login {
+	position: absolute;
+	left:0px;
+	top: 262px;
+	margin-top: 20px;
+	width: 100%;
+}
+.m-reg .arr, .m-login .arr {
+	text-align: center;
+}
+.m-reg .arr span, .m-login .arr span {
+	display: inline-block;
+	position: relative;
+	top: 2px;
+	width: 36px;
+	height: 17px;
+	background:url(img/login-1.png) -404px -290px no-repeat; 
+	
+}
+.m-login .arr .arml {
+     margin-left: -260px;
+     *margin-left:-124px;
+ }
+.m-login .arr .arm2 {
+    left:100px;
+}
+.m-reg .cont, .m-login .cont {
+	overflow:hidden;
+	width: 100%;
+
+	background: #fff;
+	color: #888;
+}
+.m-reg .contc, .m-login .contc {
+	width: 332px;
+	padding: 35px 0 30px;
+	margin: 0 auto;
+	overflow:hidden;
+}
+.m-reg .contl, .m-login .contl {
+	float: left;
+	width: 332px;
+}
+.m-reg .contr, .m-login .contr {
+	float: right;
+	width: 150px;
+	padding-left:30px; border-left:1px solid #ddd; height:280px;
+}
+.m-reg h3, .m-login h3 {
+	margin: 0 0 18px;
+	font-weight: normal;
+}
+.m-reg .others, .m-login .others {
+	position: relative;
+	zoom: 1;
+}
+.m-reg .sepln, .m-login .sepln {
+	position: absolute;
+	left: -41px;
+	top: 0;
+	display: block;
+	height: 100%;
+	_height: 150px;
+	width: 1px;
+	background: #e7e7e7;
+}
+.m-reg .septxt, .m-login .septxt {
+	position: absolute;
+	left: -41px;
+	top: 50%;
+	margin: -8px 0 0 -6px;
+	display: block;
+	width: 20px;
+	height: 20px;
+	background: #fff;
+	color: #aaa;
+}
+.m-reg .msg, .m-login .msg {
+	margin: 5px 0 20px;
+	padding: 6px 17px;
+	background: #fdf8c4;
+	line-height: 20px;
+	color: #444;
+}
+.m-reg .chkbox, .m-login .chkbox {
+	position: relative;
+	display: inline-block;
+*display:inline;
+*zoom:1;
+	padding-left: 24px;
+	margin-right: 16px;
+	font-size: 14px;
+}
+.m-reg .chkbox .c, .m-login .chkbox .c {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 16px;
+	height: 16px;
+	
+}
+.m-reg .msg .c, .m-login .msg .c {
+	top: 2px;
+}
+.m-reg .msg img, .m-login .msg img {
+	position: relative;
+	top: 2px;
+}
+.m-reg .msg a:hover, .m-login .msg a:hover {
+	color: #7594b3;
+}
+
+.m-reg .chkbox input, .m-login .chkbox input { vertical-align:top; margin-right:5px;}
+.w-user .w0 {
+	zoom: 1;
+	margin: 0 0 15px;
+}
+.w-user .inpt, .w-user .txt {
+	width: 298px;
+	height: 22px;
+	font-size: 16px;
+	line-height: 22px;
+}
+.w-user .inpt {
+	position: relative;
+	zoom: 1;
+	padding: 5px 16px;
+	border: 1px solid #d7d7d7;
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.15) inset;
+}
+.w-user .j-tfocus {
+	z-index: 1;
+}
+.w-user .txt, .w-user label {
+	position: absolute;
+	left: 16px;
+	top: 6px;
+}
+.w-user .validt {
+position: absolute;
+right: 0;
+top: 0;
+width: 130px;
+height: 30px;
+line-height: 30px;
+}
+.w-user .validt:hover .icn {
+background-position: -54px -326px !important;
+}
+.w-user .validt .icn {
+display: inline-block;
+width: 38px;
+height: 30px;
+border-left: 1px solid #D7D7D7;
+background: url(img/login-1.png) -5px -326px no-repeat;
+}
+.w-user .validt img {
+vertical-align: 1px;
+}
+.w-user .txt {
+	border: 0;
+	outline: none;
+	color: #444;
+    background-color: white;
+}
+.w-user label {
+	color: #aaa;
+	 z-index:999;
+}
+.w-user .txtlist {
+	position: absolute;
+	z-index: 10;
+	left: -1px;
+	top: 40px;
+	padding: 1px 0;
+	width: 330px;
+	border: 1px solid #d7d7d7;
+	background: #fff;
+	font-size: 14px;
+	line-height: 32px;
+}
+.w-user .txtlist p, .w-user .txtlist div {
+	padding: 0 12px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.w-user .txtlist .j-crt {
+	background: #e7e7e7;
+}
+.w-user .warn {
+	margin: 10px 0 20px;
+    *margin-bottom:5px;
+	line-height: 21px;
+}
+.w-user .warn .icn {
+	display: inline-block;
+	width: 21px;
+	height: 21px;
+	margin: 0 5px 0 0;
+	background-position: -1px -664px;
+}
+.w-user .warn a, .w-user .warn a:hover {
+	margin: 0 4px;
+	color: #7594b3;
+	text-decoration: underline;
+}
+.w-user .warn a:hover {
+	color: #5a8dcd;
+}
+.w-user .w3 a, .w-user .w3 a:hover {
+	color: #888;
+}
+.w-user .w2 {
+	text-align: center;
+}
+.w-user .btn, .m-focuson .btn {
+	background: -moz-linear-gradient(top, #84af00 0%, #79a200 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #84af00), color-stop(100%, #79a200));
+	background: -webkit-linear-gradient(top, #84af00 0%, #79a200 100%);
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	line-height: 40px;
+	text-align: center;
+}
+.w-user .btn {
+	width: 332px;
+	padding-left: 14px;
+    *padding-left:0;
+	*background-position:1px -380px;	
+	height: 40px;
+	border: 0; 
+}
+.w-user .btn:hover {
+	*background-position:1px -434px;		
+}
+.w-user .btn::-moz-focus-inner {
+border:0;
+}
+.w-user .btn:hover, .m-focuson .btn:hover {
+	background: -moz-linear-gradient(top, #a1c400 0%, #a1c400 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a1c400), color-stop(100%, #a1c400));
+	background: -webkit-linear-gradient(top, #a1c400 0%, #a1c400 100%);
+}
+.w-user .btn span, .m-focuson .btn span {
+	font-size: 16px;
+	color: #fff;
+	text-shadow: 0 1px 0 rgba(117,155,0,0.65);
+}
+.w-user .btn span {
+	font-size: 20px;
+	display: block;
+    *text-indent:-9999px;
+	letter-spacing: 14px;
+}
+.w-user .btn,.w-user .btn:hover,.m-userlnks a,.m-userlnks a:hover{*background-image:url(img/login-1.png);}
+

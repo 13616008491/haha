@@ -1,0 +1,72 @@
+<?php
+namespace app\common\cache\demand;
+
+use app\common\cache\BaseCache;
+use app\common\enum\IsPropose;
+use app\common\ext\IDb;
+use app\common\enum\IsDelete;
+use app\common\ext\IRedis;
+
+class IMyDemandCache extends BaseCache{
+    /**
+     * @功能：取得缓存数据
+     * @param int $user_id 数据编号
+     * @param int $bottom_id 数据编号
+     * @开发者：曾文杰
+     * @return string
+     */
+    public static function getList($user_id,$demand_status,$bottom_id){
+        self::deleteListAll();
+        $data['user_id'] = $user_id;
+        $data['demand_status'] = $demand_status;
+        //取得缓存信息
+        $list = IRedis::getCallBackList(self::DM_MY_DEMAND_LIST,$data,$bottom_id,function($data,$bottom_id){
+            //实例化对象
+            $dm_demand_where['is_delete'] = IsDelete::No;
+            $dm_demand_where['user_id'] = $data['user_id'];
+            if (!empty($data['demand_status'] )){
+                if ($data['demand_status']==DemandStatus::PROCEEDING){
+                    $dm_demand_where['demand_status'] = array(array("eq",DemandStatus::PROCEEDING),array("eq",DemandStatus::TEST),array("eq",DemandStatus::UP),'or');
+                }else{
+                    $dm_demand_where['demand_status'] = $data['demand_status'] ;
+                }
+
+            }
+            if(!empty($bottom_id)) $dm_demand_where['demand_id'] = array("lt",$bottom_id);
+
+
+            //取得数据
+            $list = IDb::getInstance('demand')
+                ->setDbFiled("demand_id,project_id,proposer_name,demand_describe,propose_time,priority_level,demand_status,demand_feedback")
+                ->setDbWhere($dm_demand_where)
+                ->setDbOrder("demand_id desc")
+                ->setDbLimit(10)
+                ->sel();
+
+            //返回值
+            return $list;
+        },3600);
+
+        //返回值
+        return $list;
+    }
+
+    /**
+     * @功能：删除缓存数据
+     * @param int $user_id 数据编号
+     * @开发者：陈旭林
+     * @return string
+     */
+    public static function deleteList($user_id){
+        return IRedis::delList(self::DM_MY_DEMAND_LIST,$user_id);
+    }
+
+    /**
+     * @功能：删除缓存数据
+     * @开发者：陈旭林
+     * @return string
+     */
+    public static function deleteListAll(){
+        return IRedis::delKey(self::DM_MY_DEMAND_LIST);
+    }
+}

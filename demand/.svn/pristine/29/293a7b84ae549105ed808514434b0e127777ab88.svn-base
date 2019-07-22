@@ -1,0 +1,47 @@
+<!--添加用户表单-->
+<div class="tab_edit">
+    <table width="100%" class="list">
+        <tr>
+            <td class="t_r t_left_w">角色名称：</td>
+            <td class="t_l">
+                {:widget('common/Input/input',array('role_name',$role_info['role_name'],false,true))}
+            </td>
+        </tr>
+        <tr>
+            <td class="t_r t_left_w">角色类型：</td>
+            <td class="t_l">
+                {:widget('common/Select/select',array('admin_super','admin_super',$role_info['admin_super'],false,true))}
+            </td>
+        </tr>
+        <tr>
+            <td class="t_r t_left_w">备注：</td>
+            <td class="t_l">
+                {:widget('common/TextArea/text_area',array('remark',$role_info['remark'],false,true))}
+            </td>
+        </tr>
+        <tr>
+            <td class="t_r t_left_w">创建人：</td>
+            <td class="t_l">
+                {:widget('common/Name/admin',array($role_info["create_admin"]))}
+            </td>
+        </tr>
+        <tr>
+            <td class="t_r t_left_w">创建时间：</td>
+            <td class="t_l">
+                {$role_info["create_time"]}
+            </td>
+        </tr>
+        <tr>
+            <td class="t_r t_left_w">更新人：</td>
+            <td class="t_l">
+                {:widget('common/Name/admin',array($role_info["update_admin"]))}
+            </td>
+        </tr>
+        <tr>
+            <td class="t_r t_left_w">更新时间：</td>
+            <td class="t_l">
+                {$role_info["update_time"]}
+            </td>
+        </tr>
+    </table>
+</div>

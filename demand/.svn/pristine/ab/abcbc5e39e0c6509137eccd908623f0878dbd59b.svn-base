@@ -1,0 +1,66 @@
+<!-- 搜索框及工具条 -->
+<div class="c-head-box">
+    <form method="get" action="{:Url('demand_list')}">
+    <ul>
+        <li class="c-head-search">
+            <!-- 搜索条件 -->
+            <ul>
+                <li><span>需求编号：</span><input type="text" name="demand_id" value="{$demand_id}"/></li>
+                <li><span>选择项目：</span>{:widget('common/Select/select',array('project_id',array($project_list,"project_id","project_name"),$project_id))}</li>
+                <li><span>提出人姓名：</span><input type="text" name="proposer_name" value="{$proposer_name}"/></li>
+                <li><span>优先级：</span>{:widget('common/Select/select',array('priority_level','priority_level',$priority_level))}</li>
+
+            </ul>
+        </li>
+        <li class="c-head-button">
+            <!-- 操作按钮 -->
+            <div class="fr"><input type="submit" class="but_blue" value="搜索"></div>
+            <div class="fr"><a class="but_blue" href="{:Url('demand_add')}">添加需求</a></div>
+            <div class="fr"><a class="but_blue" href="{:Url('demand_export',$_GET)}">导出</a></div>
+        </li>
+    </ul>
+    </form>
+</div>
+
+<!--用户列表-->
+<div class="lists-tab-cont">
+    <div class="lists-table">
+        <table class="pointer" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th style="width: 2%" class="tabSort-header"><a class="tabSort-header-inner"><p>需求编号</p></a></th>
+                <th style="width: 4%" class="tabSort-header"><a class="tabSort-header-inner"><p>项目名称</p></a></th>
+                <th style="width: 4%" class="tabSort-header"><a class="tabSort-header-inner"><p>提出人</p></a></th>
+                <th style="width: 4%" class="tabSort-header"><a class="tabSort-header-inner"><p>提出人电话</p></a></th>
+                <th style="width: 10%" class="tabSort-header"><a class="tabSort-header-inner"><p>需求描述</p></a></th>
+                <th style="width: 5%" class="tabSort-header"><a class="tabSort-header-inner"><p>提出时间</p></a></th>
+                <th style="width: 2%" class="tabSort-header"><a class="tabSort-header-inner"><p>优先级</p></a></th>
+                <th style="width: 2%" class="tabSort-header"><a class="tabSort-header-inner"><p>需求状态</p></a></th>
+                <th style="width: 10%" class="tabSort-header"><a class="tabSort-header-inner"><p>操作</p></a></th>
+            </tr>
+            </thead>
+            <tbody>
+                {foreach name="demand_list" item="info"}
+                    <tr>
+                        <td>{$info.demand_id}</td>
+                        <td>{$info.project_name}</td>
+                        <td>{$info.real_name}</td>
+                        <td>{$info.phone}</td>
+                        <td>{$info.demand_describe}</td>
+                        <td>{$info.propose_time}</td>
+                        <td>{:widget('common/Color/color',array('priority_level',$info["priority_level"]))}</td>
+                        <td>
+                            <a href="{:Url('demand_info',array('demand_id'=>$info['demand_id']))}" class="blue">详情</a>
+                            <a href="{:Url('demand_start',array('demand_id'=>$info['demand_id']))}" class="blue">需求审核</a>
+                        </td>
+                    </tr>
+                {/foreach}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 翻页模板 -->
+    <div class="page">
+        {$Think.config.page_html}
+    </div>
+</div>

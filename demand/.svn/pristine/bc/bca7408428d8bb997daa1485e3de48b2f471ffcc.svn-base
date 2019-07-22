@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name=”viewport” content=”initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no”>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>周报（{$weekly_info['date_range_start']}~{$weekly_info['date_range_end']}）</title>
+    <style>
+        *{margin: 0; padding: 0;font-size: 14px;}
+        html,body{width: 100%;background-color: #fff;}
+        .separate{height: .3rem;background-color: #f4f5f9;}
+        .img-title{width: 100%;}
+        .text-title{padding: .3rem;display: flex;justify-content: space-between;align-items: flex-end;}
+        .text-title span{font-size: .26rem;color: #333;}
+        .title{padding: .3rem 0;display: flex;align-items: center;}
+        .title i{display: inline-block;width: .06rem;height: .25rem;background-color: #547bfe;margin-right: .25rem;}
+        .title span{font-size: .3rem;color: #333;font-weight: bold;}
+        .conten-box{padding-bottom: .3rem;}
+        .conten-box .content{padding: 0 .3rem;}
+        .demand-box .propose-conten div{
+            font-size: .23rem;
+            color: #666;
+        }
+    </style>
+    <link rel="stylesheet" href="__STATIC__/admin/css/weekly/app.css">
+    <script type="text/javascript" src="__STATIC__/common/plugins/Charts/amcharts.js"></script>
+    <script type="text/javascript" src="__STATIC__/common/underscore.js"></script>
+</head>
+<style>
+    .font-color-position span{
+        color: #f9a470 !important;
+    }
+</style>
+<body>
+    <img class="img-title" src="/static/admin/img/week_report.jpg" alt="" srcset="">
+    <div class="text-title">
+        <span><b style="font-size: .3rem;color: #547bfe;">汇报周期：</b>{$weekly_info['date_range_start']}～{$weekly_info['date_range_end']}</span>
+    </div>
+
+    <div class="separate"></div>
+
+    <div class="conten-box">
+        <div class="title">
+            <i></i>
+            <span style="color: #547bfe;">周报总结</span>
+        </div>
+        <div class="content">{$weekly_info['summary']|stripslashes=###}</div>
+    </div>
+
+    <div class="separate"></div>
+
+    <div class="conten-box">
+        <div class="title">
+            <i></i>
+            <span style="color: #547bfe;">需求统计</span>
+        </div>
+        <div  class="content" id="chartdiv" style="width: 90%; height: 300px;">
+            <!--<div  style="width: 100%; height: 400px;"></div>-->
+        </div>
+    </div>
+
+    <!-- 项目组1 -->
+    {foreach name="$weekly_info['detail']" item="info"}
+    {if condition="$info['project_id']"}
+    <div class="conten-box" style="padding-bottom:0">
+        <div class="title">
+            <i></i>
+            <span>{$info.project_name}</span>
+        </div>
+    </div>
+
+    <div class="separate"></div>
+    {empty name="$info['demand_list']"}
+    {else/}
+    {foreach name="$info['demand_list']" item="info2"}
+    <div class="conten-box demand-box">
+
+        <div class="{if $info2['demand_status']==2}content box-bg-deving{/if}{if $info2['demand_status']==3}content box-bg-dev{/if}{if $info2['demand_status']==4}content box-bg-refuse{/if}{if $info2['demand_status']==5}content box-bg-test{/if}{if $info2['demand_status']==6}content box-bg-complete{/if}">
+            <div class="propose">
+                <b>提出人: {$info2.demand_real_name}</b>
+                <span>{:widget('common/Color/color',array('demand_status',$info2["demand_status"]))}</span>
+            </div>
+            <div class="propose-conten">
+                <p>需求内容:</p>
+                <div>
+                    {$info2.demand_describe}
+                </div>
+            </div>
+        </div>
+        <div class="list">
+            {empty name="$info2['task_list']"}
+            {else/}
+            {foreach name="$info2['task_list']" item="info3"}
+            <div class="list-box">
+                <p>
+                    <label class="font-color-name">【{$info3.task_real_name}】</label>
+                    <label class="font-color-position">【{:widget('common/Color/color',array('task_type',$info3["task_type"]))}】</label>
+                    <label class="font-color-speed">【{$info3.rate_percent}%】</label>
+                    <span>
+                        {$info3.rate_describe}
+                    </span>
+                    <i>{$info3.create_time}（用时{$info3.minute}分钟）</i>
+                </p>
+            </div>
+            {/foreach}
+            {/empty}
+        </div>
+        <!--<div class="separate"></div>-->
+    </div>
+    <div class="separate"></div>
+    {/foreach}
+    {/empty}
+    {/if}
+    {/foreach}
+
+    <div class="separate"></div>
+
+    {foreach name="$weekly_info['detail']" item="info"}
+    {if condition="!$info['project_id']"}
+    <!-- 其他项 -->
+    <div class="conten-box" style="padding-bottom:0">
+        <div class="title">
+            <i></i>
+            <span>其他</span>
+        </div>
+    </div>
+
+    {foreach name="$info['demand_list']" item="info2"}
+    <div class="conten-box demand-box">
+    <div class="list">
+    {foreach name="$info2['task_list']" item="info3"}
+    <div class="list-box">
+        <p>
+            <label class="font-color-name">【{$info3.task_real_name}】</label>
+            <label class="font-color-position">【{:widget('common/Color/color',array('task_type',$info3["task_type"]))}】</label>
+            <label class="font-color-speed">【{$info3.rate_percent}%】</label>
+            <span>
+                        {$info3.rate_describe}
+                    </span>
+            <i>{$info3.create_time}（用时{$info3.minute}分钟）</i>
+        </p>
+    </div>
+    {/foreach}
+    </div>
+    </div>
+    {/foreach}
+    {/if}
+    {/foreach}
+
+    <div class="separate"></div>
+
+    <div class="text-title">
+        <span><b style="font-size: .3rem;color: #547bfe;">汇报人员：</b>{$weekly_info['user_list']}</span>
+    </div>
+
+    <div class="text-title">
+        <span><b style="font-size: .3rem;color: #547bfe;">汇报时间：</b>{$weekly_info['create_time']}</span>
+    </div>
+</body>
+<script type="text/javascript">
+    (function() {
+        var json = JSON.parse('{$Think.config.json}');
+        var new_ary = _.values(json['new_data']);
+
+        //获取html元素
+        var html = document.getElementsByTagName('html')[0];
+        //屏幕的宽度（兼容处理）
+        var width = document.documentElement.clientWidth || document.body.clientWidth;
+        //375这个数字是根据你的设计图的实际大小来的，所以值具体根据设计图的大小,根据苹果6的尺寸布局设计
+        html.style.fontSize = width / 750 * 50 * 2 + 'px';
+
+        //扇形图
+        var chart;
+
+        // var chartData = json['new_data'];
+
+
+        AmCharts.ready(function () {
+            // PIE CHART
+            chart = new AmCharts.AmPieChart();
+
+            // title of the chart
+            // chart.addTitle("Visitors countries", 16);
+
+            chart.dataProvider = new_ary;
+            chart.titleField = "country";
+            chart.valueField = "visits";
+            chart.sequencedAnimation = false;
+            chart.startEffect = "elastic";
+            chart.innerRadius = "40%";
+            chart.startDuration = 2;
+            chart.labelRadius = -1;
+
+            // the following two lines makes the chart 3D
+            chart.depth3D = 10;
+            chart.angle = 15;
+
+            // WRITE
+            chart.write("chartdiv");
+        });
+    })()
+
+    window.onresize=function(){
+        //获取html元素
+        var html = document.getElementsByTagName('html')[0];
+        //屏幕的宽度（兼容处理）
+        var width = document.documentElement.clientWidth || document.body.clientWidth;
+        //375这个数字是根据你的设计图的实际大小来的，所以值具体根据设计图的大小,根据苹果6的尺寸布局设计
+        html.style.fontSize = width / 750 * 50 * 2 + 'px';
+    }
+</script>
+
+</html>

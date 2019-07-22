@@ -1,0 +1,61 @@
+<!--添加用户表单-->
+<div class="tab_edit_empty">
+    <form action="{:Url('role_submit')}" method="post" id="role_submit">
+        <input type="hidden" name="role_id" value="{$role_id}" />
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">角色名称：</td>
+                <td class="t_l">
+                    {:widget('common/Input/input',array('role_name',$role_info['role_name'],true))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">角色权限：</td>
+                <td class="t_l">
+                    {eq name="admin_super" value="1"}
+                        <input type="text" class="tab_text border_input" value="普通管理员" disabled="disabled"/>
+                        {else/}
+                        {:widget('common/Select/select',array('admin_super','admin_super',$role_info['admin_super'],true))}
+                    {/eq}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">备注：</td>
+                <td class="t_l">
+                    {:widget('common/TextArea/text_area',array('remark',$role_info['remark']))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"></td>
+                <td class="t_l">
+                    <div class="btn"><input type="submit" class="but_blue" value="保存信息"></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<!-- JS处理 -->
+<script language="javascript">
+    $(function(){
+        //提示是否删除
+        $("select[name='admin_super']").live("change",function(){
+            //判断是否为超级管理员
+            if($(this).val() == 2){
+                $("select[name='role_type']").val(2);
+                $("select[name='role_type']").attr("disabled","disabled");
+            }else{
+                $("select[name='role_type']").val(0);
+                $("select[name='role_type']").removeAttr("disabled");
+            }
+        });
+
+        //设置初期状态
+        if($("select[name='admin_super']").val() == 2){
+            $("select[name='role_type']").val(2);
+            $("select[name='role_type']").attr("disabled","disabled");
+        }else{
+            $("select[name='role_type']").removeAttr("disabled");
+        }
+    });
+</script>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="description" content="">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{$materials_info['materials_title']}">
+    <meta property="og:description" content="{$materials_info['materials_content']}">
+    <meta property="og:image" content="{$materials_info['materials_cover']}">
+    <title>{$materials_info['materials_title']}</title>
+    <link rel="stylesheet" href="__STATIC__/h5/app.css?v=12">
+</head>
+
+<body>
+    <img src="{$materials_info['materials_cover']}" alt="" width="0" height="0" />
+    <!-- <img src="http://www.zhhcho.com/img/timg1.jpg" width="0" height="0" /> -->
+    <div class="conten">
+        <div class="info">
+            <div class="head-img" style='background:url({$materials_info["avatar"]}) center/cover no-repeat;'></div>
+            <span class="name">{$materials_info['name']}</span>
+        </div>
+        <div class="main-conten">
+            <p>
+                {$materials_info['materials_content']}
+            </p>
+            <div class="main-conten-img">
+                {foreach name="$materials_info['materials_img']" item="info"}
+                <span class="show-img" bgurl="{$info}" style="background:url({$info}) center/cover no-repeat;"></span>
+                {/foreach}
+            </div>
+            <div class="main-conten-time">{$materials_info['create_time']}</div>
+        </div>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="conten" style="padding-top:2rem">
+        <div class="share-info">
+            <div class="share-info-user">
+                <div class="share-info-img" style='background:url({$materials_info["avatar"]}) center/cover no-repeat;'></div>
+                <dl>
+                    <dt>{$materials_info['name']}</dt>
+                    <dd>{$materials_info['place']}</dd>
+                </dl> 
+            </div>
+            <p class="share-info-text">
+                <img src="__STATIC__/h5/img/share_1.png" alt="" srcset="">
+                {$materials_info['phone']}
+            </p>
+            <p class="share-info-text">
+                <img src="__STATIC__/h5/img/share_2.png" alt="" srcset="">
+                {$materials_info['company_name']}
+            </p>
+            <img class="wx-code" src='{$materials_info["wx_code"]}' />
+        </div>
+
+        <div class="tips">
+            扫码或者长按识别上面的小程序码进入我的名片
+        </div>
+    </div>
+
+    <div class="img-view" onclick="clos_view()">
+        <img src="" alt="">
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+
+        //计算图片框的高度
+        $(function(){
+            $('.show-img').height($('.show-img').width());
+        })
+
+        //放大图片
+        var img_v_dom = $('.main-conten-img span');
+        img_v_dom.click(function(){
+            var index = $(this).index();
+            var url = img_v_dom.eq(index).attr('bgurl');
+            // $('.img-view').css('left','0').find('img').attr('src',url);
+            $('.img-view').css('display','flex').find('img').attr('src',url);
+        })
+        
+        //关闭放大图片
+        function clos_view(){
+            $('.img-view').css('display','none');
+        }
+
+    </script>
+
+</body>
+
+</html>

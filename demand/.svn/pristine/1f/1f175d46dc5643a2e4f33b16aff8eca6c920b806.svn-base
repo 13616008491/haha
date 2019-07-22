@@ -1,0 +1,18 @@
+<script language="javascript">
+    //取得域名地址
+    var href = window.location.href;
+    var url = href.split(".")[0];
+    var domain = url.split("//")[1];
+
+    //根据域名地址转发
+    switch (domain) {
+        case 'zht':
+            window.location.href = '/admin.html';
+            break;
+        case 'dlsht':
+            window.location.href = '/agent.html';
+            break;
+        default:
+            window.location.href = '/index.html';
+    }
+</script>

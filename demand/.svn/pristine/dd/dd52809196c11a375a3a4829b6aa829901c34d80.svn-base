@@ -1,0 +1,55 @@
+<div class="lists-tab-cont">
+    <div class="lists-table">
+        <table class="pointer" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th class="tabSort-header"><a class="tabSort-header-inner"><p>区域编号</p></a></th>
+                <th class="tabSort-header"><a class="tabSort-header-inner"><p>区域简称</p></a></th>
+                <th class="tabSort-header"><a class="tabSort-header-inner"><p>区域全称</p></a></th>
+                <th class="tabSort-header"><a class="tabSort-header-inner"><p>排序</p></a></th>
+                <th class="tabSort-header"><a class="tabSort-header-inner"><p>操作</p></a></th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach name="area_list" item="info"}
+                <tr>
+                    <td>{$info.area_id}</td>
+                    <td><a  href="{:Url('area_list',array('parent_id'=>$info['area_id']))}">{$info.acronym}</a></td>
+                    <td><a  href="{:Url('area_list',array('parent_id'=>$info['area_id']))}">{$info.area_name}</a></td>
+                    <td>{$info.order_by}</td>
+                    <td>
+                        <a href="{:Url('area_edit',array('area_id'=>$info['area_id']))}" class="blue">编辑</a>
+                        {neq name="info['area_type']" value="3"}
+                            <a href="{:Url('area_add',array('area_id'=>$info['area_id']))}" class="blue">添加下层区域</a>
+                        {/neq}
+                        {eq name="info['is_delete']" value="1"}
+                            <a href="{:Url('area_del',array('area_id'=>$info['area_id']))}" class="blue info">禁用</a>
+                        {else/}
+                            <a href="{:Url('area_reset',array('area_id'=>$info['area_id']))}" class="blue"><font color="red">启用</font></a>
+                        {/eq}
+                    </td>
+                </tr>
+            {/foreach}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 翻页模板 -->
+    <div class="page">
+        {$Think.config.page_html}
+    </div>
+</div>
+
+<!-- JS处理 -->
+<script language="javascript">
+    $(function(){
+        //提示是否删除
+        $("a.info").click(function(){
+            if(confirm("您确定要删除该记录吗？")){
+                return true;
+            }else{
+                return false;
+            }
+        });
+    });
+</script>

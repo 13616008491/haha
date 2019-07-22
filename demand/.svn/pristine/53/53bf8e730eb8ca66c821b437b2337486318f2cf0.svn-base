@@ -1,0 +1,84 @@
+@charset "utf-8";
+/* CSS Document */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,button{padding:0;margin:0;}
+label input{vertical-align:middle}
+a{text-decoration:none;color:#333}
+a:hover,a:active{text-decoration:none}
+body{color:#333;background-color:#fcfcfc;}
+img,input{border:0}
+table{border-collapse:collapse;}
+ul li{list-style:none}
+a.hidefocus{outline:none} 
+select,input{outline:none;}
+input{padding-left: 3px;}
+
+.header .logo{ float:left; margin:10px 0 0 10px;}
+.header .nav{ float:left; margin-left:100px;}
+.header .nav ul{ overflow:hidden; zoom:100%;}
+.header .nav li{ float:left; margin:20px 10px 0 0;}
+.header .nav li a{ color:#e5e7e8; font:16px/24px "Microsoft YaHei UI"; font-weight:bold; padding:2px 20px; display:block; border-radius:3px; }
+.header .nav li a:hover{ color:#ffde00;}
+.header .nav li a.curr{ background:#2c3c47;} 
+.header .user{ float:right; overflow:hidden; zoom:100%;}
+.header .user .user_name{ float:left; line-height:65px; color:#e5e7e8; margin-right:20px;}
+.header .user .logout{ float:left; height:65px; display:inline-block; padding:0 15px;}
+.header .user .logout img{ margin-top:15px;}
+.header .user .line{ border-left:1px solid #354856; border-right:1px solid #606e79; width:0; overflow:hidden; height:65px; float:left;}
+
+/*******/
+.mt10{ margin-top:10px;}
+.borddd{ border:1px solid #ddd;}
+a.blue{ color:#0086c8; line-height:24px;}
+a.blue:hover{ color:#005e8c; text-decoration:underline;}
+.list input.tab_text,.list select.tab_text{ height:24px; line-height:24px; width:250px;padding-left: 5px;}
+.list input.text{ height:24px; line-height:24px; padding:0 5px; width:150px;}
+.list input.min_text{ height:24px; line-height:24px; padding:0 5px; width:100px;}
+.list .tab_textarea{ width:250px; height: 60px; padding:0 5px;  line-height:24px; vertical-align: middle}
+.list .base_tips{ vertical-align: middle}
+
+tr.bgfff td{ background:#fff; border-bottom:1px solid #dfdfdf;}
+.bgf1f1f1 td,{ background:#f1f1f1; border-bottom:1px solid #dfdfdf;}
+
+
+.minus_sign{ margin-right:5px;}
+.bottom_sign{ margin-right:5px;}
+.b_cont{ border:1px solid #ddd; margin:0 10px;}
+
+.but_blue{cursor:pointer; /*background:url(img/but_bluebg.gif) left center repeat-x; */padding:0 33px;background-color: #266DB4; color: #fff; height:26px; line-height:26px; border:none; font-weight:bold; color:#FFF; display:inline-block; margin:2px;}
+.but_disabled{cursor:pointer; /*background:url(img/but_bluebg.gif) left center repeat-x; */padding:0 33px;background-color: #B7B9BB; color: #fff; height:26px; line-height:26px; border:none; font-weight:bold; color:#FFF; display:inline-block; margin:5px;}
+.pos_tab{border-collapse:collapse; border:1px solid #ddd; background:#FFF; width:260px;}
+.minus_sign{cursor: pointer;}
+.sys_right .b_cont .list .t_l .input_post{border-left: 0 none;border-top: 0 none;}
+
+.num{position: relative;text-align: center;}
+.num input {
+    border: 1px solid #7F9DB9;
+    height: 18px;
+    line-height: 18px;
+    margin-right: 0;
+    padding: 0;
+    text-align: center;
+    width: 100px;
+}
+.num a {
+    border: 1px solid #919191;
+    color: #4B63A7;
+    display: block;
+    font-family: "Courier New",monospace;
+    font-weight: bold;
+    left: 12px;
+    line-height: 8px;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    top: 0px;
+}
+.num a.add {
+    margin: 4px 0 0 120px;
+    line-height: 8px;
+}
+.num a.reduce {
+    margin: 4px 0 0 -5px;
+    line-height: 8px;
+}

@@ -1,0 +1,85 @@
+<!-- 搜索框及工具条 -->
+<div class="c-head-box">
+    <form method="get" action="{:Url('task_list')}">
+        <ul>
+            <li class="c-head-search">
+                <!-- 搜索条件 -->
+                <ul>
+                    <li><span>任务编号：</span><input type="text" name="rate_id" value="{$rate_id}"/></li>
+                    <li><span>需求编号：</span><input type="text" name="demand_id" value="{$demand_id}"/></li>
+                </ul>
+            </li>
+            <li class="c-head-button">
+                <!-- 操作按钮 -->
+                <div class="fr"><input type="submit" class="but_blue" value="搜索"></div>
+                <div class="fr"><a class="but_blue" href="{:Url('task_add')}">添加任务</a></div>
+                <!--<div class="fr"><a class="but_blue" href="{:Url('task_export',$_GET)}">导出</a></div>-->
+            </li>
+        </ul>
+    </form>
+</div>
+
+<!--用户列表-->
+<div class="lists-tab-cont">
+    <div class="lists-table">
+        <table class="pointer" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th style="width: 2%" class="tabSort-header"><a class="tabSort-header-inner"><p>任务编号</p></a></th>
+                <th style="width: 2%" class="tabSort-header"><a class="tabSort-header-inner"><p>需求编号</p></a></th>
+                <th style="width: 4%" class="tabSort-header"><a class="tabSort-header-inner"><p>项目名称</p></a></th>
+                <th style="width: 4%" class="tabSort-header"><a class="tabSort-header-inner"><p>项目负责人</p></a></th>
+                <th style="width: 4%" class="tabSort-header"><a class="tabSort-header-inner"><p>进度描述</p></a></th>
+                <th style="width: 4%" class="tabSort-header"><a class="tabSort-header-inner"><p>进度百分比</p></a></th>
+                <th style="width: 7%" class="tabSort-header"><a class="tabSort-header-inner"><p>创建时间</p></a></th>
+                <th style="width: 5%" class="tabSort-header"><a class="tabSort-header-inner"><p>备注</p></a></th>
+                <th style="width: 5%" class="tabSort-header"><a class="tabSort-header-inner"><p>操作</p></a></th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach name="$task_list" item="info"}
+            <tr>
+                <td>{$info.rate_id}</td>
+                <td>{empty name='$info.demand_id'}--{else/}{$info.demand_id}{/empty}</td>
+                <td>{$info.project_name}</td>
+                <td>{$info.charge_name}</td>
+                <td>{$info.rate_describe}</td>
+                <td>{$info.rate_percent}</td>
+                <td>{$info.create_time}</td>
+                <td>{$info.remark}</td>
+                <td>
+                    <a data-type="info-win" data-src="{:Url('task_info',array('rate_id'=>$info['rate_id']))}" data-title="详情" data-width="80%" data-height="80%" class="blue">详情</a>
+                    {if condition="$info['is_delete'] == 1"}
+                    <a href="{:Url('task_edit',array('rate_id'=>$info['rate_id']))}" class="blue">编辑</a>
+                    <a href="{:Url('task_del',array('rate_id'=>$info['rate_id']))}" class="blue del">删除</a>
+                    {else/}
+                    <a href="{:Url('task_restore',array('rate_id'=>$info['rate_id']))}" class="blue restore"><font color="red">还原</font></a>
+                    {/if}
+                </td>
+            </tr>
+            {/foreach}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 翻页模板 -->
+    <div class="page">
+        {$Think.config.page_html}
+    </div>
+</div>
+<script>
+    $(function () {
+        $('.del').click(function () {
+            if(confirm("确认删除吗？")){
+                return true;
+            }
+            return false;
+        })
+        $('.restore').click(function () {
+            if(confirm("确认还原吗？")){
+                return true;
+            }
+            return false;
+        })
+    })
+</script>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" >
+    <meta http-equiv="Cache-Control" content="max-age=2592000" />
+    <title>普融后台管理系统</title>
+    <link href="__STATIC__/favicon.ico" rel="shortcut icon">
+    <link href="__STATIC__/admin/css/base.css" rel="stylesheet">
+    <link href="__STATIC__/admin/css/index.css" rel="stylesheet" />
+    <link href="__STATIC__/admin/css/system.css" rel="stylesheet" />
+    <script type="text/javascript" src="__STATIC__/common/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/common/jquery.validate.js"></script>
+    <script type="text/javascript" src="__STATIC__/common/jquery.metadata.js"></script>
+    <script type='text/javascript' src="__STATIC__/common/jquery.resizableColumns.js"></script>
+    <script type="text/javascript" src="__STATIC__/common/plugins/layer/layer.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/admin/js/common.js"></script>
+    <script type="text/javascript" src="__STATIC__/common/json2.js"></script>
+
+    <script type="text/javascript">var json = JSON.parse('{$Think.config.json}');</script>
+</head>
+<body>
+    <!-- Layout加载内容-->
+    {__CONTENT__}
+</body>
+<!-- JS处理 -->
+<script language="javascript">
+    $(function(){
+        //修改列表宽度
+        $("div.lists-table table").resizableColumns(function(){});
+
+        //重写alert
+        window.alert = layer.alert;
+    });
+</script>
+</html>

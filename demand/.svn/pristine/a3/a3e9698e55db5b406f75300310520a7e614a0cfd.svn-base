@@ -1,0 +1,26 @@
+.edit-table{width: 100%;}
+.edit-table .red{color:red;}
+.edit-table .bold{font-weight: bold;}
+.edit-table .left{width: 20%;padding: 0 10px 0 15px;border-right:1px dashed #ddd; }
+.edit-table .left .no{border: 0px;font-size: 13px;font-weight: bold;padding: 10px 0;}
+.edit-table .left .img{border: 1px solid #ddd;width: 152px;height: 152px;background: #BBBBBB;opacity: 0.5;}
+.edit-table .left .img img{width: 132px;height: 132px;padding: 10px;}
+.edit-table .left .send{width: 132px;padding: 10px 0;}
+.edit-table .left .send_but {cursor: pointer;padding: 0 47px;background-color: #266DB4;color: #fff;height: 26px;line-height: 26px;border: none;font-weight: bold;color: #FFF;display: inline-block;margin-right: 10px;}
+.edit-table .left .info{width: 132px;padding: 10px 0;font-family: "Î¢ÈíÑÅºÚ";font-size: 13px;color: #666;line-height: 25px;}
+.edit-table .tra{background-color:#FFFFFF;}
+.edit-table .domain{width: 25%;padding: 10px;border: 0px;}
+.edit-table .gray {background-color: #E2E2E2;font-size: 16px;font-weight: bold;}
+.edit-table .user-total{width: 55%;padding: 0 10px;}
+.edit-table .user-total .send{width: 132px;padding: 10px 0;}
+.edit-table .user-total .amount .box{float: left;border: 1px solid #ddd;background: #f7f7f7;width: 168px;height: 100px;margin:5px;}
+.info-table .tra{background-color: #FFFFFF;}
+.edit-table .user-total .info-table .tra{background-color: #FFFFFF;}
+.edit-table .user-total .info-table .amount .box img{padding-left:10px;width: 30px;height: 30px;}
+.edit-table .user-total .info-table .amount .box .count {color: #ed7030;font-size: 24px;}
+.edit-table .user-total .info-table .amount .box .count span{color: #ed7030;font-size: 14px;}
+.edit-table .user-total .info-table .total-info{padding-top:20px;}
+.edit-table .user-total .info-table .total-info li{float: left;width: 250px;padding-left: 5px;line-height: 40px;}
+.edit-table .user-total .info-table .total-info .title{font-size: 16px;}
+.edit-table .other-info{width:100%;float: left;}
+.edit-table .other-info li{width: 500px;padding-left: 5px;float: left;}

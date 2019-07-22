@@ -1,0 +1,31 @@
+<!--pages/Details/Details.wxml-->
+
+<view class='lableStyle'>状态</view>
+
+<view class='header'>
+
+   <view class='nameTitle'>提出人: 金融人</view>
+
+</view>
+
+<view class='content'>
+
+   <view class='nameTitle'>需求内容</view>
+
+   <view class='contentTitle'>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</view>
+
+</view>
+
+
+<view class="question-images-area">
+
+    <!-- 图片缩略图  -->
+    <view class="question-images">
+      <block wx:for="{{images}}" wx:key="*this">
+          <image class="q-image" src="{{images[index]}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+      </block>
+    </view>
+
+</view>
+
+<view class='reason' wx:if = "{{exhibition}}">拒绝理由: 哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</view>

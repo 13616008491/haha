@@ -1,0 +1,213 @@
+<?php
+/*
+ * @开发工具: JetBrains PhpStorm.
+ * @文件名：SystemController.class.php
+ * @类功能: 项目管理
+ * @开发者: cxl
+ * @开发时间： 15-10-22
+ * @版本：version 1.0
+ */
+namespace app\admin\controller;
+
+use app\common\controller\AdminBaseController;
+use app\common\ext\IDb;
+use app\common\ext\IRequest;
+use think\Cache;
+
+class Project extends AdminBaseController {
+    /**
+     * @功能：项目列表
+     * @开发者：szg
+     */
+    public function project_list(){
+        //接收参数
+        $project_id = IRequest::get('project_id');
+        $project_name = IRequest::get('project_name');
+        $user_name = IRequest::get('user_name');
+
+        //设置查询条件
+        $project_where = array();
+        if(!empty($project_id))$project_where['pt.project_id'] =$project_id;
+        if(!empty($project_name))$project_where['pt.project_name'] = array('like', "%{$project_name}%");
+        if(!empty($user_name))$project_where['concat(ur.nickname,ur.real_name)'] = array('like', "%{$user_name}%");
+
+        //取得数据
+        $project_list = IDb::getInstance('project as pt')
+            ->setDbFiled("dd.*,pt.*,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name,ur.phone")
+            ->setDbJoin("user as ur","pt.charge_user_id=ur.user_id","left")
+            ->setDbJoin("(select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) as total,sum(if(demand_status=1,1,0)) as pending,sum(if(demand_status=2,1,0)) as confirm,
+                              sum(if(demand_status=3,1,0)) as development,sum(if(demand_status=4,1,0)) as refuse,
+                              sum(if(demand_status=5,1,0)) as test,sum(if(demand_status=6,1,0)) as finish
+                       from   dm_demand as dd
+                       group  by project_id
+                       ) as dd","dd.project_id=pt.project_id","left")
+            ->setDbWhere($project_where)
+            ->setDbOrder('pt.sort_level desc,pt.project_name desc')
+            ->pag();
+
+        //判断取得数据是否正常
+        if(empty($project_list)){
+            $project_list = array();
+        }
+
+        //页面赋值
+        $this->assign('project_list', $project_list);
+        $this->assign('project_id', $project_id);
+        $this->assign('project_name', $project_name);
+        $this->assign('user_name', $user_name);
+
+        //页面显示
+        return view();
+    }
+ 
+    /**
+     * @功能：添加项目
+     * @开发者：szg
+     */
+    public function project_add(){
+        //取得管理员人员
+        $user_list = IDb::getInstance('admin as an')
+            ->setDbFiled("ur.user_id,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name")
+            ->setDbJoin("user as ur","an.user_id=ur.user_id")
+            ->sel();
+
+        //判断取得数据是否正常
+        if($user_list === false){
+            error('取得项目列表失败！');
+        }
+
+        //模板渲染
+        $this->assign('user_list', $user_list);
+
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：项目编辑
+     * @开发者：szg
+     */
+    public function project_edit(){
+        //接收参数
+        $project_id = IRequest::get('project_id',IRequest::NOT_EMPTY,"项目编号不能为空！");
+
+        //取得项目数据
+        $project_where['project_id'] = $project_id;
+        $project_info = IDb::getInstance("project")->setDbWhere($project_where)->row();
+        if(empty($project_info['project_id'])){
+            error("项目不存在！");
+        }
+
+        //取得管理员人员
+        $user_list = IDb::getInstance('admin as an')
+            ->setDbFiled("ur.user_id,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name")
+            ->setDbJoin("user as ur","an.user_id=ur.user_id")
+            ->sel();
+
+        //判断取得数据是否正常
+        if($user_list === false){
+            error('取得项目列表失败！');
+        }
+
+        //模板渲染
+        $this->assign('project_id',$project_id);
+        $this->assign('project_info',$project_info);
+        $this->assign('user_list', $user_list);
+
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：项目保存
+     * 开发者：szg
+     */
+    public function project_submit(){
+        //接收参数
+        $project_name = IRequest::get("project_name",IRequest::NOT_EMPTY,"项目名称不能为空！");
+        $project_id = IRequest::get("project_id");
+        $project_photo_url = IRequest::get("project_photo_url",IRequest::NOT_EMPTY,"项目图片地址不能为空！");
+        $project_describe= IRequest::get("project_describe",IRequest::NOT_EMPTY,"项目描述不能为空");
+        $charge_user_id = IRequest::get("charge_user_id",IRequest::NOT_EMPTY,"项目负责人不能为空");
+        $propose_status= IRequest::get("propose_status",IRequest::NOT_EMPTY,"请选择需求提交状态");
+        $start_time= IRequest::get("start_time",IRequest::NOT_EMPTY,"请选择项目开始时间");
+        $sort_level= IRequest::get("sort_level");
+        $remark = IRequest::get("remark");
+
+        //判断项目排序值是否正确
+        $sort_level = intval($sort_level);
+        if($sort_level < 0){
+            $sort_level = 0;
+        }
+
+        //判断操作类型
+        if(empty($project_id)){
+            //查询项目名是否重复
+            $project_where['project_name'] = $project_name;
+            $project_info = IDb::getInstance('project')->setDbWhere($project_where)->row();
+            if(!empty($project_info)){
+                error("项目名已经被使用了！");
+            }
+
+            //新增保存
+            $project_data['project_id']=$project_id;
+            $project_data['project_name']=$project_name;
+            $project_data['project_photo_url']=$project_photo_url;
+            $project_data['project_describe']=$project_describe;
+            $project_data['charge_user_id']=$charge_user_id;
+            $project_data['propose_status'] = $propose_status;
+            $project_data['start_time'] = $start_time;
+            $project_data['remark'] = $remark;
+            $project_data['sort_level']=$sort_level;
+            $project_id = IDb::getInstance("project")->setDbData($project_data)->add();
+            if($project_id === false){
+                error("添加项目失败！");
+            }
+        }else{
+            //新增保存
+            $project_where['project_id'] = $project_id;
+            $project_data['project_name']=$project_name;
+            $project_data['project_photo_url']=$project_photo_url;
+            $project_data['project_describe']=$project_describe;
+            $project_data['charge_user_id']=$charge_user_id;
+            $project_data['propose_status'] = $propose_status;
+            $project_data['start_time'] = $start_time;
+            $project_data['remark'] = $remark;
+            $project_data['sort_level']=$sort_level;
+            $project_upd = IDb::getInstance("project")->setDbWhere($project_where)->setDbData($project_data)->upd();
+            if($project_upd === false){
+                error("编辑项目失败！");
+            }
+        }
+
+        //画面跳转
+        $this->success("操作成功",Url("project_list"));
+    }
+
+    /**
+     * @功能：项目详情
+     * @开发者：szg
+     */
+    public function project_info(){
+        //接收参数
+        $project_id = IRequest::get('project_id',IRequest::NOT_EMPTY,"项目编号不能为空！");
+
+        //取得数据
+        $project_where['project_id'] = $project_id;
+        $project_info = IDb::getInstance('project as pt')
+            ->setDbFiled("pt.*,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name,ur.phone")
+            ->setDbJoin("user as ur","pt.charge_user_id=ur.user_id")
+            ->setDbWhere($project_where)
+            ->row();
+
+        //设置layout
+        $this->layout("layout_empty");
+
+        //模板渲染
+        $this->assign('project_id',$project_id);
+        $this->assign('project_info',$project_info);
+
+        //渲染模板输出
+        return view();
+    }
+}

@@ -1,0 +1,75 @@
+<!-- 搜索框及工具条 -->
+<div class="c-head-box">
+    <form method="get" action="{:Url('project_list')}">
+        <ul>
+            <li class="c-head-search">
+                <!-- 搜索条件 -->
+                <ul>
+                    <li><span>需求编号：</span><input type="text" name="project_id" value="{$project_id}"/></li>
+                    <li><span>项目名称：</span><input type="text" name="project_name" value="{$project_name}"/></li>
+                    <li><span>开始日期：</span>{:widget('common/DateTime/date',array('propose_time_start',$propose_time_start))}</li>
+                    <li><span>结束日期：</span>{:widget('common/DateTime/date',array('propose_time_end',$propose_time_end))}</li>
+                    <li><span>负责人姓名：</span><input type="text" name="user_name" value="{$user_name}"/></li>
+                </ul>
+            </li>
+            <li class="c-head-button">
+                <!-- 操作按钮 -->
+                <div class="fr"><input type="submit" class="but_blue" value="搜索"></div>
+                <div class="fr"><a class="but_blue" href="{:Url('project_add')}">添加项目</a></div>
+            </li>
+        </ul>
+    </form>
+</div>
+
+<!--用户列表-->
+<div class="lists-tab-cont">
+    <div class="lists-table">
+        <table class="pointer" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th style="width: 2%" class="tabSort-header"><a class="tabSort-header-inner"><p>项目编号</p></a></th>
+                <th style="width: 5%" class="tabSort-header"><a class="tabSort-header-inner"><p>项目名称</p></a></th>
+                <th style="width: 3%" class="tabSort-header"><a class="tabSort-header-inner"><p>项目图片</p></a></th>
+                <th style="width: 5%" class="tabSort-header"><a class="tabSort-header-inner"><p>开放状态</p></a></th>
+                <th style="width: 5%" class="tabSort-header"><a class="tabSort-header-inner"><p>负责人</p></a></th>
+                <th style="width: 6%" class="tabSort-header"><a class="tabSort-header-inner"><p>负责人电话</p></a></th>
+                <th style="width: 3%" class="tabSort-header"><a class="tabSort-header-inner"><p>总需求数</p></a></th>
+                <th style="width: 3%" class="tabSort-header"><a class="tabSort-header-inner"><p>待确定(需求)</p></a></th>
+                <th style="width: 3%" class="tabSort-header"><a class="tabSort-header-inner"><p>开发中(需求)</p></a></th>
+                <th style="width: 3%" class="tabSort-header"><a class="tabSort-header-inner"><p>待测试(需求)</p></a></th>
+                <th style="width: 3%" class="tabSort-header"><a class="tabSort-header-inner"><p>已拒绝(需求)</p></a></th>
+                <th style="width: 3%" class="tabSort-header"><a class="tabSort-header-inner"><p>待上线(需求)</p></a></th>
+                <th style="width: 3%" class="tabSort-header"><a class="tabSort-header-inner"><p>已上线(需求)</p></a></th>
+                <th style="width: 5%" class="tabSort-header"><a class="tabSort-header-inner"><p>操作</p></a></th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach name="project_list" item="info"}
+                <tr>
+                    <td>{$info.project_id}</td>
+                    <td>{$info.project_name}</td>
+                    <td>{:widget('common/Images/img' ,array($info.project_photo_url,25,25))}</td>
+                    <td>{:widget('common/Color/color',array('propose_status',$info["propose_status"]))}</td>
+                    <td>{$info.real_name}</td>
+                    <td>{$info.phone}</td>
+                    <td>{$info.total|default=0}</td>
+                    <td>{$info.pending|default=0}</td>
+                    <td>{$info.confirm|default=0}</td>
+                    <td>{$info.development|default=0}</td>
+                    <td>{$info.refuse|default=0}</td>
+                    <td>{$info.test|default=0}</td>
+                    <td>{$info.finish|default=0}</td>
+                    <td>
+                        <a data-type="info-win" data-src="{:Url('project_info',array('project_id'=>$info['project_id']))}" data-title="详情" data-width="60%" data-height="60%" class="blue">详情</a>
+                    </td>
+                </tr>
+            {/foreach}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 翻页模板 -->
+    <div class="page">
+        {$Think.config.page_html}
+    </div>
+</div>

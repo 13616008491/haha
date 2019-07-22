@@ -1,0 +1,14 @@
+.user_body .user{padding-left: 0px;margin-left: 0px;margin-right:3px;background-color: #F0F0EE;border: 1px solid #D9D9D9;}
+.user_body .not_reg{padding-left: 0px;margin-left: 0px;background-color: #F0F0EE;border: 1px solid #D9D9D9;width: 100%;}
+.user_body .settled{padding-left: 0px;margin-left: 0px;background-color: #F0F0EE;border: 1px solid #D9D9D9;}
+.user_body .not_settled{padding-left: 0px;margin-left: 0px;background-color: #F0F0EE;border: 1px solid #D9D9D9;}
+.user_body .not_pay{padding-left: 0px;margin-left: 0px;background-color: #F0F0EE;border: 1px solid #D9D9D9;width: 100%;}
+.user_body .pay{padding-left: 0px;margin-left: 0px;background-color: #F0F0EE;border: 1px solid #D9D9D9;}
+.user_body .not_complaint{padding-left: 0px;margin-left: 0px;background-color: #F0F0EE;border: 1px solid #D9D9D9;width: 100%;}
+.user_body .info{float: right;height: 25px;width: 30px;}
+
+.user_body .c1{color:#FF0000;}
+.user_body .c2{color:#DA9907;}
+.user_body .c3{color:#008080;}
+.user_body .c4{color:#32CD32;}
+.user_body .c5{color:#0000CD;}

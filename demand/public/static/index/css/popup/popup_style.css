@@ -1,0 +1,179 @@
+/*资料弹框*/
+html{
+	min-width: auto;
+	background-color: #fafafa;
+}
+.info-index{
+	width: 700px;
+	margin: 0 auto;
+	background-color: #fff;
+}
+.info-index h1{
+	height: 80px;
+	line-height: 80px;
+	color: #fff;
+	text-align: center;
+	font-size: 24px;
+	letter-spacing: 4px;
+	font-weight: 400;
+	background-image: url(../../images/intention_loan.png);
+}
+.info-index .body{
+	padding: 30px;
+}
+.info-index .body p{
+	padding-left: 120px;
+	margin-bottom: 20px;
+}
+
+.info-index .body p span{
+	color: #479EF8;
+}
+
+.info-index .body li{
+	margin-bottom: 20px;
+}
+
+.info-index .body .inputTextBD{
+	display: block;
+	width: 400px;
+	margin: 0 auto;
+	background-color: #FAFAFA;
+}
+.info-index .body .inputTextBD input{
+	font-size: 14px;
+}
+.info-index .body .inputTextBD input[type="text"]::-webkit-input-placeholder{
+	color:#999;
+}
+.info-index .body .inputTextBD input[type="text"]::-moz-placeholder{   /* Mozilla Firefox 19+ */
+	color:#999;
+}
+.info-index .body .inputTextBD input[type="text"]:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+	color:#999;
+}
+.info-index .body .inputTextBD input[type="text"]:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+	color:#999;
+}
+.info-index .body .inputTextBD input[type="radio"]{
+	top: -15px;
+}
+.info-index .body .chhBtn{
+	display: block;
+	width: 400px;
+	margin: 0 auto;
+	background-color: #479EF8;
+	color: #fff;
+}
+.info-index .body .phoneVer b{
+	right: 10px;
+	cursor: pointer;
+	color: #479ef8;
+	font-size: 14px;
+}
+.info-index .body .phoneVer b:hover{
+	text-decoration: underline;
+}
+.info-head{
+	width: 700px;
+	margin: 0 auto;
+	margin-top: 60px;
+	margin-bottom: 10px;
+}
+.info-head img{
+	width: 140px;
+}
+.info-head .userLogin {
+	margin-top: 0;
+}
+.info-head .userLogin .imgCenterBox{
+	height: 30px;
+	width: 30px;
+	line-height: 30px;
+	border-radius: 15px;
+	overflow: hidden;
+	display: inline-block;
+	vertical-align: middle;
+}
+.info-foot{
+	width: 700px;
+	margin: 0 auto;
+	margin-top: 50px;
+	text-align: center;
+	color: #999;
+	margin-bottom: 60px;
+}
+.info::after{
+	content: '';
+	display: block;
+	clear: both;
+}
+.info-l{
+	width: 350px;
+	float: left;
+}
+.info-l .inputTextBD{
+	width: 350px !important;
+}
+.info-r{
+	width: 260px;
+	float: right;
+}
+.info-r h2{
+	font-size: 18px;
+	font-weight: 400;
+	margin-bottom: 20px;
+}
+.info-r h2 i{
+	height: 18px;
+}
+.info-r .chhBtn{
+	width: 100% !important;
+	height: 40px;
+	line-height: 40px;
+	background-color: #479EF8;
+	color: #fff;
+}
+.info-r .img-upd{
+	width: 100%;
+	height: 130px;
+	cursor: pointer;
+}
+.info-r .img-upd img{
+	width: 80%;
+}
+.list_box li{
+	text-align: left;
+	position: relative;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #eee;
+}
+
+.list_box li h2{
+	font-size: 16px;
+	color: #323232;
+}
+.list_box li p{
+	padding: 0 !important;
+	margin-bottom: 0 !important; 
+	margin-top: 10px;
+}
+.list_box li p span{
+	color: #666 !important;
+	margin-right: 20px;
+}
+.list_box li .chhBtn{
+	width: 70px !important;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	position: absolute;
+	bottom: 20px;
+	right: 0;
+}
+.list_box li .edit{
+	right: 80px;
+}
+.list_box li .delete{
+	background-color: #FF3B4D !important;
+}

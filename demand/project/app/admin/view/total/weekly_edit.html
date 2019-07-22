@@ -1,0 +1,34 @@
+<!--添加用户表单-->
+<div class="tab_edit">
+    <form action="{:Url('weekly_submit')}" method="post" id="weekly_submit">
+        <input type="hidden" name="weekly_id" value="{$weekly_id}">
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">周报开始日期：</td>
+                <td class="t_l">{:widget('common/DateTime/date',array('date_range_start',$weekly_info['date_range_start'],true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">周报结束日期：</td>
+                <td class="t_l">{:widget('common/DateTime/date',array('date_range_end',$weekly_info['date_range_end'],true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">汇报人员选择</td>
+                <td class="t_l">{:widget('common/CheckBox/checkbox',array('user_list',array($admin_list,"user_id","real_name"),$weekly_info['user_list'],null,null,false))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">每周总结：</td>
+                <td class="t_l">{:widget('common/TextArea/text_area_html',array('summary',$weekly_info['summary'],false,false,"width:80%;height:300px;"))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">备注：</td>
+                <td class="t_l">{:widget('common/TextArea/text_area',array('remark',$weekly_info['remark'],false))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"></td>
+                <td class="t_l">
+                    <div class="btn"><input type="submit" class="but_blue" value="保存信息"></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

@@ -1,0 +1,55 @@
+<!--添加用户表单-->
+<div class="tab_edit">
+    <form action="{:Url('demand_submit')}" method="post" id="demand_submit">
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">选择项目：</td>
+                <td class="t_l">{:widget('common/Select/select',array('project_id',array($project_list,"project_id","project_name"),1,true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求描述：</td>
+                <td class="t_l">{:widget('common/TextArea/text_area',array('demand_describe',null,true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求图片</td>
+                <td class="t_l">{:widget('common/Images/wos',array('demand_photo_url','demand',null,true,false))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">优先级：</td>
+                <td class="t_l">{:widget('common/Radio/radio',array('priority_level','priority_level',1,true))}</td>
+            </tr>
+            <tr class="note hide">
+                <td class="t_r t_left_w"><font style="font-weight: bold;color: red;">特急说明：</font></td>
+                <td class="t_l">{:widget('common/TextArea/text_area',array('priority_describe',null,true,true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">备注：</td>
+                <td class="t_l">{:widget('common/TextArea/text_area',array('remark',null,false))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"></td>
+                <td class="t_l">
+                    <div class="btn"><input type="submit" class="but_blue" value="保存信息"></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<!-- JS处理 -->
+<script language="javascript">
+    $(function(){
+        //提示信息
+        $("input[name='priority_level']").live("click",function(){
+            //取得等级
+            var priority_level = $(this).val();
+            if(priority_level == 3){
+                $("tr.note").show();
+                $("textarea[name='priority_describe']").removeAttrs("disabled")
+            }else{
+                $("tr.note").hide();
+                $("textarea[name='priority_describe']").attr("disabled","disabled")
+            }
+        });
+    });
+</script>

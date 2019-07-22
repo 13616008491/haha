@@ -1,0 +1,85 @@
+<!--添加用户表单-->
+<div class="tab_edit">
+    <form action="{:Url('demand_auditing_submit')}" method="post" id="demand_auditing_submit">
+        <input type="hidden" name="demand_id" value="{$demand_id}"/>
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">需求编号：</td>
+                <td class="t_l">{$demand_info.demand_id}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目编号：</td>
+                <td class="t_l">{$demand_info.project_id}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目名称：</td>
+                <td class="t_l">{$demand_info.project_name}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求描述：</td>
+                <td class="t_l">{$demand_info.demand_describe}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求审核：</td>
+                <td class="t_l">{:widget('common/Radio/radio',array('demand_audit','demand_audit',2,true))}</td>
+            </tr>
+            <tr class="time">
+                <td class="t_r t_left_w">预计需求完成时间：</td>
+                <td class="t_l">{:widget('common/DateTime/datetime',array('expect_finish_time',null,false))}</td>
+            </tr>
+            <tr class="time">
+                <td class="t_r t_left_w">设计人员：</td>
+                <td class="t_l">
+                    {empty name="user_list['2']"}
+                        无设计人员
+                    {else/}
+                        {:widget('common/CheckBox/checkbox',array('design_list',array($user_list[2],"user_id","name"),null,null,null,true))}
+                    {/empty}
+                </td>
+            </tr>
+            <tr class="time">
+                <td class="t_r t_left_w">开发人员：</td>
+                <td class="t_l">
+                    {empty name="user_list['1']"}
+                        无设计人员
+                    {else/}
+                        {:widget('common/CheckBox/checkbox',array('development_list',array($user_list[1],"user_id","name"),null,null,null,true))}
+                    {/empty}</td>
+            </tr>
+            <tr class="time">
+                <td class="t_r t_left_w">测试人员：</td>
+                <td class="t_l">
+                    {empty name="user_list['3']"}
+                        无设计人员
+                    {else/}
+                        {:widget('common/CheckBox/checkbox',array('test_list',array($user_list[3],"user_id","name"),null,null,null,true))}
+                    {/empty}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">审核说明：</td>
+                <td class="t_l">
+                    {:widget('common/TextArea/text_area',array('demand_feedback',null,true))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"></td>
+                <td class="t_l">
+                    <div class="btn"><input type="submit" class="but_blue" value="保存信息"></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<script language="javascript">
+    $(function() {
+        //修改选中状态
+        $("input[name='demand_audit']").live("change", function () {
+            if ($("input[name='demand_audit']:checked").val() == 2) {
+                $("tr.time").show();
+            } else {
+                $("tr.time").hide();
+            }
+        });
+    });
+</script>

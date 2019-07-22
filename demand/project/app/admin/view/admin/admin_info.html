@@ -1,0 +1,50 @@
+<!--添加用户表单-->
+<div class="tab_edit">
+    <form action="{:Url('admin_info_submit')}" method="post" id="admin_info_submit">
+        <input type="hidden" name="admin_id" value="{:get_login_admin_id()}"/>
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">登录账户：</td>
+                <td class="t_l">{$admin_info['phone']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">真实姓名：</td>
+                <td class="t_l">{:widget('common/Input/input',array('real_name',$admin_info['real_name'],true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">最后登录时间：</td>
+                <td class="t_l">{$admin_info['login_time']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">最后登录IP：</td>
+                <td class="t_l">{$admin_info['login_ip']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">注册时间：</td>
+                <td class="t_l">{$admin_info['reg_time']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">最后登录IP：</td>
+                <td class="t_l">{$admin_info['reg_ip']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">二维码：</td>
+                <td class="t_l">  {:widget('common/Images/img',array($mini_code,200,200))}<span style="color:red;">{$qr_error}</span></td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"></td>
+                <td class="t_l">
+                    <div class="btn"><input type="submit" class="but_blue" value="保存信息"></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function(){
+        if('{$show_reset}'){
+            alert('当前登录密码为默认密码，请修改密码');
+        }
+    })
+
+</script>

@@ -1,0 +1,102 @@
+<!--添加用户表单-->
+<div class="tab_edit">
+    <form action="{:Url('org_submit')}" method="post" id="org_submit">
+        <input type="hidden" name="parent_id" value="{$parent_id}"/>
+        <input type="hidden" name="level" value="{$level}"/>
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">父级组织架构编号：</td>
+                <td class="t_l">
+                    {$parent_id}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">父级组织架构名称：</td>
+                <td class="t_l">
+                    {$parent_name}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">组织架构等级：</td>
+                <td class="t_l">
+                    {$level}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">下级组织架构名称：</td>
+                <td class="t_l">
+                    {:widget('common/Input/input',array('name',null,true))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">排序：</td>
+                <td class="t_l">
+                    {:widget('common/Input/input',array('order_by',0,true))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">职位名称：</td>
+                <td class="t_l">
+                    <div class="lists-tab-cont" style="width: 100%;border: 1px solid #ddd;">
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                            <tr>
+                                <th width="15%" class="tabSort-header">职位名称</th>
+                                <th width="15%" class="tabSort-header">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr id="node_extend">
+                                <td>{:widget("common/Input/input",array("job_name",null,false,false,"width:85%"))}</td>
+                                <td><a id="node_add" href="javascript:void(0);" class="blue"><b>添加</b></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"></td>
+                <td class="t_l">
+                    <div class="btn"><input type="submit" class="but_blue" value="保存信息"></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<!-- JS处理 -->
+<script language="javascript">
+    $(function(){
+        //菜单节点
+        var node_tpl = {
+            getTemplate : function(info){
+                return  '<tr class="info"><td><input type="text" name="node[job_name][]" style="width: 100%;" value="' + info.job_name + '"></td><td><a class="del" href="javascript:void(0);" class="blue"><b>删除</b></a></td></tr>';
+            }
+        };
+
+        //添加菜单节点
+        $("a#node_add").click(function(){
+            //初期化变量
+            var job_name = $("input[name='job_name']");
+            var job_data = $.trim(job_name.val());
+
+            //判断是否数据是否存在
+            if(job_data != "") {
+                //添加到列表中
+                $("tr#node_extend").after(node_tpl.getTemplate({job_name: job_data}));
+
+                //清除历史状态
+                job_name.val("");
+            }else{
+                alert("请输入职位名称！");
+            }
+        });
+
+        //删除关联有效区域
+        $("a.del").live("click",function(){
+            //删除多余数据
+            $(this).parents("tr.info").remove();
+        });
+    });
+</script>

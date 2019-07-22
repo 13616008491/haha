@@ -1,0 +1,79 @@
+<!-- 编辑区域 -->
+<div class="lists">
+    <!--添加用户表单-->
+    <div class="tab_edit">
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">需求编号：</td>
+                <td class="t_l">{$demand_info['demand_id']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">提出人编号：</td>
+                <td class="t_l">{$demand_info['user_id']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目编号：</td>
+                <td class="t_l">{$demand_info['project_id']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目名称：</td>
+                <td class="t_l">{$demand_info['project_name']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目负责人：</td>
+                <td class="t_l">{$demand_info['project_charge_name']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求负责人：</td>
+                <td class="t_l">{$demand_info['demand_charge_name']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求参与人：</td>
+                <td class="t_l">{$demand_info['join_name']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求描述：</td>
+                <td class="t_l">{$demand_info['demand_describe']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求图片：</td>
+                <td class="t_l">{foreach name='$demand_info.image_list' item="img"}
+                    {:widget('common/Images/img',array($img,25,25))}
+                    {/foreach}
+                </td>
+            </tr>
+            <tr>
+                 <td class="t_r t_left_w">优先级：</td>
+                 <td class="t_l">{:widget('common/Color/color',array('priority_level',$demand_info["priority_level"]))}</td>
+             </tr>
+            <tr>
+                <td class="t_r t_left_w">需求状态：</td>
+                <td class="t_l">{:widget('common/Color/color',array('demand_status',$demand_info["demand_status"]))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">系统回复：</td>
+                <td class="t_l">{$demand_info['demand_feedback']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">预计需求完成时间：</td>
+                <td class="t_l">{$demand_info['expect_finish_time']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求完成时间：</td>
+                <td class="t_l">{$demand_info['finish_time']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">创建时间：</td>
+                <td class="t_l">{$demand_info['create_time']}</td>
+             </tr>
+            <tr>
+                <td class="t_r t_left_w">更新时间：</td>
+                <td class="t_l">{$demand_info['update_time']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">备注：</td>
+                <td class="t_l">{$demand_info['remark']}</td>
+            </tr>
+        </table>
+    </div>
+</div>

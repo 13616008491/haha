@@ -1,0 +1,45 @@
+<!--pages/DemandList/DemandList.wxml-->
+<!-- <view class='head-select' wx:if = "{{isShow?true:true}}" style="position:fixed;">
+        <radio-group class="radio" bindchange="radioChange">
+            <label><radio value="0" checked="true"/>总需求</label>
+            <label><radio value="1"/>待定中</label>
+            <label><radio value="2"/>进行中</label>
+            <label><radio value="3"/>已完成</label>
+            <label><radio value="4"/>已拒绝</label>
+        </radio-group>
+</view> -->
+
+<!--导航条-->
+<view class="navbar" >
+  <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+</view>
+
+<view class="page" >
+  <block wx:for = "{{list}}">
+      <view class="page-section" bindtap="nav_demand_detail" data-target_id="{{item.demand_id}}">
+            <dl>
+                <dt>
+                    <dr>
+                      <image mode="scaleToFill" class="img-border" src="/asset/icon_head.png" ></image>
+                      <span>{{item.proposer_name}}</span>
+                    </dr>
+                    <j wx:if = "{{item.priority_level==3}}">紧急需求（优先完成）</j>
+                    <j2 wx:if = "{{item.priority_level==2}}">加急需求（尽快完成）</j2>
+                    <j3 wx:if = "{{item.priority_level==1}}">普通需求</j3>
+                    <!-- <i>{{item.time}}</i> -->
+                </dt>
+                <dd>{{item.demand_describe}}</dd>
+            </dl>
+            <view class='devider'></view>
+            <dl>
+                <dt>
+                    <i>{{item.propose_time}}</i>
+                    <text class='content1' wx:if = "{{item.demand_status==1}}">待定中</text>
+                    <text class='content2' wx:if = "{{item.demand_status==2}}">进行中</text>
+                    <text class='content3' wx:if = "{{item.demand_status==3}}">已完成</text>
+                    <text class='content4' wx:if = "{{item.demand_status==4}}">已拒绝</text>
+                </dt>
+            </dl>
+      </view>
+    </block>
+</view>

@@ -1,0 +1,40 @@
+<!-- 编辑区域 -->
+<div class="lists">
+    <!--添加用户表单-->
+    <div class="tab_edit">
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">真实姓名：</td>
+                <td class="t_l">
+                    {$admin_info['real_name']|default='--'}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">电话号码：</td>
+                <td class="t_l">
+                    {$admin_info['phone']|default='--'}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">角色：</td>
+                <td class="t_l">{:widget('common/Select/select',array('admin_role_id',array($role_list,"admin_role_id","role_name"),$admin_info['admin_role_id'],false,true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">最后登录时间：</td>
+                <td class="t_l">{$admin_info['login_time']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">最后登录IP：</td>
+                <td class="t_l">{$admin_info['login_ip']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">注册时间：</td>
+                <td class="t_l">{$admin_info['reg_time']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">备注：</td>
+                <td class="t_l">{$admin_info['remark']}</td>
+            </tr>
+        </table>
+    </div>
+</div>

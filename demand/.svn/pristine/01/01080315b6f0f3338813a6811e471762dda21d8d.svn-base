@@ -1,0 +1,246 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: zengwenjie
+ * Date: 2018/12/6
+ * Time: 11:10
+ */
+
+namespace app\api\controller;
+
+
+use app\common\cache\demand\IDemandCache;
+use app\common\cache\demand\IMyDemandCache;
+use app\common\controller\DemandBaseController;
+use app\common\enum\DemandStatus;
+use app\common\ext\IDb;
+use app\common\enum\IsDelete;
+use app\common\enum\PriorityLevel;
+use app\common\ext\IFake;
+use app\common\ext\IWeChat;
+
+class Demand extends DemandBaseController
+
+{
+    /**
+     * @功能：添加需求接口
+     * @开发者：曾文杰
+     */
+    public function add_demand(){
+        //接收参数
+        $user_id  = self::$uid;
+        $project_id = self::get_data('project_id',self::NOT_EMPTY,"项目编号不能为空");
+        $proposer_name  = self::get_data('proposer_name',self::NOT_EMPTY,"提出人名字为空");
+        $proposer_phone  = self::get_data('proposer_phone',self::PHONE,"电话不能为空或格式不正确！");
+        $demand_describe  = self::get_data('demand_describe');
+        $demand_photo_url  = self::get_data('demand_photo_url');
+        $voice_url  = self::get_data('voice_url');
+        $voice_duration  = self::get_data('voice_duration');
+        $priority_level  = self::get_data('priority_level');
+        $priority_describe = self::get_data('priority_describe');
+        if (empty($demand_describe)&&empty($voice_url)){
+            self::set_code(self::ERR_0001);
+            self::set_msg("需求描述和语音不能都为空！");
+            self::send();
+        }
+        if ($priority_level!=PriorityLevel::NORMAL&&$priority_level!=PriorityLevel::URGENCY&&$priority_level!=PriorityLevel::URGENCYEST){
+            $priority_level=PriorityLevel::NORMAL;
+        }
+        if ($priority_level==PriorityLevel::URGENCYEST&&empty($priority_describe)){
+            self::set_code(self::ERR_0001);
+            self::set_msg("特急理由不能为空！");
+            self::send();
+        }
+        $demand_data['project_id']=$project_id;
+        $demand_data['user_id']=$user_id;
+        $demand_data['proposer_name']=$proposer_name;
+        $demand_data['proposer_phone']=$proposer_phone;
+        $demand_data['demand_describe']=$demand_describe;
+        $demand_data['demand_photo_url']=$demand_photo_url;
+        $demand_data['voice_url']=$voice_url;
+        $demand_data['voice_duration']=$voice_duration;
+        $demand_data['priority_level']=$priority_level;
+        $demand_data['propose_time'] = get_date_time();
+        $demand_data['create_time'] = get_date_time();
+        $demand_data['is_delete'] = IsDelete::No;
+        if ($priority_level==PriorityLevel::URGENCYEST){
+            $demand_data['priority_describe'] = $priority_describe;
+        }
+        $demand_id = IDb::getInstance("demand")->setDbData($demand_data)->add();
+        if($demand_id === false){
+            //返回错误
+            self::set_code(self::ERR_0003);
+            self::set_msg("提交需求失败！");
+            self::send();
+        }
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::set_value("demand_id",$demand_id);
+        self::send();
+
+    }
+
+    /**
+     * @功能：取得项目需求列表接口
+     * @开发者：曾文杰
+     */
+    public function get_demand_list(){
+        $project_id  = self::get_data('project_id',self::NOT_EMPTY,"项目编号不能为空");
+        $demand_status  = self::get_data('demand_status');
+        $bottom_id  = self::get_data('bottom_id');
+        if ($demand_status!=DemandStatus::IDENT&&$demand_status!=DemandStatus::PROCEEDING&&$demand_status!=DemandStatus::DONE&&$demand_status!=DemandStatus::REFUSE){
+            $demand_status=null;
+        }
+        $demand_list = IDemandCache::getList($project_id,$demand_status,$bottom_id);
+        if (!empty($demand_list)){
+            foreach ($demand_list as &$item){
+                $user_where['user_id']=$item['user_id'];
+                $user_data = IDb::getInstance("user")->setDbFiled("avatar,nickname,real_name")->setDbWhere($user_where)->row();
+                $item['avatar']=$user_data['avatar'];
+                $item['nickname']=$user_data['nickname'];
+                $item['real_name']=$user_data['real_name'];
+            }
+        }
+        //返回值
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::set_value("demand_list",$demand_list);
+        self::send();
+    }
+
+    /**
+     * @功能：取得项目需求详情接口
+     * @开发者：曾文杰
+     */
+    public function get_demand_detail(){
+
+        $demand_id  = self::get_data('demand_id',self::NOT_EMPTY,"需求编号不能为空");
+        $demand_where['demand_id']=$demand_id;
+        $demand_det = IDb::getInstance("demand")->setDbWhere($demand_where)->row();
+        if(!empty($demand_det)){
+            if (!empty($demand_det['demand_photo_url'])){
+                $demand_det['demand_photo_url']=str_replace('"', "",$demand_det['demand_photo_url']);
+                $phototArray=explode(',',$demand_det['demand_photo_url']);
+                $demand_det['demand_photo_url']=$phototArray;
+            }
+           /* if (!empty($demand_det['demand_describe'])){
+                $demand_det['demand_describe']=str_replace('\n','<br>',$demand_det['demand_describe']);
+                $demand_det['demand_describe']=str_replace('\r','<br>',$demand_det['demand_describe']);
+
+            }*/
+
+        }
+
+        //返回值
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::set_value("demand_det",$demand_det);
+        self::send();
+    }
+
+    /**
+     * @功能：取得我提出的需求列表接口
+     * @开发者：曾文杰
+     */
+    public function get_my_demand(){
+        $user_id  = self::$uid;
+        $demand_status  = self::get_data('demand_status');
+        $bottom_id  = self::get_data('bottom_id');
+        if ($demand_status!=DemandStatus::IDENT&&$demand_status!=DemandStatus::PROCEEDING&&$demand_status!=DemandStatus::DONE&&$demand_status!=DemandStatus::REFUSE){
+            $demand_status=null;
+        }
+        $demand_list = IMyDemandCache::getList($user_id,$demand_status,$bottom_id);
+        if (!empty( $demand_list)){
+
+            foreach ($demand_list as &$demand_item){
+                $demand_where['project_id']=$demand_item['project_id'];
+                $project = IDb::getInstance("project")->setDbWhere($demand_where)->row();
+                if (!empty( $project)){
+                    $demand_item['project_name']=$project['project_name'];
+                }
+
+            }
+        }
+        //返回值
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::set_value("demand_list",$demand_list);
+        self::send();
+    }
+
+    public function search_demand(){
+        $search_content  = self::get_data('search_content',self::NOT_EMPTY,"搜索内容不能为空");
+        $project_id  = self::get_data('project_id');
+        $demand_status  = self::get_data('demand_status');
+        $bottom_id  = self::get_data('bottom_id');
+        if ($demand_status!=DemandStatus::IDENT&&$demand_status!=DemandStatus::PROCEEDING&&$demand_status!=DemandStatus::DONE&&$demand_status!=DemandStatus::REFUSE){
+            $demand_status=null;
+        }
+        $demand_list = IDemandCache::getSearchList($search_content,$project_id,$demand_status,$bottom_id);
+        //返回值
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::set_value("demand_list",$demand_list);
+        self::send();
+    }
+
+    public function qr_code(){
+        $scene = self::get_data('scene',self::NOT_EMPTY,'参数值不能为空');
+
+        $code_url = IWeChat::getMiniCode($scene);
+        if(!$code_url){
+            self::set_code(self::WARNING_0001);
+            self::set_msg(IWeChat::getError());
+            self::send();
+        }
+
+        self::set_code(self::SUCCESS);
+        self::set_value('code_url',$code_url);
+        self::send();
+    }
+
+    public function reg_code(){
+
+
+        $code_url = IWeChat::getMiniCodeReg();
+
+        if(!$code_url){
+            self::set_code(self::WARNING_0001);
+            self::set_msg(IWeChat::getError());
+            self::send();
+        }
+
+        self::set_code(self::SUCCESS);
+        self::set_value('code_url',$code_url);
+        self::send();
+
+    }
+    /**
+     * @功能：获取进度列表
+     * @开发者：wdd
+     */
+    public function get_rate(){
+        $demand_id = self::get_data('demand_id',self::NOT_EMPTY,'需求编号不能为空');
+        $bottom_id = self::get_data('bottom_id');
+
+        $where['demand_id'] = $demand_id;
+        if(!empty($bottom_id)) $where["date_format(create_time,'%Y%m%d%H%i%s')"] = array("lt",$bottom_id);
+        $task_rate_list = IDb::getInstance('task_rate')
+            ->setDbFiled(array("*,date_format(create_time,'%Y%m%d%H%i%s') as code "))
+            ->setDbWhere($where)
+            ->setDbOrder("code desc")
+            ->setDbLimit(10)
+            ->sel();
+        if ($task_rate_list === false){
+            //返回错误
+            self::set_code(self::ERR_0003);
+            self::set_msg("获取进度列表失败！");
+            self::send();
+        }
+
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::set_value("task_rate_list",$task_rate_list);
+        self::send();
+    }
+}

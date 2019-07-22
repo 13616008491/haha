@@ -1,0 +1,177 @@
+<?php
+/*
+ * @开发工具: JetBrains PhpStorm.
+ * @文件名：IApiConfig.class.php
+ * @类功能: api配置文件
+ * @开发者: zc
+ * @开发时间： 14-10-28
+ * @版本：version 1.0
+ */
+namespace app\api\ext;
+
+class IApiConfig{
+    //API配置文件
+    public static $api = array(
+        "login/login" => array(
+            "api_group" => "公共接口",
+            "api_name" => "微信登录",
+            "api_param" => array(
+
+                array("name"=>"临时登录凭证code","code"=>"code"),
+                array("name"=>"权限校验码","code"=>"secret")
+
+            ),
+        ),
+        "login/admin_reg" => array(
+            "api_group" => "公共接口",
+            "api_name" => "后台账号注册",
+            "api_param" => array(
+                array("name"=>"手机号","code"=>"phone")
+            ),
+        ),
+        "login/reg_right" => array(
+            "api_group" => "公共接口",
+            "api_name" => "后台账号注册权限",
+            "api_param" => array(
+            ),
+        ),
+        "login/login_test" => array(
+            "api_group" => "公共接口",
+            "api_name" => "登录状态测试（pc无效）",
+            "api_param" => array(
+            ),
+        ),
+        "user/wx_info" => array(
+            "api_group" => "公共接口",
+            "api_name" => "设置用户微信信息",
+            "api_param" => array(
+                array("name"=>"签名","code"=>"signature"),
+                array("name"=>"加解数据","code"=>"encrypted_data"),
+                array("name"=>"加密算法的初始向量","code"=>"iv")
+            ),
+        ),
+        "user/user_info" => array(
+            "api_group" => "公共接口",
+            "api_name" => "获取用户信息",
+            "api_param" => array(
+            ),
+        ),
+        "user/set_user" => array(
+            "api_group" => "公共接口",
+            "api_name" => "修改用户信息",
+            "api_param" => array(
+                array("name"=>"姓名","code"=>"real_name"),
+                array("name"=>"电话","code"=>"phone"),
+            ),
+        ),
+        "user/notice_list" => array(
+            "api_group" => "公共接口",
+            "api_name" => "获取消息列表",
+            "api_param" => array(
+                array("name"=>"最下面数据编号（首次请求为空,notice_id）","code"=>"bottom_id"),
+            ),
+        ),
+        "user/notice_read" => array(
+            "api_group" => "公共接口",
+            "api_name" => "设置消息已读",
+            "api_param" => array(
+                array("name"=>"消息编号","code"=>"notice_id"),
+            ),
+        ),
+        "user/get_oss_sign" => array(
+            "api_group" => "公共接口",
+            "api_name" => "获取阿里云oss签名",
+            "api_param" => array(
+            ),
+        ),
+        "user/get_form_id" => array(
+            "api_group" => "公共接口",
+            "api_name" => "收集小程序form_id",
+            "api_param" => array(
+                array("name"=>"收集小程序form_id【传入json格式】","code"=>"form_id"),
+                array("name"=>"收集小程序form_id来源","code"=>"source"),
+            ),
+        ),
+        "project/get_project" => array(
+            "api_group" => "项目接口",
+            "api_name" => "获取项目列表",
+            "api_param" => array(
+                array("name"=>"搜索内容","code"=>"search_content"),
+                array("name"=>"最下面数据编号（首次请求为空,project_id）","code"=>"bottom_id"),
+
+            ),
+        ),"demand/add_demand" => array(
+            "api_group" => "需求接口",
+            "api_name" => "添加项目需求",
+            "api_param" => array(
+                array("name"=>"项目编号","code"=>"project_id"),
+                array("name"=>"描述","code"=>"demand_describe"),
+                array("name"=>"图片（非必填,多张用“,”分隔）","code"=>"demand_photo_url"),
+                array("name"=>"语音（非必填）","code"=>"voice_url"),
+                array("name"=>"语音时长","code"=>"voice_duration"),
+                array("name"=>"优先级【1：普通，2：紧急，3：特急】","code"=>"priority_level"),
+                array("name"=>"优先级说明（只有特急时才有且必须有）","code"=>"priority_describe"),
+            ),
+        ),"demand/get_demand_list" => array(
+            "api_group" => "需求接口",
+            "api_name" => "取得项目需求列表",
+            "api_param" => array(
+                array("name"=>"项目编号","code"=>"project_id"),
+                array("name"=>"是否取得自己的需求（1：是，2：否）","code"=>"is_my"),
+                array("name"=>"搜索内容","code"=>"search_content"),
+                array("name"=>"需求状态","code"=>"demand_status"),
+                array("name"=>"状态分类（【1：待确定，2：进行中，3：已完成，4：已拒绝】,不填为所有）","code"=>"demand_status"),
+                array("name"=>"最下面数据编号（首次请求为空,demand_id）","code"=>"bottom_id"),
+            ),
+        ),"demand/get_demand_detail" => array(
+            "api_group" => "需求接口",
+            "api_name" => "取得项目需求详情",
+            "api_param" => array(
+                array("name"=>"项目需求编号","code"=>"demand_id"),
+            ),
+        ),"demand/qr_code" => array(
+            "api_group" => "需求接口",
+            "api_name" => "生成二维码(访问权限)",
+            "api_param" => array(
+                array("name"=>"参数","code"=>"scene"),
+            ),
+        ),"demand/reg_code" => array(
+            "api_group" => "需求接口",
+            "api_name" => "生成二维码(后台注册)",
+            "api_param" => array(
+            ),
+        ),"user/wx_push_msg" => array(
+            "api_group" => "测试接口",
+            "api_name" => "推送服务消息",
+            "api_param" => array(
+            ),
+        ),"Organization/get_organization" => array(
+            "api_group" => "组织架构接口",
+            "api_name" => "获取组织架构",
+            "api_param" => array(
+                array("name"=>"参数","code"=>"org_id"),
+            ),
+        ),"demand/get_task" => array(
+            "api_group" => "需求接口",
+            "api_name" => "取得需求进度列表",
+            "api_param" => array(
+                array("name"=>"需求编号","code"=>"demand_id"),
+            ),
+        ),"Organization/set_organization" => array(
+            "api_group" => "组织架构接口",
+            "api_name" => "提交组织信息",
+            "api_param" => array(
+                array("name"=>"组织id","code"=>"org_id"),
+                array("name"=>"职位id","code"=>"job_id"),
+                array("name"=>"姓名","code"=>"real_name"),
+                array("name"=>"手机号","code"=>"phone"),
+            ),
+        ), "totol/get_totol_url" => array(
+            "api_group" => "统计接口",
+            "api_name" => "取得统计页面",
+            "api_param" => array(
+            ),
+        )
+
+    );
+}

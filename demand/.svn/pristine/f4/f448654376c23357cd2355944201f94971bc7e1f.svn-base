@@ -1,0 +1,409 @@
+<?php
+/*
+ * @开发工具: JetBrains PhpStorm.
+ * @文件名：LoginController.class.php
+ * @类功能: 首页
+ * @开发者: zc
+ * @开发时间： 15-10-22
+ * @版本：version 1.0
+ */
+namespace app\api\controller;
+
+use app\common\cache\user\IUserCache;
+use app\common\controller\DemandBaseController;
+use app\common\enum\WeChatInformStatus;
+use app\common\enum\OperationType;
+use app\common\enum\IsYes;
+use app\common\ext\IDb;
+use app\common\ext\IWeChat;
+use app\common\ext\Statistics;
+use app\common\ext\util\Oss;
+use app\common\ext\util\StringUtil;
+use think\Config;
+use app\common\enum\WeChatInformType;
+
+class User extends DemandBaseController {
+
+     private static $init = true; //开启统计初始化
+
+    /**
+     * @功能：设置微信用户信息
+     * @开发者：gys
+     */
+    public function wx_info(){
+        $encrypted_data = self::get_data('encrypted_data',self::NOT_EMPTY,'missing encrypted data');
+        $iv = self::get_data('iv',self::NOT_EMPTY,'missing iv');
+
+        //设置条件
+        $where['user_id'] = self::$uid;
+
+        //实例化对象
+        $user_info = IDb::getInstance('user')->setDbWhere($where)->row();
+        if(!$user_info){
+            self::set_code(self::WARNING_0001);
+            self::set_msg('用户不存在');
+            self::send();
+        }
+        $data = [];
+        $result = IWeChat::decryptData($user_info['session_key'],$encrypted_data, $iv, $data );
+        if(!$result){
+            self::set_code(self::WARNING_0002);
+            self::set_msg('数据校验失败');
+            self::send();
+        }
+
+        $update_data['nickname'] = $data['nickName'];
+        $update_data['avatar'] = $data['avatarUrl'];
+        $update_data['login_time'] = get_date_time();
+//        $update_data['country'] = $data['country'];
+//        $update_data['province'] = $data['province'];
+//        $update_data['city'] = $data['city'];
+        $return_data = $update_data;
+
+        if(isset($data['unionId'])){
+            $update_data['union_id'] = $data['unionId'];
+        }
+
+        $result = IDb::getInstance('user')
+            ->setDbWhere(['user_id'=>self::$uid])
+            ->setDbData($update_data)
+            ->upd();
+        if($result === false){
+            self::set_code(self::WARNING_0003);
+            self::set_msg('修改用户信息失败');
+            self::send();
+        }
+
+        IUserCache::deleteInfo(self::$uid);
+
+
+        $user_where['user_id'] = self::$uid;
+        //判断客户是不是属于自己
+        $user_info = IDb::getInstance('user')->setDbWhere($user_where)->row();
+
+        if(empty($user_info)){
+            self::set_code(self::WARNING_0001);
+            self::set_msg('获取用户详情失败');
+            self::send();
+        }
+        $notice_where['user_id'] = self::$uid;
+        $notice_where['notice_read'] = "1";
+        $notice_count = IDb::getInstance('notice')->setDbWhere($notice_where)->con();
+        if($notice_count===false){
+            self::set_code(self::WARNING_0002);
+            self::set_msg('获取用户详情失败');
+            self::send();
+        }
+        $user_info['notice_count'] = $notice_count;
+        //返回数据
+        self::set_code(self::SUCCESS);
+        self::set_value('user_info', $user_info);
+        return self::send();
+    }
+
+
+    /**
+     * @功能：设置用户信息
+     * @开发者：gys
+     */
+    private function set_info(){
+        $nickname = self::get_data('nickname');
+        $avatar = self::get_data('avatar');
+        $data[''] = self::get_data('sex');
+        $country = self::get_data('country');
+        $province = self::get_data('province');
+        $city = self::get_data('city');
+
+
+        $iv = self::get_data('iv',self::NOT_EMPTY,'missing iv');
+
+        $data = [];
+        $result = IWeChat::decryptData($session_key,$encrypted_data, $iv, $data );
+        if(!$result){
+            self::set_code(self::WARNING_0001);
+            self::set_msg('数据校验失败');
+            self::send();
+        }
+
+
+        self::set_code(self::SUCCESS);
+        self::set_msg('登录成功');
+        return self::send();
+    }
+
+    /**
+     * @功能：客户列表
+     * @开发者：yy
+     */
+    public function user_list(){
+        //参数的获取
+        $user_id = self::$uid;
+        $bottom_id = self::get_data('bottom_id');
+
+        //获取用户的信息
+        $user_info = self::get_info($user_id);
+
+        //判断是否存在名片
+        $card_list = null;
+        if(!empty($user_info['card_id'])){
+            //获取名片信息和标签信息
+            $card_where['cc.card_id'] = $user_info['card_id'];
+            if(!empty($bottom_id)) $card_where['date_format(cc.view_time,"%Y%m%d%H%i%s")'] = ['lt',$bottom_id];
+            $card_list = IDb::getInstance('user as u')
+                ->setDbFiled('u.nickname,u.card_id,cc.view_time,u.avatar,cc.user_tag,u.user_id,date_format(cc.view_time,"%Y%m%d%H%i%s") as code')
+                ->setDbJoin('card_customer as cc', 'u.user_id = cc.user_id')
+                ->setDbWhere($card_where)
+                ->setDbOrder('code desc')
+                ->setDbLimit(10)
+                ->sel();
+            if($card_list === false){
+                self::set_code(self::WARNING_0001);
+                self::set_msg('获取客户列表失败');
+                self::send();
+            }
+
+            //获取客户标签
+            $tag_list = null;
+            if(!empty($card_list) || !is_array($card_list)){
+               foreach ($card_list as &$val){
+                   if(!empty($val['user_tag'])){
+                       $val['user_tag'] = str_replace(',', '、', $val['user_tag']);
+                   }
+                   //获取浏览数量
+                   $val['view_con'] = ICardOperation::get_con($user_info['card_id'],OperationType::browse,$val['user_id']);
+
+                   //获取交谈次数
+                   $val['chat_con'] = ICardOperation::get_chat_num($user_id,$val['user_id']);
+
+
+                   //获取拨号次数
+                   $val['dial_con'] = ICardOperation::get_con($user_info['card_id'],OperationType::dial,$val['user_id']);
+
+               }
+            }
+
+        }
+
+        //返回数据
+        self::set_code(self::SUCCESS);
+        self::set_value('card_list', $card_list);
+        return self::send();
+    }
+
+    /**
+     * @功能：获取客户详情
+     * @开发者：yy
+     */
+    public function user_info(){
+        //参数的获取
+        $user_id  = self::$uid;
+
+        $user_where['user_id'] = $user_id;
+        //判断客户是不是属于自己
+        $user_info = IDb::getInstance('user')->setDbWhere($user_where)->row();
+
+        if(empty($user_info)){
+            self::set_code(self::WARNING_0001);
+            self::set_msg('获取用户详情失败');
+            self::send();
+        }
+        $notice_where['user_id'] = $user_id;
+        $notice_where['notice_read'] = "1";
+        $notice_count = IDb::getInstance('notice')->setDbWhere($notice_where)->con();
+        if($notice_count===false){
+            self::set_code(self::WARNING_0002);
+            self::set_msg('获取用户详情失败');
+            self::send();
+        }
+        $user_info['notice_count'] = $notice_count;
+        //返回数据
+        self::set_code(self::SUCCESS);
+        self::set_value('user_info', $user_info);
+        return self::send();
+    }
+
+    /**
+     * @功能：获取消息列表
+     * @开发者：yy
+     */
+    public function notice_list(){
+        //参数的获取
+        $user_id  = self::$uid;
+
+        $bottom_id  = self::get_data('bottom_id');
+        $notice_where['noc.user_id'] = $user_id;
+        if(!empty($bottom_id))$demand_where['noc.bottom_id'] = array('lt',$bottom_id);
+        $notice_list= IDb::getInstance('notice as noc')
+            ->setDbFiled('noc.*,dd.demand_describe as notice_title')
+            ->setDbJoin('demand as dd','dd.demand_id = noc.demand_id')
+            ->setDbWhere($notice_where)->sel();
+        if($notice_list===false){
+            self::set_code(self::WARNING_0002);
+            self::set_msg('获取消息失败');
+            self::send();
+        }
+        //返回数据
+        self::set_code(self::SUCCESS);
+        self::set_value('notice_list', $notice_list);
+        return self::send();
+    }
+
+    /**
+     * @功能：设置消息已读
+     * @开发者：yy
+     */
+    public function notice_read(){
+        //参数的获取
+        $notice_id = self::get_data('notice_id', self::NOT_EMPTY, '消息编号不能为空');
+
+        $notice_where['notice_id'] = $notice_id;
+        $notice_data['notice_read'] = "2";
+        $notice_upd = IDb::getInstance('notice')->setDbWhere($notice_where)->setDbData($notice_data)->upd();
+        if($notice_upd===false){
+            self::set_code(self::WARNING_0002);
+            self::set_msg('设置消息已读状态失败');
+            self::send();
+        }
+        //返回数据
+        self::set_code(self::SUCCESS);
+        return self::send();
+    }
+    /**
+     * @功能：修改用户信息
+     * @开发者：szg
+     */
+    public function set_user(){
+        //参数的获取
+        $user_id = self::$uid;
+        $real_name = self::get_data('real_name', self::NOT_EMPTY, '用户姓名不能为空');
+        $phone = self::get_data('phone', self::NOT_EMPTY, '用户姓名不能为空');
+
+        $user_where['user_id'] = $user_id;
+        $user_data['real_name'] = $real_name;
+        $user_data['phone'] = $phone;
+        $user_upd = IDb::getInstance('user')->setDbWhere($user_where)->setDbData($user_data)->upd();
+        if($user_upd===false){
+            self::set_code(self::WARNING_0002);
+            self::set_msg('修改用户信息失败！');
+            self::send();
+        }
+        //返回数据
+        self::set_code(self::SUCCESS);
+        return self::send();
+    }
+
+    /**
+     * @功能：消息推送测试
+     * @开发者：张俊
+     */
+    public function wx_push_msg(){
+        
+        IWeChat::sendInform(self::$uid,WeChatInformType::State,['1','2',3,2],161);
+        
+        // IWeChat::sendInform(self::$uid,WeChatInformType::Received,['1','2',3,2],161);
+
+        //操作成功
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::send();
+
+    }
+
+
+
+    /**
+     * @功能：取得oss上传签名
+     * @开发者：yy
+     */
+    public function get_oss_sign(){
+
+        //获取配置信息
+        $access_id = Config::get("oss.access_key_id");
+        $access_key = Config::get("oss.access_key_secret");
+        $endpoint = Config::get("oss.endpoint");
+        $bucket = Config::get("oss.bucket");
+
+
+        $oss = new Oss($access_id,$access_key,$endpoint,$bucket);
+
+        $data['upload_url'] = Config::get("oss.url");
+        $data['access_id'] = $access_id;
+        $data['policy'] = $oss->getUploadPolicy();
+        $data['signature'] = $oss->getUploadSignature($data['policy']);
+        $data['key'] = md5(StringUtil::randString(32).self::$uid);
+        $data['path'] = config('oss.path');
+
+        //操作成功
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::set_values($data);
+        self::send();
+    }
+
+    /**
+     * @功能：获取小程序的form_id
+     * @开发者：yy
+     */
+    public function get_form_id(){
+        //获取参数
+        $user_id = self::$uid;
+        $form_id = self::get_data('form_id');
+        $source = self::get_data('source');
+
+        //判断小程序form_id是否为空
+        if(empty($form_id)){
+            $data['module'] = 'card';
+            $data['controller'] = self::$call_controller;
+            $data['action'] = self::$call_action;
+            $data['error'] = 'form_id不能为空';
+            IDb::getInstance('database')->setDbData($data)->add();
+            self::set_code(self::SUCCESS);
+            self::set_msg("成功！");
+            self::send();
+        }
+
+        //数据的整理
+        $form_id_list = json_decode($form_id,true);
+
+//      $form_id_list = explode(',','123,2,1,3');
+
+        //判断是否是合法的数组
+        $data = null;
+        $where['user_id'] = $user_id;
+        $where['status'] = WeChatInformStatus::Entering;
+        $where['create_time'] = ['gt',date('Y-m-d H:i:s',strtotime('-6 days'))];
+        $count = IDb::getInstance('wechat_inform')->setDbWhere($where)->con();
+
+        if(!is_array($form_id_list)){
+            $data['module'] = 'card';
+            $data['controller'] = self::$call_controller;
+            $data['action'] = self::$call_action;
+            $data['error'] = 'json格式有误';
+            IDb::getInstance('database')->setDbData($data)->add();
+        }
+
+        $save_count = 50;
+        if(!empty($form_id_list) && $count < $save_count){
+            foreach ($form_id_list as $val){
+                if($count >= $save_count){
+                    break;
+                }
+                //添加数据
+                $data['user_id'] = $user_id;
+                $data['form_id'] = $val;
+                // $data['status'] = WeChatInformStatus::Entering;
+                // $data['source'] = $source;
+                $data['create_time'] = get_date_time();
+                IDb::getInstance('wechat_inform')->setDbData($data)->add();
+                $count++;
+            }
+        }
+
+        //操作成功
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::send();
+
+    }
+
+}

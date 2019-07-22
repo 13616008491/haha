@@ -1,0 +1,422 @@
+<!--加载js-->
+<script src="/static/common/plugins/Charts/amcharts.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var json = JSON.parse('{"user":[{"reg_time":"05\/21","android":0,"ios":0,"pc":0,"wq":26,"dl":0,"sum":26},{"reg_time":"05\/22","android":0,"ios":0,"pc":0,"wq":29,"dl":0,"sum":29},{"reg_time":"05\/23","android":0,"ios":0,"pc":0,"wq":22,"dl":0,"sum":22},{"reg_time":"05\/24","android":0,"ios":0,"pc":0,"wq":32,"dl":0,"sum":32},{"reg_time":"05\/25","android":0,"ios":0,"pc":0,"wq":25,"dl":0,"sum":25},{"reg_time":"05\/26","android":0,"ios":0,"pc":0,"wq":8,"dl":0,"sum":8},{"reg_time":"05\/27","android":0,"ios":0,"pc":0,"wq":2,"dl":0,"sum":2},{"reg_time":"05\/28","android":0,"ios":0,"pc":0,"wq":40,"dl":0,"sum":40},{"reg_time":"05\/29","android":0,"ios":0,"pc":0,"wq":26,"dl":0,"sum":26},{"reg_time":"05\/30","android":0,"ios":0,"pc":0,"wq":27,"dl":0,"sum":27},{"reg_time":"05\/31","android":0,"ios":0,"pc":2,"wq":55,"dl":0,"sum":57},{"reg_time":"06\/01","android":0,"ios":0,"pc":0,"wq":30,"dl":0,"sum":30},{"reg_time":"06\/02","android":0,"ios":0,"pc":0,"wq":1,"dl":0,"sum":1},{"reg_time":"06\/03","android":0,"ios":0,"pc":1,"wq":0,"dl":0,"sum":1},{"reg_time":"06\/04","android":0,"ios":0,"pc":1,"wq":26,"dl":1,"sum":28},{"reg_time":"06\/05","android":0,"ios":0,"pc":1,"wq":34,"dl":0,"sum":35},{"reg_time":"06\/06","android":0,"ios":0,"pc":0,"wq":21,"dl":0,"sum":21},{"reg_time":"06\/07","android":0,"ios":0,"pc":2,"wq":11,"dl":0,"sum":13},{"reg_time":"06\/08","android":0,"ios":0,"pc":0,"wq":4,"dl":0,"sum":4},{"reg_time":"06\/09","android":0,"ios":0,"pc":0,"wq":0,"dl":0,"sum":0},{"reg_time":"06\/10","android":0,"ios":0,"pc":0,"wq":0,"dl":0,"sum":0},{"reg_time":"06\/11","android":0,"ios":0,"pc":0,"wq":0,"dl":0,"sum":0},{"reg_time":"06\/12","android":0,"ios":0,"pc":0,"wq":0,"dl":0,"sum":0},{"reg_time":"06\/13","android":0,"ios":0,"pc":0,"wq":0,"dl":0,"sum":0},{"reg_time":"06\/14","android":1,"ios":0,"pc":1,"wq":0,"dl":0,"sum":2},{"reg_time":"06\/15","android":0,"ios":0,"pc":0,"wq":0,"dl":0,"sum":0},{"reg_time":"06\/16","android":0,"ios":0,"pc":0,"wq":0,"dl":0,"sum":0},{"reg_time":"06\/17","android":0,"ios":0,"pc":0,"wq":0,"dl":0,"sum":0},{"reg_time":"06\/18","android":0,"ios":0,"pc":0,"wq":0,"dl":0,"sum":0},{"reg_time":"06\/19","android":0,"ios":0,"pc":0,"wq":0,"dl":0,"sum":0},{"reg_time":"06\/20","android":0,"ios":0,"pc":0,"wq":0,"dl":0,"sum":0}],"company":[{"date_time":"05\/21","company_num":0,"company_admin_num":0},{"date_time":"05\/22","company_num":0,"company_admin_num":0},{"date_time":"05\/23","company_num":0,"company_admin_num":0},{"date_time":"05\/24","company_num":0,"company_admin_num":0},{"date_time":"05\/25","company_num":0,"company_admin_num":0},{"date_time":"05\/26","company_num":0,"company_admin_num":0},{"date_time":"05\/27","company_num":0,"company_admin_num":0},{"date_time":"05\/28","company_num":0,"company_admin_num":0},{"date_time":"05\/29","company_num":0,"company_admin_num":0},{"date_time":"05\/30","company_num":0,"company_admin_num":0},{"date_time":"05\/31","company_num":2,"company_admin_num":2},{"date_time":"06\/01","company_num":3,"company_admin_num":3},{"date_time":"06\/02","company_num":0,"company_admin_num":0},{"date_time":"06\/03","company_num":0,"company_admin_num":0},{"date_time":"06\/04","company_num":0,"company_admin_num":0},{"date_time":"06\/05","company_num":0,"company_admin_num":0},{"date_time":"06\/06","company_num":3,"company_admin_num":3},{"date_time":"06\/07","company_num":1,"company_admin_num":1},{"date_time":"06\/08","company_num":0,"company_admin_num":0},{"date_time":"06\/09","company_num":1,"company_admin_num":1},{"date_time":"06\/10","company_num":0,"company_admin_num":0},{"date_time":"06\/11","company_num":0,"company_admin_num":0},{"date_time":"06\/12","company_num":0,"company_admin_num":0},{"date_time":"06\/13","company_num":0,"company_admin_num":0},{"date_time":"06\/14","company_num":0,"company_admin_num":0},{"date_time":"06\/15","company_num":1,"company_admin_num":1},{"date_time":"06\/16","company_num":0,"company_admin_num":0},{"date_time":"06\/17","company_num":2,"company_admin_num":2},{"date_time":"06\/18","company_num":1,"company_admin_num":1},{"date_time":"06\/19","company_num":0,"company_admin_num":0},{"date_time":"06\/20","company_num":0,"company_admin_num":0}],"pay":[{"date_time":"05\/21","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"05\/22","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"05\/23","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"05\/24","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"05\/25","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"05\/26","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"05\/27","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"05\/28","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"05\/29","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"05\/30","company_apply":0,"company_bond_apply":0,"company_recharge_apply":1000,"sum":0},{"date_time":"05\/31","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/01","company_apply":9800,"company_bond_apply":500,"company_recharge_apply":20000,"sum":10300},{"date_time":"06\/02","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/03","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/04","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/05","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/06","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/07","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/08","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/09","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/10","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/11","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/12","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/13","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/14","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/15","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/16","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/17","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/18","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/19","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0},{"date_time":"06\/20","company_apply":0,"company_bond_apply":0,"company_recharge_apply":0,"sum":0}],"area":[{"area_id":1190,"acronym":"\u798f\u5efa","amount":"168527"},{"area_id":1,"acronym":"\u5317\u4eac","amount":"10000"},{"area_id":813,"acronym":"\u4e0a\u6d77","amount":"5000"},{"area_id":22,"acronym":"\u5929\u6d25","amount":"0"},{"area_id":43,"acronym":"\u6cb3\u5317","amount":"0"},{"area_id":227,"acronym":"\u5c71\u897f","amount":"0"},{"area_id":358,"acronym":"\u5185\u8499\u53e4","amount":"0"},{"area_id":475,"acronym":"\u8fbd\u5b81","amount":"0"},{"area_id":594,"acronym":"\u5409\u6797","amount":"0"},{"area_id":665,"acronym":"\u9ed1\u9f99\u6c5f","amount":"0"},{"area_id":834,"acronym":"\u6c5f\u82cf","amount":"0"},{"area_id":958,"acronym":"\u6d59\u6c5f","amount":"0"},{"area_id":1064,"acronym":"\u5b89\u5fbd","amount":"0"},{"area_id":1287,"acronym":"\u6c5f\u897f","amount":"0"},{"area_id":1399,"acronym":"\u5c71\u4e1c","amount":"0"},{"area_id":1561,"acronym":"\u6cb3\u5357","amount":"0"},{"area_id":1739,"acronym":"\u6e56\u5317","amount":"0"},{"area_id":1867,"acronym":"\u6e56\u5357","amount":"0"},{"area_id":2007,"acronym":"\u5e7f\u4e1c","amount":"0"},{"area_id":2207,"acronym":"\u5e7f\u897f","amount":"0"},{"area_id":2333,"acronym":"\u6d77\u5357","amount":"0"},{"area_id":2389,"acronym":"\u91cd\u5e86","amount":"0"},{"area_id":2433,"acronym":"\u56db\u5ddd","amount":"0"},{"area_id":2640,"acronym":"\u8d35\u5dde","amount":"0"},{"area_id":2738,"acronym":"\u4e91\u5357","amount":"0"},{"area_id":2887,"acronym":"\u897f\u85cf","amount":"0"},{"area_id":2969,"acronym":"\u9655\u897f","amount":"0"},{"area_id":3087,"acronym":"\u7518\u8083","amount":"0"},{"area_id":3191,"acronym":"\u9752\u6d77","amount":"0"},{"area_id":3243,"acronym":"\u5b81\u590f","amount":"0"},{"area_id":3273,"acronym":"\u65b0\u7586","amount":"0"},{"area_id":3396,"acronym":"\u53f0\u6e7e","amount":"0"},{"area_id":3399,"acronym":"\u9999\u6e2f","amount":"0"},{"area_id":3402,"acronym":"\u6fb3\u95e8","amount":"0"},{"area_id":3405,"acronym":"\u5176\u4ed6","amount":"0"}]}');
+</script>
+
+<!--主页面-->
+<div class="side-left fl mt10">
+    <div class="box">
+        <h2>个人信息</h2>
+        <ul class="status">
+            <li class="risk first-child">
+                <p>
+                    <i class="img"></i>
+                    <strong>{:get_login_admin_phone()}</strong><br><span class="gray">账号：{$admin_info['phone']}<br>电话：{$admin_info['phone']}</span>
+                </p>
+                <a class="status-btn exam" style="" href="{:Url('admin/admin_info')}">完善信息</a>
+            </li>
+            <li>
+                <p><span class="fl">最后登录数据：{$admin_info['login_time']}</span><span class="fr">最后登录IP：{$admin_info['login_ip']}</span></p>
+            </li>
+        </ul>
+    </div>
+    <div class="box">
+        <h2>主要功能快捷入口</h2>
+        <div class="clear_fix">
+            <ul class="entrance">
+                <li style="height: 32px;">
+                    <a href="{:Url('/admin/credit_apply/company_apply_user_list')}"><img src="/static/admin/img/dp_icon2.gif" class="fl" style="width: 35px;height: 30px;"></a>
+                    <a class="txt" href="{:Url('/admin/company_apply/company_apply_user_list')}">
+                        <h2>未处理贷款通充值申请</h2>
+                    </a>
+                </li>
+                <li style="height: 32px;">
+                    <a href="{:Url('/admin/company_bond_package_apply/company_bond_package_apply_user_list')}"><img src="/static/admin/img/icon18.png" class="fl" style="width: 35px;height: 30px;"></a>
+                    <a class="txt" href="{:Url('/admin/company_bond_package_apply/company_bond_package_apply_user_list')}">
+                        <h2>未处理招标宝开通申请</h2>
+                    </a>
+                </li>
+                <li style="height: 32px;">
+                    <a href="{:Url('/admin/company_bond_recharge_apply/company_bond_recharge_apply_user_list')}"><img src="/static/admin/img/icon16.png" class="fl" style="width: 35px;height: 30px;"></a>
+                    <a class="txt" href="{:Url('/admin/company_bond_recharge_apply/company_bond_recharge_apply_user_list')}">
+                        <h2>未处理招标宝充值申请</h2>
+                    </a>
+                </li>
+                <li style="height: 32px;">
+                    <a href="{:Url('/admin/credit_apply/credit_apply_dispatch_list')}"><img src="/static/admin/img/qd_icon4.gif" class="fl" style="width: 35px;height: 30px;"></a>
+                    <a class="txt" href="{:Url('/admin/credit_apply/credit_apply_dispatch_list')}">
+                        <h2>未指派信用卡申请</h2>
+                    </a>
+                </li>
+                <li style="height: 32px;">
+                    <a href="{:Url('/admin/loan_apply/loan_apply_dispatch_list')}"><img src="/static/admin/img/qd_icon3.gif" class="fl" style="width: 35px;height: 30px;"></a>
+                    <a class="txt" href="{:Url('/admin/loan_apply/loan_apply_dispatch_list')}">
+                        <h2>未指派信银行贷申请</h2>
+                    </a>
+                </li>
+                <li style="height: 32px;">
+                    <a href="{:Url('/admin/small_apply/small_apply_dispatch_list')}"><img src="/static/admin/img/qd_icon2.gif" class="fl" style="width: 35px;height: 30px;"></a>
+                    <a class="txt" href="{:Url('/admin/small_apply/small_apply_dispatch_list')}">
+                        <h2>未指派极速贷申请</h2>
+                    </a>
+                </li>
+                <li style="height: 32px;">
+                    <a href="{:Url('/admin/loan_intention/loan_intention_distribution_list')}"><img src="/static/admin/img/sp_icon3.gif" class="fl" style="width: 35px;height: 30px;"></a>
+                    <a class="txt" href="{:Url('/admin/loan_intention/loan_intention_distribution_list')}">
+                        <h2>银行贷未指派意向</h2>
+                    </a>
+                </li>
+                <li style="height: 32px;">
+                    <a href="{:Url('/admin/small_intention/small_intention_distribution_list')}"><img src="/static/admin/img/qd_icon1.gif" class="fl" style="width: 35px;height: 30px;"></a>
+                    <a class="txt" href="{:Url('/admin/small_intention/small_intention_distribution_list')}">
+                        <h2>极速贷未指派意向</h2>
+                    </a>
+                </li>
+                <li style="height: 32px;">
+                    <a href="{:Url('/admin/finance/agent_subsidy_apply_list')}"><img src="/static/admin/img/oa_icon4.gif" class="fl" style="width: 35px;height: 30px;"></a>
+                    <a class="txt" href="{:Url('/admin/finance/agent_subsidy_apply_list')}">
+                        <h2>代理商贴息申请</h2>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="box">
+        <h2>省份客户数量排名</h2>
+        <div class="clear_fix">
+            <ul class="show_total">
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="side-m fl mt10">
+    <div class="box2">
+        <h2>注册用户数量走势图
+            <font color="red">&nbsp;&nbsp;&nbsp;&nbsp;<b>备注：首页所有统计数据每小时更新一次！</b></font>
+        </h2>
+        <div class="item_chart">
+            <div class="item_total">
+                <ul>
+
+                </ul>
+                <div class="clear_fix"></div>
+            </div>
+            <div id="amount_chart" style="width:99%; height:300px;"></div>
+
+            <script type="text/javascript">
+                var chart;
+
+                AmCharts.ready(function() {
+                    chart = new AmCharts.AmSerialChart();
+                    chart.dataProvider = json['user'];
+                    chart.categoryField = "reg_time";
+
+                    var categoryAxis = chart.categoryAxis;
+                    categoryAxis.dashLength = 2;
+                    categoryAxis.gridAlpha = 0.15;
+                    categoryAxis.axisColor = "#DADADA";
+
+                    var valueAxis0 = new AmCharts.ValueAxis();
+                    valueAxis0.axisColor = "#FF0F00";
+                    valueAxis0.axisThickness = 2;
+                    valueAxis0.gridAlpha = 0;
+                    chart.addValueAxis(valueAxis0);
+
+                    var valueAxis1 = new AmCharts.ValueAxis();
+                    valueAxis1.axisColor = "#FF0F00";
+                    valueAxis1.axisThickness = 2;
+                    valueAxis1.gridAlpha = 0;
+                    chart.addValueAxis(valueAxis1);
+
+                    var valueAxis2 = new AmCharts.ValueAxis();
+                    valueAxis2.position = "right";
+                    valueAxis2.axisColor = "#FF6600";
+                    valueAxis2.gridAlpha = 0;
+                    valueAxis2.axisThickness = 2;
+                    chart.addValueAxis(valueAxis2);
+
+                    var valueAxis3 = new AmCharts.ValueAxis();
+                    valueAxis3.position = "right";
+                    valueAxis3.axisColor = "#FF9E01";
+                    valueAxis3.gridAlpha = 0;
+                    valueAxis3.axisThickness = 2;
+                    chart.addValueAxis(valueAxis3);
+
+                    var valueAxis4 = new AmCharts.ValueAxis();
+                    valueAxis4.position = "right";
+                    valueAxis4.axisColor = "#FCD202";
+                    valueAxis4.gridAlpha = 0;
+                    valueAxis4.axisThickness = 2;
+                    chart.addValueAxis(valueAxis4);
+
+                    var valueAxis5 = new AmCharts.ValueAxis();
+                    valueAxis5.position = "right";
+                    valueAxis5.axisColor = "#F8FF01";
+                    valueAxis5.gridAlpha = 0;
+                    valueAxis5.axisThickness = 2;
+                    chart.addValueAxis(valueAxis5);
+
+                    var graph0 = new AmCharts.AmGraph();
+                    graph0.valueAxis = valueAxis1;
+                    graph0.title = "合计";
+                    graph0.valueField = "sum";
+                    graph0.bullet = "round";
+                    graph0.hideBulletsCount = 30;
+                    chart.addGraph(graph0);
+
+                    var graph1 = new AmCharts.AmGraph();
+                    graph1.valueAxis = valueAxis1;
+                    graph1.title = "安卓注册";
+                    graph1.valueField = "android";
+                    graph1.bullet = "round";
+                    graph1.hideBulletsCount = 30;
+                    chart.addGraph(graph1);
+
+                    var graph2 = new AmCharts.AmGraph();
+                    graph2.valueAxis = valueAxis2;
+                    graph2.title = "IOS注册";
+                    graph2.valueField = "ios";
+                    graph2.bullet = "round";
+                    graph2.hideBulletsCount = 30;
+                    chart.addGraph(graph2);
+
+                    var graph3 = new AmCharts.AmGraph();
+                    graph3.valueAxis = valueAxis2;
+                    graph3.title = "网站注册";
+                    graph3.valueField = "pc";
+                    graph3.bullet = "round";
+                    graph3.hideBulletsCount = 30;
+                    chart.addGraph(graph3);
+
+                    var graph4 = new AmCharts.AmGraph();
+                    graph4.valueAxis = valueAxis2;
+                    graph4.title = "握旗接入";
+                    graph4.valueField = "wq";
+                    graph4.bullet = "round";
+                    graph4.hideBulletsCount = 30;
+                    chart.addGraph(graph4);
+
+                    var graph5 = new AmCharts.AmGraph();
+                    graph5.valueAxis = valueAxis2;
+                    graph5.title = "代理商创建";
+                    graph5.valueField = "dl";
+                    graph5.bullet = "round";
+                    graph5.hideBulletsCount = 30;
+                    chart.addGraph(graph5);
+
+                    var chartCursor = new AmCharts.ChartCursor();
+                    chartCursor.cursorPosition = "mouse";
+                    chart.addChartCursor(chartCursor);
+
+                    var legend = new AmCharts.AmLegend();
+                    legend.marginLeft = 110;
+                    chart.addLegend(legend);
+
+                    chart.write("amount_chart");
+                });
+            </script>
+        </div>
+    </div>
+
+    <div class="box2">
+        <h2>注册信贷公司数量走势图</h2>
+        <div class="item_chart">
+            <div class="item_total">
+                <ul>
+
+                </ul>
+                <div class="clear_fix"></div>
+            </div>
+            <div id="company_chart" style="width:99%; height:300px;"></div>
+
+            <script type="text/javascript">
+                var chart;
+
+                AmCharts.ready(function() {
+                    chart = new AmCharts.AmSerialChart();
+                    chart.dataProvider = json['company'];
+                    chart.categoryField = "date_time";
+
+                    var categoryAxis = chart.categoryAxis;
+                    categoryAxis.dashLength = 2;
+                    categoryAxis.gridAlpha = 0.15;
+                    categoryAxis.axisColor = "#DADADA";
+
+                    var valueAxis1 = new AmCharts.ValueAxis();
+                    valueAxis1.axisColor = "#FF0F00";
+                    valueAxis1.axisThickness = 2;
+                    valueAxis1.gridAlpha = 0;
+                    chart.addValueAxis(valueAxis1);
+
+                    var valueAxis2 = new AmCharts.ValueAxis();
+                    valueAxis2.position = "right";
+                    valueAxis2.axisColor = "#FF6600";
+                    valueAxis2.gridAlpha = 0;
+                    valueAxis2.axisThickness = 2;
+                    chart.addValueAxis(valueAxis2);
+
+                    var graph1 = new AmCharts.AmGraph();
+                    graph1.valueAxis = valueAxis1;
+                    graph1.title = "注册信贷公司数量";
+                    graph1.valueField = "company_num";
+                    graph1.bullet = "round";
+                    graph1.hideBulletsCount = 30;
+                    chart.addGraph(graph1);
+
+                    var graph2 = new AmCharts.AmGraph();
+                    graph2.valueAxis = valueAxis2;
+                    graph2.title = "注册信贷公司业务员数量";
+                    graph2.valueField = "company_admin_num";
+                    graph2.bullet = "round";
+                    graph2.hideBulletsCount = 30;
+                    chart.addGraph(graph2);
+
+                    var chartCursor = new AmCharts.ChartCursor();
+                    chartCursor.cursorPosition = "mouse";
+                    chart.addChartCursor(chartCursor);
+
+                    var legend = new AmCharts.AmLegend();
+                    legend.marginLeft = 110;
+                    chart.addLegend(legend);
+
+                    chart.write("company_chart");
+                });
+            </script>
+        </div>
+    </div>
+
+    <div class="box2">
+        <h2>信贷公司缴费走势图</h2>
+        <div class="item_chart">
+            <div class="item_total">
+                <ul>
+
+                </ul>
+                <div class="clear_fix"></div>
+            </div>
+            <div id="company_money_chart" style="width:99%; height:300px;"></div>
+
+            <script type="text/javascript">
+                var chart;
+
+                AmCharts.ready(function() {
+                    chart = new AmCharts.AmSerialChart();
+                    chart.dataProvider = json['pay'];
+                    chart.categoryField = "date_time";
+
+                    var categoryAxis = chart.categoryAxis;
+                    categoryAxis.dashLength = 2;
+                    categoryAxis.gridAlpha = 0.15;
+                    categoryAxis.axisColor = "#DADADA";
+
+                    var valueAxis1 = new AmCharts.ValueAxis();
+                    valueAxis1.position = "left";
+                    valueAxis1.axisColor = "#FF0F00";
+                    valueAxis1.axisThickness = 2;
+                    valueAxis1.gridAlpha = 0;
+                    chart.addValueAxis(valueAxis1);
+
+                    var valueAxis2 = new AmCharts.ValueAxis();
+                    valueAxis2.position = "right";
+                    valueAxis2.axisColor = "#FF6600";
+                    valueAxis2.gridAlpha = 0;
+                    valueAxis2.axisThickness = 2;
+                    chart.addValueAxis(valueAxis2);
+
+                    var valueAxis3 = new AmCharts.ValueAxis();
+                    valueAxis3.position = "right";
+                    valueAxis3.axisColor = "#FF9E01";
+                    valueAxis3.gridAlpha = 0;
+                    valueAxis3.axisThickness = 2;
+                    chart.addValueAxis(valueAxis3);
+
+                    var valueAxis4 = new AmCharts.ValueAxis();
+                    valueAxis4.position = "right";
+                    valueAxis4.axisColor = "#FCD202";
+                    valueAxis4.gridAlpha = 0;
+                    valueAxis4.axisThickness = 2;
+                    chart.addValueAxis(valueAxis4);
+
+                    var graph1 = new AmCharts.AmGraph();
+                    graph1.valueAxis = valueAxis1;
+                    graph1.title = "合计（贷款通充值 + 开通招标宝）";
+                    graph1.valueField = "sum";
+                    graph1.bullet = "round";
+                    graph1.hideBulletsCount = 30;
+                    chart.addGraph(graph1);
+
+                    var graph2 = new AmCharts.AmGraph();
+                    graph2.valueAxis = valueAxis2;
+                    graph2.title = "贷款通充值";
+                    graph2.valueField = "company_apply";
+                    graph2.bullet = "round";
+                    graph2.hideBulletsCount = 30;
+                    chart.addGraph(graph2);
+
+                    var graph3 = new AmCharts.AmGraph();
+                    graph3.valueAxis = valueAxis3;
+                    graph3.title = "开通招标宝";
+                    graph3.valueField = "company_bond_apply";
+                    graph3.bullet = "round";
+                    graph3.hideBulletsCount = 30;
+                    chart.addGraph(graph3);
+
+                    var graph4 = new AmCharts.AmGraph();
+                    graph4.valueAxis = valueAxis4;
+                    graph4.title = "保证金充值";
+                    graph4.valueField = "company_recharge_apply";
+                    graph4.bullet = "round";
+                    graph4.hideBulletsCount = 30;
+                    chart.addGraph(graph4);
+
+                    var chartCursor = new AmCharts.ChartCursor();
+                    chartCursor.cursorPosition = "mouse";
+                    chart.addChartCursor(chartCursor);
+
+                    var legend = new AmCharts.AmLegend();
+                    legend.marginLeft = 110;
+                    chart.addLegend(legend);
+
+                    chart.write("company_money_chart");
+                });
+            </script>
+        </div>
+    </div>
+
+    <div class="box2">
+        <h2>缴费区域分布统计（贷款通充值 + 开通招标宝 + 保证金充值）</h2>
+        <div class="item_total">
+            <ul>
+            </ul>
+            <div class="clear_fix"></div>
+        </div>
+        <div class="item_chart">
+            <div id="project_chart" style="width:99%; height:400px;"></div>
+            <script type="text/javascript">
+                var chart;
+                AmCharts.ready(function() {
+                    chart = new AmCharts.AmPieChart();
+                    chart.addTitle("缴费区域分布统计", 16);
+                    chart.dataProvider = json['area'];
+                    chart.titleField = "acronym";
+                    chart.valueField = "amount";
+                    chart.sequencedAnimation = true;
+                    chart.startEffect = "elastic";
+                    chart.innerRadius = "30%";
+                    chart.startDuration = 2;
+                    chart.labelRadius = 15;
+                    chart.depth3D = 10;
+                    chart.angle = 15;
+                    chart.write("project_chart");
+                });
+            </script>
+        </div>
+    </div>
+</div>

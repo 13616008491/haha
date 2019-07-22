@@ -1,0 +1,58 @@
+<!-- 搜索框及工具条 -->
+<div class="c-head-box">
+    <form method="get" action="{:Url('weekly_list')}">
+        <ul>
+            <li class="c-head-search">
+                <!-- 搜索条件 -->
+                <ul>
+                    <li><span>周报编号：</span><input type="text" name="weekly_id" value="{$weekly_id}"/></li>
+                    <li><span>周报日期：</span><input type="text" name="date_range" value="{$date_range}"/></li>
+                    <li><span>备注内容：</span><input type="text" name="remark" value="{$remark}"/></li>
+                    <li><span>是否历史：</span>{:widget('common/Select/select',array('is_history','is_history',$is_history))}</li>
+                </ul>
+            </li>
+            <li class="c-head-button">
+                <!-- 操作按钮 -->
+                <div class="fr"><input type="submit" class="but_blue" value="搜索"></div>
+                <div class="fr"><a class="but_blue" href="{:Url('weekly_add')}">添加周报</a></div>
+            </li>
+        </ul>
+    </form>
+</div>
+
+<!--用户列表-->
+<div class="lists-tab-cont">
+    <div class="lists-table">
+        <table class="pointer" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th style="width: 4%" class="tabSort-header"><a class="tabSort-header-inner"><p>周报编号</p></a></th>
+                <th style="width: 6%" class="tabSort-header"><a class="tabSort-header-inner"><p>日期范围</p></a></th>
+                <th style="width: 35%" class="tabSort-header"><a class="tabSort-header-inner"><p>周报地址</p></a></th>
+                <th style="width: 8%" class="tabSort-header"><a class="tabSort-header-inner"><p>创建时间</p></a></th>
+                <th style="width: 8%" class="tabSort-header"><a class="tabSort-header-inner"><p>操作</p></a></th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach name="weekly_list" item="info"}
+                <tr>
+                    <td>{$info.weekly_id}</td>
+                    <td>{$info.date_range_start}~{$info.date_range_end}</td>
+                    <td><a target="_blank" href="{$info.url}">{$info.url}</a></td>
+                    <td>{$info.create_time}</td>
+                    <td>
+                        <a data-type="info-win" data-src="{:Url('weekly_info',array('weekly_id'=>$info['weekly_id']))}" data-title="详情" data-width="30%" data-height="90%" class="blue">详情</a>
+                        <a href="{:Url('weekly_edit',array('weekly_id'=>$info['weekly_id']))}" class="blue">编辑</a>
+                        <a href="{:Url('weekly_history',array('weekly_id'=>$info['weekly_id']))}" class="blue">存档</a>
+                    </td>
+                </tr>
+            {/foreach}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 翻页模板 -->
+    <div class="page">
+        {$Think.config.page_html}
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="tab_edit">
+    <form action="{:Url('project_submit')}" method="post" id="project_submit">
+        <input type="hidden" name="project_id" value="{$project_id}"/>
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">项目名称：</td>
+                <td class="t_l">{:widget('common/Input/input',array('project_name',$project_info['project_name'],true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目图片</td>
+                <td class="t_l">{:widget('common/Images/wos',array('project_photo_url','demand',$project_info['project_photo_url'],false,true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目描述：</td>
+                <td class="t_l">{:widget('common/Input/input',array('project_describe',$project_info['project_describe'],true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">所属公司：</td>
+                <td class="t_l">{:widget('common/Input/input',array('affiliated_company',$project_info['affiliated_company'],true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目负责人</td>
+                <td class="t_l">{:widget('common/Input/input',array('charge_name',$project_info['charge_name'],true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">负责人手机号</td>
+                <td class="t_l">{:widget('common/Input/input',array('charge_phone',$project_info['charge_phone'],false))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求提交状态</td>
+                <td class="t_l">{:widget('common/Radio/radio',array('propose_status','propose_status',$project_info['propose_status'],true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目开始时间</td>
+                <td class="t_l">{:widget('common/DateTime/datetime',array('start_time',$project_info['start_time'],true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">排序</td>
+                <td class="t_l">{:widget('common/Input/input',array('sort_level',$project_info['sort_level'],false))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">备注：</td>
+                <td class="t_l">
+                    {:widget('common/TextArea/text_area',array('remark',$project_info['remark'],false))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"></td>
+                <td class="t_l">
+                    <div class="btn"><input type="submit" class="but_blue" value="保存信息"></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

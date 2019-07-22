@@ -1,0 +1,116 @@
+/* Copyright 2008 Google Inc. All Rights Reserved. */
+
+.google-visualization-orgchart-table {
+  border: 0;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.google-visualization-orgchart-table * {
+  margin: 0;
+  padding: 2px;
+}
+
+.google-visualization-orgchart-space-small {
+  width: 4px;
+  height: 1px;
+  border: 0;
+}
+
+.google-visualization-orgchart-space-medium {
+  width: 10px;
+  height: 1px;
+  border: 0;
+}
+
+.google-visualization-orgchart-space-large {
+  width: 16px;
+  height: 1px;
+  border: 0;
+}
+
+.google-visualization-orgchart-noderow-small {
+  height: 12px;
+  border: 0;
+}
+
+.google-visualization-orgchart-noderow-medium {
+  height: 30px;
+  border: 0;
+}
+
+.google-visualization-orgchart-noderow-large {
+  height: 46px;
+  border: 0;
+}
+
+.google-visualization-orgchart-connrow-small {
+  height: 2px;
+  font-size: 1px;
+}
+
+.google-visualization-orgchart-connrow-medium {
+  height: 6px;
+  font-size: 4px;
+}
+
+.google-visualization-orgchart-connrow-large {
+  height: 10px;
+  font-size: 8px;
+}
+
+.google-visualization-orgchart-node {
+  text-align: center;
+  vertical-align: middle;
+  font-family: arial,helvetica;
+  cursor: default;
+  color: #595757;
+  /*border: 2px solid #b5d9ea;*/
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px;
+  box-shadow:1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px;
+  background-color: #edf7ff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#F5F7F9), to(#E5E6E7));
+  background: -moz-linear-gradient( top,#F5F7F9,#E5E6E7);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#F5F7F9, endColorstr=#E5E6E7);
+}
+
+.google-visualization-orgchart-nodesel {
+  background-color: #edf7ff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#8DBCEC), to(#739ECA));
+  background: -moz-linear-gradient( top,#8DBCEC,#739ECA);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#8DBCEC, endColorstr=#739ECA);
+}
+
+.google-visualization-orgchart-node-small {
+  font-size: 6px;
+}
+
+.google-visualization-orgchart-node-medium {
+  font-size: 9px;
+}
+
+.google-visualization-orgchart-node-large {
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.google-visualization-orgchart-linenode {
+  border: 0;
+}
+
+.google-visualization-orgchart-lineleft {
+  border-left: 1px solid #CBCED0;
+}
+
+.google-visualization-orgchart-lineright {
+  border-right: 1px solid #CBCED0;
+}
+
+.google-visualization-orgchart-linebottom {
+  border-bottom: 1px solid #CBCED0;
+}

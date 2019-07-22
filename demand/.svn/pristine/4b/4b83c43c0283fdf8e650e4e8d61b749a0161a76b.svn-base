@@ -1,0 +1,36 @@
+<!--用户列表-->
+<div class="lists-tab-cont">
+    <div class="lists-table">
+        <table class="pointer" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th style="width: 5%" class="tabSort-header"><a class="tabSort-header-inner"><p>进度提交人</p></a></th>
+                <th style="width: 3%" class="tabSort-header"><a class="tabSort-header-inner"><p>进度类型</p></a></th>
+                <th style="width: 25%" class="tabSort-header"><a class="tabSort-header-inner"><p>进度描述</p></a></th>
+                <th style="width: 3%" class="tabSort-header"><a class="tabSort-header-inner"><p>进度</p></a></th>
+                <th style="width: 5%" class="tabSort-header"><a class="tabSort-header-inner"><p>开始时间</p></a></th>
+                <th style="width: 5%" class="tabSort-header"><a class="tabSort-header-inner"><p>结束时间</p></a></th>
+                <th style="width: 5%" class="tabSort-header"><a class="tabSort-header-inner"><p>提交进度时间</p></a></th>
+            </tr>
+            </thead>
+            <tbody>
+                {foreach name="task_list" item="info"}
+                    <tr>
+                        <td>{$info.user_id}</td>
+                        <td>{:widget('common/Color/color',array('task_type',$info["task_type"]))}</td>
+                        <td title="{$info.rate_describe}">{$info.rate_describe}</td>
+                        <td>{$info.rate_percent}%</td>
+                        <td>{$info.start_time}</td>
+                        <td>{$info.end_time}</td>
+                        <td>{$info.create_time}</td>
+                    </tr>
+                {/foreach}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 翻页模板 -->
+    <div class="page">
+        {$Think.config.page_html}
+    </div>
+</div>

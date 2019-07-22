@@ -1,0 +1,104 @@
+<?php
+/*
+ * @开发工具: JetBrains PhpStorm.
+ * @文件名：common.php
+ * @类功能: 扩展基础函数库
+ * @开发者: cxl
+ * @开发时间：14-10-27
+ * @版本：version 1.0
+ */
+use app\common\ext\IDb;
+
+/**
+ * @功能：取得屏幕比例
+ * @开发者： cxl
+ */
+
+function get_screen(){
+    //取得信息
+    $screen = \think\Session::get('screen');
+    if(empty($screen)){
+        $screen = "100%";
+    }
+
+    //返回值
+    return $screen;
+}
+
+/**
+ * @功能：获取登录管理员编号
+ * @开发者： cxl
+ */
+function get_login_admin_id(){
+    return \think\Session::get('admin_id');
+}
+
+/**
+ * @功能：获取登录管理员级别
+ * @开发者： cxl
+ */
+function get_login_admin_super(){
+    return \think\Session::get('admin_super');
+}
+
+/**
+ * @功能：获取登录管理员手机号
+ * @开发者： cxl
+ */
+function get_login_admin_phone(){
+    return \think\Session::get('phone');
+}
+
+/**
+ * @功能：获取登录管理员角色ID
+ * @开发者： cxl
+ */
+function get_login_admin_role_id(){
+    return \think\Session::get('admin_role_id');
+}
+
+/**
+ * @功能：获取登录管理员角色名称
+ * @开发者： cxl
+ */
+function get_login_admin_role_name(){
+    //实例化对象
+    $admin_role_where['admin_role_id'] = get_login_admin_role_id();
+    $admin_role_info = IDb::getInstance("admin_role")->setDbWhere($admin_role_where)->row();
+    if(empty($admin_role_info['role_name'])){
+        return null;
+    }
+
+    //返回值
+    return $admin_role_info['role_name'];
+}
+
+/**
+ * @功能：删除目录
+ * @param string $path 目录地址
+ * @开发者： cxl
+ */
+function rm_directory($path) {
+    //取得目录系想你
+    $dir = dir($path);
+
+    //循环读取文件
+    while(false != ($item = $dir->read())) {
+        //判断是否为虚拟目录
+        if($item == '.' || $item == '..') {
+            continue;
+        }
+
+        //判断是否为目录
+        $path_temp = $dir->path;
+        if(is_dir($path_temp.'/'.$item)) {
+            //递归查找子目录
+            @rm_directory($path_temp.'/'.$item);
+
+            //删除目录
+            @rmdir($path_temp.'/'.$item);
+        } else {
+            @unlink($path_temp.'/'.$item);
+        }
+    }
+}

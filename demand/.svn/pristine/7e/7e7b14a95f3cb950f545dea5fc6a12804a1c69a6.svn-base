@@ -1,0 +1,48 @@
+<!--添加用户表单-->
+<div class="tab_edit">
+    <form action="{:Url('demand_start_submit')}" method="post" id="demand_start_submit">
+        <input type="hidden" name="demand_id" value="{$demand_id}"/>
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">需求审核：</td>
+                <td class="t_l">{:widget('common/Radio/radio',array('demand_audit','demand_audit',null,true))}</td>
+            </tr>
+            <tr class="hide time">
+                <td class="t_r t_left_w">预计需求完成时间：</td>
+                <td class="t_l">{:widget('common/DateTime/datetime',array('expect_finish_time',null,false))}</td>
+            </tr>
+            <tr class="hide time">
+                <td class="t_r t_left_w">选择组织架构（请选择最下级）：</td>
+                <td class="t_l">{:widget('common/Select/select_tree',array('org_id',array($select_org_list,"org_id","name","parent_id"),0,null))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">系统回复：</td>
+                <td class="t_l">
+                    {:widget('common/TextArea/text_area',array('demand_feedback',null,true))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"></td>
+                <td class="t_l">
+                    <div class="btn"><input type="submit" class="but_blue" value="保存信息"></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<script language="javascript">
+    $(function(){
+        var time = $("tr.time");
+        time.hide();
+        var demand_audit = $("input[name='demand_audit']");
+
+        demand_audit.live("change",function () {
+            if($("input[name='demand_audit']:checked").val()==2){
+                time.show();
+            }else{
+                time.hide();
+            }
+        });
+    })
+</script>

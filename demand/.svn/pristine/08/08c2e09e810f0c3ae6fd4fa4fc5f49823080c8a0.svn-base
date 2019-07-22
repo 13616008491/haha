@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name=”viewport” content=”initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no”>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>周报（{$weekly_info['date_range_start']}~{$weekly_info['date_range_end']}）</title>
+    <style>
+        *{margin: 0; padding: 0;font-size: 14px;}
+        html,body{width: 100%;background-color: #fff;}
+        .separate{height: .3rem;background-color: #f4f5f9;}
+        .img-title{width: 100%;}
+        .text-title{padding: .3rem;display: flex;justify-content: space-between;align-items: flex-end;}
+        .text-title span{font-size: .26rem;color: #333;}
+        .title{padding: .3rem 0;display: flex;align-items: center;}
+        .title i{display: inline-block;width: .06rem;height: .25rem;background-color: #547bfe;margin-right: .25rem;}
+        .title span{font-size: .3rem;color: #333;font-weight: bold;}
+        .conten-box{padding-bottom: .3rem;}
+        .conten-box .content{padding: 0 .3rem;}
+    </style>
+</head>
+<body>
+    <img class="img-title" src="/static/admin/img/week_report.jpg" alt="" srcset="">
+    <div class="text-title">
+        <span><b style="font-size: .3rem;color: #547bfe;">汇报周期：</b>{$weekly_info['date_range_start']}～{$weekly_info['date_range_end']}</span>
+    </div>
+
+    <div class="separate"></div>
+
+    <div class="conten-box">
+        <div class="title">
+            <i></i>
+            <span style="color: #547bfe;">周报总结</span>
+        </div>
+        <div class="content">{$weekly_info['summary']|stripslashes=###}</div>
+    </div>
+
+    <div class="separate"></div>
+
+    <div class="conten-box">
+        <div class="title">
+            <i></i>
+            <span style="color: #547bfe">进度概述</span>
+        </div>
+        <div class="content">
+            <ul style="width: 100%;">
+                {foreach name="weekly_info['outline']" item="info"}
+                    <li style="list-style: none;"><span style="color: #00CD00;">项目：</span>{$info['project_name']}</li>
+                    <li style="list-style: none;">
+                        <table cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
+                            {foreach name="info['demand_list']" item="info"}
+                            <tr>
+                                <td>状态：{:widget('common/Color/color',array('demand_status',$info["demand_status"]))}</td>
+                                <td>提出人：{$info['demand_status']}程序林</td>
+                            </tr>
+                            <tr>
+                                <td>状态：{:widget('common/Color/color',array('demand_status',$info["demand_status"]))}</td>
+                                <td>提出人：{$info['demand_status']}程序林</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">{$info['demand_describe']}</td>
+                            </tr>
+                            {/foreach}
+                        </table>
+                    </li>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+
+    <div class="separate"></div>
+
+    <div class="conten-box">
+        <div class="title">
+            <i></i>
+            <span style="color: #547bfe;">进度明细</span>
+        </div>
+        <div class="content">
+
+        </div>
+    </div>
+
+    <div class="separate"></div>
+
+    <div class="text-title">
+        <span><b style="font-size: .3rem;color: #547bfe;">汇报人员：</b>{$weekly_info['user_list']}</span>
+    </div>
+
+    <div class="text-title">
+        <span><b style="font-size: .3rem;color: #547bfe;">汇报时间：</b>{$weekly_info['create_time']}</span>
+    </div>
+</body>
+<script type="text/javascript">
+    (function() {
+        //获取html元素
+        var html = document.getElementsByTagName('html')[0];
+        //屏幕的宽度（兼容处理）
+        var width = document.documentElement.clientWidth || document.body.clientWidth;
+        //375这个数字是根据你的设计图的实际大小来的，所以值具体根据设计图的大小,根据苹果6的尺寸布局设计
+        html.style.fontSize = width / 750 * 50 * 2 + 'px';
+    })()
+
+    window.onresize=function(){
+        //获取html元素
+        var html = document.getElementsByTagName('html')[0];
+        //屏幕的宽度（兼容处理）
+        var width = document.documentElement.clientWidth || document.body.clientWidth;
+        //375这个数字是根据你的设计图的实际大小来的，所以值具体根据设计图的大小,根据苹果6的尺寸布局设计
+        html.style.fontSize = width / 750 * 50 * 2 + 'px';
+    }
+</script>
+
+</html>

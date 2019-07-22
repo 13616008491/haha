@@ -1,0 +1,406 @@
+/*用户中心*/
+.user_page{
+	padding: 30px 0 90px 0;
+}
+.user-l{
+	width: 230px;
+}
+.user-r{
+	width: 950px;
+	background-color: #fff;
+}
+.user-det{
+	background-color: #fff;
+	margin-bottom: 20px;
+	padding: 20px;
+	text-align: center;
+}
+.user-det .imgCenterBox{
+	width: 70px;
+	height: 70px;
+	border-radius: 35px;
+	overflow: hidden;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+.user-det i{
+	color: #eee;
+	margin-left: 10px;
+}
+.user-det i.is-aut{
+	color: #fea802;
+}
+.user-det dt{
+	font-size: 18px;
+	color: #323232;
+	margin-bottom: 4px;
+}
+.user-det dd{
+	color: #999;
+	margin-bottom: 20px;
+}
+.user-det .chhBtn{
+	width: 100%;
+	height: 36px;
+	line-height: 36px;
+	border-radius: 4px;
+	background-color: #479ef8;
+	color: #fff;
+}
+.user-nav{
+	background-color: #fff;
+	position: relative;
+}
+.user-nav li{
+	height: 54px;
+	line-height: 54px;
+	color: #323232;
+	padding: 0 20px;
+	cursor: pointer;
+}
+.user-nav li.line{
+	border-bottom: 1px solid #eee;
+}
+.user-nav li:hover{
+	background-color: #479ef8;
+	color: #fff;
+}
+.user-nav li.aft{
+	color: #479ef8;
+}
+.user-nav li.aft:hover{
+	color: #fff;
+}
+.user-nav i{
+	display: block;
+	height: 26px;
+	width: 3px;
+	background-color: #479ef8;
+	position: absolute;
+	left: 0;
+	top: 14px;
+}
+.userpage{
+	padding:0 30px;
+}
+.userpage .pages{
+	border: none;
+	padding: 30px 0;
+}
+.title{
+	font-size: 14px;
+	color: #323232;
+	font-weight: 400;
+	padding: 30px 30px 20px 30px;
+	border-bottom: 1px solid #eee;
+}
+/*招标状态*/
+.tender-type{
+	height: 70px;
+	line-height: 70px;
+}
+.tender-type span{
+	display: inline-block;
+	height: 30px;
+	width: 70px;
+	border-radius: 4px;
+	text-align: center;
+	line-height: 30px;
+	margin: 0 10px;
+	cursor: pointer;
+}
+
+.tender-type span.aft{
+	color: #479ef8;
+	border: 1px solid #479ef8;
+}
+.tender-list li{
+	width: 20%;
+	height: 100px;
+	line-height: 100px;
+	float: left;
+	text-align: center;
+	color: #323232;
+}
+.tender-list li i{
+	color: #ff4e4e;
+}
+.tender-list ul{
+	border-bottom: 1px solid #eee;
+	cursor: pointer;
+}
+.tender-list a:last-child ul{
+	border-bottom: 0px solid #eee;
+}
+.tender-list a ul:hover{
+	background-color: #fafafa;
+}
+.tender-list-title li{
+	height: 60px;
+	line-height: 60px;
+	background-color: #f5f5f5;
+}
+/*招标详情*/
+.tender-info{
+	border-bottom: 1px solid #eee;
+	margin-bottom: 20px;
+}
+.tender-info .tender-info-det label{
+	display: block;
+	color: #323232;
+	margin-bottom: 10px;
+}
+.tender-info .tender-info-det p{
+	color: #ff4e4e;
+}
+.tender-info .tender-info-det span{
+	font-size: 30px;
+}
+.tender-info .tender-info-det{
+	padding: 30px;
+	padding-left: 70px;
+	padding-right: 0;
+	border-right: 1px solid #eee;
+}
+.tender-info .tender-info-time{
+	padding: 30px;
+	padding-left: 30px;
+	padding-right: 0;
+	position: relative;
+	height: 129px;
+}
+.tender-info .tender-info-time p{
+	color: #999;
+}
+.tender-info .tender-info-time p+p{
+	color: #fa5d5d;
+	position: absolute;
+	bottom: 30px;
+	left: 30px;
+}
+.tender-info .tender-info-time span{
+	display: inline-block;
+	height: 26px;
+	width: 64px;
+	text-align: center;
+	line-height: 26px;
+	border-radius: 4px;
+	border: 1px solid #eee;
+	position: absolute;
+	right: 90px;
+	top: 50%;
+	margin-top: -13px;
+}
+/*投标中*/
+.tender-info .tender-info-time span.font-blue{
+	border: 1px solid #479ef8;
+}
+/*待开标*/
+.tender-info .tender-info-time span.font-red{
+	border: 1px solid #fa5d5d;
+}
+/*已流标*/
+.tender-info .tender-info-time span.font-green{
+	border: 1px solid #4eb168;
+}
+/*已开标、待投放*/
+.tender-info .tender-info-time span.font_gray{
+	border: 1px solid #999;
+}
+.tender-list-page .tender-list li{
+	width: 25%;
+}
+.tender-list-page .tender-list li .imgCenterBox{
+	display: inline-block;
+	height: 32px;
+	width: 32px;
+	border-radius:16px ;
+	overflow: hidden;
+	vertical-align: middle;
+	line-height: 32px;
+}
+
+.tender-list-page .tender-list .tender-aut{
+	line-height: 35px;
+	margin-top: 15px;
+	height: 70px;
+	color: #999;
+	font-weight: bold;
+}
+.tender-list-page .tender-list .brief-text{
+	display: inline-block;
+	line-height: 35px;
+	margin-top: 15px;
+	height: 70px;
+	color: #323232;
+	text-align: left;
+	width: 150px;
+}
+.tender-list-page .tender-list .tender-aut div{
+	text-align: left;
+	padding-left: 10px;
+}
+.tender-list-page .tender-list .tender-aut span{
+	padding: 2px 4px;
+	border-radius: 4px;
+	color: #999;
+	border: 1px solid #999;
+}
+/*企业*/
+.tender-list-page .tender-list .tender-aut span.font-blue{
+	border: 1px solid #479ef8;
+}
+/*手机*/
+.tender-list-page .tender-list .tender-aut span.font-red{
+	border: 1px solid #fa5d5d;
+}
+/*保证金*/
+.tender-list-page .tender-list .tender-aut span.font-green{
+	border: 1px solid #4eb168;
+}
+/*实名*/
+.tender-list-page .tender-list .tender-aut span.font-yellow{
+	border: 1px solid #ffb15c;
+}
+.tender-list-page .tender-list .chhBtn{
+	height: 28px;
+	line-height: 28px;
+	width: 60px;
+	text-align: center;
+	background-color: #479ef8;
+	color: #fff;
+}
+/*投标方详情*/
+.tender-user-det{
+	text-align: center;
+	padding-top: 25px;
+	border-right: 1px solid #eee;
+	height: 129px;
+}
+.tender-user-det .imgCenterBox{
+	display: inline-block;
+	height: 80px;
+	width: 80px;
+	text-align: center;
+	line-height: 80px;
+	border-radius: 40px;
+	overflow: hidden;
+	vertical-align: bottom;
+	margin-right: 20px;
+}
+.tender-user-det dl{
+	display: inline-block;
+	height: 60px;
+	line-height: 30px;
+	position: relative;
+	top: -10px;
+}
+
+.tender-user-det dl dt{
+	color: #323232;
+}
+.tender-user-det dl dd{
+	color: #999;
+}
+.tender-aut-det{
+	height: 129px;
+	border-right: 1px solid #eee;
+	padding: 20px;
+}
+.tender-aut-det label{
+	color: #323232;
+}
+.tender-aut-det div{
+	color: #999;
+}
+.tender-aut-det div div{
+	margin-top: 14px;
+}
+.tender-bond-det{
+	border: none;
+}
+.tender-bond-det div i{
+	color: #ff9a26;
+}
+.tender-info-text{
+	border-right: 1px solid #eee;
+	padding: 30px 0;
+	padding-right: 30px;
+}
+.tender-info-img{
+	padding: 30px 0;
+	padding-left: 30px;
+}
+.tender-info-img .imgCenterBox{
+	width: 100%;
+	height: 290px;
+}
+.tender-info-text label,
+.tender-info-img label{
+	display: inline-block;
+	font-size: 16px;
+	color: #323232;
+	margin-bottom: 10px;
+}
+.tender-info-text p{
+	color: #999;
+	margin-bottom: 60px;
+}
+.tender-info-text .chhBtn{
+	height: 34px;
+	line-height: 34px;
+	width: 84px;
+	text-align: center;
+	background-color: #479ef8;
+	color: #fff;
+}
+/*贷款意向*/
+.intention-page .tender-list li{
+	width: 25%;
+}
+.intention-page .tender-list-title{
+	margin-top: 20px;
+}
+.intention-info-time{
+	height: 129px;
+	padding-left: 20px;
+	padding-top: 30px;
+}
+.intention-info-time label{
+	color: #323232;
+}
+.intention-info-time p{
+	margin-top: 20px;
+	padding-right: 30px;
+	color: #999;
+}
+.intention-info-time span{
+	display: inline-block;
+	height: 26px;
+	width: 64px;
+	line-height: 26px;
+	text-align: center;
+	color: #fa5d5d;
+	border:1px solid #fa5d5d;
+	border-radius: 4px;
+}
+
+.intention-list-page .tender-list li{
+	width: 16.66666667%;
+}
+.intention-tab{
+	text-align: center;
+	margin-bottom: 10px;
+}
+.intention-tab span{
+	display: inline-block;
+	font-size: 18px;
+	color: #999;
+	padding: 8px 12px;
+	cursor: pointer;
+	margin: 0 10px;
+}
+.intention-tab span.aft{
+	color: #479ef8;
+	border-bottom: 2px solid #479ef8;
+}

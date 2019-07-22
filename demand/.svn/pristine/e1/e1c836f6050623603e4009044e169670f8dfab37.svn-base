@@ -1,0 +1,26 @@
+.file_upload {width:845px;}
+.file_upload .file_head{width:100%;height:48;}
+.file_upload .file_head li{width:100%;float:left;height:40px;display:inline-block;}
+.file_upload .file_head li .btn{width:146px;height:28px;float:left;margin-top:5px;background-image:url('images/upload.jpg');}
+.file_upload .file_head li .btn input{filter:alpha(opacity=0);-moz-opacity:0;opacity:0;width:146px;height:28px;}
+.file_upload .file_head li .msg{float:left;padding-top:12px;padding-left:10px;color:red;}
+.file_upload .file_head li .tip{float:right;padding-top:12px;padding-left:10px;color:red;font-weight: bold;}
+.file_upload .file_head li label{line-height: 38px;vertical-align: center;}
+
+.file_upload .file_body {max-width:100%;float:left;border:1px solid #CCC;}
+.file_upload .file_body li{float:left;display:inline-block;}
+.file_upload .file_body .pic {z-index:1;border:1px solid #CCC;position:relative;margin:5px;}
+.file_upload .file_body .pic img {width:132px;height:132px;}
+.file_upload .file_body .preview {display:none;height:132px;width:132px;}
+.file_upload .file_body .default {z-index:2;}
+.file_upload .file_body .default img {width:132px;height:132px;}
+.file_upload .file_body .dis  {z-index:3;position:absolute;top:0;left:0;height:132px;width:132px;filter:alpha(opacity=1);-moz-opacity:0.01;opacity:0.01;background:#BBBBBB;}
+.file_upload .file_body .mask {z-index:3;position:absolute;top:0;left:0;height:132px;width:132px;filter:alpha(opacity=50);-moz-opacity:0.5;opacity:0.5;background:#BBBBBB;}
+.file_upload .file_body .desc {z-index:4;position:absolute;color:red;text-align:center;top:0;left:0;width:122px;max-height:122px;overflow:hidden;padding:5px;word-wrap:break-word;background:#BBBBBB;filter:alpha(opacity=80);-moz-opacity:0.8;opacity:0.8;}
+
+.file_upload .file_body .operate {z-index:9; /*background:#BBBBBB;filter:alpha(opacity=80);-moz-opacity:0.8;opacity:0.8;*/text-align:center;padding:5px;position:absolute;top:0px;width:122px;}
+.file_upload .file_body .operate i {background:url('images/operate.png');cursor:pointer;display:inline-block;font-size:0;height:12px;line-height:0;overflow:hidden;width:12px;float: right;}
+.file_upload .file_body .operate .drag {background-position:0 0px;}
+.file_upload .file_body .operate .del {background-position:-12px 0;}
+.file_upload .file_body .has .preview {display:block;}
+.file_upload .file_body .has .default {display:none;}

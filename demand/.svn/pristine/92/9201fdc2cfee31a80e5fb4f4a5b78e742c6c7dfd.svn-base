@@ -1,0 +1,219 @@
+<?php
+namespace app\admin\controller;
+
+use app\common\cache\admin\IAdminCache;
+use app\common\controller\AdminBaseController;
+use app\common\enum\IsDelete;
+use app\common\enum\ProposeStatus;
+use app\common\ext\IDb;
+use app\common\ext\IRequest;
+
+class Task extends AdminBaseController{
+    /**
+     * @功能：我的任务列表
+     * @开发者：wdd
+     */
+    public function task_list(){
+        //获取参数
+        $task_id= IRequest::get("task_id");
+        $demand_id= IRequest::get("demand_id");
+
+        //查询条件
+        $where['ta.join_id'] = get_login_user_id();
+        if(!empty($task_id))$where['ta.task_id'] = $task_id;
+        if(!empty($demand_id))$where['ta.demand_id'] = $demand_id;
+
+        $task_list = IDb::getInstance('task as ta')
+            ->setDbFiled("ta.*,pt.project_name,pt.charge_name")
+            ->setDbJoin("project as pt","pt.project_id = ta.project_id")
+            ->setDbWhere($where)
+            ->setDbOrder('ta.task_id desc')
+            ->pag();
+
+        if ($task_list === false){
+            error('获取任务列表失败');
+        }
+
+        $this->assign('task_id',$task_id);
+        $this->assign('demand_id',$demand_id);
+        $this->assign('task_list',$task_list);
+        return view();
+    }
+
+    /**
+     * @功能：我的任务列表
+     * @开发者：wdd
+     */
+    public function task_add(){
+
+        $where['propose_status'] =ProposeStatus::OPEN;
+        $where['is_delete'] = IsDelete::No;
+        $project_list = IDb::getInstance('project')
+            ->setDbFiled("project_id,project_name")
+            ->setDbWhere($where)
+            ->sel();
+        if ($project_list === false){
+            error('获取项目列表失败');
+        }
+
+        $this->assign('project_list',$project_list);
+        return view();
+    }
+
+    /**
+     * @功能：我的任务列表
+     * @开发者：wdd
+     */
+    public function task_edit(){
+        //接收参数
+        $task_id = IRequest::get("task_id",IRequest::NOT_EMPTY,"请选择项目！");
+
+        $where_task['ta.task_id'] = $task_id;
+        $task_info = IDb::getInstance('task as ta')
+            ->setDbFiled("ta.*,pt.project_name,pt.charge_name")
+            ->setDbJoin("project as pt","pt.project_id = ta.project_id")
+            ->setDbWhere($where_task)
+            ->row();
+        if ($task_info === false){
+            error('获取任务详情失败');
+        }
+
+        $where['propose_status'] =ProposeStatus::OPEN;
+        $where['is_delete'] = IsDelete::No;
+        $project_list = IDb::getInstance('project')
+            ->setDbFiled("project_id,project_name")
+            ->setDbWhere($where)
+            ->sel();
+        if ($project_list === false){
+            error('获取项目列表失败');
+        }
+
+        $this->assign('task_info',$task_info);
+        $this->assign('project_list',$project_list);
+        $this->assign('task_id',$task_id);
+        return view();
+    }
+    /**
+     * @功能：任务提交
+     * @开发者：wdd
+     */
+    public function task_submit(){
+        //接收参数
+        $task_id = IRequest::get("task_id");
+        $project_id = IRequest::get("project_id",IRequest::NOT_EMPTY,"请选择项目！");
+        $rate_describe = IRequest::get("rate_describe",IRequest::NOT_EMPTY,"进度描述不能为空！");
+        $rate_percent = IRequest::get("rate_percent",IRequest::NUMBER,"进度百分比格式不对！");
+        $remark = IRequest::get("remark");
+
+        if($rate_percent<0){
+            error('百分比不能小于0');
+        }
+
+        if (empty($task_id)){
+
+            $user_info = IDb::getInstance('user')->setDbWhere(array('user_id'=>get_login_user_id()))->row();
+            if ($user_info === false){
+                error('获取用户信息失败');
+            }
+
+            $add_data['project_id'] = $project_id;
+            $add_data['rate_describe'] = $rate_describe;
+            $add_data['rate_percent'] = $rate_percent;
+            $add_data['remark'] = $remark;
+            $add_data['join_id'] = $user_info['user_id'];
+            $add_data['join_name'] = $user_info['nickname'];
+            $add_data['join_avatar'] = $user_info['avatar'];
+            $add_data['create_admin'] = get_login_admin_id();
+            $add_data['create_time'] = get_date_time();
+
+            $rate_add = IDb::getInstance('task')->setDbData($add_data)->add();
+            if ($rate_add === false){
+                error('添加失败');
+            }
+
+        }else{
+
+            $edit_where['task_id'] = $task_id;
+            $edit_data['project_id'] = $project_id;
+            $edit_data['rate_describe'] = $rate_describe;
+            $edit_data['rate_percent'] = $rate_percent;
+            $edit_data['remark'] = $remark;
+            $edit_data['update_admin'] = get_login_admin_id();
+            $edit_data['update_time'] = get_date_time();
+
+            $rate_edit = IDb::getInstance('task')->setDbData($edit_data)->setDbWhere($edit_where)->upd();
+            if ($rate_edit === false){
+                error('修改失败');
+            }
+
+        }
+        //画面跳转
+        $this->success("操作成功",Url("task_list"));
+    }
+
+    /**
+     * @功能：任务详情
+     * @开发者：wdd
+     */
+    public function task_info(){
+        $task_id = IRequest::get("task_id",IRequest::NOT_EMPTY,"任务编号不能为空！");
+
+        $where_task['ta.task_id'] = $task_id;
+        $task_info = IDb::getInstance('task as ta')
+            ->setDbFiled("ta.*,pt.project_name,pt.charge_name,use.nickname,use.avatar")
+            ->setDbJoin("project as pt","pt.project_id = ta.project_id")
+            ->setDbJoin("user as use","use.user_id = ta.join_id")
+            ->setDbWhere($where_task)
+            ->row();
+//        dump(IDb::getLastSql());exit;
+        if ($task_info === false){
+            error('获取详情失败');
+        }
+
+        //设置layout
+        $this->layout("layout_empty");
+
+        //参数的赋值
+        $this->assign('task_info', $task_info);
+
+        //页面的显示
+        return view();
+    }
+    /**
+     * @功能：任务详情
+     * @开发者：wdd
+     */
+    public function task_del(){
+        $task_id = IRequest::get("task_id",IRequest::NOT_EMPTY,"任务编号不能为空！");
+
+        $where['task_id'] = $task_id;
+        $data['is_delete'] = IsDelete::Yes;
+
+        $task_del = IDb::getInstance('task')->setDbData($data)->setDbWhere($where)->upd();
+        if ($task_del === false){
+            error('删除失败');
+        }
+
+        //画面跳转
+        $this->success("操作成功",Url("task_list"));
+    }
+
+    /**
+     * @功能：任务详情
+     * @开发者：wdd
+     */
+    public function task_restore(){
+        $task_id = IRequest::get("task_id",IRequest::NOT_EMPTY,"任务编号不能为空！");
+
+        $where['task_id'] = $task_id;
+        $data['is_delete'] = IsDelete::No;
+
+        $task_del = IDb::getInstance('task')->setDbData($data)->setDbWhere($where)->upd();
+        if ($task_del === false){
+            error('还原失败');
+        }
+
+        //画面跳转
+        $this->success("操作成功",Url("task_list"));
+    }
+}

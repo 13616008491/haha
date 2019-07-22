@@ -1,0 +1,52 @@
+<!-- 编辑区域 -->
+<div class="lists">
+    <!--添加用户表单-->
+    <div class="tab_edit">
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">项目编号：</td>
+                <td class="t_l">{$project_info['project_id']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目名称：</td>
+                <td class="t_l">{$project_info['project_name']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目负责人：</td>
+                <td class="t_l">{$project_info['real_name']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目负责人电话：</td>
+                <td class="t_l">{$project_info['phone']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目描述：</td>
+                <td class="t_l">{:widget('common/TextArea/text_area',array('project_describe',$project_info['project_describe'],false,true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目图片：</td>
+                <td class="t_l">  {:widget('common/Images/img',array($project_info['project_photo_url'],50,50))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目描述：</td>
+                <td class="t_l">{$project_info['project_describe']}</td>
+            </tr>
+            <tr>
+                 <td class="t_r t_left_w">需求提交状态：</td>
+                <td class="t_l">{:widget('common/Color/color',array('propose_status',$project_info["propose_status"]))}</td>
+             </tr>
+            <tr>
+                <td class="t_r t_left_w">项目开始时间：</td>
+                <td class="t_l">{$project_info['start_time']}</td>
+             </tr>
+            <tr>
+                <td class="t_r t_left_w">排序：</td>
+                <td class="t_l">{$project_info['sort_level']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">备注：</td>
+                <td class="t_l">{:widget('common/TextArea/text_area',array('project_describe',$project_info['remark'],false,true))}</td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<!--添加用户表单-->
+<div class="tab_edit_empty">
+    <table width="100%" class="list">
+        <tr>
+            <td class="t_r t_left_w">任务编号：</td>
+            <td class="t_l">{$task_info.task_id}</td>
+        </tr>
+        <tr>
+            <td class="t_r t_left_w">项目名称：</td>
+            <td class="t_l">{$task_info.project_name}</td>
+        </tr>
+        <tr>
+            <td class="t_r t_left_w">项目负责人：</td>
+            <td class="t_l">{$task_info.charge_name}</td>
+        </tr>
+        <tr>
+            <td class="t_r t_left_w">参与人编号：</td>
+            <td class="t_l">{$task_info.join_id}</td>
+        </tr>
+        <tr>
+            <td class="t_r t_left_w">参与人名字：</td>
+            <td class="t_l">{$task_info.join_name}</td>
+        </tr>
+        <tr>
+            <td class="t_r t_left_w">参与人头像：</td>
+            <td class="t_l">{:widget('common/Images/img',array($task_info['join_avatar'],130,130))}</td>
+        </tr>
+        <tr>
+            <td class="t_r t_left_w">进度描述：</td>
+            <td class="t_l">{$task_info.rate_describe}</td>
+        </tr>
+        <tr>
+            <td class="t_r t_left_w">进度百分比：</td>
+            <td class="t_l">{$task_info.rate_percent}%</td>
+        </tr>
+        <tr>
+            <td class="t_r t_left_w">创建时间：</td>
+            <td class="t_l">{$task_info.create_time}</td>
+        </tr>
+        <tr>
+            <td class="t_r t_left_w">更新时间：</td>
+            <td class="t_l">{empty name="$task_info.update_time"}--{else/}{$task_info.update_time}{/empty}</td>
+        </tr>
+        <tr>
+            <td class="t_r t_left_w">备注：</td>
+            <td class="t_l">{empty name="$task_info.remark"}--{else/}{$task_info.remark}{/empty}</td>
+        </tr>
+    </table>
+</div>

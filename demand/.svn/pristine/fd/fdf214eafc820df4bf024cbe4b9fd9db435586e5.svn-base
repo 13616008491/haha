@@ -1,0 +1,437 @@
+<?php
+/*
+ * @开发工具: JetBrains PhpStorm.
+ * @文件名：SystemController.class.php
+ * @类功能: 需求管理
+ * @开发者: cxl
+ * @开发时间： 15-10-22
+ * @版本：version 1.0
+ */
+namespace app\admin\controller;
+
+use app\common\controller\AdminBaseController;
+use app\common\enum\DemandStatus;
+use app\common\enum\IsDelete;
+use app\common\enum\IsHistory;
+use app\common\ext\IDb;
+use app\common\ext\IRequest;
+use think\Config;
+
+class Total extends AdminBaseController {
+    /**
+     * @功能：项目统计
+     * @开发者：szg
+     */
+    public function project_list(){
+        //接收参数
+        $project_id = IRequest::get('project_id');
+        $project_name = IRequest::get('project_name');
+        $user_name = IRequest::get('user_name');
+        $propose_time_start = IRequest::get('propose_time_start');
+        $propose_time_end = IRequest::get('propose_time_end');
+
+        //设置查询条件
+        $demand_where = null;
+        $project_where = array();
+        if(!empty($project_id)) $project_where['pt.project_id'] =$project_id;
+        if(!empty($project_name)) $project_where['pt.project_name'] = array('like', "%{$project_name}%");
+        if(!empty($user_name)) $project_where['concat(ur.nickname,ur.real_name)'] = array('like', "%{$user_name}%");
+        if(!empty($propose_time_start) && empty($propose_time_end)) $demand_where = " where date_format(propose_time,'%Y-%m-%d')>='{$propose_time_start}'";
+        if(empty($propose_time_start) && !empty($propose_time_end)) $demand_where = " where date_format(propose_time,'%Y-%m-%d')<='{$propose_time_end}'";
+        if(!empty($propose_time_start) && !empty($propose_time_end)) $demand_where = " where date_format(propose_time,'%Y-%m-%d')>='{$propose_time_start}' and date_format(propose_time,'%Y-%m-%d')<='{$propose_time_end}'";
+
+        //取得数据
+        $project_list = IDb::getInstance('project as pt')
+            ->setDbFiled("dd.*,pt.*,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name,ur.phone")
+            ->setDbJoin("user as ur","pt.charge_user_id=ur.user_id","left")
+            ->setDbJoin("(select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) as total,sum(if(demand_status=1,1,0)) as pending,sum(if(demand_status=2,1,0)) as confirm,
+                              sum(if(demand_status=3,1,0)) as development,sum(if(demand_status=4,1,0)) as refuse,
+                              sum(if(demand_status=5,1,0)) as test,sum(if(demand_status=6,1,0)) as finish
+                       from ".get_table("demand").$demand_where."
+                       group  by project_id
+                       ) as dd","dd.project_id=pt.project_id","left")
+            ->setDbWhere($project_where)
+            ->setDbOrder('pt.sort_level desc,pt.project_name desc')
+            ->pag();
+
+        //判断取得数据是否正常
+        if(empty($project_list)){
+            $project_list = array();
+        }
+
+        //页面赋值
+        $this->assign('project_list', $project_list);
+        $this->assign('project_id', $project_id);
+        $this->assign('project_name', $project_name);
+        $this->assign('user_name', $user_name);
+        $this->assign('propose_time_start', $propose_time_start);
+        $this->assign('propose_time_end', $propose_time_end);
+
+        //页面显示
+        return view();
+    }
+
+    /**
+     * @功能：项目详情
+     * @开发者：szg
+     */
+    public function project_info(){
+        //接收参数
+        $project_id = IRequest::get('project_id',IRequest::NOT_EMPTY,"项目编号不能为空！");
+
+        //取得数据
+        $project_where['project_id'] = $project_id;
+        $project_info = IDb::getInstance('project as pt')
+            ->setDbFiled("pt.*,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name,ur.phone")
+            ->setDbJoin("user as ur","pt.charge_user_id=ur.user_id")
+            ->setDbWhere($project_where)
+            ->row();
+
+        //设置layout
+        $this->layout("layout_empty");
+
+        //模板渲染
+        $this->assign('project_id',$project_id);
+        $this->assign('project_info',$project_info);
+
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：用户统计
+     * @开发者：szg
+     */
+    public function user_list(){
+        //接收参数
+        $user_id = IRequest::get('user_id');
+        $user_name = IRequest::get('user_name');
+        $phone = IRequest::get('phone');
+        $propose_time_start = IRequest::get('propose_time_start');
+        $propose_time_end = IRequest::get('propose_time_end');
+
+        //设置查询条件
+        $notice_where = null;
+        $demand_log_where = null;
+        $demand_where = null;
+        $project_where = array();
+        if(!empty($project_id)) $project_where['ur.user_id'] =$user_id;
+        if(!empty($phone)) $project_where['ur.phone'] = array('like', "%{$phone}%");
+        if(!empty($user_name)) $project_where['concat(ur.nickname,ur.real_name)'] = array('like', "%{$user_name}%");
+
+        //设置日期查询条件（开始时间）
+        if(!empty($propose_time_start) && empty($propose_time_end)) {
+            $notice_where = " where date_format(create_time,'%Y-%m-%d')>='{$propose_time_start}'";
+            $demand_log_where = " where date_format(operate_time,'%Y-%m-%d')>='{$propose_time_start}'";
+            $demand_where = " where date_format(propose_time,'%Y-%m-%d')>='{$propose_time_start}'";
+        }
+
+        //设置日期查询条件（结束时间）
+        if(empty($propose_time_start) && !empty($propose_time_end)) {
+            $notice_where = " where date_format(create_time,'%Y-%m-%d')<='{$propose_time_end}'";
+            $demand_log_where = " where date_format(operate_time,'%Y-%m-%d')<='{$propose_time_end}'";
+            $demand_where = " where date_format(propose_time,'%Y-%m-%d')<='{$propose_time_end}'";
+        }
+
+        //设置日期查询条件（开始时间、结束时间）
+        if(!empty($propose_time_start) && !empty($propose_time_end)) {
+            $notice_where = " where date_format(create_time,'%Y-%m-%d')>='{$propose_time_start}' and date_format(create_time,'%Y-%m-%d')<='{$propose_time_end}'";
+            $demand_log_where = " where date_format(operate_time,'%Y-%m-%d')>='{$propose_time_start}' and date_format(operate_time,'%Y-%m-%d')<='{$propose_time_end}'";
+            $demand_where = " where date_format(propose_time,'%Y-%m-%d')>='{$propose_time_start}' and date_format(propose_time,'%Y-%m-%d')<='{$propose_time_end}'";
+        }
+
+        //取得数据
+        $user_list = IDb::getInstance('user as ur')
+            ->setDbFiled("ne.*,dl.*,tk.*,dd.*,ur.*")
+            ->setDbJoin("(select user_id,count(user_id) as notice from ".get_table("notice").$notice_where." group by user_id) as ne","ne.user_id=ur.user_id","left")
+            ->setDbJoin("(select user_id,count(user_id) as log from ".get_table("demand_log").$demand_log_where." group by user_id) as dl","dl.user_id=ur.user_id","left")
+            ->setDbJoin("(select user_id,count(user_id) as task from ".get_table("task").$notice_where." group by user_id) as tk","tk.user_id=ur.user_id","left")
+            ->setDbJoin("(select user_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) as total,sum(if(demand_status=1,1,0)) as pending,sum(if(demand_status=2,1,0)) as confirm,sum(if(demand_status=3,1,0)) as development,sum(if(demand_status=4,1,0)) as refuse,sum(if(demand_status=5,1,0)) as test,sum(if(demand_status=6,1,0)) as finish from ".get_table("demand").$demand_where." group  by user_id) as dd","dd.user_id=ur.user_id","left")
+            ->setDbWhere($project_where)
+            ->setDbOrder('ur.user_id desc')
+            ->pag();
+
+        //判断取得数据是否正常
+        if(empty($user_list)){
+            $user_list = array();
+        }
+
+        //页面赋值
+        $this->assign('user_list', $user_list);
+        $this->assign('user_id', $user_id);
+        $this->assign('user_name', $user_name);
+        $this->assign('phone', $phone);
+        $this->assign('propose_time_start', $propose_time_start);
+        $this->assign('propose_time_end', $propose_time_end);
+
+        //页面显示
+        return view();
+    }
+
+    /**
+     * @功能：周报
+     * @开发者：szg
+     */
+    public function weekly_list(){
+        //接收参数
+        $weekly_id = IRequest::get('weekly_id');
+        $date_range = IRequest::get('date_range');
+        $remark = IRequest::get('remark');
+        $is_history = IRequest::get('is_history');
+
+        //设置查询条件
+        $weekly_where = array();
+        if(!empty($weekly_id)) $weekly_where['weekly_id'] = $weekly_id;
+        if(!empty($date_range)) $weekly_where['date_range'] = array('like', "%{$date_range}%");
+        if(!empty($remark)) $weekly_where['remark'] = array('like', "%{$remark}%");
+        if(!empty($is_history)) $weekly_where['is_history'] = $is_history;
+        $weekly_list = IDb::getInstance('weekly')
+            ->setDbWhere($weekly_where)
+            ->setDbOrder('weekly_id desc')
+            ->pag();
+
+        //判断取得数据是否正常
+        if(empty($weekly_list)){
+            $weekly_list = array();
+        }
+
+        //整理数据
+        foreach($weekly_list as &$data){
+            $data['url'] = "http://".Config::get("url_ip").url("admin/total/weekly_info",array("weekly_id"=>$data['weekly_id']));
+        }
+
+        //页面赋值
+        $this->assign('weekly_list', $weekly_list);
+        $this->assign('weekly_id', $weekly_id);
+        $this->assign('date_range', $date_range);
+        $this->assign('remark', $remark);
+        $this->assign('is_history', $is_history);
+
+        //页面显示
+        return view();
+    }
+
+    /**
+     * @功能：添加周报
+     * @开发者：szg
+     */
+    public function weekly_add(){
+        //设置查询条件
+        $admin_where['is_delete'] = IsDelete::No;
+        $admin_list = IDb::getInstance('admin as ad')
+            ->setDbFiled("ur.user_id,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name")
+            ->setDbJoin("user as ur","ad.user_id=ur.user_id")
+            ->setDbWhere($admin_where)
+            ->setDbOrder('ad.user_id desc')
+            ->sel();
+
+        //页面赋值
+        $this->assign('admin_list', $admin_list);
+
+        //页面显示
+        return view();
+    }
+
+    /**
+     * @功能：编辑周报
+     * @开发者：szg
+     */
+    public function weekly_edit(){
+        //接收参数
+        $weekly_id = IRequest::get("weekly_id",IRequest::NOT_EMPTY,"周报编号不能为空！");
+
+        //设置查询条件
+        $weekly_where['weekly_id'] = $weekly_id;
+        $weekly_info = IDb::getInstance('weekly')->setDbWhere($weekly_where)->row();
+        if(empty($weekly_info)){
+            error("取得周报信息失败！");
+        }
+
+        //整理信息
+        $weekly_info['user_list'] = explode(",",$weekly_info['user_list']);
+
+        //设置查询条件
+        $admin_where['is_delete'] = IsDelete::No;
+        $admin_list = IDb::getInstance('admin as ad')
+            ->setDbFiled("ur.user_id,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name")
+            ->setDbJoin("user as ur","ad.user_id=ur.user_id")
+            ->setDbWhere($admin_where)
+            ->setDbOrder('ad.user_id desc')
+            ->sel();
+
+        //页面赋值
+        $this->assign('weekly_id', $weekly_id);
+        $this->assign('weekly_info', $weekly_info);
+        $this->assign('admin_list', $admin_list);
+
+        //页面显示
+        return view();
+    }
+
+    /**
+     * @功能：周报提交
+     * @开发者：szg
+     */
+    public function weekly_submit(){
+        //接收参数
+        $weekly_id = IRequest::get("weekly_id");
+        $date_range_start = IRequest::get("date_range_start",IRequest::NOT_EMPTY,"周报开始日期不能为空！");
+        $date_range_end = IRequest::get("date_range_end",IRequest::NOT_EMPTY,"周报结束日期不能为空！");
+        $user_list = IRequest::get("user_list");
+        $summary = IRequest::get("summary");
+        $remark = IRequest::get("remark");
+
+        //判断日期是否正常
+        if($date_range_start >= $date_range_end){
+            error("周报汇报日期错误！");
+        }
+
+        //判断是否选择汇报人员
+        if(empty($user_list) || !is_array($user_list) || count($user_list) <= 0){
+            error("请选择汇报人员！");
+        }
+
+        //设置查询条件
+        $demand_where['demand_status'] = array("neq",DemandStatus::IDENT);
+        $demand_where['_string_'] = "(
+                (date_format(development_time,'%Y-%m-%d') >= '{$date_range_start}' and date_format(development_time,'%Y-%m-%d') <= '{$date_range_end}') or
+                (date_format(test_time,'%Y-%m-%d') >= '{$date_range_start}' and date_format(test_time,'%Y-%m-%d') <= '{$date_range_end}') or
+                (date_format(finish_time,'%Y-%m-%d') >= '{$date_range_start}' and date_format(finish_time,'%Y-%m-%d') <= '{$date_range_end}')
+            )";
+
+        //取得数据
+        $demand_list = IDb::getInstance("demand as dd")
+            ->setDbFiled("pt.project_id,pt.project_name,dd.demand_describe,dd.demand_status")
+            ->setDbJoin("project as pt","dd.project_id=pt.project_id")
+            ->setDbWhere($demand_where)
+            ->setDbOrder("pt.project_id")
+            ->sel();
+
+        //整理进度概要数据
+        $outline = array();
+        if(is_array($demand_list) && count($demand_list) > 0){
+            foreach($demand_list as $item){
+                $outline[$item['project_id']]['project_id'] = $item['project_id'];
+                $outline[$item['project_id']]['project_name'] = $item['project_name'];
+                $outline[$item['project_id']]['demand_list'][] = array("demand_describe"=>$item['demand_describe'],"demand_status"=>$item['demand_status']);
+            }
+        }
+
+        //取得数据
+        $task_where['_string_'] = "(date_format(create_time,'%Y-%m-%d') >= '{$date_range_start}' or date_format(create_time,'%Y-%m-%d') <= '{$date_range_end}') ";
+        $task_list = IDb::getInstance("task as tk")
+            ->setDbFiled("pt.project_id,pt.project_name,dd.demand_id,dd.demand_describe,ur.user_id,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name,tk.task_type,tk.rate_describe,tk.rate_percent,tk.start_time,tk.end_time")
+            ->setDbJoin("user as ur","tk.user_id=ur.user_id")
+            ->setDbJoin("demand as dd","tk.demand_id=dd.demand_id")
+            ->setDbJoin("project as pt","dd.project_id=pt.project_id")
+            ->setDbData($demand_where)
+            ->setDbOrder("pt.project_id,dd.demand_id")
+            ->sel();
+
+        //整理进度明细数据
+        $detail = array();
+        if(is_array($task_list) && count($task_list) > 0){
+            foreach($task_list as $item){
+                //整理进度数据
+                $detail[$item['project_id']]['project_id'] = $item['project_id'];
+                $detail[$item['project_id']]['project_name'] = $item['project_name'];
+                $detail[$item['project_id']]['demand_list'][$item['demand_id']]['demand_describe'] = $item['demand_describe'];
+                $detail[$item['project_id']]['demand_list'][$item['demand_id']]['task_list'][] = array(
+                    "user_id"=>$item['user_id'],
+                    "real_name"=>$item['real_name'],
+                    "task_type"=>$item['task_type'],
+                    "rate_describe"=>$item['rate_describe'],
+                    "rate_percent"=>$item['rate_percent'],
+                    "start_time"=>$item['start_time'],
+                    "end_time"=>$item['end_time']
+                );
+            }
+        }
+
+        //整理数据
+        $user_list = implode(",",$user_list); //设置选中汇报人员
+        $outline = json_encode($outline); //设置进度概要
+        $detail = json_encode($detail); //设置进度明细
+
+        //判断操作类型
+        if(empty($weekly_id)){
+            //添加周报记录
+            $weekly_data['date_range_start'] = $date_range_start;
+            $weekly_data['date_range_end'] = $date_range_end;
+            $weekly_data['user_list'] = $user_list;
+            $weekly_data['summary'] = $summary;
+            $weekly_data['outline'] = $outline;
+            $weekly_data['detail'] = $detail;
+            $weekly_data['is_history'] = IsHistory::No;
+            $weekly_data['remark'] = $remark;
+            $weekly_data['create_time'] = get_date_time();
+            $weekly_add = IDb::getInstance("weekly")->setDbData($weekly_data)->add();
+            if($weekly_add === false){
+                error("添加周报失败！");
+            }
+        }else{
+            //添加周报记录
+            $weekly_where['weekly_id'] = $weekly_id;
+            $weekly_data['date_range_start'] = $date_range_start;
+            $weekly_data['date_range_end'] = $date_range_end;
+            $weekly_data['user_list'] = $user_list;
+            $weekly_data['summary'] = $summary;
+            $weekly_data['outline'] = $outline;
+            $weekly_data['detail'] = $detail;
+            $weekly_data['is_history'] = IsHistory::No;
+            $weekly_data['remark'] = $remark;
+            $weekly_data['create_time'] = get_date_time();
+            $weekly_upd = IDb::getInstance("weekly")->setDbData($weekly_data)->setDbWhere($weekly_where)->upd();
+            if($weekly_upd === false){
+                error("修改周报失败！");
+            }
+        }
+
+        //画面跳转
+        $this->success("操作成功",Url("weekly_list"));
+    }
+
+    /**
+     * @功能：周报详情
+     * @开发者：szg
+     */
+    public function weekly_info(){
+        //接收参数
+        $weekly_id = IRequest::get("weekly_id",IRequest::NOT_EMPTY,"周报编号不能为空！");
+
+        //设置查询条件
+        $weekly_where['weekly_id'] = $weekly_id;
+        $weekly_info = IDb::getInstance('weekly')->setDbWhere($weekly_where)->row();
+        if(empty($weekly_info)){
+            error("取得周报信息失败！");
+        }
+
+        //整理数据
+        $weekly_info['outline'] = json_decode($weekly_info['outline'],true);//整理进度概要
+        $weekly_info['detail'] = json_decode($weekly_info['detail'],true);//整理进度明细
+
+        //整理汇报人员
+        $user_list = $weekly_info['user_list'];
+        $user_list = explode(",", $user_list);
+        $weekly_info['user_list'] = array();
+
+        //整理数据
+        if(!empty($user_list) && is_array($user_list) && count($user_list) > 0) {
+            //设置查询条件
+            $user_where['user_id'] = array("in",$user_list);
+            $user_info = IDb::getInstance('user')->setDbFiled(array("group_concat(if(real_name is null,nickname,real_name)) as real_name"))->setDbWhere($user_where)->row();
+            if(!empty($user_info)){
+                $weekly_info['user_list'] = str_ireplace(",","，",$user_info['real_name']);
+            }
+        }
+
+            //设置layout
+        $this->layout(false);
+
+        //页面赋值
+        $this->assign('weekly_info', $weekly_info);
+
+        //页面显示
+        return view();
+    }
+}

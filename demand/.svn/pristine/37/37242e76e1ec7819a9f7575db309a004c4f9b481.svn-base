@@ -1,0 +1,13 @@
+<!--菜单列表-->
+<div class="lists-tab-cont">
+    <form action="{:Url('role_access_submit')}" method="post" id="admin_submit">
+        <!-- 公司类型编号 -->
+        <input type="hidden" name="role_id" value="{$role_id}"/>
+
+        <!-- 菜单列表 -->
+        {:widget('common/Access/show',array($menu_list,0,$node_list))}
+
+        <!-- 提交按钮 -->
+        <div class="btn" style="margin: 20px;"><input type="submit" class="but_blue" value="保存角色菜单分配信息"></div>
+    </form>
+</div>

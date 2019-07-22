@@ -1,0 +1,2059 @@
+/*房贷首页*/
+.hos-banner{
+	width: 100%;
+	margin: auto;
+	background: url(../../images/hos_banner.jpg) center center no-repeat;
+	background-size:auto 100%;
+	height: 496px;
+	position: relative;
+}
+.hos-list-banner{
+	width: 100%;
+	max-width: 1920px;
+	margin: auto;
+	background: url(../../images/hos_list_banner.jpg) center center no-repeat;
+	height: 364px;
+	position: relative;
+}
+.mortgage-qa-title {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	line-height: 30px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #2692E9;
+}
+
+.mortgage-qa-title p {
+	width: 30px;
+	height: 30px;
+	overflow: hidden;
+	float: left;
+	border-radius: 100%;
+	background: #94CFFF;
+	color: #2087DB;
+	line-height: 30px;
+	text-align: center;
+	font-size: 16px;
+	margin-right: 15px;
+}
+
+.mortgage-qa dl {
+	background: #F1F8FE;
+	padding: 20px;
+}
+
+.mortgage-qa dl dt span {
+	margin: 0 10px;
+	float: left;
+	color: #999;
+}
+
+.mortgage-qa dl dt p {
+	width: auto;
+	height: 22px;
+	background: #4DAAF5;
+	color: #fff;
+	float: left;
+	line-height: 22px;
+	padding: 0 10px;
+	margin-top: 7px;
+}
+
+.mortgage-qa-titleicon {
+	width: 0;
+	height: 0;
+	border: 12px solid #F1F8FE;
+	border-color: transparent transparent #F1F8FE transparent;
+	display: block;
+	margin-left: 80px;
+}
+
+
+.mortgage-qa .asklist {
+	padding: 0 0 25px 0;
+	border: 0;
+}
+.hosLoanNav{
+	background: #fff;
+}
+.hosLoanNav .nav-b{
+	width: 1200px;
+	margin: 0 auto;
+}
+.hosLoanCont {
+	
+}
+.hosLoanCont .hosLoanLl{
+	margin: 25px 0px;
+	background: #038df7; 
+	background: -moz-linear-gradient(right top, #038df7 0%,#00c0ff 100%); 
+	background: -webkit-linear-gradient(right top, #038df7 0%,#00c0ff 100%); 
+	background: -o-linear-gradient(right top, #038df7 0%,#00c0ff 100%); 
+	background: -ms-linear-gradient(right top, #038df7 0%,#00c0ff 100%); 
+	background: linear-gradient(right top, #038df7 0%,#00c0ff 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#038df7', endColorstr='#00c0ff',GradientType=0 ); 
+}
+:root .gradient{filter:none;} 
+
+.hosLoanCont .hosLoanLl .hosLoanLl-le{
+	float: left;
+	width: 20%;
+	text-align: center;
+	padding: 20px 0px;
+}
+.hosLoanCont .hosLoanLl .hosLoanLl-le h1{
+	color: #fff;
+	font-size: 28px;
+	height: 60px;
+	line-height: 60px;
+}
+.hosLoanCont .hosLoanLl .hosLoanLl-le .chhBtn{
+	width: 120px;
+	border-radius: 17.5px;
+	height: 35px;
+	line-height: 32px;
+	background: #fced00;
+	color: #97621d;
+	border:2px solid #fff;
+	margin-top: 5px;
+}
+.hosLoanCont .hosLoanLl .hosLoanLl-rig{
+	float: left;
+	width: 80%;
+	padding: 20px 0px;
+}
+.hosLoanCont .hosLoanLl .hosLoanLl-rig li{
+	float: left;
+	width: 18%;
+	background: #FFFFFF;
+	padding: 15px;
+	margin-left: 1%;
+	cursor: pointer;
+	position: relative;
+	top: 0px;
+	border-radius: 2px;
+	transition: top 0.2s;
+	-moz-transition: top 0.2s;	
+	-webkit-transition: top 0.2s;	
+	-o-transition: top 0.2s;	
+}
+.hosLoanCont .hosLoanLl .hosLoanLl-rig li:hover{
+	top: -5px;
+}
+.hosLoanCont .hosLoanLl .hosLoanLl-rig li img{
+	vertical-align: middle;
+	margin-right: 10px;
+	max-width: 30px;
+}
+.hosLoanCont .hosLoanLl .hosLoanLl-rig li h2{
+	font-size: 18px;
+	font-weight: 400;
+}
+.hosLoanCont .hosLoanLl .hosLoanLl-rig li p{
+	background: #fff4f0;
+	padding: 20px;
+	margin-top: 10px;
+	padding-right: 0px;
+}
+.hosLoanCont .hosLoanLl .hosLoanLl-rig li p span{
+	display: block;
+	height: 25px;
+	line-height: 25px;
+}
+.hosLoanCont .hosLoanLl .hosLoanLl-rig li p .hosLoanLl-sign1{
+	background: #ff3640;
+	color: #fff;
+	padding: 1px 3px;
+	margin-right: 5px;
+}
+.hosLoanCont .hosLoanLl .hosLoanLl-rig li p .hosLoanLl-sign2{
+	background: #c0c0c0;
+	color: #fff;
+	padding: 1px 3px;
+	margin-right: 5px;
+}
+.buyHosProc{
+	background: #fff;
+	padding: 20px;
+	margin: 20px 0;
+	position: relative;
+}
+.buyHosProc h1{
+	font-size: 20px;
+	margin-bottom: 20px;
+	color: #323232;
+	font-weight: 500;
+}
+.buyHosProc .buyHosProc-detl li{
+	float: left;
+	width: 20%;
+	text-align: center;
+}
+.buyHosProc .buyHosProc-detl li p{
+	margin: 5px 0px;
+}
+.buyHosProc .buyHosProc-detl li h2{
+	margin: 10px 0px;
+	font-size: 16px;
+	color: #323232;
+}
+.buyHosProc .buyHosProc-detl div{
+	display: inline-block;
+	width: 90px;
+	height: 81px;
+	background: url(../../images/sign-img.png) no-repeat;
+	background-position-y: -200px;
+}
+.buyHosProc .buyHosProc-detl div.sign-img-2{
+	background-position-x: -108px;
+}
+.buyHosProc .buyHosProc-detl div.sign-img-3{
+	background-position-x: -216px;
+}
+.buyHosProc .buyHosProc-detl div.sign-img-4{
+	background-position-x: -324px;
+}
+.buyHosProc .buyHosProc-detl div.sign-img-5{
+	background-position-x: -432px;
+}
+.buyHosProc .buyHosProc-arrow{
+	height: 100px;
+	width: 50px;
+	position: absolute;left: 0px;
+	top: 50%;
+	margin-top: -50px;
+	background: url(../../images/car_loan_icon5.png) center center no-repeat;
+	
+}
+.hosLoanDet{
+	margin-bottom: 20px;
+	height: 550px;
+	padding-left: 320px;
+	position: relative;
+}
+.hosLoanDet .hosLoanDet-rate{
+	padding: 20px;
+	height: 550px;
+	background-color: #fff;
+}
+.hosLoanDet .hosLoanDet-rate ul{
+	width: 105%;
+}
+.hosLoanDet .hosLoanDet-rate li{
+	float: left;
+	margin-right: 20px;
+	width: 410px;
+	height: 140px;
+	border:1px solid #eee;
+	cursor: pointer;
+	position: relative;
+	padding: 20px;
+}
+.hosLoanDet .hosLoanDet-rate li .imgCenterBox{
+	height: 70px;
+	width: 70px;
+	line-height: 70px;
+	border-radius: 35px;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	overflow: initial;
+}
+.hosLoanDet .hosLoanDet-rate li .hosLoanDet-bank{
+	width: 100px;
+	text-align: center;
+}
+.hosLoanDet .hosLoanDet-rate li .hosLoanDet-bank p{
+	font-size: 18px;
+	color: #323232;
+	white-space : nowrap  ;
+}
+.hosLoanDet .hosLoanDet-rate li dl{
+	position: absolute;
+	left: 120px;
+	top: 30px;
+}
+.hosLoanDet .hosLoanDet-rate li dl div{
+	float: left;
+	text-align: center;
+	width: 96px;
+}
+.hosLoanDet .hosLoanDet-rate li dl div em{
+	display: block;
+	color: #ff3640;
+	font-size: 16px;
+	margin-bottom: 4px;
+}
+.hosLoanDet .hosLoanDet-rate li dl div span{
+	display: block;
+	color: #323232;
+	font-size: 18px;
+}
+.hosLoanDet .hosLoanDet-rate li dl dd{
+	width: 288px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	color: #999;
+}
+.hosLoanDet .hosLoanDet-rate li dl dd i{ 
+	margin-left: 25px;
+}
+.hosLoanDet .hosLoanDet-rate li .imgCenterBox img{ 
+	width: 100%;
+}
+.hosLoanDet .hosLoanDet-rate li:hover{
+	border:1px solid #fff;
+    box-shadow: 0px 0px 5px rgba(50,50,50,0.1);
+}
+.hosLoanDet .hosLoanDet-rate li:nth-child(even){
+	margin-right: 0;
+	margin-bottom: 20px;
+}
+.hosLoanDet .hosLoanDet-rate h1{
+    font-size: 20px;
+    color: #323232;
+	margin-bottom: 20px;
+	font-weight: 500;
+	position: relative;
+}
+.hosLoanDet .hosLoanDet-rate h1 a{
+	position: absolute;
+    right: 0;
+    top: 4px;
+    font-size: 14px;
+}
+.hosLoanDet h2{
+	color: #323232 ;
+	font-size: 22px;
+}
+.hosLoanDet .hosLoanDet-banInfo{
+	background: url(../../images/hos_loan_info.png);
+	position: relative;
+	height: 550px;
+}
+.hosLoanDet .hosLoanDet-banInfo2{
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: url(../../images/hos_loan_info2.jpg);
+	height: 550px;
+}
+.hosLoanDet .hosLoanDet-banInfo a,.hosLoanDet .hosLoanDet-banInfo2 a{
+	display: inline-block;
+	height: 46px;
+	width: 100%;
+	position: absolute;top: 308px;
+	cursor: pointer;
+}
+.hosLoanDet .hosLoanHeadLin{
+	padding:10px 20px;
+	border-right: 1px solid #eee;
+	padding-bottom: 27px;
+}
+.hosLoanDet .hosLoanPlan{
+	padding:10px 20px;
+}
+.hosLoanHeadLin-con ul li{
+	margin-top:20px ;
+}
+.hosLoanHeadLin-con ul li .imgCenterBox{
+	width: 40%;
+	height: 115px;
+	float: left;
+}
+.hosLoanHeadLin-con ul li dl{
+	float: left;
+	width: 60%;
+	padding-left: 10px;
+}
+.hosLoanHeadLin-con ul li dt{
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+.hosLoanHeadLin-con ul li dt a{
+	color: #323232 ;
+}
+.hosLoanHeadLin-con ul li dt a:hover{
+	color:#0099FF;
+}
+.hosLoanHeadLin-con ul li dd{
+	margin-bottom: 10px;
+}
+.hosLoanPlan-con .imgCenterBox{
+	width: 100%;
+	height: auto;
+	margin-top: 20px;
+}
+.hosLoanPlan-con li{
+	position: relative;
+	padding-left: 20px;
+	margin-top: 10px;
+}
+.hosLoanPlan-con li label{
+	color: #323232;
+	font-size: 16px;
+}
+.hosLoanPlan-con li:first-child label{
+	font-size: 20px;
+	color: #323232;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.hosLoanPlan-con li:first-child p{
+	font-size: 14px;
+	color: #999;
+	padding-top: 10px;
+}
+.hosLoanPlan-con li label a{
+	color: #323232 ;
+}
+.hosLoanPlan-con li label a:hover{
+	color:#0099FF;
+}
+.hosLoanPlan-con li i{
+	font-size: 30px;
+	position: absolute;left: 0px;
+	height: 20px;
+	line-height: 8px;
+	color: #323232;
+}
+.hosLoanDet .hosLoanDet-lvl{
+	border-right: 1px solid #eee;
+}
+.hosLoanDet .hosLoanDet-lvl:last-child{
+	border-right: 0px solid #eee;
+}
+.hosLoanDet-lvl{
+	padding: 10px 20px;
+	padding-bottom: 16px;
+}
+.hosLoanDet-lvl ul{
+	border: 1px solid #eee;
+	width: 100%;
+	margin-top: 10px;
+}
+.hosLoanDet-lvl ul li:after{
+	content: '';
+	display: block;
+	clear: both;
+}
+.hosLoanDet-lvl ul li label{
+	background: #edf7ff;
+	color: #323232;
+	display: inline-block;
+	width: 33.3334%;
+	padding: 18px 0px;
+	float: left;
+	text-align: center;
+	border-bottom: 1px solid #eee;
+}
+.hosLoanDet-lvl ul li span{
+	display: inline-block;
+	width: 33.3334%;
+	padding: 8px 0px;
+	float: left;
+	text-align: center;
+}
+.hosLoanDet-lvl ul.hosLoanDet-L4 li span,.hosLoanDet-lvl ul.hosLoanDet-L4 li label{
+	display: inline-block;
+	width: 25%;
+	padding: 18px 0px;
+	float: left;
+	text-align: center;
+}
+.hosLoanDet-lvl ul.hosLoanDet-L4 li span{
+	padding: 8px 0px;
+}
+.hosLoanArticle{
+	margin-bottom: 25px;
+	background: #fff;
+}
+.hosLoanArticle-tab{
+	padding: 0 20px;
+	border-bottom: 1px solid #eee;
+	position: relative;
+}
+.hosLoanArticle-tab span{
+	display: inline-block;
+	font-size: 20px;
+	height: 60px;
+	padding: 0 20px;
+	line-height: 60px;
+	cursor: pointer;
+	color: #323232;
+	position: relative;top: 1px;
+	transition: all 0.5s;
+	-moz-transition: all 0.5s;	
+	-webkit-transition: all 0.5s;	
+	-o-transition: all 0.5s;	
+}
+.hosLoanArticle-tab a{
+	display: inline-block;
+	height: 60px;
+	line-height: 60px;
+	cursor: pointer;
+	float: right;
+}
+.hosLoanArticle-tab i{
+	position: absolute;
+	display: inline-block;
+	width: 96px;
+	height: 3px;
+	background: #2692e9;
+	bottom: 0px;
+	left: 20px;
+	transition: all 0.5s;
+	-moz-transition: all 0.5s;	
+	-webkit-transition: all 0.5s;	
+	-o-transition: all 0.5s;	
+}
+.hosLoanArticle-tab span.articleAft{
+	color: #2692e9;
+}
+.hosLoanArticle-boxS .hosLoanArticle-box{
+	display: none;
+}
+.hosLoanArticle-boxS .hosLoanArticle-box:first-child{
+	display: block;
+}
+.hosLoanArticleList{
+	padding: 20px;
+	transition: background 0.5s;
+	-moz-transition: background 0.5s;
+	-webkit-transition: background 0.5s;
+	-o-transition: background 0.5s;
+}
+.hosLoanArticleList:hover{
+	background: #edf6fd;
+	cursor: pointer;
+	
+}
+.hosLoanArticleList:hover>dl dt a{
+	color: #2692e9 !important;
+}
+.hosLoanArticleList:after{
+	content: '';
+	display: block;
+	clear: both;
+}
+.hosLoanArticleList>div{
+	float: left;
+	width: 20%;
+	height: 130px;
+}
+.hosLoanArticleList>dl{
+	float: left;
+	padding-left: 20px;
+	width: 80%;
+}
+.hosLoanArticleList>dl span{
+	margin-right: 10px;
+	font-size: 12px;
+	color: #999;
+}
+.hosLoanArticleList>dl span i{
+	margin-right: 5px;
+    position: relative;
+    top: 1px;
+}
+.hosLoanArticleList>dl dt{
+	font-size: 16px;
+	color: #323232;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.hosLoanArticleList>dl dt a:link,
+.hosLoanArticleList>dl dt a:visited{
+	color: #323232;
+}
+.hosLoanArticleList>dl dd{
+	margin-bottom: 20px;
+	font-size: 14px;
+}
+.hosLoanProblem{
+	background: #fff;
+	padding: 20px;
+	margin-bottom: 25px;
+}
+.hosLoanProblem h1{
+	font-size: 22px;
+	color: #323232;
+	margin-bottom: 20px;
+}
+.hosLoanProblem .inputTextBD{
+	height: 40px;
+	line-height: 40px;
+	position: relative;top: 1px;
+	margin-right: 10px;
+	padding-right: 20px;
+}
+.hosLoanProblem .inputTextBD input{
+	width: 320px;
+	font-size: 12px;
+}
+.hosLoanProblem .chhBtn{
+	height: 40px;
+	line-height: 40px;
+	border-radius: 0px;
+	width: 120px;
+	margin-right: 20px;
+	color: #fff;
+}
+.hosLoanProblem .asklist ul{
+	padding: 0px;
+}
+.hosLoanProblem .asklist ul li{
+	width: 49%;
+	float: left;
+}
+.hosLoanProblem .asklist ul li a{
+	color: #2692e9;
+	margin-left: 10px;
+	cursor: pointer;
+}
+.hosLoanProblem .asklist ul li a:hover{
+	text-decoration: underline;
+}
+.hosLoanProblem .asklist ul li:nth-of-type(even){
+	margin-left: 2%;
+}
+.hosLoanProblem .mortgage-qa-title p{
+	color: #fff;
+	background: #2692e9;
+}
+.hosLoanProblem .asklist {
+	border:0px;
+}
+.hosLoanText{
+	margin-bottom: 10px;
+}
+.hosLoanText a{
+	padding-right: 15px;
+}
+.hosLoanTextEnc a{
+	margin-right: 30px;
+	color: #0c0c0c;
+	font-size: 18px;
+}
+.hosLoanTextEnc a:hover{
+	color: #2692e9;
+}
+/*房贷详情*/
+.hosLoanForm{
+	border:1px solid #eee;
+	text-align: center;
+}
+.hosLoanForm>div{
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px solid #eee;
+	background: #fff;
+}
+.hosLoanForm>div>div{
+	border-right: 1px solid #eee;
+}
+.hosLoanForm>div>div:last-child{
+	border-right: 0px solid #eee;
+}
+.hosLoanForm>div:last-child{
+	border-bottom: 0px solid #eee;
+}
+.formTitle {
+	height: 40px;
+	line-height: 40px;
+	position: relative;right: -1px;
+	font-weight: bold;
+}
+.formTitle>div {
+	color: #666;
+}
+.formTitle>div {
+	height: 40px;
+	line-height: 40px;
+	background: #ececec;
+}
+/*房贷计算器*/
+.piclist-b {
+	max-width: 1200px;
+	height: auto;
+	overflow: hidden;
+	margin: 0 auto
+}
+
+.piclist-b ul {
+	width: 105%
+}
+
+.piclist-b ul li {
+	width: 291px;
+	height: auto;
+	overflow: hidden;
+	float: left;
+	margin: 10px 12px 0 0
+}
+
+.piclist-b ul li img {
+	width: 291px;
+	height: 177px;
+	float: left;
+	transition: all .5s ease 0s;
+	transform: scale(1)
+}
+
+.piclist-b ul li img:hover {
+	transform: scale(1.1)
+}
+
+.piclistb-txt {
+	width: 100%;
+	height: 50px;
+	clear: both;
+	overflow: hidden;
+	font-size: 18px;
+	float: left;
+	line-height: 40px
+}
+
+.piclistb-txt-link:link,.piclistb-txt-link:visited {
+	text-decoration: none;
+	color: #333
+}
+
+.piclistb-txt-link:hover {
+	text-decoration: none;
+	color: #09F
+}
+.wrap-l{
+	width: 915px;
+}
+.wrap-r{
+	width: 260px;
+}
+.wrap-l .hosLoanCalc:last-child{
+	margin-bottom: 100px;
+}
+.hosList-nav .answer-title{
+	background: url(../../images/hosNavTitle.png) center center no-repeat;
+	color: #FFF;
+	font-size: 16px;
+}
+.hosList-nav-til i{
+	margin-right: 10px;
+}
+.hosList-nav-list span{
+	position: relative;top: 3px;
+	font-size: 30px;
+	color: #22aef8;
+}
+.information-details-a .hosList-nav-list li{
+	height: 50px;
+	line-height: 50px;
+	border-bottom:1px solid #eee ;
+	padding: 0px 20px;
+	cursor:pointer;
+}
+.information-details-a .hosList-nav-list li:hover{
+	background: #f2f7fd;
+}
+.information-details-a .hosList-nav-list li:hover a{
+	color: #0099ff;
+}
+.information-details-a .hosList-nav-list li:last-child{
+	border:0px;
+}
+.information-details-a .hosList-nav-list{
+	padding: 0px 0px;
+}
+.hosList-nav-aft{
+	background: #f2f7fd;
+}
+.hosLoanCalc{
+	padding: 25px 20px;
+	background: #fff;
+	margin-bottom: 25px;
+	position: relative;
+	border: 1px solid #eee;
+}
+.hosLoanCalc h3 i{
+	position: relative;top: 3px;
+	display: inline-block;
+	width: 5px;
+	height: 22px;
+	background: #2692e9;
+	margin-right: 5px;
+}
+.hosLoanCalc h3{
+	font-size: 22px;
+}
+.hosLoanCalc .hosRate{
+	font-size: 12px;
+	padding: 20px 0;
+	display: inline-block;
+	color: #ff0000;
+}
+.hosLoanCalc h4{
+	font-size: 20px;
+	color: #323232;
+	margin-bottom: 10px;
+}
+.hosLoanCalc .hosLoanTerm li{
+	height: 60px;
+	line-height: 60px;
+}
+.hosLoanCalc .hosLoanTerm li .chck:before{
+	border:1px solid #eee;
+	top:-15px;
+	left: 26px;
+}
+.hosLoanCalc .hosLoanTerm li .chck:after{
+	top:-9px;
+	left: 32px;
+}
+.hosLoanCalc .hosLoanTerm li .chck:checked:after{
+	top:-11px;
+	left: 30px;
+	background: #2692e9;
+}
+.hosLoanCalc .hosLoanTerm li .chck:checked:before{
+	border: 1px solid #2692e9;
+}
+.hosLoanCalc .hosLoanTerm li label{
+	width: 80px;
+	display: inline-block;
+}
+
+.hosLoanCalc .hosLoanTerm li>b{
+	font-weight: 400;
+	color: #2692e9;
+	margin-left: 20px;
+	cursor:pointer;
+}
+.hosLoanCalc .hosLoanTerm li>b:hover{
+	text-decoration:underline;
+}
+.hosLoanCalc .hosLoanTerm li .chhBtn{
+	border-radius:0px ;
+	color: #FFFFFF;
+	width: 120px;
+	margin-right: 20px;
+}
+.hosLoanCalc .hosLoanTerm li .inputTextBD input{
+	width: 180px;
+}
+.hosLoanCalc .hosLoanTerm li .rateManual{
+	padding-right: 20px;
+	margin-left: 20px;
+}
+.hosLoanCalc .segLine-empty{
+	margin: 20px 0px;
+}
+.hosLoanCalc .hosCalcResult h5{
+	font-weight: 400;
+	font-size: 14px;
+	color: #666666;
+}
+.hosLoanCalc .hosCalcResult h5 b{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: #2692e9;
+	color: #fff;
+	line-height: 20px;
+	text-align: center;
+	cursor:pointer;
+	margin-left: 10px;
+}
+.hosLoanCalc .hosCalcResult ul{
+	border: 1px solid #eee;
+	margin: 10px 20px 0 0;
+}
+.hosLoanCalc .hosCalcResult ul li{
+	border-bottom: 1px solid #eee;
+	height: 40px;
+	line-height: 40px;
+}
+.hosLoanCalc .hosCalcResult ul li label{
+	display: inline-block;
+	height: 39px;
+	width: 35%;
+	padding: 0px;
+	margin: 0px;
+	padding-left: 20px;
+	border-right: 1px solid #eee;
+	background: #f8f8f8;
+}
+.hosLoanCalc .hosCalcResult ul li span{
+	display: inline-block;
+	width: 63%;
+	text-align: right;
+	padding-right: 20px;
+}
+.hosLoanCalc .hosCalcResult ul li span i{
+	color: #ff2300;
+}
+.hosLoanCalc .hosCalcResult ul li:last-child{
+	border:0px
+}
+.hosLoanCalc p{
+	margin-top: 15px;
+}
+.hosLoanCalc p.hosRem{
+	font-size: 12px;
+	color: #999999;
+}
+.hosLoanCalc p.hosRem i{
+	margin: 0 5px 0 0;
+	position: relative;top:1px
+}
+.hosLoanCalc p a{
+	margin-right: 10px;
+}
+.hosLoanCalc p b{
+	font-size: 12px;
+	font-weight: 400;
+	color: #2692e9;
+	margin-left: 10px;
+	cursor:pointer;
+}
+.hosLoanRecd ul{
+	border:1px solid #eee;
+	margin: 20px 0px;
+}
+.hosLoanRecd ul .hosLoanRecdList{
+	text-align: center;
+	height: 50px;
+}
+.hosLoanRecd ul .hosLoanRecdList dl{
+	display: inline-block;
+	height: 50px;
+	vertical-align: middle;
+	padding-left: 5px;
+}
+.hosLoanRecd ul .hosLoanRecdList dt{
+	font-size: 18px;
+	font-weight: bold;
+}
+.hosLoanRecd ul .hosLoanRecdList dt,.hosLoanRecd ul .hosLoanRecdList dd{
+	height: 25px;
+	line-height: 25px;
+	text-align: left;
+}
+.hosLoanRecd ul li{
+	border-bottom: 1px solid #eee;
+	height: 90px;
+	padding-top: 20px;
+}
+.hosLoanRecd ul li:last-child{
+	border-bottom: 0px solid #eee;
+}
+.hosLoanRecd ul li p{
+	margin: 0px;
+	height: 25px;
+	line-height: 25px;
+}
+.hosLoanRecd ul li p i{
+	font-size: 18px;
+	color: #fd654d;
+}
+.hosLoanRecd ul li img{
+	vertical-align: middle;
+	height: 50px;
+}
+.hosLoanRecd .chhBtn{
+	border-radius: 2px;
+	width: 120px;
+	color: #fff;
+}
+.hosLoanCalc .piclist-b ul{
+	width: 100%;
+}
+.hosLoanCalc .piclist-b li{
+	width: 22%;
+	margin-right: 4%;
+}
+.hosLoanCalc .piclist-b li:last-child{
+	margin-right: 0;
+}
+.hosLoanCalc .piclist-b li img{
+	width: 100%;
+	height: auto;
+}
+.hosLoanCalc .piclist-b li p{
+	display: inline-block;
+	font-weight: bold;
+	font-size: 16px;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	margin: 10px 0 0 0 ;
+	color: #323232;
+}
+.hosLoanCalc .piclist-b li span{
+	display: block;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.hosLoanCalc .loanRecd{
+	margin-top: 20px;
+	padding-bottom: 130px;
+}
+.hosLoanCalc .loanRecd dl{
+	float: left;
+	padding-left: 20px;
+	width: 180px;
+	border-right: 1px solid #eee;
+}
+.hosLoanCalc .loanRecd .zhhCol-4:last-child dl{
+	border-right: 0px solid #eee;
+}
+.hosLoanCalc .loanRecd .zhhCol-4:hover{
+	cursor: pointer;
+}
+.hosLoanCalc .loanRecd p{
+	margin: 0px;
+	float: left;
+	width: 60px;
+	height: 60px;
+	border:1px solid #eee;
+	position: relative;
+}
+.hosLoanCalc .loanRecd p img{
+	position: absolute;
+	top: 50%;
+	margin-top: -23px;
+	left: 50%;
+	margin-left: -23px;
+}
+.hosLoanCalc .loanRecd dt{
+	font-size: 16px;
+	font-weight:bold;
+	color: #323232;
+}
+.hosLoanCalc .loanRecd dt+dt{
+	margin-bottom: 3px;
+}
+.hosLoanCalc .loanRecd dd{
+	font-size: 12px;
+}
+.loanQuotaTest{
+	width: 100%;
+	background: #f1f8fe;
+	padding: 30px 20px;
+	position: absolute;bottom: 0px;left: 0px;
+	border-top: 1px solid #eee;
+}
+.loanQuotaTest input{
+	width: 100px;
+}
+.loanQuotaTest .inputTextBD{
+	margin-right: 10px;
+}
+.loanQuotaTest .chhBtn{
+	width: 120px;
+	border-radius: 3px;
+	color: #fff;
+}
+.licRecd{
+	width: 95%;
+	margin: 0 auto;
+	background: url(../../images/licaiBg.png) center center ;
+	background-size:100% ;
+	height: 320px;
+}
+.licRecd h6{
+	font-size: 24px;
+	height: 120px;
+	line-height: 140px;
+	text-align: center;
+}
+.licRecd ul li{
+	float: left;
+	width: 50%;
+	padding-left: 25px;
+	border-right: 1px solid #a5a3a2;
+	color: #323232;
+}
+.licRecd ul li label{
+	display: block;
+	font-size: 34px;
+	font-weight: bold;
+	color:#fd5522;
+}
+.licRecd ul li label i{
+	font-size: 20px;
+	font-weight: 400;
+	color:#fd5522;
+}
+.licRecd .progLineBox{
+	width: 85%;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.licRecd .fontCor_black{
+	text-align: center;
+}
+.licRecd .chhBtn{
+	display: block;
+	border-radius: 3px;
+	width: 120px;
+	margin: 0 auto;
+	box-shadow: 0px 0px 10px #888888;
+	margin-top: 15px;
+	color: #ff2300;
+}
+/*房贷解读*/
+.hosUnsrcPage .wrap-l{
+	width: 845px;
+}
+.hosUnsrcPage .wrap-r{
+	width: 330px;
+}
+.hosLoanCond{
+	background: #038df7; 
+	padding-bottom: 2px;
+	background: -moz-linear-gradient(right , #038df7 0%,#00c0ff 100%); 
+	background: -webkit-linear-gradient(right , #038df7 0%,#00c0ff 100%); 
+	background: -o-linear-gradient(right , #038df7 0%,#00c0ff 100%); 
+	background: -ms-linear-gradient(right , #038df7 0%,#00c0ff 100%); 
+	background: linear-gradient(right , #038df7 0%,#00c0ff 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#038df7', endColorstr='#00c0ff',GradientType=0 ); 
+}
+.hosLoanCond h1{
+	text-align: center;
+	height: 60px;
+	line-height: 60px;
+	color: #FFF;
+	font-size: 20px;
+	
+}
+.hosLoanCond ul{
+	margin:0 2px 0 2px;
+	padding-top: 20px;
+	background-color: #fff;
+	
+}
+.hosLoanCond ul li{
+	padding: 6px 0;
+}
+.hosLoanCond ul li label{
+	display: inline-block;
+	width: 80px;
+	text-align: right;
+}
+.hosLoanCond>div{
+	margin:0 2px 0 2px;
+	padding: 20px;
+	background-color: #fff;
+	
+}
+.hosLoanCond>div>a{
+	display: inline-block;
+	padding: 4px 8px 4px 0;
+	color: #2692e9;
+	font-size: 12px;	
+}
+.hosLoanCond>div>a:hover{
+	text-decoration: underline;
+}
+.hosLoanCond .inputTextBD{
+	margin-left: 5px;
+}
+.hosLoanCond .inputTextBD input{
+	width: 114px;
+}
+.hosLoanCond .chhBtn{
+	width: 100%;
+	background-color: #fd654d;
+	color: #fff;
+	border-radius: 3px;
+	margin-bottom: 10px;
+}
+/*房贷问题*/
+.search-b {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	background: #fff;
+	margin: 25px 0 0 0;
+	padding: 20px;
+	
+}
+
+.searchtxt-b {
+	width: 535px;
+	height: 40px;
+	border: #32A1ED solid 1px;
+	background: #fff;
+	padding-left: 5px;
+	line-height: 32px;
+	font-size: 14px;
+	color: #999;
+	float: left
+}
+
+.searchbtn-b {
+	width: 135px;
+	height: 40px;
+	border: none;
+	background: #32A1ED;
+	color: #FFF;
+	cursor: pointer;
+	float: left
+}
+
+.searchbtn-c {
+	width: 135px;
+	height: 40px;
+	border: none;
+	background: #F46F31;
+	color: #FFF;
+	cursor: pointer;
+	float: left;
+	margin: 0 15px 0 10px
+}
+
+.icon-sousuo1 {
+	float: left;
+	color: #ccc;
+	font-size: 36px;
+	margin-right: 20px
+}
+
+.search-b dl {
+	width: 270px;
+	height: auto;
+	overflow: hidden
+}
+
+.search-b dl dd a {
+	font-size: 12px;
+	margin-right: 15px
+}
+
+.common-sense-loan {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	background: #fff;
+	border: #eee solid 1px;
+	padding: 0 20px
+}
+
+.common-sense-loanlink {
+	float: left;
+	line-height: 75px;
+	float: left;
+	margin-left: 20px
+}
+
+.common-sense-loan img {
+	margin-top: 16px
+}
+/*问题详情*/
+.hosQAPage .wrap-r{
+	width: 325px;
+}
+.hosQAPage .wrap-l{
+	width: 850px;
+}
+.hosQAPage .asklist{
+	border: 0;
+	padding: 0;
+}
+.answer-info-e {
+	width: 100%;
+	height: 108px;
+	overflow: hidden;
+	background: #fff;
+	margin-bottom: 25px;
+	position: relative;
+	padding: 25px 20px 0 85px;
+	line-height: 30px
+}
+
+.answer-info-e img {
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	top: 0
+}
+
+.answer-info-e dd {
+	color: #999;
+	font-size: 12px
+}
+
+.answer-info-e dt {
+	color: #666
+}
+
+.answer-info-e .fr {
+	text-align: right
+}
+
+.answer-info-e dt a:link,.answer-info-e dt a:visited {
+	color: #09F
+}
+
+.answer-info-e dt a:hover {
+	color: red
+}
+
+.answer-info-e dt span {
+	font-size: 18px;
+	color: #333
+}
+
+.layout-a .answer-title {
+	background: #FCFBFB;
+	color: #666
+}
+
+.layout-a .mortgage-qa dl {
+	background: 0 0;
+	padding: 0 0 20px 0;
+	border-bottom: #CACACA dotted 1px
+}
+.answer-b-consultation{
+	padding: 0 20px;
+}
+.answer-b-consultation span {
+	float: left;
+	margin-top: 8px;
+	color: #32A1ED
+}
+
+.answer-b-consultation a:link,.answer-b-consultation a:visited {
+	color: #F46F31;
+	border: #F46F31 solid 1px;
+	width: 125px;
+	height: 40px;
+	display: block;
+	float: right;
+	text-align: center;
+	line-height: 40px
+}
+
+.answer-b-consultation a:hover {
+	color: #09F;
+	border: #09F solid 1px
+}
+
+.layout-a .answer-b .answer-title,.layout-a .navtab-c {
+	background: #FCFBFB
+}
+
+.layout-a .answer-b-tab .navtab-c,.layout-a .answer-b-tab .navtab-c ul li {
+	height: 55px;
+	line-height: 55px
+}
+
+.layout-a .answer-b-tab .answer-b-consultation {
+	padding: 0 20px
+}
+
+.layout-a .answer-info-b {
+	border-top: none
+}
+
+.layout-a .answer-info-b ul li a {
+	font-size: 16px;
+	color: #666
+}
+
+.wen {
+	width: 22px;
+	height: 22px;
+	overflow: hidden;
+	float: left;
+	border-radius: 100%;
+	background: #4CA3E8;
+	color: #fff;
+	line-height: 22px;
+	text-align: center;
+	font-size: 12px;
+	margin: 24px 10px 0 0
+}
+
+
+.layout-a .answer-info-b ul {
+	padding-bottom: 20px
+}
+.answer-rbox {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	background: #fff;
+	margin-bottom: 25px;
+	padding-bottom: 20px
+}
+
+.answer-c {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding: 0 20px
+}
+
+.answer-c ul li {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding: 15px 0;
+	border-bottom: #eee solid 1px
+}
+
+.answer-c ul li img {
+	width: 62px;
+	height: 62px;
+	float: left
+}
+
+.answer-c dl {
+	width: 207px;
+	height: auto;
+	overflow: hidden;
+	float: right
+}
+
+.answer-c dl dt {
+	font-size: 18px;
+	color: #333;
+	line-height: 36px
+}
+
+.answer-c dl dd {
+	font-size: 12px;
+	color: #666
+}
+.number {
+	width: 22px;
+	height: 22px;
+	overflow: hidden;
+	float: left;
+	border-radius: 100%;
+	background: #FD654D;
+	color: #fff;
+	line-height: 22px;
+	text-align: center;
+	font-size: 12px;
+	margin: 28px 12px 0 0
+}
+
+.answer-d {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding: 0 20px
+}
+
+.answer-d ul li {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding: 15px 0;
+	border-bottom: #eee solid 1px
+}
+.answer-d ul li:first-child{
+	padding-top: 4px;
+}
+
+.answer-d ul li img {
+	width: 76px;
+	height: 76px;
+	float: left;
+	border:1px solid #eee;
+}
+
+.answer-d dl {
+	width: 200px;
+	height: auto;
+	overflow: hidden;
+	float: right
+}
+
+.answer-d dl dt {
+	font-size: 18px;
+	color: #333
+}
+
+.answer-d dl dd {
+	font-size: 12px;
+	color: #666
+}
+.answer-d dl dd .stars{
+	position: relative;top: 2px;
+	margin-right: 5px;
+}
+
+.answer-d dl dt {
+	width: 100%;
+	overflow: hidden
+}
+
+.answer-d dl dt p {
+	padding: 0 5px;
+	line-height: 20px;
+	background: #3DB3FE;
+	font-size: 12px;
+	color: #fff;
+	float: left;
+	margin: 5px 0 6px 0
+}
+.answer-b {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	background: #fff;
+	margin-bottom: 25px;
+	padding-bottom: 20px
+}
+
+.answer-b .answer-title {
+	padding: 0 20px
+}
+.answer-b-tab .navtab-c {
+	width: 1050px;
+	height: 67px;
+	line-height: 67px
+}
+
+.answer-b-tab .navtab-c ul li {
+	width: auto;
+	height: 67px;
+	float: left;
+	line-height: 67px;
+	text-align: center;
+	padding: 0 30px;
+	cursor: pointer
+}
+
+.answer-b-tab .navtab-c .navli {
+	background: 0 0;
+	color: #666;
+}
+
+.answer-b-tab .navtab-c .navli-active {
+	background: 0 0;
+	color: #2692E9;
+	border-bottom: #2692E9 solid 3px
+}
+
+.navtabcont {
+	width: 200px;
+	height: 50px
+}
+
+.answer-b-tab .answer-info-c {
+	padding: 0
+}
+
+.answer-b-tab .mortgage-qa ul li {
+	width: 559px;
+	float: left;
+	margin: 0 20px
+}
+
+.answer-b-tab #navtabid1-c0 {
+	background: 0 0
+}
+
+.answer-b-tab .mortgage-qa-title {
+	color: #666;
+	font-weight: 400
+}
+
+.answer-b-tab .mortgage-qa-title p {
+	color: #fff
+}
+
+.answer-info-d ul li {
+	float: left;
+	width: 111px;
+	height: 30px;
+	line-height: 30px;
+	overflow: hidden;
+	margin: 0 0 0 20px
+}
+
+.answer-b-tab .answer-title a {
+	margin-top: 10px
+}
+.calculator-sidebar-b .calculator-sidebar{
+	right: 0;
+	left: auto;
+}
+.calculator-sidebar-b .calculator-sidebar-info{
+	background: #FD654D;
+}
+.calculator-sidebar {
+	width: 76px;
+	height: auto;
+	overflow: hidden;
+	position: fixed;
+	z-index: 8888;
+	left: 0;
+	top: 230px;
+	border-top: #eee solid 1px
+}
+.calculator-sidebar-info {
+	width: 76px;
+	height: 76px;
+	overflow: hidden;
+	border: #eee solid 1px;
+	display: block;
+	float: left;
+	border-top: none;
+	text-align: center;
+	background: #2692E9;
+	padding-top: 15px
+}
+
+.calculator-sidebar-info:hover {
+	opacity: .8
+}
+
+.calculator-sidebar-info p {
+	color: #fff;
+	line-height: 22px;
+	font-size: 12px;
+}
+
+.calculator-sidebar-info .iconfont {
+	color: #fff;
+	font-size: 30px
+}
+.title-c{
+	border-bottom: 1px solid #eee;
+}
+.titleh3-c {
+	float: left;
+	line-height: 60px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #323232;
+	position: relative;
+	padding-left: 30px;
+	font-weight: 500
+}
+
+.titleh3-c:after {
+	content: "";
+	width: 3px;
+	height: 22px;
+	background: #319FED;
+	position: absolute;
+	z-index: 1;
+	left: 20px;
+	top: 19px
+}
+
+.titleh3-c a:link,.titleh3-c a:visited {
+	text-decoration: none;
+	color: #333
+}
+
+.titleh3-c a:hover {
+	text-decoration: none;
+	color: #09F
+}
+.answer-info-b ul li a:link,.answer-info-b ul li a:visited {
+	width: 100%;
+	height: 70px;
+	line-height: 70px;
+	font-size: 20px;
+	display: block;
+	float: left;
+	color: #333;
+	border-bottom: #eee dotted 1px;
+}
+.answer-info-b ul li {
+	padding: 0 20px;
+	overflow: hidden
+}
+.answer-info-b ul li:hover {
+	background: #F6F6F6;
+	color: #2692E9
+}
+
+.answer-info-b ul li p {
+	float: right;
+	width: 80px;
+	color: #999;
+	text-align: right;
+	font-size: 16px;
+}
+.answer-info-b ul li div {
+	font-size: 16px;
+}
+
+.answer-c ul li:last-of-type,.answer-d ul li:last-of-type,.answer-info-b ul li:last-of-type,.wrap-lb .asklist ul li:last-of-type,.wrap-rb-a ul li:last-of-type {
+	border-bottom: none;
+	padding-bottom: 0;
+}
+.answer-c ul li:first-child{
+	padding-top:4px;
+}
+/*问答*/
+.qa-page .search-b{
+	margin-bottom: 20px;
+}
+.qa-page .mortgage-qa-title{
+	font-size: 16px;
+	line-height: none;
+	color: #323232;
+}
+.qa-page .asklist dl{
+	background: none;
+	padding: 0;
+}
+.qa-page .asklist ul{
+	padding: 0;
+}
+.qa-page .asklist ul li{
+	padding: 20px;
+	border-bottom: 1px solid #eee;
+}
+.qa-page .asklist ul li:last-child{
+	border-bottom: 0px solid #eee;
+	padding-bottom: 0;
+}
+.qa-page .asklist dd{
+	color: #666;
+	font-size: 14px;
+	text-indent: 0;
+}
+.qa-page .asklist dt span{
+	font-size: 12px;
+	color: #666;
+	line-height: none;
+	margin: 10px 0;
+}
+.qa-page .asklist dt {
+	margin: 0;
+}
+.qa-page .asklist b {
+	color: #32A1ED;
+}
+.qa-page .asklist dd b{
+	font-weight: 400;
+}
+.qa-page .wrap-l{
+	width: 855px;
+}
+.qa-page .wrap-r{
+	width: 325px;
+	background-color: #fff;
+}
+.qa-page .wrap-r h1{
+	font-size:20px;
+	color:#323232;
+	padding: 20px;
+	border-bottom: 1px solid #eee;
+	font-weight: 500;
+}
+.qa-page .wrap-r ul{
+	padding:20px;
+	color:#323232;
+}
+.qa-page .wrap-r ul li{
+	margin-bottom: 20px;
+}
+
+.qa-page .wrap-r ul li a{
+	width: 100%;
+	color: #323232;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+
+.qa-page .wrap-r ul li a:hover{
+	color: #32A1ED;
+}
+
+.qa-page .wrap-r ul li:last-child{
+	margin-bottom: 0;
+}
+.credContent-QA{
+	background-color: #fff;
+	margin-bottom: 25px;
+	padding: 20px;
+}
+.credContent-QA h1{
+	font-size: 20px;
+	color: #323232;
+	margin-bottom: 20px;
+	font-weight: 500;
+}
+.qa-add-box{
+	background-color: #fff;
+	margin-bottom: 30px;
+	padding: 30px;
+}
+.qa-add-box .qa-title b{
+	color: #ff1a14;
+	font-weight: 400;
+}
+.qa-add-box h1{
+	font-size: 22px;
+	color: #323232;
+	font-weight: 400;
+	margin-top: 20px;
+	height: 30px;
+	line-height: 30px;
+	width: 610px;
+}
+.qa-add-box h1 b{
+	position: relative;
+	top: -2px;
+	font-size: 16px;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+	background-color: #94cfff;
+	color: #fff;
+	text-align: center;
+	line-height: 30px;
+	margin-right: 10px;
+}
+.qa-add-box h1 span{
+	font-size: 16px;
+	color: #999;
+}
+.qa-add-box textarea{
+	margin: 20px 0;
+	width: 610px;
+	resize:none;
+	text-align: left;
+	padding: 10px;
+}
+.qa-add-box h2{
+	margin-top: 20px;
+	width: 610px;
+	font-size: 14px;
+	height: 30px;
+	line-height: 30px;
+	position: relative;
+	padding-left: 100px;
+	color: #999;
+	font-weight: 400;
+}
+.qa-add-box h2 .inputTextBD{
+	padding: 0;
+	width: 100px;
+	border: none;
+	height: 30px;
+	line-height: 30px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.qa-add-box h2 span{
+	color: #479ef8;
+}
+.qa-add-box h2 .inputTextBD input{
+	width: 70px;
+	height: 20px;
+	font-size: 14px;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	margin-top: -10px;
+	color: #479ef8;
+}
+.qa-add-box h2 .inputTextBD i{
+	right: 20px;
+	top: 2px;
+	color: #479ef8;
+}
+.qa-add-box ul{
+	margin-top: 20px;
+}
+.qa-add-box ul li{
+	margin-bottom: 20px;
+	color: #999;
+}
+.qa-add-box ul li .inputTextBD{
+	height: 30px;
+	line-height: 30px;
+	width: 200px;
+	margin-right: 20px;
+}
+.qa-add-box ul li .inputTextBD input{
+	font-size: 14px;
+}
+.qa-add-box ul li label{
+	display: inline-block;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	color: #323232;
+}
+.qa-add-box ul li .imgCode{
+	display: inline-block;
+	margin-right: 20px;
+	width: 200px;
+}
+.qa-add-box ul li .chhBtn{
+	height: 55px;
+	width: 200px;
+	line-height: 55px;
+	background-color: #479ef8;
+	color: #fff;
+	font-size: 18px;
+}
+.qa-add-box ul li a:hover{
+	cursor: pointer;
+	text-decoration: underline;
+}
+.question-type .inputTextBD{
+	border: 1px solid #479ef8;
+}
+.question-type .inputTextBD>ul{
+	margin: 0;
+}
+/*房贷列表页*/
+.hos-list-page .hos-list{
+	margin-top: 20px;
+}
+.hos-list-page .pages{
+	border: none;
+	background: none;
+}
+.loanScreen{
+	height: 60px;
+	line-height: 60px;
+	background-color: #fafafc;
+	padding: 0px 20px;
+	border: 1px solid #eee;
+}
+.loanScreen .inputTextBD{
+	padding-right: 30px;
+	width: 150px;
+	height: 30px;
+	line-height: 30px;
+	margin-right: 10px;
+}
+.loanScreen .inputTextBD i{
+	bottom: -2px;
+}
+.loanScreen input{
+	padding-right: 30px;
+	width: 130px;
+	height: 30px;
+	line-height: 30px;
+	margin-right: 10px;
+	font-size: 14px;
+}
+.loanScreen input.aft{
+	color: #479ef8;
+}
+.loanScreen .loanSort{
+	height: 30px;
+	line-height: 30px;
+	background-color: #fff;
+	margin-top: 15px;
+	border: 1px solid #eee;
+	overflow: hidden;
+}
+.loanScreen .loanSort a{
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 10px;
+	border-right: 1px solid #eee;
+	cursor: pointer;
+}
+.loanScreen .loanSort a:last-child{
+	border: 0;
+}
+.loanScreen .loanSort a.aft{
+	color: #479EF8;
+}
+.hos-lists{
+	padding:20px 30px;
+	background-color: #fff;
+}
+.hos-lists:after{
+	content: '';
+	display: block;
+	clear: both;
+}
+.hos-lists .imgCenterBox{
+	border: 1px solid #eee;
+	width: 135px;
+	height: 135px;
+	float: left;
+}
+
+.hos-lists .hos-lists-info{
+	height: 135px;
+	float: left;
+	margin-left: 20px;
+	width: 985px;
+	position: relative;
+}
+.hos-lists .hos-lists-info h1{
+	color: #323232;
+	font-size: 22px;
+	font-weight: 400;
+	padding:5px 0 10px 0;
+}
+.hos-lists .hos-lists-info>div{
+	width: 100%;
+	position: absolute;
+	bottom: 6px;
+}
+.hos-lists .hos-lists-info b{
+	color: #999;
+	font-weight: 400;
+}
+.hos-lists .hos-lists-info span{
+	margin-right: 20px;
+	color: #999;
+}
+.hos-lists .hos-lists-info div.aft span{
+	color: #666;
+}
+.hos-lists .hos-lists-info div.aft b{
+	color: #f45a31;
+}
+.hos-lists .hos-lists-info i{
+	margin-right: 10px;
+	font-size: 22px;
+}
+.hos-lists .hos-lists-info .bottom-border{
+	bottom: 48px;
+}
+.hos-lists .hos-lists-info p,
+.hos-lists .hos-lists-info div{
+	font-size: 18px;
+}
+.hos-list .hos-lists{
+	border-bottom: 1px solid #eee;
+}
+.hos-list .hos-lists:last-child{
+	border-bottom: 0px solid #eee;
+}
+.hot-key-word{
+	height: 40px;
+	line-height: 40px;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	width: 330px;
+	padding-left: 42px;
+}
+.hot-key-word a{
+	margin-right: 10px;
+}

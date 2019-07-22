@@ -1,0 +1,1472 @@
+/*贷款首页*/
+.loanBanner{
+	height: 430px;
+	width: 100%;
+	position: relative;
+}
+.loanBanner ul{
+	height: 430px;
+	position: relative;
+}
+.loanBanner ul li{
+	height: 430px;
+	right: 100%;
+	float: left;
+	background-size:auto 100% !important;
+	margin-left:0;
+	transition: all 2s;
+	-moz-transition: all 2s;	/* Firefox 4 */
+	-webkit-transition: all 2s;	/* Safari 和 Chrome */
+	-o-transition: all 2s;	/* Opera */
+}
+.loanBanner .LoanBann-count{
+	position: absolute;
+	right: 36%;
+	bottom: 20px;
+	height: 10px;
+}
+.loanBanner .LoanBann-count a{
+	cursor: pointer;
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 5px;
+	background-color: #ede2da;
+	margin: 0 3px;
+}
+.loanBanner .LoanBann-count a.aft{
+	background-color: #1a67c7;
+}
+.loanBanner .loanBann-infor{
+	padding: 30px;
+	width: 400px;
+	background-color:#fff ;
+	margin-top: 38px;
+}
+.loanBanner .loanBann-infor label{
+	color: #323232;
+}
+.loanBanner .loanBann-infor b{
+	font-size: 14px;
+}
+.loanBann-infor-box{
+	width: 1200px;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -600px;
+	height: 430px;
+}
+.loanBann-infor .title{
+	border: none;
+	padding: 0;
+	margin-bottom: 20px;
+}
+
+.loanBann-infor h1{
+	font-size: 24px;
+	margin-bottom: 5px;
+}
+
+.loanBann-infor p{
+	font-size: 12px;
+	color: #666;
+}
+
+.loanBann-infor .inputTextBD{
+	width: 100%;
+	margin-bottom: 10px;
+}
+.loanBann-infor .inputTextBD label{
+	padding: 5px 10px 5px 0;
+	border-right: 1px solid #eee;
+	margin-right: 10px;
+}
+.loanBann-infor .inputTextBD input{
+	width: 155px;
+}
+.loanBann-infor .chhBtn{
+	width: 100%;
+	border-radius: 4px;
+	background-color: #2692e9;
+	color: #fff;
+	position:relative ;
+	font-size: 18px;
+}
+.loanTypeBox{
+	background-color: #fff;
+	padding: 50px 0;
+	margin-bottom: 25px;
+}
+.loanType{
+	width: 1200px;
+	margin: 0 auto;
+}
+.loanType>div{
+	float: left;
+	width: 24.25%;
+	margin-right: 1%;
+	background-color: #fff;
+	text-align: center;
+	padding: 30px 0;
+	cursor: pointer;
+	background:rgba(255,255,255,1);
+	box-shadow: 0px 2px 20px rgba(0,0,0,0.05);
+	position: relative;
+}
+.loanType>div+div+div+div{
+	margin: 0;
+}
+.loanType>div dt{
+	font-size: 20px;
+	color: #323232;
+	margin: 4px 0;
+}
+
+.loanType>div dd{
+	font-size: 12px;
+	color: #999;
+}
+.wrap-l-loan{
+	width: 880px;
+}
+.wrap-r-loan{
+	width: 300px;
+}
+.hotLoanList-min .loan-type-banner,
+.hotLoanList-bank .loan-type-banner{
+	float: left;
+	margin-right: 20px;
+	position: relative;
+}
+.hotLoanList-min .loan-type-banner img,
+.hotLoanList-bank .loan-type-banner img{
+	display: block;
+}
+.hotLoanList-min .loan-type-banner a,
+.hotLoanList-bank .loan-type-banner a{
+	display: block;
+	width: 100%;
+	height: 46px;
+	position: absolute;
+	top: 263px;
+}
+.hotLoanList-min,.hotLoanList-bank{
+	margin-bottom: 25px;
+}
+.hotLoanList-min ul,
+.hotLoanList-bank ul{
+	float: left;
+	width: 600px;
+	padding: 20px;
+	background-color: #fff;
+	height: 531px;
+}
+.hotLoanList-min ul li.loan-title,
+.hotLoanList-bank ul li.loan-title{
+	padding: 0;
+	border: 0;
+	margin-bottom: 14px;
+	position: relative;
+}
+.hotLoanList-min ul li.loan-title a,
+.hotLoanList-bank ul li.loan-title a{
+	position: absolute;
+	right: 0;
+	top: 4px;
+}
+.left-cont{
+	padding: 20px;
+	background-color: #fff;
+	margin-bottom: 25px;
+}
+.left-cont h1{
+	font-size: 20px;
+	color: #323232;
+	font-weight: 500;
+}
+.left-cont h1 i{
+	height: 20px;
+	position: relative;top: 2px;
+}
+.left-cont .QaModular{
+	padding: 0;
+}
+.credContent-QA h1{
+	margin-bottom: 20px;
+}
+.hotLoanList{
+	padding: 0;
+	background: none;
+}
+.hotLoanList .hotLoanImg{
+	display: inline-block;
+	width: 90px;
+	height: 90px;
+	vertical-align: bottom;
+	background-color: #fff;
+	margin-right: 20px;
+	border-radius: 45px;
+}
+.hotLoanList li{
+	border:1px solid #eee;
+	position: relative;
+	margin-bottom: 20px;
+	padding: 21.5px 20px;
+}
+.hotLoanList li:last-child{
+	margin-bottom: 0;
+}
+.hotLoanList li .chhBtn{
+	position: absolute;
+	display: inline-block;
+	height: 40px;
+	width: 100px;
+	line-height: 40px;
+	text-align: center;
+	border-radius: 4px;
+	/*background: #038df7; 
+	background: -moz-linear-gradient(right top, #038df7 0%,#00c0ff 100%); 
+	background: -webkit-linear-gradient(right top, #038df7 0%,#00c0ff 100%); 
+	background: -o-linear-gradient(right top, #038df7 0%,#00c0ff 100%); 
+	background: -ms-linear-gradient(right top, #038df7 0%,#00c0ff 100%); 
+	background: linear-gradient(right top, #038df7 0%,#00c0ff 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#038df7', endColorstr='#00c0ff',GradientType=0 );*/
+	background-color: #2692e9;
+	cursor:pointer;
+	right: 20px;
+	top: 50%;
+	margin-top: -20px;
+	color: #fff;
+}
+/*.hotLoanList li .chhBtn-gra:after{
+	content: '查看';
+	text-align: center;
+	display: inline-block;
+	height: 36px;
+	width: 76px;
+	line-height: 36px;
+	border-radius: 18px;
+	background: #f2f9ff;
+	margin: 2px 0 0 2px;
+	font-size: 18px;
+	color: #37a7ef;
+}*/
+.hotLoanList dl{
+	display: inline-block;
+	max-width: 270px;
+}
+.hotLoanList dl dt{
+	font-size: 22px;
+	font-weight: 500;
+	color: #323232;
+	margin-bottom: 10px;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.hotLoanList dl dd{
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.hotLoanList dl dd.sign{
+	margin-bottom: 8px;
+}
+.hotLoanList dl dd.sign span{
+	display: inline-block;
+	padding: 2px 4px;
+	 border-radius: 4px;
+	 border: 1px solid #eee;
+	 margin-right: 10px;
+	 font-size: 12px;
+}
+.hotLoanList dl dd.sign span.border-orange{
+	 border: 1px solid #fd654d;
+	 color: #fd654d;
+}
+.hotLoanList dl dd.sign span.border-green{
+	 border: 1px solid #78da50;
+	 color: #78da50;
+}
+/* .hotLoanList dl dd.sign span.border-blue{
+	 border: 1px solid #2692e9;
+	 color: #2692e9;
+} */
+.hotLoanList dl dd.sign span{
+	 border: 1px solid #2692e9;
+	 color: #2692e9;
+}
+.hotLoanList dl dd.sign span+span{
+	 border: 1px solid #78da50;
+	 color: #78da50;
+}
+.hotLoanList dl dd.sign span+span+span{
+	 border: 1px solid #fd654d;
+	 color: #fd654d;
+}
+.yesCase ul{
+	padding-top: 20px;
+}
+.yesCase li{
+	float: left;
+	width: 32%;
+	text-align: center;
+	background-color: #fafafa;
+	margin-right: 2%;
+	padding: 30px 0;
+	height: 271px
+}
+.yesCase li:last-child{
+	margin: 0;
+}
+.yesCase li .userImg{
+	width: 80px;
+	height: 80px;
+	border-radius: 40px;
+	border: 1px solid #addeff;
+	background-color: #fff;
+	display: inline-block;
+	margin: 10px 0;
+}
+.yesCase li label{
+	display: block;
+}
+.yesCase li span{
+	display: block;
+	font-size: 26px;
+	font-weight: bold;
+	color: #f52f3e;
+}
+.yesCase li dt{
+	font-size: 18px;
+	color: #323232;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.hosLoanHeadLin-con ul li{
+	margin-top:20px ;
+	border-bottom: 1px dashed #eee;
+	padding-bottom: 20px;
+}
+.hosLoanHeadLin-con ul li:last-child{
+	border: 0;
+	padding-bottom: 0;
+}
+.hosLoanHeadLin-con .imgCenterBox img{
+	width: 225px;
+	height: 125px;
+}
+.hosLoanHeadLin-con ul li .imgCenterBox{
+	width: 225px;
+	height: 125px;
+	float: left;
+}
+.hosLoanHeadLin-con ul li dl{
+	float: left;
+	width: 73%;
+	padding-left: 20px;
+}
+.hosLoanHeadLin-con ul li dt{
+	font-size: 20px;
+	font-weight: 400;
+	margin-bottom: 20px;
+}
+.hosLoanHeadLin-con ul li dt a{
+	font-size: 16px;
+	font-weight: bold;
+	color: #323232 ;
+}
+.hosLoanHeadLin-con ul li dt a:hover{
+	color:#0099FF;
+}
+.hosLoanHeadLin-con ul li dd{
+	margin-bottom: 10px;
+	color: #999;
+	line-height: 24px;
+	min-height: 48px;
+}
+.hosLoanHeadLin-con ul li span{
+	color: #999;
+}
+.conditionBox{
+	margin-top: 20px;
+}
+.conditionBox input{
+	display: inline-block;
+	width: 60%;
+	height: 45px;
+	line-height: 45px;
+	border: 1px solid #eee;
+	padding-left: 10px;
+	margin-right: 20px;
+}
+.conditionBox .chhBtn{
+	background-color: #2c99eb;
+	width: 120px;
+	border-radius: 0;
+	color: #fff;
+	margin-right: 10px;
+}
+.conditionBox .chhBtn+.chhBtn{
+	background-color: #f46831;
+}
+.loanQa li{
+	margin-bottom: 30px;
+}
+.loanQa li:last-child{
+	margin: 0;
+}
+.loanQa li h1{
+	font-size: 20px;
+	margin: 20px 0;
+}
+.QAtext{
+	color: #666;
+}
+.minContent label{
+	color: #666;
+}
+
+.loanQa li h1 i{
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	border-radius: 12px;
+	background-color: #2692e9;
+	text-align: center;
+	line-height: 24px;
+	font-size: 14px;
+	color: #fff;
+	position: relative;top: -3px;
+	margin-right: 10px;
+}
+.minContent{
+	margin: 20px 0;
+}
+.minContent span{
+	color: #323232;
+	margin-right: 30px;
+}
+.minContent a{
+	color: #323232;
+}
+.minContent b{
+	font-weight: 400;
+	padding: 2px 5px;
+	background-color: #ff6a21;
+	color: #fff;
+	margin-right: 40px;
+}
+.QAtext a{
+	color: #2692e9;
+}
+.QAtext a:hover{
+	text-decoration:underline
+}
+.answer-d dl{
+	width: 174px;
+}
+.answer-c dl{
+	width: 180px;
+}
+.answer-c ul li{
+	position: relative;
+}
+.answer-c li .tool-icon{
+	width: 62px;
+	height: 62px;
+	border-radius: 4px;
+	display: inline-block;
+	position: relative;
+}
+.answer-c li .tool-icon i{
+	color: #fff;
+}
+.tool-icon-hos{
+	background-color: #fe8a45;
+}
+.tool-icon-car{
+	background-color: #11cddd;
+}
+.tool-icon-user{
+	background-color: #42bbf0;
+}
+.answer-c ul li i{
+	position: absolute;
+	right: 0;
+	top: 40px;
+	display: inline-block;
+	transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);		/* IE 9 */
+	-webkit-transform: rotate(-90deg);	/* Safari and Chrome */
+	-o-transform: rotate(-90deg);		/* Opera */
+	-moz-transform: rotate(-90deg);		/* Firefox */
+}
+.answer-c li .tool-icon i{
+	font-size: 60px;
+	top: 0;
+	transform: rotate(0deg);
+	-ms-transform: rotate(0deg);		/* IE 9 */
+	-webkit-transform: rotate(0deg);	/* Safari and Chrome */
+	-o-transform: rotate(0deg);		/* Opera */
+	-moz-transform: rotate(0deg);		/* Firefox */
+}
+.answer-d dl dd .stars{
+	position: relative;
+	top: 2px;
+	margin-right: 5px;
+}
+.answer-d dl dd.signature{
+	margin-top: 4px;
+	font-size: 12px;
+	color: #999
+}
+.answer-rbox{
+	border: none;
+}
+.title-c{
+	border: none;
+}
+.right-cont{
+	background-color:#fff ;
+	padding: 20px;
+	margin-bottom: 25px;
+}
+.right-cont h1{
+	font-size: 22px;
+	color: #323232;
+}
+.right-cont h1 i{
+	height: 20px;
+	position: relative;top: 2px;
+	margin-right: 7px;
+}
+.loanEnc ul{
+	margin-top: 20px;
+}
+.loanEnc li{
+	width: 33.33%;
+	float: left;
+	margin-bottom: 10px;
+}
+.loanPage{
+	padding-bottom: 60px;
+}
+.intention-loan .intention-img img{
+	display: block;
+	width: 100%;
+}
+.intention-from {
+	padding: 20px;
+	padding-bottom: 0;
+}
+.intention-from li{
+	padding-left: 70px;
+	position: relative;
+	margin-bottom: 20px;
+}
+.intention-from li label{
+	position: absolute;
+	height: 40px;
+	line-height: 40px;
+	left: 0;
+}
+.intention-from li .inputTextBD{
+	width: 190px;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 4px;
+	padding:0 10px;
+	padding-right: 40px;
+}
+.intention-from li .inputTextBD input{
+	font-size: 16px;
+}
+.intention-from li .inputTextBD b{
+	height: 40px;
+	line-height: 40px;
+	top: 0;
+	color: #999;
+	right: 10px;
+}
+.intention-from li textarea{
+	width: 190px;
+	border: 1px solid #eee;
+	border-radius: 4px;
+	padding: 10px;
+	resize:none
+}
+.intention-from .chhBtn{
+	width: 100%;
+	background-color: #2692e9;
+	height: 40px;
+	line-height: 40px;
+	color: #fff;
+}
+/*贷款分类页面*/
+.loanCationPage{
+	
+}
+.loanCationPage .pages{
+	border: none;
+	background: none;
+}
+.loanCation{
+	border:1px solid #eee;
+	margin-bottom: 25px;
+	background-color: #fff;
+}
+.loanCation-top{
+	background-color: #fff;
+	border-bottom: 1px solid #eee;
+	padding: 0 20px;
+}
+.loanCation-top label{
+	margin-right: 8px;
+}
+.loanCation-top .inputTextBD{
+	margin: 20px 0;
+	margin-right: 30px;
+}
+.loanCation-top .inputTextBD input{
+	margin-top: 10px;
+}
+
+.loanCation-top .chhBtn{
+	width: 100px;
+	border-radius: 0;
+	background-color: #2692e9;
+	color: #fff;
+	margin-right: 10px;
+	border-radius: 4px;
+	height: 50px;
+	line-height: 50px;
+	position: relative;
+	top: -3px;
+}
+.loanCation-top span{
+	color: #2692e9;
+	cursor: pointer;
+}
+.loanCation-top span:hover{
+	text-decoration: underline;
+}
+.loanCation-cond{
+	padding: 20px;
+}
+.loanCation-cond li{
+	padding-left: 120px;
+	position: relative;
+	margin-bottom: 10px;
+}
+.loanCation-cond li label{
+	padding: 8px 5px;
+	color: #999;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.loanCation-cond li a{
+	display: inline-block;
+	cursor: pointer;
+	padding: 8px 15px;
+	color: #323232;
+	margin-right: 5px;
+}
+.loanCation-cond li a:hover{
+	color: #2692e9;
+}
+.loanCation-cond li a.aft{
+	color: #2692e9;
+	/*border: 1px solid #2692e9;*/
+	border-radius: 10px;
+}
+.loanScreen{
+	height: 60px;
+	line-height: 60px;
+	background-color: #fafafa;
+	padding: 0px 20px;
+	border: 1px solid #eee;
+}
+.loanScreen .inputTextBD{
+	padding-right: 30px;
+	width: 150px;
+	height: 34px;
+	line-height: 34px;
+	margin-right: 10px;
+}
+.loanScreen .loanSort{
+	height: 30px;
+	line-height: 30px;
+	background-color: #fff;
+	margin-top: 15px;
+	border: 1px solid #eee;
+}
+.loanScreen .loanSort a{
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 10px;
+	border-right: 1px solid #eee;
+	cursor: pointer;
+}
+.loanScreen .loanSort a:last-child{
+	border: 0;
+}
+.loanList{
+	background-color: #fff;
+	border:1px solid #eee;
+	border-top: 0;
+	padding: 20px;
+	position: relative;
+}
+.loanList .loanListImg{
+	display: inline-block;
+	width: 144px;
+	height: 144px;
+	line-height: 144px;
+	border: 1px solid #eee;
+	vertical-align: bottom;
+}
+.loanList dl{
+	display: inline-block;
+	width: 75%;
+}
+.loanList dl dt{
+	padding-left: 20px;
+	padding-bottom: 10px;
+	position: relative;
+}
+.loanList dl dd.loan_sign{
+	padding-left: 20px;
+	margin-bottom: 10px;
+}
+.loanList dl dd.loan_sign span{
+	display: inline-block;
+	height: 24px;
+	line-height: 24px;
+	text-align: center;
+	width: 64px;
+	margin-right: 16px;
+	border-radius: 4px;
+	border: 1px solid #eee;
+}
+.loanList dl dd.loan_sign span{
+	border-color: #ff0c00;
+	color: #ff0c00;
+}
+.loanList dl dd.loan_sign span+span{
+	border-color: #2692e9;
+	color: #2692e9;
+}
+.loanList dl dd.loan_sign span+span+span{
+	border-color: #12d629;
+	color: #12d629;
+}
+.loanList dl dt label{
+	font-size: 18px;
+	font-weight: bold;
+	margin-right: 20px;
+	display: inline-block;
+	width: 430px;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.loanList dl dt span{
+	position: absolute;
+	left: 332px;
+	color: #999;
+	top: 4px;
+}
+.loanList dl dt .stars{
+	position: relative;top: 1px;
+	margin-left: 10px;
+}
+.loanList dl dd div.zhhCol-4 {
+	height: 75px;
+	padding: 0 20px;
+	border-right: 1px dashed #eee;
+}
+.loanList dl dd div.zhhCol-4:last-child {
+	border-right: 0px dashed #eee;
+}
+.loanList dl dd div.zhhCol-4 p{
+	padding: 3px 0;
+	position: relative;
+	padding-left: 20px;
+}
+.loanList dl dd div.zhhCol-4 p b{
+	color: #fe0000;
+	margin-left: 10px;
+	font-weight: 400;
+}
+.loanList dl dd div.zhhCol-4 i{
+	position: absolute;
+	left: 0px;
+	bottom: 3px;
+}
+.loanList .listBtnBox{
+	display: inline-block;
+	height: 115px;
+	width: 250px;
+	background:none;
+	position: absolute;
+	right: -10px;
+	top: 46px;
+	text-align: center;
+}
+.loanList .listBtnBox label{
+	display: block;
+	margin-top: 20px;
+	font-size: 16px;
+	color: #323232;
+}
+
+.loanList .listBtnBox label i{
+	color: #2681ca;
+}
+.loanList .listBtnBox .chhBtn{
+	width: 130px;
+	background-color: #479ef8;
+	color: #fff;
+	border-radius: 3px;
+	height: 40px;
+	line-height: 40px;
+	margin-top: 10px;
+}
+.loanRaiders {
+	padding: 20px;
+	background-color: #fff;
+	margin-bottom: 120px;
+}
+.loanRaiders .problemList{
+	width: 50%;
+	float: left;
+	padding-right: 10px;
+}
+.loanRaiders .problemList:nth-child(even){
+	padding-left: 10px;
+}
+.loanRaiders h1{
+	font-size: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #eee;
+}
+.loanRaiders h1 a{
+	font-size: 14px;
+	font-weight: 400;
+	margin-top: 3px;
+}
+.loanRaiders .asklist{
+	border: none;
+	padding: 0;
+}
+.loanRaiders .asklist dd a{
+	color: #2692e9;
+}
+.loanRaiders .asklist dd a:hover{
+	text-decoration: underline;
+}
+.loanRaiders .asklist ul{
+	padding: 0;
+}
+.loanRaiders .asklist ul li{
+	width: 49%;
+	float: left;
+	margin-right: 2%;
+}
+.loanRaiders .asklist ul li:nth-child(even){
+	margin: 0;
+}
+/*--车贷详细--*/
+.carLoanDet {
+	padding: 0 20px;
+	background-color:#fff ;
+	padding-bottom: 20px;
+}
+.carLoanDet-head {
+	position: relative;
+	height: 90px;
+	padding-top: 20px;
+}
+.carLoanDet-head:after {
+	content: '';
+	clear: both;
+}
+.carLoanDet-head div {
+	float: left;
+	height: 50px;
+	line-height: 50px;
+}
+.carLoanDet-head .carLoanDet-bank {
+	border: #eee solid 1px;
+	box-sizing: border-box;
+	overflow: hidden;
+	padding: 10px;
+}
+.carLoanDet-head .carLoanDet-bank img {
+	height: 30px;
+}
+.carLoanDet-head .carLoanDet-title {
+	font-size: 26px;
+	font-weight: bold;
+	margin-left: 20px;
+}
+.carLoanDet-head .carLoanDet-sign {
+	position: absolute;
+	right: 0px
+}
+.carLoanDet-head .carLoanDet-sign span {
+	margin-right: 5px;
+}
+.carLoanDet-head .carLoanDet-sign .sign_mortgages {
+	color: #f46200;
+}
+.carLoanDet-head .carLoanDet-sign i {
+	color: #999999;
+	margin-right: 2px;
+}
+.carLoanDet-head .carLoanDet-sign .sign_identity i {
+	font-size: 19px;
+	position: relative;
+	top: 2px;
+}
+.carLoanDet-info {
+	background: #fafafa;
+	padding: 20px 30px;
+	position: relative;
+}
+.carLoanDet-info-a li {
+	height: 50px;
+	line-height: 50px;
+	margin-right: 50px;
+	margin-bottom: 20px;
+}
+.carLoanDet-info-a li+li{
+	margin-bottom: 0;
+}
+.carLoanDet-info-a:after {
+	content: '';
+	clear: both;
+	display: block;
+}
+.carLoanDet-info-a li div {
+	display: inline-block;
+	margin-right: 20px;
+}
+.carLoanDet-info-a li span i{
+	color: #ff0000;
+    font-size: 20px;
+}
+.carLoanDet-info-a li div input {
+	width: 160px;
+}
+.carLoanDet-info-b {
+	padding:25px 0 5px 0px;
+}
+.carLoanDet-info-b div {
+	height: 30px;
+	line-height: 30px;
+}
+.carLoanDet-info-b div i {
+	color: #ff0000;
+	font-size: 20px;
+}
+.carLoanDet-info-b div span {
+	display: inline-block;
+	min-width: 200px;
+	padding-right: 40px;
+}
+.carLoanDet-info-b .fontCor_gray:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+.carLoanDet-info-c{
+	position: absolute;
+	right: 20px;
+	bottom: 238px;
+	text-align: right;
+}
+.carLoanDet-info-c .chhBtn {
+	width: 120px;
+	background: #fd654d;
+	height: 35px;
+	line-height: 35px;
+	color: #FFFFFF;
+	margin-right: 10px;
+	border-radius: 3px;
+}
+.carLoanDet-info-c span {
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+.carLoanDet-info-c i {
+	color: #ff0000;
+}
+.carLoanDet-info-line {
+	border-bottom: 1px solid #eee;
+	margin: 20px 0px;
+}
+.carLoanDet-info-d h1 {
+	color: #323232;
+	font-size: 20px;
+	font-weight: 400;
+}
+.carLoanDet-info-d-flow {
+	margin: 10px 0px;
+	position: relative;
+}
+.carLoanDet-info-d-flow .carLoanDet-info-R {
+	width: 32px;
+	height: 43px;
+	background: url(../../images/car_loan_icon5.png);
+	position: absolute;
+	top: 50%;
+	margin-top: -21px;
+	left: 246px;
+}
+.carLoanDet-info-d-flow .carLoanDet-info-R-b {
+	left: 536px;
+}
+.carLoanDet-info-d-flow .zhhCol-4 {
+	padding-left: 30px;
+}
+.carLoanDet-info-d-flow .zhhCol-4:first-child {
+	padding-left: 0px;
+}
+.carLoanDet-info-d-flow .paddL50 {
+	padding-left: 50px;
+}
+.carLoanDet-info-d-flow .zhhCol-4 .zhhCol-4 {
+	text-align: center;
+}
+.carLoanDet-info-d-flow .zhhCol-4 .zhhCol-4 p{
+	margin-top: 4px;
+	width: 72px;
+	height: 72px;
+	background: url(../../images/sign-img.png) 0 0 no-repeat;
+	background-position-y:-100px ;
+}
+.carLoanDet-info-d-flow .zhhCol-4 .zhhCol-4 p.sign-img-2{
+	background-position-x: -108px;
+}
+.carLoanDet-info-d-flow .zhhCol-4 .zhhCol-4 p.sign-img-3{
+	background-position-x: -216px;
+}
+.carLoanDet-info-d-flow .zhhCol-4 .zhhRow {
+	height: 80px;
+}
+.carLoanDet-info-d-flow .zhhCol-4 .zhhRow .zhhCol-8 p {
+	height: 40px;
+	line-height: 40px;
+	padding-left: 15px;
+}
+.carLoanDet-info-d-flow .zhhCol-4 .zhhRow .zhhCol-8 .info-d-flow-title {
+	color: #323232;
+	font-size: 18px;
+	line-height: 60px;
+}
+.saveText {
+	position: absolute;
+	right: 40px;
+	top: 30px;
+	cursor: pointer;
+	color: #666666;
+}
+.saveText:hover {
+	color: #6fbb68;
+}
+.saveText i {
+	color: #6fbb68;
+	position: relative;
+	top: 1px;
+	margin-right: 5px;
+}
+.carLoanDet_TabBox_list {
+	padding: 20px 0;
+}
+.carLoanDet_TabBox_list .QaModular{
+	padding-left: 40px;
+}
+.carLoanDet_TabBox_list h1 {
+	font-size: 16px;
+	font-weight: 400;
+	height: 52px;
+	width: 175px;
+	text-align: center;
+	line-height: 35px;
+	background: url(../../images/car_loan_icon4.png);
+	color: #FFF;
+	margin-bottom: 10px;
+}
+.carLoanDet_TabBox_list h1 i {
+	margin-right: 5px;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text {
+	padding: 0px 40px;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text p {
+	padding: 5px 0px;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text h3 {
+	font-size: 16px;
+	color: #323232;
+	font-weight: 400;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text h3 i {
+	display: inline-block;
+	width: 3px;
+	height: 16px;
+	background: #2692e9;
+	position: relative;
+	top: 2px;
+	margin: 30px 10px 0px 0px;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text div.zhhRow:last-child {
+	border-bottom: 1px solid #eee;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text div.zhhRow>div {
+	color: #ff0f0f;
+	font-size: 16px;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text div.zhhRow>div:first-child {
+	border-right: 0px;
+	color: #666;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text div.zhhRow.formTitle {
+	height: 40px;
+	line-height: 40px;
+	margin-top: 30px;
+	position: relative;
+	left: 0px;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text div.zhhRow.formTitle>div {
+	color: #666;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text div.zhhRow.formTitle>div {
+	height: 40px;
+	line-height: 40px;
+	background: #ececec;
+}
+.carLoanDet_TabBox_list .carLoanDet_TabBox_list_text div.zhhCol-6 {
+	height: 35px;
+	line-height: 35px;
+	padding-left: 40px;
+	border: 1px solid #eee;
+	border-bottom: 0px;
+}
+.loan-record{
+	padding-top: 30px;
+}
+.is-through{
+	padding: 100px 0;
+	text-align: center;
+}
+.is-through img{
+	display: block;
+	margin: 0 auto;
+}
+.is-through label{
+	display: block;
+	font-size: 28px;
+	font-weight: 500px;
+	color:#323232;
+	padding: 10px;
+}
+.is-through p{
+	font-size: 16px;
+}
+.loan-record .fffbox-r{
+	margin-top: 0;
+}
+.loan-record .formbox-l{
+	padding-top: 30px;
+}
+.loan-record .formbox-l label{
+	font-size: 20px;
+	color: #323232;
+}
+
+.loan-record .formbox-l ul{
+	margin-top: 30px;
+}
+
+.loan-record .formbox-l ul li{
+	font-size: 16px;
+	color: #323232;
+	margin-bottom: 10px;
+}
+.loan-record .formbox-l ul li span{
+	color: #999;
+	margin-right: 5px;
+}
+.loanInforPage .userInfor .is-choice .inputTextBD .no-is-label{
+	display: inline-block;
+}
+.loanInforPage .userInfor .is-choice .inputTextBD .no-is-label label{
+	display: inline;
+}
+.loanInforPage .userInfor .is-choice .inputTextBD{
+	border: none;
+	padding: 0;
+	width: 280px;
+}
+.loanInforPage .userInfor .is-choice .inputTextBD input{
+	position: relative;
+	top: -15.5px;
+	margin-right: 6px;
+	height: 0;
+}
+.loanInforPage .formbox-l{
+	overflow: initial;
+}
+@-moz-document url-prefix() {
+	.loanInforPage .userInfor li.is-choice .inputTextBD input{
+		top: 0;
+	}
+}
+.loanInforPage .userInfor .is-choice .inputTextBD input+input{
+	margin-left: 20px;
+}
+.loanInforPage .userInfor .is-choice .inputTextBD b{
+	right: 3px;
+	color: #479EF8;
+	font-size: 14px;
+	cursor: pointer;
+}
+.loanInforPage .userInfor li.is-choice .inputTextBD b:hover{
+	text-decoration: underline;
+}
+.rdo:checked:before, .chck:checked:before{
+	background-color: #479ef8;
+	border: 1px solid #479ef8;
+}
+.rdo:checked:after, .chck:checked:after{
+	background-color: #fff;
+}
+.rdo:before, .chck:before{
+	border-color: #999;
+}
+.is-choice-list .is-choice label{
+	color: #323232;
+	
+}
+.is-choice-list .is-choice .inputTextBD{
+	width: 350px !important;
+}
+
+.is-choice-list .is-choice b{
+	right: 40px !important;
+}
+.is-choice-list .is-choice b:hover{
+	text-decoration: underline;
+}
+.fffbox-more{
+	padding-left: 50px;
+	padding-bottom: 100px;
+}
+.fffbox-more h1{
+    font-size: 24px;
+	margin: 30px 0;
+}
+.picture-start{
+	width: 100%;
+	height: 93px;
+	background: url(./../../images/picture-2-start.png) top left no-repeat;
+}
+.picture-start2{
+	background-position-y: -93px;
+}
+.picture-start3{
+	background-position-y: -186px;
+}
+.is-small-loan{
+	line-height: 60px;
+	color: #479ef8;
+	font-size: 16px;
+}
+.is-small-loan i{
+	font-size: 24px;
+	position: relative;
+	top: 3px;
+	margin-right: 4px;
+}
+.is-un-id{
+	width: 100%;
+	text-align: center;
+	margin-top: 60px;
+	padding-bottom: 60px;
+}
+.is-un-id img{
+	width: 150px;
+}
+.is-un-id p{
+	font-size: 20px;
+	font-weight: 500;
+	color: #323232;
+	margin: 20px 0 14px 0;
+}
+.is-un-id p a{
+	color: #479ef8;
+	cursor: pointer;
+}
+.is-un-id p a:hover{
+	text-decoration: underline;
+}
+.is-un-id .chhBtn{
+	width: 116px;
+	height: 42p;
+	line-height: 42px;
+	border: 4px;
+	color: #fff;
+	background-color: #479ef8;
+	font-size: 16px;
+}
+.personal-info-page{
+	margin-top: 60px;
+}
+.personal-info-page h2{
+	font-size: 24px;
+	font-weight: 500;
+	padding-top: 30px;
+	margin-bottom: 20px;
+}
+.personal-info-page li {
+	margin-bottom: 30px;
+}
+.personal-info-page li input[type="radio"]{
+	top: -15.5px;
+	margin-right: 6px;
+}
+@-moz-document url-prefix() {
+	.personal-info-page li input[type="radio"]{
+		top: 0px;
+	}
+}
+.personal-info-page li label{
+	display: inline-block;
+	text-align: right;
+	margin-right: 40px;
+	width: auto;
+}
+.personal-info-page li label.title-label{
+	color: #323232;
+	display: inline-block;
+	width: 164px;
+	text-align: right;
+	margin-right: 16px;
+	white-space:nowrap;
+	margin-left: -50px !important;
+}
+.personal-info-page li label.title-label sup{
+	color: #f45a31;
+	font-size: 16px;
+	position: relative;
+	top: 5px;
+	right: 2px;
+	font-weight: bold;
+}
+.personal-info-page li .chhBtn{
+	width: 160px;
+    border-radius: 4px;
+    background-color: #2692e9;
+    color: #fff;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 20px;
+}
+.personal-info-page li table{
+	width: 100%;
+	border: 1px solid #eee;
+	text-align: center;
+	margin-top: 14px;
+}
+.personal-info-page li table th{
+	width: 20%;
+	background-color: #fafafa;
+	padding: 10px 0;
+}
+.personal-info-page li table td{
+	padding: 10px 0;
+}
+.personal-info-page li table td a{
+	color: #479ef8;
+	cursor: pointer;
+	margin-right: 6px;
+}
+.personal-info-page li table td span{
+	color: #ff0000;
+	cursor: pointer;
+}
+.personal-info-page li table td span:hover,
+.personal-info-page li table td a:hover{
+	text-decoration: underline;
+}
+.personal-info-page li table tr{
+	
+	border-bottom:1px solid #eee; 
+}
+.personal-info-page li .add-all{
+	float: right;
+	color: #479ef8;
+	cursor: pointer;
+	margin-top: 7px;
+}
+.personal-info-page li .add-all:hover{
+	color: #479ef8;
+	text-decoration: underline;
+}
+.user-info-win iframe{
+	width: 100%;
+	height: 100%;
+	border: none;
+	box-shadow: 0px;
+}
+.personal-info-page li span{
+	margin-left: 0;
+	left: 0;
+}
+.loan-success ul{
+	padding: 20px 0;
+	padding-bottom: 0;
+}
+.loan-success ul li{
+	margin-right: 20px;
+	width: 267px;
+	margin-bottom: 0;
+}
+.loan_del_info{
+	/* border: 1px solid #efefef; */
+	margin-top: 20px;
+}
+.loan_del_info td,
+.loan_del_info th{
+	width: 160px;
+	padding: 16px 0;
+	text-align: center;
+}
+.loan_del_info th{
+	background-color: #eff5fb;
+	font-weight: 500;
+	color: #666;
+}
+.loan_del_info td{
+	background-color: #fff;
+	color: #ff0000;
+	font-weight: bold;
+}
+.loan_del_info .loan_ll{
+	background: none;
+	text-align: left;
+	color: #666;
+}
+.loan-process{
+	margin: 20px 0;
+	width: 100%;
+	height: 112px;
+	background: url(../../images/loan_process.png) center center no-repeat;
+}

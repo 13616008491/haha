@@ -1,0 +1,333 @@
+<!--添加用户表单-->
+<div class="tab_edit">
+    <form action="{:Url('demand_start_submit')}" method="post" id="demand_start_submit">
+        <input type="hidden" name="demand_id" value="{$demand_id}"/>
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">需求编号：</td>
+                <td class="t_l">{$demand_info.demand_id}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目编号：</td>
+                <td class="t_l">{$demand_info.project_id}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">项目名称：</td>
+                <td class="t_l">{$demand_info.project_name}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">提出人：</td>
+                <td class="t_l">{$demand_info.proposer_name}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求描述：</td>
+                <td class="t_l">{$demand_info.demand_describe}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">需求审核：</td>
+                <td class="t_l">{:widget('common/Radio/radio',array('demand_audit','demand_audit',null,true))}</td>
+            </tr>
+            <tr class="hide time">
+                <td class="t_r t_left_w">预计需求完成时间：</td>
+                <td class="t_l">{:widget('common/DateTime/datetime',array('expect_finish_time',null,false))}</td>
+            </tr>
+            <tr class="hide time">
+                <td class="t_r t_left_w">选择负责人：</td>
+                <td class="t_l user_select">{:widget('common/Select/select_tree',array('org_id',array($select_org_list,"org_id","name","parent_id"),0,null))}</td>
+            </tr>
+            <tr class="time">
+                <td class="t_r t_left_w">添加参与人：</td>
+                <!--<td class="t_l" id="add"  style="display: none">-->
+                    <!--<lable id="add_select">-->
+                        <!--{:widget('common/Select/select_tree',array('join_id',array($select_org_list,"org_id","name","parent_id"),0,null))}-->
+                    <!--</lable>-->
+                    <!--&lt;!&ndash;<input name="user_label" type="text"/>&ndash;&gt;-->
+                    <!--<a onclick="seve_label()">保存</a>-->
+                <!--</td>-->
+                <td class="t_l">
+                    <div class="add_label">
+                        <input type="hidden" name="add_list"/>
+                        <div class="add_label_box">
+                            <!-- <span onclick="det_label(this)">测试</span>
+                            <span onclick="det_label(this)">测试</span> -->
+                        </div>
+
+                        <label id="add_btn">添加参与人</label>
+                        <div id="add">
+                            <div id="add_select">
+                            {:widget('common/Select/select_tree',array('join_id',array($select_org_list,"org_id","name","parent_id"),0,null))}
+                            </div>
+                            <!--<input name="user_label" type="text"/>-->
+                            <a onclick="seve_label()">保存</a>
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">系统回复：</td>
+                <td class="t_l">
+                    {:widget('common/TextArea/text_area',array('demand_feedback',null,true))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"></td>
+                <td class="t_l">
+                    <div class="btn"><input type="submit" class="but_blue" value="保存信息"></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<style>
+    .add_label{
+    }
+    .add_label .add_label_box{
+        display: inline-block;
+    }
+    .add_label span{
+        margin: 10px 0;
+        display: inline-block;
+        height: 26px;
+        padding: 0 30px;
+        line-height: 26px;
+        text-align: center;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+        position: relative;
+        cursor: pointer;
+    }
+    .add_label span::after{
+        content: '×';
+        display: block;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        color: #ff0000;
+        position: absolute;
+        right: 2px;
+        top: 2px;
+    }
+    .add_label label{
+        display: inline-block;
+        height: 26px;
+        padding: 0 30px;
+        line-height: 26px;
+        text-align: center;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+    }
+    .add_label label#add_btn{
+        border-color: #3b77e3;
+        color: #3b77e3;
+        cursor: pointer;
+    }
+    .add_label label#add_input{
+        padding: 0;
+        border-color: #3b77e3;
+        color: #999;
+        display: none;
+    }
+    #add a{
+        display: inline-block;
+        background: none;
+        border: none;
+        background-color: #3b77e3;
+        width: 50px;
+        text-align: center;
+        height: 26px;
+        line-height: 26px;
+        color: #fff;
+        cursor: pointer;
+    }
+    .add_label label#add_input input{
+        height: 22px;
+        line-height: 22px;
+        position: relative;
+        top: -2px;
+    }
+    #add{
+        display: none;
+    }
+    #add label{
+        display: none;
+
+    }
+    #add_select{
+        display: inline-block;
+    }
+</style>
+
+<script language="javascript">
+    $(function(){
+        var time = $("tr.time");
+        time.hide();
+        var demand_audit = $("input[name='demand_audit']");
+
+        demand_audit.live("change",function () {
+            if($("input[name='demand_audit']:checked").val()==2){
+                time.show();
+            }else{
+                time.hide();
+            }
+        });
+        //判断选中的商品规格
+        $("select[name='org_id']").live("change",function(){
+            var org_id = $(this).val();
+            if(org_id !== ''){
+                $.ajax({
+                    url:"{:Url('demand_start_submit',array('get_user'=>1))}",
+                    type:'post',
+                    data:{
+                        org_id:org_id,
+                    },
+                    dataType:'json',
+                    success:function(data){
+                        // $('')
+                        if (data.user_list!==null){
+                            if ($('.user_id')){
+                                $('.user_id').remove();
+                            }
+                            var oSelect=$("<select name='charge_id' class='user_id'  style=\"width:250px;\"> <option value =''>请选择</option></select>")
+                            for (var i=0;i<data.user_list.length;i++){
+                                var oPtion =$("<option value =''></option>");
+                                oPtion.text(data.user_list[i].nickname)
+                                oPtion.val(data.user_list[i].user_id)
+                                oPtion.appendTo(oSelect)
+                            }
+
+                            oSelect.appendTo($('.user_select'))
+
+                        }else {
+                            $('.user_id').remove();
+                            var oSelect=$("<select name='charge_id' class='user_id'  style=\"width:250px;\"> <option value =''>请选择</option></select>")
+                            oSelect.appendTo($('.user_select'))
+                        }
+
+                    },
+                    error:function(){
+                        alert("获取失败！");
+                    },
+                })
+            }else {
+                if ($('.user_id')){
+                    $('.user_id').remove();
+                }
+            }
+        });
+
+        //判断选中的商品规格
+        $("select[name='join_id']").live("change",function(){
+            var join_id = $(this).val();
+            if(join_id !== ''){
+                $.ajax({
+                    url:"{:Url('demand_start_submit',array('get_user'=>1))}",
+                    type:'post',
+                    data:{
+                        org_id:join_id,
+                    },
+                    dataType:'json',
+                    success:function(data){
+                        // $('')
+                        if (data.user_list!==null){
+                            if ($('.users_id')){
+                                $('.users_id').remove();
+                            }
+
+                            var oSelect=$("<select class='users_id'  style=\"width:250px;\"> <option value =''>请选择</option></select>")
+                            for (var i=0;i<data.user_list.length;i++){
+                                var oPtion =$("<option value =''></option>");
+                                oPtion.text(data.user_list[i].nickname)
+                                oPtion.val(data.user_list[i].user_id)
+                                oPtion.appendTo(oSelect)
+                            }
+
+                            oSelect.appendTo($('#add_select'))
+
+                        }else {
+                            $('.users_id').remove();
+                            var oSelect=$("<select class='users_id'  style=\"width:250px;\"> <option value =''>请选择</option></select>")
+                            oSelect.appendTo($('#add_select'))
+                        }
+
+                    },
+                    error:function(){
+                        alert("获取失败！");
+
+                    },
+                })
+            }else {
+                if ($('.users_id')){
+                    $('.users_id').remove();
+                }
+            }
+        });
+        //添加
+        $('#add_btn').click(function(){
+
+            //隐藏按钮显示输入框
+            $(this).hide();
+            $('#add').css("display","inline-block")
+        });
+
+
+    })
+    //删除
+    function det_label(thas,id){
+        //询问框
+        layer.confirm('确认删除该标签？', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+
+            //取得当前点击的索引
+            var index = $(thas).index();
+
+            var add_val = $("input[name=add_list]").val();
+            $("input[name=add_list]").val('');
+            var add_list = add_val.split(",");
+            for(var i in add_list){
+                if(add_list[i]!=$(".add_label_box span").eq(index).attr('flag')&&add_list[i]!=""){
+                    $("input[name=add_list]").val(add_list[i]+','+$("input[name=add_list]").val());
+                }
+            }
+
+            var dom = $(".add_label_box span");
+            $(".add_label_box span").eq(index).remove();
+
+            layer.msg('删除成功', {icon: 1});
+        }, function(){
+
+        });
+    }
+    //保存
+    function seve_label(){
+
+        var dom = $(".add_label_box");
+        var v = $('.users_id option:selected').val();
+        var t = $('.users_id option:selected').text();
+        if (v == ''){
+
+            alert('请选择用户')
+            return;
+        }
+        // alert($("input[name=add_list]").val())
+        // alert(v)
+        if ($("input[name=add_list]").val().search(v) !== -1){
+            alert('已选择用户');
+
+            return
+        }
+        // $('input[name=user_label]').val('');
+        dom.append("<span onclick='det_label(this)' flag="+v+">"+t+"</span>");
+        //
+        $("input[name=add_list]").val(v+','+$("input[name=add_list]").val());
+
+        //隐藏按钮显示输入框
+        $('#add').css("display","none");
+        $('#add_btn').show();
+        $('.users_id').remove();
+        $("select[name='join_id']").val('');
+    }
+
+</script>

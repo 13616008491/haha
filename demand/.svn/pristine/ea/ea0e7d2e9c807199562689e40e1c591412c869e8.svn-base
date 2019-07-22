@@ -1,0 +1,79 @@
+<!-- 搜索框及工具条 -->
+<div class="c-head-box">
+    <form method="get" action="{:Url('role_list')}">
+    <ul>
+        <li class="c-head-search">
+            <!-- 搜索条件 -->
+            <ul>
+                <li><span>角色名称：</span><input type="text" name="role_name" value="{$role_name}"/></li>
+                <li><span>角色类型：</span>{:widget('common/Select/select',array('admin_super','admin_super',$admin_super))}</li>
+            </ul>
+        </li>
+        <li class="c-head-button">
+            <!-- 操作按钮 -->
+            <div class="fr"><input type="submit" class="but_blue" value="搜索"></div>
+            <div class="fr"><a class="but_blue" href="{:Url('role_add')}">添加角色</a></div>
+        </li>
+    </ul>
+    </form>
+</div>
+
+<!--用户列表-->
+<div class="lists-tab-cont">
+    <div class="lists-table">
+        <table class="pointer" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th class="tabSort-header"><a class="tabSort-header-inner"><p>角色名称</p></a></th>
+                <th class="tabSort-header"><a class="tabSort-header-inner"><p>角色权限</p></a></th>
+                <th class="tabSort-header"><a class="tabSort-header-inner"><p>备注</p></a></th>
+                <th class="tabSort-header"><a class="tabSort-header-inner"><p>创建人</p></a></th>
+                <th class="tabSort-header"><a class="tabSort-header-inner"><p>创建时间</p></a></th>
+                <th class="tabSort-header"><a class="tabSort-header-inner"><p>操作</p></a></th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach name="role_list" item="info"}
+                <tr>
+                    <td>{$info.role_name}</td>
+                    <td>{:widget('common/Color/color',array('admin_super',$info['admin_super']))}</td>
+                    <td>{$info.remark}</td>
+                    <td>{:widget('common/Name/admin',array($info["create_admin"]))}</td>
+                    <td>{$info.create_time}</td>
+                    <td>
+                        <a href="{:Url('role_edit',array('role_id'=>$info['admin_role_id']))}" class="blue">编辑</a>
+                        <a href="{:Url('role_info',array('role_id'=>$info['admin_role_id']))}" class="blue">详情</a>
+                        {eq name="info['is_delete']" value="2"}
+                            <a href="{:Url('role_reset',array('role_id'=>$info['admin_role_id']))}" class="info1" style="color: red;">启用</a>
+                        {else/}
+                            <a href="{:Url('role_del',array('role_id'=>$info['admin_role_id']))}" class="blue info2">禁用</a>
+                        {/eq}
+                        {eq name="info['admin_super']" value="1"}
+                            <a href="{:Url('role_access_edit',array('role_id'=>$info['admin_role_id']))}" class="blue">设置角色权限</a>
+                        {/eq}
+                    </td>
+                </tr>
+            {/foreach}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 翻页模板 -->
+    <div class="page">
+        {$Think.config.page_html}
+    </div>
+</div>
+
+<!-- JS处理 -->
+<script language="javascript">
+    $(function(){
+        //提示是否删除
+        $("a.info").click(function(){
+            if(confirm("您确定要删除该记录吗？")){
+                return true;
+            }else{
+                return false;
+            }
+        });
+    });
+</script>

@@ -1,0 +1,61 @@
+<?php
+
+
+/**
+ * Created by PhpStorm.
+ * User: zengwenjie
+ * Date: 2018/12/5
+ * Time: 15:48
+ */
+namespace app\api\controller;
+use app\common\cache\project\IProjectCache;
+use app\common\controller\DemandBaseController;
+use app\common\enum\IsDelete;
+use app\common\ext\IDb;
+class Project extends  DemandBaseController
+{
+    /**
+     * @功能：取得项目列表接口
+     * @开发者：曾文杰
+     */
+    public function get_project(){
+        //接收参数
+        $user_id  = self::$uid;
+        $bottom_id  = self::get_data('bottom_id');
+        //判断列表是否存在
+        $loan_list = IProjectCache::getList($user_id,$bottom_id);
+        if(!empty($loan_list) && is_array($loan_list)) {
+            foreach ($loan_list as &$data) {
+                $data['start_time']=substr( $data['start_time'],0,10);
+                for($i = 1; $i <=4; $i++){
+                    $demand_where = null;
+                    $demand_where['project_id'] = $data['project_id'];
+                    $demand_where['demand_status'] = $i;
+                    $demand_where['is_delete'] = IsDelete::No;
+                    $demand_count = IDb::getInstance('demand')->setDbWhere($demand_where)->con();
+                    switch ($i){
+                        case 1:
+                            $data["pending"]=$demand_count;
+                            break;
+                        case 2:
+                            $data["confirm"]=$demand_count;
+                            break;
+                        case 3:
+                            $data["finish"]=$demand_count;
+                            break;
+                        case 4:
+                            $data["refuse"]=$demand_count;
+                            break;
+                    }
+                }
+
+            }
+        }
+        //返回值
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::set_value("userid",$user_id);
+        self::set_value("project_list",$loan_list);
+        self::send();
+    }
+}

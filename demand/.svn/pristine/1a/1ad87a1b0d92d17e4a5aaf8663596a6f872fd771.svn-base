@@ -1,0 +1,76 @@
+<!-- 搜索框及工具条 -->
+<div class="c-head-box">
+    <form method="get" action="{:Url('file_list')}">
+    <ul>
+        <li class="c-head-search">
+            <!-- 搜索条件 -->
+            <ul>
+                <li><span>资料分组名称：</span><input type="text" name="group_name" value="{$group_name}"/></li>
+                <li><span>资料名称：</span><input type="text" name="file_name" value="{$file_name}"/></li>
+            </ul>
+        </li>
+        <li class="c-head-button">
+            <!-- 操作按钮 -->
+            <div class="fr"><input type="submit" class="but_blue" value="搜索"></div>
+            <div class="fr"><a class="but_blue" href="{:Url('file_add')}">添加资料</a></div>
+        </li>
+    </ul>
+    </form>
+</div>
+
+<!--用户列表-->
+<div class="lists-tab-cont">
+    <div class="lists-table">
+        <table class="pointer" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th style="width: 8%" class="tabSort-header"><a class="tabSort-header-inner"><p>资料编号</p></a></th>
+                <th style="width: 20%" class="tabSort-header"><a class="tabSort-header-inner"><p>资料分组名称</p></a></th>
+                <th style="width: 20%" class="tabSort-header"><a class="tabSort-header-inner"><p>资料名称</p></a></th>
+                <th style="width: 8%" class="tabSort-header"><a class="tabSort-header-inner"><p>创建人</p></a></th>
+                <th style="width: 10%" class="tabSort-header"><a class="tabSort-header-inner"><p>创建时间</p></a></th>
+                <th style="width: 8%" class="tabSort-header"><a class="tabSort-header-inner"><p>更新人</p></a></th>
+                <th style="width: 10%" class="tabSort-header"><a class="tabSort-header-inner"><p>更新时间</p></a></th>
+                <th class="tabSort-header"><a class="tabSort-header-inner"><p>操作</p></a></th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach name="file_list" item="info"}
+                <tr>
+                    <td>{$info.file_id}</td>
+                    <td>{$info.group_name}</td>
+                    <td>{$info.file_name}</td>
+                    <td>{:widget('common/Name/admin',array($info["create_admin_id"]))}</td>
+                    <td>{$info.create_time}</td>
+                    <td>{:widget('common/Name/admin',array($info["update_admin_id"]))}</td>
+                    <td>{$info.update_time}</td>
+                    <td>
+                        <a href="{:Url('file_edit',array('file_id'=>$info['file_id']))}" class="blue">编辑</a>
+                        <a href="{$info['file_url']}" class="blue">下载</a>
+                        <a href="{:Url('file_del',array('file_id'=>$info['file_id']))}" class="blue info">删除</a>
+                    </td>
+                </tr>
+            {/foreach}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 翻页模板 -->
+    <div class="page">
+        {$Think.config.page_html}
+    </div>
+</div>
+
+<!-- JS处理 -->
+<script language="javascript">
+    $(function(){
+        //提示是否删除
+        $("a.info").click(function(){
+            if(confirm("您确定要删除该记录吗？")){
+                return true;
+            }else{
+                return false;
+            }
+        });
+    });
+</script>

@@ -1,0 +1,64 @@
+<!--添加用户表单-->
+<div class="tab_edit">
+    <form action="{:Url('admin_pwd_submit')}" method="post" id="admin_pwd_submit">
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">登录账户：</td>
+                <td class="t_l">
+                    {:widget('common/Input/input',array('phone',$admin_info['phone'],false,true))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">真实姓名：</td>
+                <td class="t_l">
+                    {:widget('common/Input/input',array('real_name',$admin_info['real_name'],false,true))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">原密码：</td>
+                <td class="t_l">
+                    {:widget('common/Input/password',array('old_pwd',null,true))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">新密码：</td>
+                <td class="t_l">
+                    {:widget('common/Input/password',array('new_pwd',null,true))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">确认新密码：</td>
+                <td class="t_l">
+                    {:widget('common/Input/password',array('verify_pwd',null,true))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"></td>
+                <td class="t_l">
+                    <div class="btn"><input type="submit" class="but_blue" value="保存信息"></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<!-- JS处理 -->
+<script language="javascript">
+    $(function() {
+        //保存设置
+        $("#admin_pwd_submit").submit(function() {
+            //取得参数
+            var new_pwd = $("input[name='new_pwd']").val();
+            var verify_pwd = $("input[name='verify_pwd']").val();
+
+            //判断密码是否一致
+            if (new_pwd != verify_pwd) {
+                alert("两次输入的密码不一致！")
+                return false;
+            }
+
+            //返回值
+            return true;
+        });
+    });
+</script>

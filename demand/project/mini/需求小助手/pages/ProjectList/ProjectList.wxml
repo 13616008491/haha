@@ -1,0 +1,31 @@
+<!--pages/ProjectList/ProjectList.wxml-->
+<view class="page">
+  <block wx:for = "{{list}}">
+      <view class="page-section" bindtap="nav_demand_list" data-target_id="{{item.project_id}}">
+        <image mode="aspectFill" class="img-border" src="{{item.project_photo_url}}" ></image>
+        <dl>
+            <dt>
+                <span>{{item.project_name}}</span>
+                <i>{{item.start_time}}</i>
+            </dt>
+            <dd>{{item.project_describe}}</dd>
+        </dl>
+      </view>
+      <view class='devider'></view>
+      <view class='status-content' bindtap="nav_demand_list" data-target_id="{{item.project_id}}">
+        <block wx:for="{{item.status}}">
+          <view class='page-section-status'>
+            <text class='text-total'>{{item.title}}:{{item.num}}</text>
+          </view>
+        </block>
+      </view>
+      <!-- <view class='page-section-status' style='display:flex;flex-direction:row;justify-content:space-around'>
+        <text class='text-total'>总需求</text>
+        <text class='text-undetermined'>待定中</text>
+        <text class='text-agree'>已同意</text>
+        <text class='text-finish'>已完成</text>
+        <text class='text-refused'>已拒绝</text>
+      </view> -->
+    </block>
+</view>
+

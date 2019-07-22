@@ -1,0 +1,110 @@
+<?php
+namespace app\admin\controller;
+
+use app\common\cache\admin\IAdminCache;
+use app\common\controller\AdminBaseController;
+use app\common\ext\IDb;
+use app\common\ext\IWeChat;
+use app\common\ext\IRequest;
+
+class Admin extends AdminBaseController{
+
+    /**
+     * @功能：编辑管理员信息
+     * @开发者：cxl
+     */
+    public function admin_info(){
+        //取得管理员详情
+        $admin_where['admin_id'] = get_login_admin_id();
+        $admin_info = IDb::getInstance("admin")->setDbWhere($admin_where)->row();
+
+        //是否提示修改默认密码
+        $show_reset = false;
+        if($admin_info['pwd'] == md5(md5('88888888'))){
+            $show_reset = true;
+        }
+
+        $code_url = IWeChat::getMiniCode(1);
+        if(!$code_url){
+            error('获取二维码失败');
+        }
+
+        //页面赋值
+        $this->assign("admin_info",$admin_info);
+        $this->assign("mini_code",$code_url);
+        $this->assign("show_reset",$show_reset);
+
+        //渲染模板输出
+        return view();
+    }
+    
+    /**
+     * @功能：管理员信息提交
+     * @开发者：cxl
+     */
+    public function admin_info_submit(){
+        //接收参数
+        $real_name = IRequest::get('real_name',IRequest::NOT_EMPTY,"请输入真实姓名！");
+
+        //修改管理员信息
+        $admin_where['admin_id'] = get_login_admin_id();
+        $admin_data['real_name'] = $real_name;
+        $admin_upd = IDb::getInstance('admin')->setDbWhere($admin_where)->setDbData($admin_data)->upd();
+        if($admin_upd === false){
+            error("修改管理员信息失败！");
+        }
+
+        //画面跳转
+        $this->success("操作成功！",Url("admin_info"));
+    }
+
+    /**
+     * @功能：修改密码
+     * @开发者：cxl
+     */
+    public function admin_pwd(){
+        //取得管理员详情
+        $admin_where['admin_id'] = get_login_admin_id();
+        $admin_info = IDb::getInstance("admin")->setDbWhere($admin_where)->row();
+
+        //页面赋值
+        $this->assign("admin_info",$admin_info);
+
+        //渲染模板输出
+        return view();
+    }
+
+    /**
+     * @功能：保存密码
+     * 开发者：cxl
+     */
+    public function admin_pwd_submit(){
+        //接收参数
+        $old_pwd = IRequest::get("old_pwd",IRequest::NOT_EMPTY,"请输入旧密码！");
+        $new_pwd = IRequest::get("new_pwd",IRequest::NOT_EMPTY,"请输入新密码！");
+
+        //取得管理员详情
+        $admin_where['admin_id'] = get_login_admin_id();
+        $admin_info = IDb::getInstance("admin")->setDbWhere($admin_where)->row();
+        if(empty($admin_info)){
+            error("取得登录用户信息失败！");
+        }
+
+        //判断旧密码
+        $old_pwd = md5(md5($old_pwd));
+        if($admin_info['pwd'] != $old_pwd){
+            error("您输入的旧密码错误！");
+        }
+
+        //修改管理员信息
+        $admin_where['admin_id'] = get_login_admin_id();
+        $admin_data['pwd'] = md5(md5($new_pwd));
+        $admin_upd = IDb::getInstance('admin')->setDbWhere($admin_where)->setDbData($admin_data)->upd();
+        if($admin_upd === false){
+            error("修改密码失败！");
+        }
+
+        //画面跳转
+        $this->success("操作成功！",Url("admin_pwd"));
+    }
+}

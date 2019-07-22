@@ -1,0 +1,380 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: zengwenjie
+ * Date: 2018/12/6
+ * Time: 11:10
+ */
+
+namespace app\api\controller;
+use app\common\controller\DemandBaseController;
+use app\common\ext\IDb;
+use app\common\enum\PriorityLevel;
+use app\common\ext\IFake;
+use app\common\ext\IWeChat;
+use app\common\enum\WeChatInformType;
+
+class Demand extends DemandBaseController{
+    /**
+     * @功能：添加需求接口
+     * @开发者：曾文杰
+     */
+    public function add_demand(){
+        //接收参数
+        $user_id  = self::$uid;
+        $project_id = self::get_data('project_id',self::NOT_EMPTY,"项目编号不能为空");
+        $demand_describe  = self::get_data('demand_describe');
+        $demand_photo_list  = self::get_data('demand_photo_url');
+        $voice_url  = self::get_data('voice_url');
+        $voice_duration  = self::get_data('voice_duration');
+        $priority_level  = self::get_data('priority_level');
+        $priority_describe = self::get_data('priority_describe');
+        if (empty($demand_describe)&&empty($voice_url)){
+            self::set_code(self::ERR_0001);
+            self::set_msg("需求描述和语音不能都为空！");
+            self::send();
+        }
+        if ($priority_level!=PriorityLevel::NORMAL&&$priority_level!=PriorityLevel::URGENCY&&$priority_level!=PriorityLevel::URGENCYEST){
+            $priority_level=PriorityLevel::NORMAL;
+        }
+        if ($priority_level==PriorityLevel::URGENCYEST&&empty($priority_describe)){
+            self::set_code(self::ERR_0001);
+            self::set_msg("特急理由不能为空！");
+            self::send();
+        }
+        $demand_data['project_id']=$project_id;
+        $demand_data['user_id']=$user_id;
+        $demand_data['demand_describe']=$demand_describe;
+        $demand_data['demand_photo_list']=$demand_photo_list;
+        $demand_data['voice_url']=$voice_url;
+        $demand_data['voice_duration']=$voice_duration;
+        $demand_data['priority_level']=$priority_level;
+        $demand_data['propose_time'] = get_date_time();
+        if ($priority_level==PriorityLevel::URGENCYEST){
+            $demand_data['priority_describe'] = $priority_describe;
+        }
+        $demand_id = IDb::getInstance("demand")->setDbData($demand_data)->add();
+        if($demand_id === false){
+            //返回错误
+            self::set_code(self::ERR_0003);
+            self::set_msg("提交需求失败！");
+            self::send();
+        }
+        //用户信息
+        $where['user_id'] = $user_id;
+        $user_info = IDb::getInstance('user')->setDbFiled('*,if(real_name is null,nickname,real_name) as real_name')->setDbWhere($where)->row();
+        //项目信息
+        $project_where['project_id'] = $project_id;
+        $project_info = IDb::getInstance('project')->setDbWhere($project_where)->row();
+        //发送通知
+        //设置发送通知
+        $project_replenish = str_pad($project_id,6,"0",STR_PAD_LEFT);
+        $demand_replenish = str_pad($demand_id,6,"0",STR_PAD_LEFT);
+
+        $sendText = $user_info['real_name'].',在您的项目（编号：'.$project_replenish.'）提了新需求：(编号：'.$demand_replenish.'),请审核。';
+        $sendData=array($sendText,get_date_time());
+        IWeChat::sendInform($project_info['charge_user_id'],WeChatInformType::Submission,$sendData,$demand_id,$sendText);
+
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::set_value("demand_id",$demand_id);
+        self::send();
+
+    }
+
+    /**
+     * @功能：取得项目需求列表接口
+     * @开发者：曾文杰
+     * @开发者：曾文杰
+     */
+    public function get_demand_list(){
+         $project_id  = self::get_data('project_id');
+        $search_content  = self::get_data('search_content');
+        $user_id  = self::$uid;
+        $demand_status  = self::get_data('demand_status');
+        $bottom_id  = self::get_data('bottom_id');
+        $is_my  = self::get_data('is_my');
+        $demand_where = array();
+        if(!empty($project_id))$demand_where['dd.project_id'] =$project_id;
+        if($is_my==1)$demand_where['dd.user_id'] =$user_id;
+        if (!empty($search_content)){
+            if (is_numeric($search_content)) {
+                $demand_where['dd.demand_id'] = $search_content + 0;
+            } else {
+                $demand_where['concat(ur.real_name,dd.demand_describe)'] = array("like","%{$search_content}%");
+            }
+        }
+        if(!empty($demand_status))$demand_where['dd.demand_status'] = $demand_status;
+        if(!empty($bottom_id))$demand_where['dd.demand_id'] = array('lt',$bottom_id);
+        //取得数据
+        $demand_list = IDb::getInstance('demand as dd')
+            ->setDbFiled("dd.*,pt.project_name,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name,ur.phone,ur.avatar")
+            ->setDbJoin("project as pt","dd.project_id=pt.project_id")
+            ->setDbJoin("user as ur","dd.user_id=ur.user_id")
+            ->setDbWhere($demand_where)
+            ->setDbOrder('dd.demand_id desc')
+            ->setDbLimit(10)
+            ->sel();
+
+        //判断数据是否正常
+        if($demand_list === false){
+            self::set_code(self::WARNING_0001);
+            self::set_msg('获取需求列表有误');
+            self::send();
+        }
+
+        foreach ($demand_list as $key=>$demand) {
+            $demand_number = str_pad($demand['demand_id'],6,"0",STR_PAD_LEFT);
+
+            $demand_list[$key]['demand_number'] = $demand_number;
+            $test_mans = array();
+            if ($demand['test_list']) {
+                $test_list = explode(',',$demand['test_list']);
+                foreach ($test_list as $key2 => $test) {
+                    $where['user_id'] = $test;
+                    $user_info = IDb::getInstance('user')
+                        ->setDbFiled('if(real_name is null,nickname,real_name) as real_name,phone,avatar')
+                        ->setDbWhere($where)->row();
+                    //判断数据是否正常
+                    if($user_info === false){
+                        self::set_code(self::WARNING_0002);
+                        self::set_msg('获取需求列表有误');
+                        self::send();
+                    }
+                    array_push($test_mans,$user_info);
+                }
+            }
+            $demand_list[$key]['test_list'] = $test_mans;
+
+            $dev_mans = array();
+            if ($demand['development_list']) {
+                $dev_list = explode(',',$demand['development_list']);
+                foreach ($dev_list as $key2 => $test) {
+                    $where['user_id'] = $test;
+                    $user_info = IDb::getInstance('user')
+                        ->setDbFiled('if(real_name is null,nickname,real_name) as real_name,phone,avatar')
+                        ->setDbWhere($where)->row();
+                    //判断数据是否正常
+                    if($user_info === false){
+                        self::set_code(self::WARNING_0002);
+                        self::set_msg('获取需求列表有误');
+                        self::send();
+                    }
+                    array_push($dev_mans,$user_info);
+                }
+            }
+            $demand_list[$key]['development_list'] = $dev_mans;
+
+            $design_mans = array();
+            if ($demand['design_list']) {
+                $design_list = explode(',',$demand['design_list']);
+                foreach ($design_list as $key2 => $test) {
+                    $where['user_id'] = $test;
+                    $user_info = IDb::getInstance('user')
+                        ->setDbFiled('if(real_name is null,nickname,real_name) as real_name,phone,avatar')
+                        ->setDbWhere($where)->row();
+                    //判断数据是否正常
+                    if($user_info === false){
+                        self::set_code(self::WARNING_0002);
+                        self::set_msg('获取需求列表有误');
+                        self::send();
+                    }
+                    array_push($design_mans,$user_info);
+                }
+            }
+            $demand_list[$key]['design_list'] = $design_mans;
+
+        }
+        //返回值
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::set_value("demand_list",$demand_list);
+        self::send();
+    }
+
+    /**
+     * @功能：取得项目需求详情接口
+     * @开发者：曾文杰
+     */
+    public function get_demand_detail(){
+
+        $demand_id  = self::get_data('demand_id',self::NOT_EMPTY,"需求编号不能为空");
+        $demand_where['dd.demand_id']=$demand_id;
+        $demand_det = IDb::getInstance("demand as dd")
+            ->setDbFiled("dd.*,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name,ur.phone,ur.avatar")
+            ->setDbJoin("user as ur","dd.user_id=ur.user_id")->setDbWhere($demand_where)->row();
+        if(!empty($demand_det)){
+            if (!empty($demand_det['demand_photo_list'])){
+                $demand_det['demand_photo_list']=str_replace('"', "",$demand_det['demand_photo_list']);
+                $phototArray=explode(',',$demand_det['demand_photo_list']);
+                $demand_det['demand_photo_list']=$phototArray;
+            }
+           /* if (!empty($demand_det['demand_describe'])){
+                $demand_det['demand_describe']=str_replace('\n','<br>',$demand_det['demand_describe']);
+                $demand_det['demand_describe']=str_replace('\r','<br>',$demand_det['demand_describe']);
+            }*/
+
+
+                $test_mans = array();
+                if ($demand_det['test_list']) {
+                    $test_list = explode(',',$demand_det['test_list']);
+                    foreach ($test_list as $key2 => $test) {
+                        $where['user_id'] = $test;
+                        $user_info = IDb::getInstance('user')
+                            ->setDbFiled('if(real_name is null,nickname,real_name) as real_name,phone,avatar')
+                            ->setDbWhere($where)->row();
+                        //判断数据是否正常
+                        if($user_info === false){
+                            self::set_code(self::WARNING_0002);
+                            self::set_msg('获取需求列表有误');
+                            self::send();
+                        }
+                        array_push($test_mans,$user_info);
+                    }
+                }
+            $demand_det['test_list'] = $test_mans;
+
+                $dev_mans = array();
+                if ($demand_det['development_list']) {
+                    $dev_list = explode(',',$demand_det['development_list']);
+                    foreach ($dev_list as $key2 => $test) {
+                        $where['user_id'] = $test;
+                        $user_info = IDb::getInstance('user')
+                            ->setDbFiled('if(real_name is null,nickname,real_name) as real_name,phone,avatar')
+                            ->setDbWhere($where)->row();
+                        //判断数据是否正常
+                        if($user_info === false){
+                            self::set_code(self::WARNING_0002);
+                            self::set_msg('获取需求列表有误');
+                            self::send();
+                        }
+                        array_push($dev_mans,$user_info);
+                    }
+                }
+            $demand_det['development_list'] = $dev_mans;
+
+                $design_mans = array();
+                if ($demand_det['design_list']) {
+                    $design_list = explode(',',$demand_det['design_list']);
+                    foreach ($design_list as $key2 => $test) {
+                        $where['user_id'] = $test;
+                        $user_info = IDb::getInstance('user')
+                            ->setDbFiled('if(real_name is null,nickname,real_name) as real_name,phone,avatar')
+                            ->setDbWhere($where)->row();
+                        //判断数据是否正常
+                        if($user_info === false){
+                            self::set_code(self::WARNING_0002);
+                            self::set_msg('获取需求列表有误');
+                            self::send();
+                        }
+                        array_push($design_mans,$user_info);
+                    }
+                }
+            $demand_det['design_list'] = $design_mans;
+
+        }
+
+        //返回值
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::set_value("demand_det",$demand_det);
+        self::send();
+    }
+
+    public function qr_code(){
+        $scene = self::get_data('scene',self::NOT_EMPTY,'参数值不能为空');
+
+        $code_url = IWeChat::getMiniCode($scene);
+        if(!$code_url){
+            self::set_code(self::WARNING_0001);
+            self::set_msg(IWeChat::getError());
+            self::send();
+        }
+
+        self::set_code(self::SUCCESS);
+        self::set_value('code_url',$code_url);
+        self::send();
+    }
+
+    public function reg_code(){
+
+
+        $code_url = IWeChat::getMiniCodeReg();
+
+        if(!$code_url){
+            self::set_code(self::WARNING_0001);
+            self::set_msg(IWeChat::getError());
+            self::send();
+        }
+
+        self::set_code(self::SUCCESS);
+        self::set_value('code_url',$code_url);
+        self::send();
+
+    }
+    /**
+     * @功能：获取进度列表
+     * @开发者：wdd
+     */
+    public function get_task(){
+
+        $demand_id  = self::get_data('demand_id',self::NOT_EMPTY,"需求编号不能为空");
+        //设计进度
+        $design_where['tk.task_type'] = "2";
+        $design_where['tk.demand_id'] = $demand_id;
+        $design_task_list = IDb::getInstance('task as tk')
+            ->setDbFiled(["tk.*,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name,
+            ur.phone,ur.avatar,substring(tk.create_time,1,10) as create_time,
+            substring(tk.end_time,1,10) as end_time,substring(tk.start_time,1,10) as start_time"])
+            ->setDbJoin('user as ur','ur.user_id = tk.user_id')
+            ->setDbWhere($design_where)
+            ->setDbOrder("tk.create_time desc")
+            ->setDbLimit(10)
+            ->sel();
+        if ($design_task_list === false){
+            //返回错误
+            self::set_code(self::ERR_0003);
+            self::set_msg("获取进度列表失败！");
+            self::send();
+        }
+//        dump(IDb::getLastSql());
+        //开发进度
+        $dev_where['tk.task_type'] = "1";
+        $dev_where['tk.demand_id'] = $demand_id;
+        $dev_task_list = IDb::getInstance('task as tk')
+            ->setDbFiled(["tk.*,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name,
+            ur.phone,ur.avatar,substring(tk.create_time,1,10) as create_time,
+            substring(tk.end_time,1,10) as end_time,substring(tk.start_time,1,10) as start_time"])
+            ->setDbJoin('user as ur','ur.user_id = tk.user_id')
+            ->setDbWhere($dev_where)
+            ->setDbOrder("tk.create_time desc")
+            ->setDbLimit(10)
+            ->sel();
+
+        //测试进度
+        $test_where['tk.task_type'] = "3";
+        $test_where['tk.demand_id'] = $demand_id;
+        $test_task_list = IDb::getInstance('task as tk')
+            ->setDbFiled(["tk.*,if(ur.real_name is null,ur.nickname,ur.real_name) as real_name,
+            ur.phone,ur.avatar,substring(tk.create_time,1,10) as create_time,
+            substring(tk.end_time,1,10) as end_time,substring(tk.start_time,1,10) as start_time"])
+            ->setDbJoin('user as ur','ur.user_id = tk.user_id')
+            ->setDbWhere($test_where)
+            ->setDbOrder("tk.create_time desc")
+            ->setDbLimit(10)
+            ->sel();
+        if ($test_task_list === false){
+            //返回错误
+            self::set_code(self::ERR_0003);
+            self::set_msg("获取进度列表失败！");
+            self::send();
+        }
+
+        self::set_code(self::SUCCESS);
+        self::set_msg("成功！");
+        self::set_value("design_task_list",$design_task_list);
+        self::set_value("dev_task_list",$dev_task_list);
+        self::set_value("test_task_list",$test_task_list);
+        self::send();
+    }
+}

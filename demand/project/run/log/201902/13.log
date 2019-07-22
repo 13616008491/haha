@@ -1,0 +1,1725 @@
+---------------------------------------------------------------
+[ 2019-02-13T17:58:44+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/system/clear_cache_all.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/system/clear_cache_all.html [运行时间：0.041051s][吞吐率：24.36req/s] [内存消耗：3,857.53kb] [文件加载：64]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'system',
+    2 => 'clear_cache_all',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/allot/demand_propose_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000143s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\System->clear_cache_all[ /phpstudy/www/demand/project/app/admin/controller/System.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/think/tpl/dispatch_jump.tpl [ array (
+  0 => '_notice_count_',
+  1 => 'code',
+  2 => 'msg',
+  3 => 'data',
+  4 => 'url',
+  5 => 'wait',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001042s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001269s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000723s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000964s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001171s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001054s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.001006s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000659s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000649s ]
+---------------------------------------------------------------
+[ 2019-02-13T17:58:46+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/allot/demand_propose_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/allot/demand_propose_list.html [运行时间：0.057719s][吞吐率：17.33req/s] [内存消耗：4,562.25kb] [文件加载：86]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'allot',
+    2 => 'demand_propose_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/system/clear_cache_all.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000141s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Allot->demand_propose_list[ /phpstudy/www/demand/project/app/admin/controller/Allot.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/allot/demand_propose_list.html [ array (
+  0 => '_notice_count_',
+  1 => 'project_list',
+  2 => 'demand_list',
+  3 => 'demand_id',
+  4 => 'project_id',
+  5 => 'demand_describe',
+  6 => 'demand_status',
+  7 => 'priority_level',
+) ]
+[ info ] [ RUN ] app\common\widget\Select->select[ /phpstudy/www/demand/project/app/common/widget/Select.php ]
+[ info ] [ RUN ] app\common\widget\Select->select[ /phpstudy/www/demand/project/app/common/widget/Select.php ]
+[ info ] [ RUN ] app\common\widget\Select->select[ /phpstudy/www/demand/project/app/common/widget/Select.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001102s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001123s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000745s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000980s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001123s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001063s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000967s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000744s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000786s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_project` [ RunTime:0.000984s ]
+[ sql ] [ SQL ] SELECT `project_id`,`project_name` FROM `dm_project` WHERE  `propose_status` = 1 [ RunTime:0.000655s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_demand` [ RunTime:0.001098s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM dm_demand as dd INNER JOIN `dm_project` `pt` ON `dd`.`project_id`=`pt`.`project_id` WHERE  `pt`.`propose_status` = '1'  AND `dd`.`user_id` = 42 LIMIT 1 [ RunTime:0.000699s ]
+[ sql ] [ SQL ] SELECT `dd`.*,`pt`.`project_name` FROM dm_demand as dd INNER JOIN `dm_project` `pt` ON `dd`.`project_id`=`pt`.`project_id` WHERE  `pt`.`propose_status` = '1'  AND `dd`.`user_id` = 42 ORDER BY dd.demand_id desc LIMIT 0,20 [ RunTime:0.000948s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.000971s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000714s ]
+---------------------------------------------------------------
+[ 2019-02-13T17:58:59+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/allot/demand_distribution_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/allot/demand_distribution_list.html [运行时间：0.054850s][吞吐率：18.23req/s] [内存消耗：4,452.12kb] [文件加载：86]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'allot',
+    2 => 'demand_distribution_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/allot/demand_propose_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000146s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Allot->demand_distribution_list[ /phpstudy/www/demand/project/app/admin/controller/Allot.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/allot/demand_distribution_list.html [ array (
+  0 => '_notice_count_',
+  1 => 'project_list',
+  2 => 'demand_list',
+  3 => 'demand_id',
+  4 => 'project_id',
+  5 => 'demand_describe',
+  6 => 'priority_level',
+) ]
+[ info ] [ RUN ] app\common\widget\Select->select[ /phpstudy/www/demand/project/app/common/widget/Select.php ]
+[ info ] [ RUN ] app\common\widget\Select->select[ /phpstudy/www/demand/project/app/common/widget/Select.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001062s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001143s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000758s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000990s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001137s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001077s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000886s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000719s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000659s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_project` [ RunTime:0.000927s ]
+[ sql ] [ SQL ] SELECT `project_id`,`project_name` FROM `dm_project` WHERE  `propose_status` = 1  AND `charge_user_id` = 42 [ RunTime:0.000692s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_demand` [ RunTime:0.001098s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM dm_demand as dd INNER JOIN `dm_project` `pt` ON `dd`.`project_id`=`pt`.`project_id` INNER JOIN `dm_user` `ur` ON `dd`.`user_id`=`ur`.`user_id` WHERE  `pt`.`propose_status` = '1'  AND `pt`.`charge_user_id` = 42  AND `dd`.`demand_status` = '1' LIMIT 1 [ RunTime:0.000726s ]
+[ sql ] [ SQL ] SELECT `dd`.*,`pt`.`project_name`,if(ur.real_name is null,`ur`.`nickname`,ur.real_name) as real_name,`ur`.`phone` FROM dm_demand as dd INNER JOIN `dm_project` `pt` ON `dd`.`project_id`=`pt`.`project_id` INNER JOIN `dm_user` `ur` ON `dd`.`user_id`=`ur`.`user_id` WHERE  `pt`.`propose_status` = '1'  AND `pt`.`charge_user_id` = 42  AND `dd`.`demand_status` = '1' ORDER BY dd.demand_id desc LIMIT 0,20 [ RunTime:0.001080s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.000997s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000608s ]
+---------------------------------------------------------------
+[ 2019-02-13T18:00:29+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/allot/demand_distribution_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/allot/demand_distribution_list.html [运行时间：0.051772s][吞吐率：19.32req/s] [内存消耗：4,236.85kb] [文件加载：84]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'allot',
+    2 => 'demand_distribution_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/allot/demand_propose_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000146s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Allot->demand_distribution_list[ /phpstudy/www/demand/project/app/admin/controller/Allot.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/allot/demand_distribution_list.html [ array (
+  0 => '_notice_count_',
+  1 => 'project_list',
+  2 => 'demand_list',
+  3 => 'demand_id',
+  4 => 'project_id',
+  5 => 'demand_describe',
+  6 => 'priority_level',
+) ]
+[ info ] [ RUN ] app\common\widget\Select->select[ /phpstudy/www/demand/project/app/common/widget/Select.php ]
+[ info ] [ RUN ] app\common\widget\Select->select[ /phpstudy/www/demand/project/app/common/widget/Select.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001010s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001186s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000715s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000984s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001137s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001014s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000835s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000657s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000684s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_project` [ RunTime:0.000920s ]
+[ sql ] [ SQL ] SELECT `project_id`,`project_name` FROM `dm_project` WHERE  `propose_status` = 1  AND `charge_user_id` = 42 [ RunTime:0.000569s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_demand` [ RunTime:0.001073s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM dm_demand as dd INNER JOIN `dm_project` `pt` ON `dd`.`project_id`=`pt`.`project_id` INNER JOIN `dm_user` `ur` ON `dd`.`user_id`=`ur`.`user_id` WHERE  `pt`.`propose_status` = '1'  AND `pt`.`charge_user_id` = 42  AND `dd`.`demand_status` = '1' LIMIT 1 [ RunTime:0.000617s ]
+[ sql ] [ SQL ] SELECT `dd`.*,`pt`.`project_name`,if(ur.real_name is null,`ur`.`nickname`,ur.real_name) as real_name,`ur`.`phone` FROM dm_demand as dd INNER JOIN `dm_project` `pt` ON `dd`.`project_id`=`pt`.`project_id` INNER JOIN `dm_user` `ur` ON `dd`.`user_id`=`ur`.`user_id` WHERE  `pt`.`propose_status` = '1'  AND `pt`.`charge_user_id` = 42  AND `dd`.`demand_status` = '1' ORDER BY dd.demand_id desc LIMIT 0,20 [ RunTime:0.001047s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.000921s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000552s ]
+---------------------------------------------------------------
+[ 2019-02-13T18:00:30+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/total/project_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/total/project_list.html [运行时间：0.055367s][吞吐率：18.06req/s] [内存消耗：4,457.02kb] [文件加载：87]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'total',
+    2 => 'project_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/allot/demand_distribution_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000142s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Total->project_list[ /phpstudy/www/demand/project/app/admin/controller/Total.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/total/project_list.html [ array (
+  0 => '_notice_count_',
+  1 => 'project_list',
+  2 => 'project_id',
+  3 => 'project_name',
+  4 => 'user_name',
+  5 => 'propose_time_start',
+  6 => 'propose_time_end',
+) ]
+[ info ] [ RUN ] app\common\widget\DateTime->date[ /phpstudy/www/demand/project/app/common/widget/DateTime.php ]
+[ info ] [ RUN ] app\common\widget\DateTime->date[ /phpstudy/www/demand/project/app/common/widget/DateTime.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000949s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001111s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000741s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000906s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001068s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001029s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000879s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.001006s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000730s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_project` [ RunTime:0.001032s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM dm_project as pt LEFT JOIN `dm_user` `ur` ON `pt`.`charge_user_id`=`ur`.`user_id` LEFT JOIN (select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) total,sum(if(demand_status=1,1,0)) pending,sum(if(demand_status=2,1,0)) confirm, sum(if(demand_status=3,1,0)) development,sum(if(demand_status=4,1,0)) refuse, sum(if(demand_status=5,1,0)) test,sum(if(demand_status=6,1,0)) finish from dm_demand group by project_id ) dd ON `dd`.`project_id`=`pt`.`project_id` LIMIT 1 [ RunTime:0.000893s ]
+[ sql ] [ SQL ] SELECT `dd`.*,`pt`.*,if(ur.real_name is null,`ur`.`nickname`,ur.real_name) as real_name,`ur`.`phone` FROM dm_project as pt LEFT JOIN `dm_user` `ur` ON `pt`.`charge_user_id`=`ur`.`user_id` LEFT JOIN (select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) total,sum(if(demand_status=1,1,0)) pending,sum(if(demand_status=2,1,0)) confirm, sum(if(demand_status=3,1,0)) development,sum(if(demand_status=4,1,0)) refuse, sum(if(demand_status=5,1,0)) test,sum(if(demand_status=6,1,0)) finish from dm_demand group by project_id ) dd ON `dd`.`project_id`=`pt`.`project_id` ORDER BY pt.sort_level desc,pt.project_name desc LIMIT 0,20 [ RunTime:0.001364s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.000948s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000724s ]
+---------------------------------------------------------------
+[ 2019-02-13T18:00:31+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/system/admin_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/system/admin_list.html [运行时间：0.053105s][吞吐率：18.83req/s] [内存消耗：4,387.30kb] [文件加载：86]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'system',
+    2 => 'admin_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/total/project_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000139s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\System->admin_list[ /phpstudy/www/demand/project/app/admin/controller/System.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/system/admin_list.html [ array (
+  0 => '_notice_count_',
+  1 => 'role_id',
+  2 => 'admin_super',
+  3 => 'admin_type',
+  4 => 'real_name',
+  5 => 'phone',
+  6 => 'admin_list',
+  7 => 'role_list',
+) ]
+[ info ] [ RUN ] app\common\widget\Select->select[ /phpstudy/www/demand/project/app/common/widget/Select.php ]
+[ info ] [ RUN ] app\common\widget\Select->select[ /phpstudy/www/demand/project/app/common/widget/Select.php ]
+[ info ] [ RUN ] app\common\widget\Select->select[ /phpstudy/www/demand/project/app/common/widget/Select.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001100s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001118s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000776s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001135s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001086s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000865s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000762s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000774s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin` [ RunTime:0.001105s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM dm_admin as an LEFT JOIN `dm_admin_role` `ar` ON `an`.`admin_role_id`=`ar`.`admin_role_id` LIMIT 1 [ RunTime:0.000657s ]
+[ sql ] [ SQL ] SELECT `an`.*,`ar`.`role_name`,`an`.`admin_super` FROM dm_admin as an LEFT JOIN `dm_admin_role` `ar` ON `an`.`admin_role_id`=`ar`.`admin_role_id` LIMIT 0,20 [ RunTime:0.000750s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.000940s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` [ RunTime:0.000654s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000666s ]
+---------------------------------------------------------------
+[ 2019-02-13T18:00:32+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/user/user_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/user/user_list.html [运行时间：0.052946s][吞吐率：18.89req/s] [内存消耗：4,429.02kb] [文件加载：87]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'user',
+    2 => 'user_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/system/admin_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000181s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\User->user_list[ /phpstudy/www/demand/project/app/admin/controller/User.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/user/user_list.html [ array (
+  0 => '_notice_count_',
+  1 => 'user_list',
+  2 => 'user_id',
+  3 => 'nickname',
+  4 => 'real_name',
+  5 => 'phone',
+  6 => 'is_enable',
+  7 => 'admin_id',
+  8 => 'admin_real_name',
+  9 => 'admin_phone',
+) ]
+[ info ] [ RUN ] app\common\widget\Select->select[ /phpstudy/www/demand/project/app/common/widget/Select.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001111s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001083s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000683s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000932s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001113s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001015s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000829s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000680s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000665s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_user` [ RunTime:0.000946s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM dm_user as ur LEFT JOIN `dm_admin` `an` ON `ur`.`user_id`=`an`.`user_id` LIMIT 1 [ RunTime:0.000609s ]
+[ sql ] [ SQL ] SELECT `ur`.*,`an`.`admin_id`,an.real_name as admin_real_name,an.phone as admin_phone FROM dm_user as ur LEFT JOIN `dm_admin` `an` ON `ur`.`user_id`=`an`.`user_id` ORDER BY ur.user_id desc LIMIT 0,20 [ RunTime:0.000846s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.001054s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000601s ]
+---------------------------------------------------------------
+[ 2019-02-13T18:00:32+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/project/project_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/project/project_list.html [运行时间：0.056320s][吞吐率：17.76req/s] [内存消耗：4,365.59kb] [文件加载：86]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'project',
+    2 => 'project_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/user/user_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000144s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Project->project_list[ /phpstudy/www/demand/project/app/admin/controller/Project.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/project/project_list.html [ array (
+  0 => '_notice_count_',
+  1 => 'project_list',
+  2 => 'project_id',
+  3 => 'project_name',
+  4 => 'user_name',
+) ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001123s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001171s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000827s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.001015s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001182s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001097s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000929s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000726s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000718s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_project` [ RunTime:0.000987s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM dm_project as pt LEFT JOIN `dm_user` `ur` ON `pt`.`charge_user_id`=`ur`.`user_id` LEFT JOIN (select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) total,sum(if(demand_status=1,1,0)) pending,sum(if(demand_status=2,1,0)) confirm, sum(if(demand_status=3,1,0)) development,sum(if(demand_status=4,1,0)) refuse, sum(if(demand_status=5,1,0)) test,sum(if(demand_status=6,1,0)) finish from dm_demand dd group by project_id ) dd ON `dd`.`project_id`=`pt`.`project_id` LIMIT 1 [ RunTime:0.001264s ]
+[ sql ] [ SQL ] SELECT `dd`.*,`pt`.*,if(ur.real_name is null,`ur`.`nickname`,ur.real_name) as real_name,`ur`.`phone` FROM dm_project as pt LEFT JOIN `dm_user` `ur` ON `pt`.`charge_user_id`=`ur`.`user_id` LEFT JOIN (select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) total,sum(if(demand_status=1,1,0)) pending,sum(if(demand_status=2,1,0)) confirm, sum(if(demand_status=3,1,0)) development,sum(if(demand_status=4,1,0)) refuse, sum(if(demand_status=5,1,0)) test,sum(if(demand_status=6,1,0)) finish from dm_demand dd group by project_id ) dd ON `dd`.`project_id`=`pt`.`project_id` ORDER BY pt.sort_level desc,pt.project_name desc LIMIT 0,20 [ RunTime:0.001575s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.001023s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000633s ]
+---------------------------------------------------------------
+[ 2019-02-13T18:00:33+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/allot/demand_propose_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/allot/demand_propose_list.html [运行时间：0.058396s][吞吐率：17.12req/s] [内存消耗：4,326.26kb] [文件加载：84]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'allot',
+    2 => 'demand_propose_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/project/project_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000146s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Allot->demand_propose_list[ /phpstudy/www/demand/project/app/admin/controller/Allot.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/allot/demand_propose_list.html [ array (
+  0 => '_notice_count_',
+  1 => 'project_list',
+  2 => 'demand_list',
+  3 => 'demand_id',
+  4 => 'project_id',
+  5 => 'demand_describe',
+  6 => 'demand_status',
+  7 => 'priority_level',
+) ]
+[ info ] [ RUN ] app\common\widget\Select->select[ /phpstudy/www/demand/project/app/common/widget/Select.php ]
+[ info ] [ RUN ] app\common\widget\Select->select[ /phpstudy/www/demand/project/app/common/widget/Select.php ]
+[ info ] [ RUN ] app\common\widget\Select->select[ /phpstudy/www/demand/project/app/common/widget/Select.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001132s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001127s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000729s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000964s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001259s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001096s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000863s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000641s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000671s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_project` [ RunTime:0.000962s ]
+[ sql ] [ SQL ] SELECT `project_id`,`project_name` FROM `dm_project` WHERE  `propose_status` = 1 [ RunTime:0.000600s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_demand` [ RunTime:0.001243s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM dm_demand as dd INNER JOIN `dm_project` `pt` ON `dd`.`project_id`=`pt`.`project_id` WHERE  `pt`.`propose_status` = '1'  AND `dd`.`user_id` = 42 LIMIT 1 [ RunTime:0.000708s ]
+[ sql ] [ SQL ] SELECT `dd`.*,`pt`.`project_name` FROM dm_demand as dd INNER JOIN `dm_project` `pt` ON `dd`.`project_id`=`pt`.`project_id` WHERE  `pt`.`propose_status` = '1'  AND `dd`.`user_id` = 42 ORDER BY dd.demand_id desc LIMIT 0,20 [ RunTime:0.000863s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.000994s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000676s ]
+---------------------------------------------------------------
+[ 2019-02-13T18:00:33+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/project/project_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/project/project_list.html [运行时间：0.052769s][吞吐率：18.95req/s] [内存消耗：4,122.77kb] [文件加载：84]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'project',
+    2 => 'project_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/allot/demand_propose_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000141s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Project->project_list[ /phpstudy/www/demand/project/app/admin/controller/Project.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/project/project_list.html [ array (
+  0 => '_notice_count_',
+  1 => 'project_list',
+  2 => 'project_id',
+  3 => 'project_name',
+  4 => 'user_name',
+) ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000953s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001196s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000734s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000925s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001130s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001095s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000901s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000705s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000702s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_project` [ RunTime:0.001011s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM dm_project as pt LEFT JOIN `dm_user` `ur` ON `pt`.`charge_user_id`=`ur`.`user_id` LEFT JOIN (select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) total,sum(if(demand_status=1,1,0)) pending,sum(if(demand_status=2,1,0)) confirm, sum(if(demand_status=3,1,0)) development,sum(if(demand_status=4,1,0)) refuse, sum(if(demand_status=5,1,0)) test,sum(if(demand_status=6,1,0)) finish from dm_demand dd group by project_id ) dd ON `dd`.`project_id`=`pt`.`project_id` LIMIT 1 [ RunTime:0.000943s ]
+[ sql ] [ SQL ] SELECT `dd`.*,`pt`.*,if(ur.real_name is null,`ur`.`nickname`,ur.real_name) as real_name,`ur`.`phone` FROM dm_project as pt LEFT JOIN `dm_user` `ur` ON `pt`.`charge_user_id`=`ur`.`user_id` LEFT JOIN (select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) total,sum(if(demand_status=1,1,0)) pending,sum(if(demand_status=2,1,0)) confirm, sum(if(demand_status=3,1,0)) development,sum(if(demand_status=4,1,0)) refuse, sum(if(demand_status=5,1,0)) test,sum(if(demand_status=6,1,0)) finish from dm_demand dd group by project_id ) dd ON `dd`.`project_id`=`pt`.`project_id` ORDER BY pt.sort_level desc,pt.project_name desc LIMIT 0,20 [ RunTime:0.001432s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.001020s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000655s ]
+---------------------------------------------------------------
+[ 2019-02-13T18:00:34+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/user/user_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/user/user_list.html [运行时间：0.050566s][吞吐率：19.78req/s] [内存消耗：4,196.54kb] [文件加载：85]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'user',
+    2 => 'user_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/project/project_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000136s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\User->user_list[ /phpstudy/www/demand/project/app/admin/controller/User.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/user/user_list.html [ array (
+  0 => '_notice_count_',
+  1 => 'user_list',
+  2 => 'user_id',
+  3 => 'nickname',
+  4 => 'real_name',
+  5 => 'phone',
+  6 => 'is_enable',
+  7 => 'admin_id',
+  8 => 'admin_real_name',
+  9 => 'admin_phone',
+) ]
+[ info ] [ RUN ] app\common\widget\Select->select[ /phpstudy/www/demand/project/app/common/widget/Select.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001030s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001105s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000710s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000906s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001129s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001048s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000868s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000670s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000676s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_user` [ RunTime:0.000983s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM dm_user as ur LEFT JOIN `dm_admin` `an` ON `ur`.`user_id`=`an`.`user_id` LIMIT 1 [ RunTime:0.000629s ]
+[ sql ] [ SQL ] SELECT `ur`.*,`an`.`admin_id`,an.real_name as admin_real_name,an.phone as admin_phone FROM dm_user as ur LEFT JOIN `dm_admin` `an` ON `ur`.`user_id`=`an`.`user_id` ORDER BY ur.user_id desc LIMIT 0,20 [ RunTime:0.000810s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.000930s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000657s ]
+---------------------------------------------------------------
+[ 2019-02-13T18:00:38+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/total/project_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/total/project_list.html [运行时间：0.056480s][吞吐率：17.71req/s] [内存消耗：4,218.57kb] [文件加载：85]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'total',
+    2 => 'project_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/user/user_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000177s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Total->project_list[ /phpstudy/www/demand/project/app/admin/controller/Total.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/total/project_list.html [ array (
+  0 => '_notice_count_',
+  1 => 'project_list',
+  2 => 'project_id',
+  3 => 'project_name',
+  4 => 'user_name',
+  5 => 'propose_time_start',
+  6 => 'propose_time_end',
+) ]
+[ info ] [ RUN ] app\common\widget\DateTime->date[ /phpstudy/www/demand/project/app/common/widget/DateTime.php ]
+[ info ] [ RUN ] app\common\widget\DateTime->date[ /phpstudy/www/demand/project/app/common/widget/DateTime.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001052s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001147s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000736s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000942s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001185s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001103s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.001407s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000804s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000718s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_project` [ RunTime:0.001168s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM dm_project as pt LEFT JOIN `dm_user` `ur` ON `pt`.`charge_user_id`=`ur`.`user_id` LEFT JOIN (select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) total,sum(if(demand_status=1,1,0)) pending,sum(if(demand_status=2,1,0)) confirm, sum(if(demand_status=3,1,0)) development,sum(if(demand_status=4,1,0)) refuse, sum(if(demand_status=5,1,0)) test,sum(if(demand_status=6,1,0)) finish from dm_demand group by project_id ) dd ON `dd`.`project_id`=`pt`.`project_id` LIMIT 1 [ RunTime:0.001153s ]
+[ sql ] [ SQL ] SELECT `dd`.*,`pt`.*,if(ur.real_name is null,`ur`.`nickname`,ur.real_name) as real_name,`ur`.`phone` FROM dm_project as pt LEFT JOIN `dm_user` `ur` ON `pt`.`charge_user_id`=`ur`.`user_id` LEFT JOIN (select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) total,sum(if(demand_status=1,1,0)) pending,sum(if(demand_status=2,1,0)) confirm, sum(if(demand_status=3,1,0)) development,sum(if(demand_status=4,1,0)) refuse, sum(if(demand_status=5,1,0)) test,sum(if(demand_status=6,1,0)) finish from dm_demand group by project_id ) dd ON `dd`.`project_id`=`pt`.`project_id` ORDER BY pt.sort_level desc,pt.project_name desc LIMIT 0,20 [ RunTime:0.001935s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.001386s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000604s ]
+---------------------------------------------------------------
+[ 2019-02-13T18:00:38+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/total/project_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/total/project_list.html [运行时间：0.051628s][吞吐率：19.37req/s] [内存消耗：4,218.34kb] [文件加载：85]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'total',
+    2 => 'project_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/total/project_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000148s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Total->project_list[ /phpstudy/www/demand/project/app/admin/controller/Total.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/total/project_list.html [ array (
+  0 => '_notice_count_',
+  1 => 'project_list',
+  2 => 'project_id',
+  3 => 'project_name',
+  4 => 'user_name',
+  5 => 'propose_time_start',
+  6 => 'propose_time_end',
+) ]
+[ info ] [ RUN ] app\common\widget\DateTime->date[ /phpstudy/www/demand/project/app/common/widget/DateTime.php ]
+[ info ] [ RUN ] app\common\widget\DateTime->date[ /phpstudy/www/demand/project/app/common/widget/DateTime.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001050s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001169s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000730s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000943s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001363s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001069s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000857s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000692s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000752s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_project` [ RunTime:0.000928s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM dm_project as pt LEFT JOIN `dm_user` `ur` ON `pt`.`charge_user_id`=`ur`.`user_id` LEFT JOIN (select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) total,sum(if(demand_status=1,1,0)) pending,sum(if(demand_status=2,1,0)) confirm, sum(if(demand_status=3,1,0)) development,sum(if(demand_status=4,1,0)) refuse, sum(if(demand_status=5,1,0)) test,sum(if(demand_status=6,1,0)) finish from dm_demand group by project_id ) dd ON `dd`.`project_id`=`pt`.`project_id` LIMIT 1 [ RunTime:0.001014s ]
+[ sql ] [ SQL ] SELECT `dd`.*,`pt`.*,if(ur.real_name is null,`ur`.`nickname`,ur.real_name) as real_name,`ur`.`phone` FROM dm_project as pt LEFT JOIN `dm_user` `ur` ON `pt`.`charge_user_id`=`ur`.`user_id` LEFT JOIN (select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) total,sum(if(demand_status=1,1,0)) pending,sum(if(demand_status=2,1,0)) confirm, sum(if(demand_status=3,1,0)) development,sum(if(demand_status=4,1,0)) refuse, sum(if(demand_status=5,1,0)) test,sum(if(demand_status=6,1,0)) finish from dm_demand group by project_id ) dd ON `dd`.`project_id`=`pt`.`project_id` ORDER BY pt.sort_level desc,pt.project_name desc LIMIT 0,20 [ RunTime:0.001302s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.000914s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000631s ]
+---------------------------------------------------------------
+[ 2019-02-13T18:00:40+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/total/project_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/total/project_list.html [运行时间：0.055450s][吞吐率：18.03req/s] [内存消耗：4,218.34kb] [文件加载：85]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'total',
+    2 => 'project_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/total/project_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000159s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Total->project_list[ /phpstudy/www/demand/project/app/admin/controller/Total.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/total/project_list.html [ array (
+  0 => '_notice_count_',
+  1 => 'project_list',
+  2 => 'project_id',
+  3 => 'project_name',
+  4 => 'user_name',
+  5 => 'propose_time_start',
+  6 => 'propose_time_end',
+) ]
+[ info ] [ RUN ] app\common\widget\DateTime->date[ /phpstudy/www/demand/project/app/common/widget/DateTime.php ]
+[ info ] [ RUN ] app\common\widget\DateTime->date[ /phpstudy/www/demand/project/app/common/widget/DateTime.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001019s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001128s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000763s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000943s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001191s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001137s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000879s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000684s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000681s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_project` [ RunTime:0.000970s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM dm_project as pt LEFT JOIN `dm_user` `ur` ON `pt`.`charge_user_id`=`ur`.`user_id` LEFT JOIN (select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) total,sum(if(demand_status=1,1,0)) pending,sum(if(demand_status=2,1,0)) confirm, sum(if(demand_status=3,1,0)) development,sum(if(demand_status=4,1,0)) refuse, sum(if(demand_status=5,1,0)) test,sum(if(demand_status=6,1,0)) finish from dm_demand group by project_id ) dd ON `dd`.`project_id`=`pt`.`project_id` LIMIT 1 [ RunTime:0.000873s ]
+[ sql ] [ SQL ] SELECT `dd`.*,`pt`.*,if(ur.real_name is null,`ur`.`nickname`,ur.real_name) as real_name,`ur`.`phone` FROM dm_project as pt LEFT JOIN `dm_user` `ur` ON `pt`.`charge_user_id`=`ur`.`user_id` LEFT JOIN (select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) total,sum(if(demand_status=1,1,0)) pending,sum(if(demand_status=2,1,0)) confirm, sum(if(demand_status=3,1,0)) development,sum(if(demand_status=4,1,0)) refuse, sum(if(demand_status=5,1,0)) test,sum(if(demand_status=6,1,0)) finish from dm_demand group by project_id ) dd ON `dd`.`project_id`=`pt`.`project_id` ORDER BY pt.sort_level desc,pt.project_name desc LIMIT 0,20 [ RunTime:0.001537s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.001205s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000680s ]
+---------------------------------------------------------------
+[ 2019-02-13T18:00:41+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/total/project_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/total/project_list.html [运行时间：0.052992s][吞吐率：18.87req/s] [内存消耗：4,218.34kb] [文件加载：85]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'total',
+    2 => 'project_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/total/project_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000146s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Total->project_list[ /phpstudy/www/demand/project/app/admin/controller/Total.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/total/project_list.html [ array (
+  0 => '_notice_count_',
+  1 => 'project_list',
+  2 => 'project_id',
+  3 => 'project_name',
+  4 => 'user_name',
+  5 => 'propose_time_start',
+  6 => 'propose_time_end',
+) ]
+[ info ] [ RUN ] app\common\widget\DateTime->date[ /phpstudy/www/demand/project/app/common/widget/DateTime.php ]
+[ info ] [ RUN ] app\common\widget\DateTime->date[ /phpstudy/www/demand/project/app/common/widget/DateTime.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001187s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001132s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000772s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000990s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001146s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001071s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000905s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000833s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000774s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_project` [ RunTime:0.000978s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM dm_project as pt LEFT JOIN `dm_user` `ur` ON `pt`.`charge_user_id`=`ur`.`user_id` LEFT JOIN (select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) total,sum(if(demand_status=1,1,0)) pending,sum(if(demand_status=2,1,0)) confirm, sum(if(demand_status=3,1,0)) development,sum(if(demand_status=4,1,0)) refuse, sum(if(demand_status=5,1,0)) test,sum(if(demand_status=6,1,0)) finish from dm_demand group by project_id ) dd ON `dd`.`project_id`=`pt`.`project_id` LIMIT 1 [ RunTime:0.000949s ]
+[ sql ] [ SQL ] SELECT `dd`.*,`pt`.*,if(ur.real_name is null,`ur`.`nickname`,ur.real_name) as real_name,`ur`.`phone` FROM dm_project as pt LEFT JOIN `dm_user` `ur` ON `pt`.`charge_user_id`=`ur`.`user_id` LEFT JOIN (select project_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) total,sum(if(demand_status=1,1,0)) pending,sum(if(demand_status=2,1,0)) confirm, sum(if(demand_status=3,1,0)) development,sum(if(demand_status=4,1,0)) refuse, sum(if(demand_status=5,1,0)) test,sum(if(demand_status=6,1,0)) finish from dm_demand group by project_id ) dd ON `dd`.`project_id`=`pt`.`project_id` ORDER BY pt.sort_level desc,pt.project_name desc LIMIT 0,20 [ RunTime:0.001388s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.000948s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000685s ]
+---------------------------------------------------------------
+[ 2019-02-13T18:00:42+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/total/user_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/total/user_list.html [运行时间：0.052450s][吞吐率：19.07req/s] [内存消耗：4,356.43kb] [文件加载：71]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'total',
+    2 => 'user_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/total/project_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000167s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Total->user_list[ /phpstudy/www/demand/project/app/admin/controller/Total.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/total/user_list.html [ array (
+  0 => '_notice_count_',
+  1 => 'user_list',
+  2 => 'user_id',
+  3 => 'user_name',
+  4 => 'phone',
+  5 => 'propose_time_start',
+  6 => 'propose_time_end',
+) ]
+[ info ] [ RUN ] app\common\widget\DateTime->date[ /phpstudy/www/demand/project/app/common/widget/DateTime.php ]
+[ info ] [ RUN ] app\common\widget\DateTime->date[ /phpstudy/www/demand/project/app/common/widget/DateTime.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ RUN ] app\common\widget\Images->img[ /phpstudy/www/demand/project/app/common/widget/Images.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001092s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001130s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000733s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000916s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001221s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001080s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000903s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000684s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000663s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_user` [ RunTime:0.000949s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM dm_user as ur LEFT JOIN (select user_id,count(user_id) notice from dm_notice group by user_id) ne ON `ne`.`user_id`=`ur`.`user_id` LEFT JOIN (select user_id,count(user_id) log from dm_demand_log group by user_id) dl ON `dl`.`user_id`=`ur`.`user_id` LEFT JOIN (select user_id,count(user_id) task from dm_task group by user_id) tk ON `tk`.`user_id`=`ur`.`user_id` LEFT JOIN (select user_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) total,sum(if(demand_status=1,1,0)) pending,sum(if(demand_status=2,1,0)) confirm,sum(if(demand_status=3,1,0)) development,sum(if(demand_status=4,1,0)) refuse,sum(if(demand_status=5,1,0)) test,sum(if(demand_status=6,1,0)) finish from dm_demand group by user_id) dd ON `dd`.`user_id`=`ur`.`user_id` LIMIT 1 [ RunTime:0.001114s ]
+[ sql ] [ SQL ] SELECT `ne`.*,`dl`.*,`tk`.*,`dd`.*,`ur`.* FROM dm_user as ur LEFT JOIN (select user_id,count(user_id) notice from dm_notice group by user_id) ne ON `ne`.`user_id`=`ur`.`user_id` LEFT JOIN (select user_id,count(user_id) log from dm_demand_log group by user_id) dl ON `dl`.`user_id`=`ur`.`user_id` LEFT JOIN (select user_id,count(user_id) task from dm_task group by user_id) tk ON `tk`.`user_id`=`ur`.`user_id` LEFT JOIN (select user_id,sum(if(demand_status in(1,2,3,4,5,6),1,0)) total,sum(if(demand_status=1,1,0)) pending,sum(if(demand_status=2,1,0)) confirm,sum(if(demand_status=3,1,0)) development,sum(if(demand_status=4,1,0)) refuse,sum(if(demand_status=5,1,0)) test,sum(if(demand_status=6,1,0)) finish from dm_demand group by user_id) dd ON `dd`.`user_id`=`ur`.`user_id` ORDER BY ur.user_id desc LIMIT 0,20 [ RunTime:0.001316s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.000937s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000600s ]
+---------------------------------------------------------------
+[ 2019-02-13T18:00:43+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/total/weekly_list.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/total/weekly_list.html [运行时间：0.051075s][吞吐率：19.58req/s] [内存消耗：4,375.34kb] [文件加载：87]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'total',
+    2 => 'weekly_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/total/user_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000141s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Total->weekly_list[ /phpstudy/www/demand/project/app/admin/controller/Total.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/total/weekly_list.html [ array (
+  0 => '_notice_count_',
+  1 => 'weekly_list',
+  2 => 'weekly_id',
+  3 => 'date_range_start',
+  4 => 'date_range_end',
+  5 => 'is_history',
+) ]
+[ info ] [ RUN ] app\common\widget\DateTime->date[ /phpstudy/www/demand/project/app/common/widget/DateTime.php ]
+[ info ] [ RUN ] app\common\widget\DateTime->date[ /phpstudy/www/demand/project/app/common/widget/DateTime.php ]
+[ info ] [ RUN ] app\common\widget\Select->select[ /phpstudy/www/demand/project/app/common/widget/Select.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ RUN ] app\common\widget\Color->color[ /phpstudy/www/demand/project/app/common/widget/Color.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001002s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001131s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000768s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000996s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001176s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001143s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000968s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000763s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000728s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_weekly` [ RunTime:0.001023s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_weekly` LIMIT 1 [ RunTime:0.000615s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_weekly` ORDER BY weekly_id desc LIMIT 0,20 [ RunTime:0.000952s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.000961s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000658s ]
+---------------------------------------------------------------
+[ 2019-02-13T18:00:58+08:00 ] 172.19.22.204 117.30.54.41 GET /demand/public/index.php/admin/total/weekly_edit/weekly_id/42.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/total/weekly_edit/weekly_id/42.html [运行时间：0.050581s][吞吐率：19.77req/s] [内存消耗：4,092.88kb] [文件加载：70]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'total',
+    2 => 'weekly_edit',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3679.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://47.102.118.52/demand/public/index.php/admin/total/weekly_list.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=u8njcpc9itnpqculbh6ah2trd6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'weekly_id' => '42',
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000156s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Total->weekly_edit[ /phpstudy/www/demand/project/app/admin/controller/Total.php ]
+[ info ] [ VIEW ] /phpstudy/www/demand/public/../project/app/admin/view/total/weekly_edit.html [ array (
+  0 => '_notice_count_',
+  1 => 'weekly_id',
+  2 => 'weekly_info',
+  3 => 'admin_list',
+) ]
+[ info ] [ RUN ] app\common\widget\DateTime->date[ /phpstudy/www/demand/project/app/common/widget/DateTime.php ]
+[ info ] [ RUN ] app\common\widget\DateTime->date[ /phpstudy/www/demand/project/app/common/widget/DateTime.php ]
+[ info ] [ RUN ] app\common\widget\CheckBox->checkbox[ /phpstudy/www/demand/project/app/common/widget/CheckBox.php ]
+[ info ] [ RUN ] app\common\widget\TextArea->text_area_html[ /phpstudy/www/demand/project/app/common/widget/TextArea.php ]
+[ info ] [ RUN ] app\common\widget\TextArea->text_area[ /phpstudy/www/demand/project/app/common/widget/TextArea.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000906s ] mysql:dbname=demand;host=47.102.118.52;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_notice` [ RunTime:0.001127s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `dm_notice` WHERE  `user_id` = 42  AND `notice_read` = 1 LIMIT 1 [ RunTime:0.000753s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_menu` [ RunTime:0.000942s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001133s ]
+[ sql ] [ SQL ] SELECT `am`.`menu_id`,`am`.`name`,`am`.`parent_id`,`am`.`default_node`,`am`.`level`,`am`.`order_by`,group_concat(amn.node_id) as node_id FROM dm_admin_menu as am LEFT JOIN `dm_admin_menu_node` `amn` ON `am`.`menu_id`=`amn`.`menu_id` WHERE  (  am.is_delete='1'  ) GROUP BY am.menu_id ORDER BY `am`.`order_by` [ RunTime:0.001046s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_node` [ RunTime:0.000842s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000679s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_node` WHERE  (  is_delete=1 ) [ RunTime:0.000689s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_weekly` [ RunTime:0.000979s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_weekly` WHERE  `weekly_id` = 42 LIMIT 1 [ RunTime:0.000683s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin` [ RunTime:0.001038s ]
+[ sql ] [ SQL ] SELECT `ur`.`user_id`,if(ur.real_name is null,`ur`.`nickname`,ur.real_name) as real_name FROM dm_admin as ad INNER JOIN `dm_user` `ur` ON `ad`.`user_id`=`ur`.`user_id` WHERE  `is_delete` = 1 ORDER BY ad.user_id desc [ RunTime:0.000700s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `dm_admin_role` [ RunTime:0.001015s ]
+[ sql ] [ SQL ] SELECT * FROM `dm_admin_role` WHERE  `admin_role_id` = 1 LIMIT 1 [ RunTime:0.000552s ]
+---------------------------------------------------------------
+[ 2019-02-13T22:48:06+08:00 ] 172.19.22.204 101.132.100.6 GET /demand/public/
+[ info ] 47.102.118.52/demand/public/ [运行时间：0.019035s][吞吐率：52.53req/s] [内存消耗：2,400.13kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000148s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-02-13T22:55:59+08:00 ] 172.19.22.204 47.98.34.250 GET /demand/public/
+[ info ] 47.102.118.52/demand/public/ [运行时间：0.018360s][吞吐率：54.47req/s] [内存消耗：2,400.13kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000143s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-02-13T22:55:59+08:00 ] 172.19.22.204 47.98.34.250 GET /demand/public/
+[ info ] 47.102.118.52/demand/public/ [运行时间：0.018538s][吞吐率：53.94req/s] [内存消耗：2,400.13kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+  'host' => '47.102.118.52',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000148s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File

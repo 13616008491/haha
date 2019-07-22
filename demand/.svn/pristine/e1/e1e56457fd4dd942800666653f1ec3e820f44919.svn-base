@@ -1,0 +1,35 @@
+<!--添加用户表单-->
+<div class="tab_edit">
+    <form action="{:Url('admin_submit')}" method="post" id="admin_submit">
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">真实姓名：</td>
+                <td class="t_l">{:widget('common/Input/input',array('real_name',null,true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">电话号码：</td>
+                <td class="t_l">{:widget('common/Input/input',array('phone',null,true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">角色：</td>
+                <td class="t_l">{:widget('common/Select/select',array('admin_role_id',array($role_list,"admin_role_id","role_name"),null,true))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">备注：</td>
+                <td class="t_l">
+                    {:widget('common/TextArea/text_area',array('remark',null,false))}
+                </td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">&nbsp;</td>
+                <td class="t_l"><font color="red">备注：默认密码为88888888</font></td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"></td>
+                <td class="t_l">
+                    <div class="btn"><input type="submit" class="but_blue" value="保存信息"></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

@@ -1,0 +1,506 @@
+---------------------------------------------------------------
+[ 2019-07-03T15:34:41+08:00 ] 172.19.22.204 117.30.56.14 GET /demand/public/
+[ info ] 47.102.118.52/demand/public/ [运行时间：0.196846s][吞吐率：5.08req/s] [内存消耗：2,861.38kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'BT_PANEL=00eacce05c8ba0c8137924523c9c4025aab1ab61; serverType=apache; order=id%20desc; memRealUsed=265; mem-before=265/1839%20%28MB%29; memSize=1839; conterError=; one=0.01; fifteen=0.18; upNet=0.25; downNet=0.26; five=0.21; uploadSize=1073741824; rank=a; apacheVersion=; phpVersion=0; pnull=2; vcodesum=14; BatchPaste=null; Path=/phpstudy/www/demand/public',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.005455s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-03T15:35:25+08:00 ] 172.19.22.204 117.30.56.14 GET /demand/public/index.php/admin/login/login.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/login/login.html [运行时间：30.109032s][吞吐率：0.03req/s] [内存消耗：4,318.61kb] [文件加载：59]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'BT_PANEL=00eacce05c8ba0c8137924523c9c4025aab1ab61; serverType=apache; order=id%20desc; memRealUsed=265; mem-before=265/1839%20%28MB%29; memSize=1839; conterError=; one=0.01; fifteen=0.18; upNet=0.25; downNet=0.26; five=0.21; uploadSize=1073741824; rank=a; apacheVersion=; phpVersion=0; pnull=2; vcodesum=14; BatchPaste=null; Path=/phpstudy/www/demand/public; PHPSESSID=rsj1pm82ledlspjt0323epv334',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000216s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2002]SQLSTATE[HY000] [2002] Connection timed out[/phpstudy/www/demand/think/library/think/db/Connection.php:293]
+---------------------------------------------------------------
+[ 2019-07-03T15:35:47+08:00 ] 172.19.22.204 117.30.56.14 GET /demand/public/index.php/
+[ info ] 47.102.118.52/demand/public/index.php/ [运行时间：0.020363s][吞吐率：49.11req/s] [内存消耗：2,861.45kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'BT_PANEL=00eacce05c8ba0c8137924523c9c4025aab1ab61; serverType=apache; order=id%20desc; memRealUsed=265; mem-before=265/1839%20%28MB%29; memSize=1839; conterError=; one=0.01; fifteen=0.18; upNet=0.25; downNet=0.26; five=0.21; uploadSize=1073741824; rank=a; apacheVersion=; phpVersion=0; pnull=2; vcodesum=14; BatchPaste=null; Path=/phpstudy/www/demand/public; PHPSESSID=rsj1pm82ledlspjt0323epv334',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000203s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-03T15:36:17+08:00 ] 172.19.22.204 117.30.56.14 GET /demand/public/index.php/admin/login/login.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/login/login.html [运行时间：30.060886s][吞吐率：0.03req/s] [内存消耗：4,318.61kb] [文件加载：59]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'BT_PANEL=00eacce05c8ba0c8137924523c9c4025aab1ab61; serverType=apache; order=id%20desc; memRealUsed=265; mem-before=265/1839%20%28MB%29; memSize=1839; conterError=; one=0.01; fifteen=0.18; upNet=0.25; downNet=0.26; five=0.21; uploadSize=1073741824; rank=a; apacheVersion=; phpVersion=0; pnull=2; vcodesum=14; BatchPaste=null; Path=/phpstudy/www/demand/public; PHPSESSID=rsj1pm82ledlspjt0323epv334',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000219s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2002]SQLSTATE[HY000] [2002] Connection timed out[/phpstudy/www/demand/think/library/think/db/Connection.php:293]
+---------------------------------------------------------------
+[ 2019-07-03T15:36:17+08:00 ] 172.19.22.204 117.30.56.14 GET /demand/public/index.php
+[ info ] 47.102.118.52/demand/public/index.php [运行时间：25.776204s][吞吐率：0.04req/s] [内存消耗：2,861.32kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'BT_PANEL=00eacce05c8ba0c8137924523c9c4025aab1ab61; serverType=apache; order=id%20desc; memRealUsed=265; mem-before=265/1839%20%28MB%29; memSize=1839; conterError=; one=0.01; fifteen=0.18; upNet=0.25; downNet=0.26; five=0.21; uploadSize=1073741824; rank=a; apacheVersion=; phpVersion=0; pnull=2; vcodesum=14; BatchPaste=null; Path=/phpstudy/www/demand/public; PHPSESSID=rsj1pm82ledlspjt0323epv334',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000204s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-03T15:36:17+08:00 ] 172.19.22.204 117.30.56.14 GET /demand/public/index.php
+[ info ] 47.102.118.52/demand/public/index.php [运行时间：22.214363s][吞吐率：0.05req/s] [内存消耗：2,861.32kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'BT_PANEL=00eacce05c8ba0c8137924523c9c4025aab1ab61; serverType=apache; order=id%20desc; memRealUsed=265; mem-before=265/1839%20%28MB%29; memSize=1839; conterError=; one=0.01; fifteen=0.18; upNet=0.25; downNet=0.26; five=0.21; uploadSize=1073741824; rank=a; apacheVersion=; phpVersion=0; pnull=2; vcodesum=14; BatchPaste=null; Path=/phpstudy/www/demand/public; PHPSESSID=rsj1pm82ledlspjt0323epv334',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000223s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-03T15:36:17+08:00 ] 172.19.22.204 117.30.56.14 GET /demand/public/
+[ info ] 47.102.118.52/demand/public/ [运行时间：17.745477s][吞吐率：0.06req/s] [内存消耗：2,861.10kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'BT_PANEL=00eacce05c8ba0c8137924523c9c4025aab1ab61; serverType=apache; order=id%20desc; memRealUsed=265; mem-before=265/1839%20%28MB%29; memSize=1839; conterError=; one=0.01; fifteen=0.18; upNet=0.25; downNet=0.26; five=0.21; uploadSize=1073741824; rank=a; apacheVersion=; phpVersion=0; pnull=2; vcodesum=14; BatchPaste=null; Path=/phpstudy/www/demand/public; PHPSESSID=rsj1pm82ledlspjt0323epv334',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000230s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-03T15:36:17+08:00 ] 172.19.22.204 117.30.56.14 GET /demand/public/
+[ info ] 47.102.118.52/demand/public/ [运行时间：14.118925s][吞吐率：0.07req/s] [内存消耗：2,861.10kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'BT_PANEL=00eacce05c8ba0c8137924523c9c4025aab1ab61; serverType=apache; order=id%20desc; memRealUsed=265; mem-before=265/1839%20%28MB%29; memSize=1839; conterError=; one=0.01; fifteen=0.18; upNet=0.25; downNet=0.26; five=0.21; uploadSize=1073741824; rank=a; apacheVersion=; phpVersion=0; pnull=2; vcodesum=14; BatchPaste=null; Path=/phpstudy/www/demand/public; PHPSESSID=rsj1pm82ledlspjt0323epv334',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000232s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-03T15:36:17+08:00 ] 172.19.22.204 117.30.56.14 GET /demand/public/
+[ info ] 47.102.118.52/demand/public/ [运行时间：0.040699s][吞吐率：24.57req/s] [内存消耗：2,861.10kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'BT_PANEL=00eacce05c8ba0c8137924523c9c4025aab1ab61; serverType=apache; order=id%20desc; memRealUsed=265; mem-before=265/1839%20%28MB%29; memSize=1839; conterError=; one=0.01; fifteen=0.18; upNet=0.25; downNet=0.26; five=0.21; uploadSize=1073741824; rank=a; apacheVersion=; phpVersion=0; pnull=2; vcodesum=14; BatchPaste=null; Path=/phpstudy/www/demand/public; PHPSESSID=rsj1pm82ledlspjt0323epv334',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.018369s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-03T15:36:17+08:00 ] 172.19.22.204 117.30.56.14 GET /demand/public/
+[ info ] 47.102.118.52/demand/public/ [运行时间：0.057194s][吞吐率：17.48req/s] [内存消耗：2,861.10kb] [文件加载：52]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'BT_PANEL=00eacce05c8ba0c8137924523c9c4025aab1ab61; serverType=apache; order=id%20desc; memRealUsed=265; mem-before=265/1839%20%28MB%29; memSize=1839; conterError=; one=0.01; fifteen=0.18; upNet=0.25; downNet=0.26; five=0.21; uploadSize=1073741824; rank=a; apacheVersion=; phpVersion=0; pnull=2; vcodesum=14; BatchPaste=null; Path=/phpstudy/www/demand/public; PHPSESSID=rsj1pm82ledlspjt0323epv334',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000207s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-03T15:37:07+08:00 ] 172.19.22.204 117.30.56.14 GET /demand/public/index.php/admin/login/login.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/login/login.html [运行时间：30.059458s][吞吐率：0.03req/s] [内存消耗：4,142.20kb] [文件加载：59]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'BT_PANEL=00eacce05c8ba0c8137924523c9c4025aab1ab61; serverType=apache; order=id%20desc; memRealUsed=265; mem-before=265/1839%20%28MB%29; memSize=1839; conterError=; one=0.01; fifteen=0.18; upNet=0.25; downNet=0.26; five=0.21; uploadSize=1073741824; rank=a; apacheVersion=; phpVersion=0; pnull=2; vcodesum=14; BatchPaste=null; Path=/phpstudy/www/demand/public; PHPSESSID=rsj1pm82ledlspjt0323epv334',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000215s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2002]SQLSTATE[HY000] [2002] Connection timed out[/phpstudy/www/demand/think/library/think/db/Connection.php:293]
+---------------------------------------------------------------
+[ 2019-07-03T17:40:18+08:00 ] 172.19.22.204 117.30.56.14 GET /demand/public/index.php/admin/login/login.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/login/login.html [运行时间：30.054634s][吞吐率：0.03req/s] [内存消耗：4,318.84kb] [文件加载：59]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'BT_PANEL=00eacce05c8ba0c8137924523c9c4025aab1ab61; serverType=apache; order=id%20desc; memRealUsed=265; mem-before=265/1839%20%28MB%29; memSize=1839; conterError=; one=0.01; fifteen=0.18; upNet=0.25; downNet=0.26; five=0.21; uploadSize=1073741824; rank=a; apacheVersion=; phpVersion=0; pnull=2; vcodesum=14; BatchPaste=null; PHPSESSID=rsj1pm82ledlspjt0323epv334; Path=/phpstudy/www',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000220s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2002]SQLSTATE[HY000] [2002] Connection timed out[/phpstudy/www/demand/think/library/think/db/Connection.php:293]
+---------------------------------------------------------------
+[ 2019-07-03T17:40:49+08:00 ] 172.19.22.204 117.30.56.14 GET /demand/public/index.php/admin/login/login.html
+[ info ] 47.102.118.52/demand/public/index.php/admin/login/login.html [运行时间：57.531706s][吞吐率：0.02req/s] [内存消耗：4,141.88kb] [文件加载：59]
+[ info ] [ LANG ] /phpstudy/www/demand/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'login',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '47.102.118.52',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'BT_PANEL=00eacce05c8ba0c8137924523c9c4025aab1ab61; serverType=apache; order=id%20desc; memRealUsed=265; mem-before=265/1839%20%28MB%29; memSize=1839; conterError=; one=0.01; fifteen=0.18; upNet=0.25; downNet=0.26; five=0.21; uploadSize=1073741824; rank=a; apacheVersion=; phpVersion=0; pnull=2; vcodesum=14; BatchPaste=null; PHPSESSID=rsj1pm82ledlspjt0323epv334; Path=/phpstudy/www',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\ModuleInit @module_init [ RunTime:0.000318s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2002]SQLSTATE[HY000] [2002] Connection timed out[/phpstudy/www/demand/think/library/think/db/Connection.php:293]

@@ -1,0 +1,15 @@
+<?php
+/**
+ * @功能：接口类型
+ * @文件：ProposeStatus.class.php
+ * @作者：layaos
+ * @时间：15-4-2 下午4:16
+ */
+namespace app\common\enum;
+
+class DemandStatus{
+    const IDENT = '1'; //待确定
+    const PROCEEDING = '2'; //进行中
+    const DONE = '3'; //已完成
+    const REFUSE = '4'; //已拒绝
+}

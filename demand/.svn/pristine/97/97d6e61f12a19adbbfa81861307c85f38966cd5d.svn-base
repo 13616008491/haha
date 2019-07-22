@@ -1,0 +1,56 @@
+<!-- 编辑区域 -->
+<div class="lists">
+    <!--添加用户表单-->
+    <div class="tab_edit">
+        <table width="100%" class="list">
+            <tr>
+                <td class="t_r t_left_w">用户编号：</td>
+                <td class="t_l">{$user_info['user_id']}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">用户头像：</td>
+                <td class="t_l">  {:widget('common/Images/img',array($user_info['avatar'],50,50))}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">微信昵称：</td>
+                <td class="t_l">{$user_info['nickname']|default='--'}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">用户姓名：</td>
+                <td class="t_l">{$user_info['real_name']|default='--'}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w">用户电话：</td>
+                <td class="t_l">{$user_info['phone']|default='--'}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"><font color="red">关联管理员</font>编号：</td>
+                <td class="t_l">{$user_info['admin_id']|default='--'}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"><font color="red">关联管理员</font>姓名：</td>
+                <td class="t_l">{$user_info['admin_real_name']|default='--'}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"><font color="red">关联管理员</font>电话：</td>
+                <td class="t_l">{$user_info['admin_phone']|default='--'}</td>
+            </tr>
+            <tr>
+                <td class="t_r t_left_w"><font color="red">关联管理员</font>类型：</td>
+                <td class="t_l">{:widget('common/Color/color',array('task_type',$user_info["admin_type"]))}</td>
+            </tr>
+            <tr>
+                 <td class="t_r t_left_w">用户状态：</td>
+                <td class="t_l">{:widget('common/Color/color',array('is_enable',$user_info["is_enable"]))}</td>
+             </tr>
+            <tr>
+                <td class="t_r t_left_w">最后登陆时间：</td>
+                <td class="t_l">{$user_info['login_time']|default='--'}</td>
+             </tr>
+            <tr>
+                <td class="t_r t_left_w">创建时间：</td>
+                <td class="t_l">{$user_info['create_time']}</td>
+            </tr>
+        </table>
+    </div>
+</div>
